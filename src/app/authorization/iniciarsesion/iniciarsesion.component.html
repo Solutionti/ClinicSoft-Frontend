@@ -1,0 +1,61 @@
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-7">
+
+<p-table
+    #dt
+    [rows]="10"
+    [paginator]="true"
+    [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+    [tableStyle]="{ 'min-width': '75rem' }"
+    [rowHover]="true"
+    dataKey="id"
+    currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas"
+    [showCurrentPageReport]="true"
+>
+    <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+            <!-- <h5 class="m-0">Manage Products</h5> -->
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input 
+                  pInputText 
+                  type="text" 
+                  class="form-control"
+                  placeholder="Buscar..." />
+            </span>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            
+            <th pSortableColumn="name" style="min-width:8rem" class="text-sm">
+                Name 
+            </th>
+            <th>
+                Image
+            </th>
+            <th pSortableColumn="price" class="text-sm">
+                Price 
+            </th>
+            <th pSortableColumn="category" style="min-width:10rem" class="text-sm">
+                Category 
+            </th>
+            <th pSortableColumn="rating" class="text-sm">
+                Reviews 
+            </th>
+            <th pSortableColumn="inventoryStatus" style="min-width:10rem" class="text-sm">
+                Status 
+            </th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+        
+    </ng-template>
+    
+</p-table>
+        </div>
+    </div>
+</div>
