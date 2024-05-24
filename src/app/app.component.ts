@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
-
+ 
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -21,18 +21,16 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.validarSesion();
     this.primengConfig.ripple = true;
+    this.validarSesion2();
   }
 
-  validarSesion() {
-    const token = localStorage.getItem('token');
-    if(token) {
-      this.router.navigate(['/', 'inicio']);
-    }
-    else if(!token) {
+  validarSesion2() {
+    const token: any  = localStorage.getItem('token');
+    if(token == null) {
       this.router.navigate(['/']);
     }
+    
   }
 
 }
