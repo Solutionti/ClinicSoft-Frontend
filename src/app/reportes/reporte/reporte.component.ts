@@ -4,8 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-reporte',
   standalone: true,
   imports: [],
-  templateUrl: './reporte.component.html',
-  styleUrl: './reporte.component.css'
+  templateUrl: './reporte.component.html'
 })
 export class ReporteComponent {
 

@@ -9,13 +9,12 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-admision',
   standalone: true,
   imports: [RouterOutlet,ReactiveFormsModule,MenuComponent, CerrarsesionComponent],
-  templateUrl: './admision.component.html',
-  styleUrl: './admision.component.css'
+  templateUrl: './admision.component.html'
 })
 export class AdmisionComponent implements OnInit {
 
   ngOnInit(): void {
-    
+
   }
 
   admisionForm: FormGroup = new FormGroup({

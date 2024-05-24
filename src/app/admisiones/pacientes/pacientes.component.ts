@@ -8,13 +8,12 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   selector: 'app-pacientes',
   standalone: true,
   imports: [RouterOutlet,RouterLink,MenuComponent, CerrarsesionComponent, ReactiveFormsModule],
-  templateUrl: './pacientes.component.html',
-  styleUrl: './pacientes.component.css'
+  templateUrl: './pacientes.component.html'
 })
 export class PacientesComponent implements OnInit {
 
   ngOnInit(): void {
-    
+
   }
 
   btnHistoriaHidden = false;

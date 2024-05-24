@@ -4,8 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-cama',
   standalone: true,
   imports: [],
-  templateUrl: './cama.component.html',
-  styleUrl: './cama.component.css'
+  templateUrl: './cama.component.html'
 })
 export class CamaComponent {
 

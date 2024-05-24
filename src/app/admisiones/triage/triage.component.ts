@@ -6,14 +6,13 @@ import { MenuComponent } from '../../componentes/menu/menu.component';
   selector: 'app-triage',
   standalone: true,
   imports: [ReactiveFormsModule, MenuComponent],
-  templateUrl: './triage.component.html',
-  styleUrl: './triage.component.css'
+  templateUrl: './triage.component.html'
 })
 export class TriageComponent implements OnInit {
 
 
   ngOnInit(): void {
-   
+
   }
 
   triageForm: FormGroup = new FormGroup({
