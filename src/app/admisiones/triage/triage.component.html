@@ -1,1 +1,232 @@
-<p>triage works!</p>
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  * -->
+<!-- * * * * * * * * * * * JERSON GALVEZ ENSUNCHO * * * * * * * * * * * -->
+<!-- ******* * * * * * * * PROYECTO CLINICSOFT * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+
+<div class="min-height-300 bg-default position-absolute w-100"></div>
+<aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
+  <app-menu></app-menu>
+</aside>
+<main class="main-content position-relative border-radius-lg">
+  <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
+    <div class="container-fluid py-1 px-3">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+          <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Administración</a></li>
+          <li class="breadcrumb-item text-sm text-white active" aria-current="page">Triage</li>
+        </ol>
+        <h6 class="font-weight-bolder text-white mb-0">Triage</h6>
+      </nav>
+      <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+        <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+          <div class="input-group">
+          </div>
+        </div>
+        <ul class="navbar-nav  justify-content-end">
+          <li class="nav-item d-flex align-items-center">
+            <a href="#" class="nav-link text-white font-weight-bold px-0">
+              <i class="fa fa-user me-sm-1"></i>
+              <span class="d-sm-inline d-none">Cerrar Sesión</span>
+            </a>
+          </li>
+          <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+            <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
+              <div class="sidenav-toggler-inner">
+                <i class="sidenav-toggler-line bg-white"></i>
+                <i class="sidenav-toggler-line bg-white"></i>
+                <i class="sidenav-toggler-line bg-white"></i>
+              </div>
+            </a>
+          </li>
+          <li class="nav-item px-3 d-flex align-items-center">
+            <a href="javascript:;" class="nav-link text-white p-0">
+              <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
+            </a>
+          </li>
+          <li class="nav-item dropdown pe-2 d-flex align-items-center">
+            <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa fa-bell cursor-pointer"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid py-1">
+    <div class="row">
+      <div class="card">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-7">
+              <div class="table-responsive">
+                <table class="table table-striped table-hover mt-3">
+                  <thead>
+                    <tr class="bg-default">
+                      <th class="text-xs text-white"></th>
+                      <th class="text-xs text-white">ESTADO</th>
+                      <th class="text-xs text-white">DNI</th>
+                      <th class="text-xs text-white">PACIENTE</th>
+                      <th class="text-xs text-white">DOCTOR</th>
+                      <th class="text-xs text-white">ESPECIALIDAD</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input form-control-sm"
+                            type="checkbox"
+                            id="flexCheckDefault"
+                          >
+                        </div>
+                      </td>
+                      <td class="text-xs text-dark mb-0 mt-4">PENDIENTE</td>
+                      <td class="text-xs text-dark mb-0">1110542802</td>
+                      <td class="text-xs text-dark mb-0">GALVEZ JERSON</td>
+                      <td class="text-xs text-dark mb-0">CUNIA PEREZ MARLENI</td>
+                      <td class="text-xs text-dark mb-0">ECOGRAFIA TRANSVAGINAL</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-md-5">
+              <form [formGroup]="triageForm">
+
+              <div class="row mt-2">
+                <div class="col-md-5">
+                  <label>DNI</label>
+                  <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    formControlName="dni_triage"
+                  >
+                </div>
+                <div class="col-md-7">
+                  <label>Paciente</label>
+                  <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    formControlName="paciente_triage"
+                  >
+                </div>
+              </div>
+                <div class="row mt-1">
+                  <div class="col-md-3">
+                    <label>Edad</label>
+                    <input
+                      type="number"
+                      class="form-control form-control-sm"
+                      formControlName="edad_triage"
+                    >
+                  </div>
+                  <div class="col-md-9">
+                    <label>Doctor</label>
+                    <select
+                      class="form-control form-control-sm"
+                      formControlName="doctor_triage"
+                    >
+                      <option value="">Seleccione una opcion</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mt-1">
+                  <div class="col-md-7">
+                    <label>Especialidad</label>
+                    <select
+                      class="form-control form-control-sm"
+                      formControlName="especialidad_triage"
+                    >
+                      <option value="">Seleccione una opcion</option>
+                    </select>
+                  </div>
+                  <div class="col-md-5">
+                    <label>Presion arterial(mmHg)</label>
+                    <input
+                      type="number"
+                      class="form-control form-control-sm"
+                      formControlName="presion_triage"
+                    >
+                  </div>
+                </div>
+                <div class="row mt-1">
+                  <div class="col-md-6">
+                    <label>Temperatura (C)</label>
+                    <input
+                      type="number"
+                      class="form-control form-control-sm"
+                      formControlName="temperatura_triage"
+                    >
+                  </div>
+                  <div class="col-md-6">
+                    <label>Frecuencia Respiratoria</label>
+                    <input
+                      type="number"
+                      class="form-control form-control-sm"
+                      formControlName="frecuenciar_triage"
+                    >
+                  </div>
+                </div>
+                <div class="row mt-1">
+                  <div class="col-md-6">
+                    <label>Frecuencia cardiaca</label>
+                    <input
+                      type="number"
+                      class="form-control form-control-sm"
+                      formControlName="frecuenciac_triage"
+                    >
+                  </div>
+                  <div class="col-md-6">
+                    <label>Saturaciòn O2</label>
+                    <input
+                      type="number"
+                      class="form-control form-control-sm"
+                      formControlName="saturacion_triage"
+                    >
+                  </div>
+                </div>
+                <div class="row mt-1">
+                  <div class="col-md-6">
+                    <label>Peso (kg)</label>
+                    <input
+                      type="number"
+                      class="form-control form-control-sm"
+                      formControlName="peso_triage"
+                    >
+                  </div>
+                  <div class="col-md-6">
+                    <label>Talla (cm)</label>
+                    <input
+                      type="number"
+                      class="form-control form-control-sm"
+                      formControlName="talla_triage"
+                    >
+                  </div>
+                </div>
+                <div class="row mt-1">
+                  <div class="col-md-6">
+                    <label>Imc</label>
+                    <input
+                      type=""
+                      class="form-control form-control-sm"
+                      formControlName="imc_triage"
+                    >
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <a
+                      class="btn btn-primary text-white btn-xs mx-1 mt-3"
+                    >
+                      <i class="fas fa-database text-white"></i> Crear
+                    </a>
+                  </div>
+                </div>
+              </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

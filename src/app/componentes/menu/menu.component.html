@@ -1,1 +1,171 @@
-<p>menu works!</p>
+
+<div class="sidenav-header">
+    <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+    <a class="navbar-brand m-0" href="#">
+    <img src="assets/img/logo.png" class="navbar-brand-img h-100" alt="main_logo">
+    <span class="mx-3 font-weight-bold"> <span class="text-black h6">ClinicSoft</span><small class="text-danger">peru</small></span>
+    <!-- <span class="mx-3 font-weight-bold"> <span class="text-black h6">ClinicSoft</span><small style="color: yellow;">Co</small><small class="text-primary">lom</small><small class="text-danger">bia</small></span> -->
+    </a>
+ </div>
+ <hr class="horizontal dark mt-0">
+ <div class="navbar-collapse  w-auto " style="height: 540px !important;" id="sidenav-collapse-main">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+         <a class="nav-link" routerLink="/inicio">
+           <i class="fas fa-home"></i>
+           <span>Inicio</span>
+         </a>
+        </li>
+       <li class="nav-item ">
+          <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#atencion">
+          <i class="fas fa-user-nurse"></i>
+          <span class="sidenav-normal "> Admisiones <b class="caret"></b></span>
+          </a>
+          <div class="collapse " id="atencion">
+             <ul class="nav nav-sm flex-column">
+                <li class="nav-item">
+                  <a class="nav-link " href="">
+                  <span class="sidenav-normal">Citas</span>
+                  </a>
+                 </li>
+               <li class="nav-item">
+                  <a class="nav-link "  routerLink="/pacientes">
+                  <span class="sidenav-normal">Pacientes</span>
+                  </a>
+               </li>
+                <li class="nav-item">
+                   <a class="nav-link" routerLink="/admision">
+                   <span class="sidenav-normal">Admisión</span>
+                   </a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link " routerLink="/triage">
+                   <span class="sidenav-normal"> Triage</span>
+                   </a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link " routerLink="/laboratorio">
+                   <span class="sidenav-normal">Laboratorio</span>
+                   </a>
+                </li>
+             </ul>
+          </div>
+       </li>
+       <li class="nav-item ">
+         <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#procedimientos">
+         <i class="fas fa-flask"></i>
+         <span class="sidenav-normal ">Procedimientos<b class="caret"></b></span>
+         </a>
+         <div class="collapse " id="procedimientos">
+            <ul class="nav nav-sm flex-column">
+              <li class="nav-item">
+                <a class="nav-link " routerLink="/colposcopia">
+                 <span class="sidenav-normal">Colposcopia</span>
+                </a>
+              </li>
+               <li class="nav-item">
+                  <a class="nav-link" routerLink="/ecografias">
+                  <span class="sidenav-normal">Ecografias</span>
+                  </a>
+               </li>
+            </ul>
+         </div>
+      </li>
+       <li class="nav-item ">
+       <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#inventarios">
+       <i class="fa fa-shopping-cart"></i>
+       <span class="sidenav-normal ">Inventarios<b class="caret"></b></span>
+       </a>
+       <div class="collapse " id="inventarios">
+          <ul class="nav nav-sm flex-column">
+            <li class="nav-item">
+              <a class="nav-link " routerLink="/productos">
+               <span class="sidenav-normal">Productos</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/inventario">
+              <span class="sidenav-normal">Inventario</span>
+              </a>
+            </li>
+             <li class="nav-item">
+               <a class="nav-link" routerLink="/kardex">
+               <span class="sidenav-normal">Kardex</span>
+               </a>
+            </li>
+          </ul>
+       </div>
+      </li>
+      <li class="nav-item ">
+       <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#seguridad">
+       <i class="fas fa-cogs"></i>
+       <span class="sidenav-normal ">Seguridad<b class="caret"></b></span>
+       </a>
+       <div class="collapse " id="seguridad">
+          <ul class="nav nav-sm flex-column">
+            <li class="nav-item">
+              <a class="nav-link " routerLink="/usuarios">
+               <span class="sidenav-normal">Administrativos</span>
+              </a>
+            </li>
+            <li class="nav-item">
+             <a class="nav-link " href="">
+              <span class="sidenav-normal">Medicos</span>
+             </a>
+           </li>
+          </ul>
+       </div>
+      </li>
+
+      <li class="nav-item ">
+       <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#contable">
+       <i class="fas fa-money-bill"></i>
+       <span class="sidenav-normal ">Contabilidad<b class="caret"></b></span>
+       </a>
+       <div class="collapse " id="contable">
+          <ul class="nav nav-sm flex-column">
+            <li class="nav-item">
+              <a class="nav-link " routerLink="/pagos">
+               <span class="sidenav-normal">Pagos</span>
+              </a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" routerLink="/gastos">
+                <span class="sidenav-normal">Gastos</span>
+                </a>
+             </li>
+             <li class="nav-item">
+               <a class="nav-link" routerLink="/finanzas">
+               <span class="sidenav-normal">Finanzas</span>
+               </a>
+            </li>
+          </ul>
+       </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/reportes">
+          <i class="fas fa-chart-pie"></i>
+          <span>Reportes</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+       <a class="nav-link">
+         <i class="fas fa-pills"></i>
+         <span>Farmacia</span>
+       </a>
+     </li>
+     <li class="nav-item">
+       <a class="nav-link">
+         <i class="fas fa-vial"></i>
+         <span>Resultados</span>
+       </a>
+     </li>
+     <li class="nav-item">
+      <a class="nav-link">
+        <i class="fas fa-info-circle"></i>
+        <span> Version 3.0.0.0</span>
+      </a>
+     </li>
+    </ul>
+ </div>

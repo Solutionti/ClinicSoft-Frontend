@@ -1,0 +1,98 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  * -->
+<!-- * * * * * * * * * * * JERSON GALVEZ ENSUNCHO * * * * * * * * * * * -->
+<!-- ******* * * * * * * * PROYECTO CLINICSOFT * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<main class="main-content  mt-0">
+    <section>
+    <div class="page-header min-vh-100">
+    <div class="container">
+    <div class="row">
+      <div class="col-6 d-lg-flex d-none h-100  position-absolute top-0 end-0 text-center justify-content-center flex-column">
+    <div class="position-relative bg-gradient-danger h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden" style="background-image: url('https://cdn.pixabay.com/photo/2021/10/11/17/37/doctor-6701410_960_720.jpg'); background-size: cover;">
+    <span class="mask bg-gradient-dark opacity-6"></span>
+    <!-- <h4 class="mt-5 text-white font-weight-bolder position-relative">"Attention is the new currency"</h4>
+    <p class="text-white position-relative">The more effortless the writing looks, the more effort the writer actually put into the process.</p> -->
+    </div>
+    </div>
+    <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
+    <div class="card card-plain">
+    <div class="card-header pb-0 text-start">
+      <div class="text-center">
+        <img src="assets/img/logo.png" class="img-fluid mb-3" width="80px;">
+      </div>
+      <div class="text-center">
+        <span class="mx-3 font-weight-bold"> <span class="text-black h6 text-bold">ClinicSoft</span><small class="text-danger text-bold">peru</small></span>
+        <!-- <span class="mx-3 font-weight-bold"> <span class="text-black h6">ClinicSoft</span><small style="color: yellow;">Co</small><small class="text-primary">lom</small><small class="text-danger">bia</small></span> -->
+
+      </div>
+      <h4 class="font-weight-bolder text-center mt-4">Iniciar sesión</h4>
+    </div>
+    <div class="card-body">
+
+      <div
+        class="alert alert-danger alert-dismissible fade show text-white"
+        role="alert"
+        [hidden]="loginAlert"
+      >
+        <strong>Error !</strong> El usuario y contraseña ingresado son invalidos.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"> <i class="fas fa-times"></i> </button>
+    </div>
+    
+    <form [formGroup]="loginForm">
+      <div class="mb-3">
+      <input
+        type="text"
+        class="form-control form-control-lg"
+        placeholder="Usuario"
+        formControlName="usuario"
+      >
+    </div>
+    <div class="mb-3">
+      <input
+        type="password"
+        class="form-control form-control-lg"
+        placeholder="Contraseña"
+        formControlName="password"
+
+      >
+    </div>
+    <div class="form-check form-switch">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        id="rememberMe"
+        formControlName="recordar"
+        
+      >
+        <label class="form-check-label" for="rememberMe">Acuérdame</label>
+    </div>
+    <div class="text-center">
+      <button
+        class="btn btn-lg btn-dark btn-lg w-100 mt-4 mb-0"
+        (click)="iniciarSesion()"
+        [disabled]="loginForm.invalid"
+      >
+        Iniciar sesión
+      </button>
+    </div>
+    </form>
+    </div>
+    <div class="card-footer text-center pt-0 px-lg-2 px-1">
+    <p class="mb-4 text-sm mx-auto">
+      ¿No tienes una cuenta?
+      <a
+        href="javascript:;"
+        class="text-primary text-gradient font-weight-bold"
+      >
+        Inscribete
+      </a>
+    </p>
+    </div>
+  </div>
+ </div>
+</div>
+</div>
+</div>
+</section>
+</main>
+
