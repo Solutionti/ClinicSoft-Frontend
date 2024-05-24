@@ -7,8 +7,7 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-laboratorio',
   standalone: true,
   imports: [RouterOutlet,MenuComponent, ReactiveFormsModule],
-  templateUrl: './laboratorio.component.html',
-  styleUrl: './laboratorio.component.css'
+  templateUrl: './laboratorio.component.html'
 })
 export class LaboratorioComponent implements OnInit {
 
@@ -19,7 +18,7 @@ export class LaboratorioComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  
+
   laboratorioForm = new FormGroup({
     dni_laboratorio: new FormControl(''),
     nombre_laboratorio: new FormControl(''),

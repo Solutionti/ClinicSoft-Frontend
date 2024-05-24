@@ -1,12 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ComponentesModule } from '../../componentes/componentes.module';
+import { MenuComponent } from '../../componentes/menu/menu.component';
+import { CerrarsesionComponent } from '../../componentes/cerrarsesion/cerrarsesion.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-ecografia',
   standalone: true,
-  imports: [],
-  templateUrl: './ecografia.component.html',
-  styleUrl: './ecografia.component.css'
+  imports: [RouterOutlet,ReactiveFormsModule,MenuComponent,CerrarsesionComponent],
+  templateUrl: './ecografia.component.html'
 })
-export class EcografiaComponent {
+export class EcografiaComponent implements OnInit {
 
+  ngOnInit(): void {
+
+  }
+
+  ecografiaForm = new FormGroup({
+
+    dni_ecografia: new FormControl(''),
+    nombre_ecografia: new FormControl(''),
+    tipo_ecografia: new FormControl(''),
+    fecha_ecografia: new FormControl(''),
+    observacion_ecografia: new FormControl(''),
+  });
 }
