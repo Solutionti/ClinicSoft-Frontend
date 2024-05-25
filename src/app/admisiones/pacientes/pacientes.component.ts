@@ -54,7 +54,7 @@ export class PacientesComponent implements OnInit {
     crearpaciente_parentescores: new FormControl('')
   });
 
-  get fechaFinalControl(): FormControl {
+  get dniControl(): FormControl {
     return this.crearPacienteForm.get('crearpaciente_dni') as FormControl;
   }
 
