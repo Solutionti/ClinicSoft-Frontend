@@ -27,6 +27,5 @@ export class KardexComponent implements OnInit {
     producto_kardex: new FormControl(''),
     inicial_kardex: new FormControl(''),
     final_kardex: new FormControl(''),
-
   });
 }
