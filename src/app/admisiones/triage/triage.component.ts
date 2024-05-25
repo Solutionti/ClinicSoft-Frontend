@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MenuComponent } from '../../componentes/menu/menu.component';
 import { TableModule } from 'primeng/table';
+import { CerrarsesionComponent } from '../../componentes/cerrarsesion/cerrarsesion.component';
 @Component({
   selector: 'app-triage',
   standalone: true,
   imports: [
     ReactiveFormsModule,
     MenuComponent,
+    CerrarsesionComponent,
     TableModule
   ],
   templateUrl: './triage.component.html'

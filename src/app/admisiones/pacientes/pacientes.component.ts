@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuComponent } from '../../componentes/menu/menu.component';
 import { CerrarsesionComponent } from '../../componentes/cerrarsesion/cerrarsesion.component';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { TableModule } from 'primeng/table';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-pacientes',
@@ -14,7 +15,8 @@ import { TableModule } from 'primeng/table';
     MenuComponent,
     CerrarsesionComponent,
     ReactiveFormsModule,
-    TableModule
+    TableModule,
+    CommonModule
   ],
   templateUrl: './pacientes.component.html'
 })
@@ -30,7 +32,7 @@ export class PacientesComponent implements OnInit {
   containerResponsable = true;
 
   crearPacienteForm: FormGroup = new FormGroup({
-    crearpaciente_dni: new FormControl(''),
+    crearpaciente_dni: new FormControl('',[Validators.required]),
     crearpaciente_apellido: new FormControl(''),
     crearpaciente_nombre: new FormControl(''),
     crearpaciente_hc: new FormControl(''),
@@ -51,5 +53,9 @@ export class PacientesComponent implements OnInit {
     crearpaciente_telefonores: new FormControl(''),
     crearpaciente_parentescores: new FormControl('')
   });
+
+  get fechaFinalControl(): FormControl {
+    return this.crearPacienteForm.get('crearpaciente_dni') as FormControl;
+  }
 
 }

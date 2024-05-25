@@ -3,6 +3,7 @@ import { MenuComponent } from '../../componentes/menu/menu.component';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { TableModule } from 'primeng/table';
+import { CerrarsesionComponent } from '../../componentes/cerrarsesion/cerrarsesion.component';
 
 @Component({
   selector: 'app-laboratorio',
@@ -10,6 +11,7 @@ import { TableModule } from 'primeng/table';
   imports: [
     RouterOutlet,
     MenuComponent,
+    CerrarsesionComponent,
     ReactiveFormsModule,
     TableModule
   ],
