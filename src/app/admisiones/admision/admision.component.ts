@@ -27,7 +27,6 @@ export class AdmisionComponent implements OnInit {
     dni_admision: new FormControl(''),
     hc_admision: new FormControl(''),
     si_admision: new FormControl(''),
-    no_admision: new FormControl(''),
     nombre_admision: new FormControl(''),
     especialidad_admision: new FormControl(''),
     doctor_admision: new FormControl(''),
