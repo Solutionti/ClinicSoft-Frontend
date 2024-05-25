@@ -59,36 +59,42 @@
           <div class="row">
             <div class="col-md-7">
               <div class="table-responsive">
-                <table class="table table-striped table-hover mt-3">
-                  <thead>
-                    <tr class="bg-default">
-                      <th class="text-xs text-white"></th>
-                      <th class="text-xs text-white">ESTADO</th>
-                      <th class="text-xs text-white">DNI</th>
-                      <th class="text-xs text-white">PACIENTE</th>
-                      <th class="text-xs text-white">DOCTOR</th>
-                      <th class="text-xs text-white">ESPECIALIDAD</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <div class="form-check">
-                          <input
-                            class="form-check-input form-control-sm"
-                            type="checkbox"
-                            id="flexCheckDefault"
-                          >
-                        </div>
-                      </td>
-                      <td class="text-xs text-dark mb-0 mt-4">PENDIENTE</td>
-                      <td class="text-xs text-dark mb-0">1110542802</td>
-                      <td class="text-xs text-dark mb-0">GALVEZ JERSON</td>
-                      <td class="text-xs text-dark mb-0">CUNIA PEREZ MARLENI</td>
-                      <td class="text-xs text-dark mb-0">ECOGRAFIA TRANSVAGINAL</td>
-                    </tr>
-                  </tbody>
-                </table>
+                <p-table
+                  #dt
+                  [rows]="10"
+                  [paginator]="true"
+                  [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+                  [tableStyle]="{ 'min-width': '75rem' }"
+                  [rowHover]="true"
+                  dataKey="id"
+                  currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas"
+                >
+                <ng-template pTemplate="caption">
+                  <div class="flex align-items-center justify-content-between">
+                    <span class="p-input-icon-left">
+                      <i class="pi pi-search"></i>
+                      <input
+                        pInputText
+                        type="text"
+                        class="form-control"
+                        placeholder="Buscar..."
+                      />
+                    </span>
+                  </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th class="text-xs text-white bg-default"></th>
+                      <th class="text-xs text-white bg-default">ESTADO</th>
+                      <th class="text-xs text-white bg-default">DNI</th>
+                      <th class="text-xs text-white bg-default">PACIENTE</th>
+                      <th class="text-xs text-white bg-default">DOCTOR</th>
+                      <th class="text-xs text-white bg-default">ESPECIALIDAD</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product>
+                </ng-template>
+               </p-table>
               </div>
             </div>
             <div class="col-md-5">

@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MenuComponent } from '../../componentes/menu/menu.component';
-
+import { TableModule } from 'primeng/table';
 @Component({
   selector: 'app-triage',
   standalone: true,
-  imports: [ReactiveFormsModule, MenuComponent],
+  imports: [
+    ReactiveFormsModule,
+    MenuComponent,
+    TableModule
+  ],
   templateUrl: './triage.component.html'
 })
 export class TriageComponent implements OnInit {

@@ -2,11 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { MenuComponent } from '../../componentes/menu/menu.component';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
+import { TableModule } from 'primeng/table';
 
 @Component({
   selector: 'app-laboratorio',
   standalone: true,
-  imports: [RouterOutlet,MenuComponent, ReactiveFormsModule],
+  imports: [
+    RouterOutlet,
+    MenuComponent,
+    ReactiveFormsModule,
+    TableModule
+  ],
   templateUrl: './laboratorio.component.html'
 })
 export class LaboratorioComponent implements OnInit {
