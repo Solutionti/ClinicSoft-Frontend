@@ -1,14 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ComponentesModule } from '../../componentes/componentes.module';
 import { MenuComponent } from '../../componentes/menu/menu.component';
 import { CerrarsesionComponent } from '../../componentes/cerrarsesion/cerrarsesion.component';
 import { RouterOutlet } from '@angular/router';
+import { TableModule } from 'primeng/table';
 
 @Component({
   selector: 'app-gastos',
   standalone: true,
-  imports: [RouterOutlet,ReactiveFormsModule,MenuComponent,CerrarsesionComponent],
+  imports: [
+    RouterOutlet,
+    ReactiveFormsModule,
+    MenuComponent,
+    CerrarsesionComponent,
+    TableModule
+  ],
   templateUrl: './gastos.component.html'
 })
 export class GastosComponent implements OnInit {

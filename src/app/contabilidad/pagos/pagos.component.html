@@ -17,24 +17,45 @@
         <div class="container-fluid mt-3">
           <div class="row">
             <div class="col-md-12">
-              <table class="table table-striped table-hover">
-                <thead>
-                  <tr class="bg-default">
-                    <th class="text-xs text-white"></th>
-                    <th class="text-xs text-white">FACTURA</th>
-                    <th class="text-xs text-white">PACIENTE</th>
-                    <th class="text-xs text-white">MEDICO</th>
-                    <th class="text-xs text-white">CONCEPTO</th>
-                    <th class="text-xs text-white">FECHA</th>
-                    <th class="text-xs text-white">TIPO DE PAGO</th>
-                    <th class="text-xs text-white">DESCUENTO</th>
-                    <th class="text-xs text-white">TOTAL</th>
-                   </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-              </table>
+              <p-table
+                  #dt
+                  [rows]="10"
+                  [paginator]="true"
+                  [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+                  [tableStyle]="{ 'min-width': '75rem' }"
+                  [rowHover]="true"
+                  dataKey="id"
+                  currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas"
+                >
+                <ng-template pTemplate="caption">
+                  <div class="flex align-items-center justify-content-between">
+                    <span class="p-input-icon-left">
+                      <i class="pi pi-search"></i>
+                      <input
+                        pInputText
+                        type="text"
+                        class="form-control"
+                        placeholder="Buscar..."
+                      />
+                    </span>
+                  </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th pSortableColumn="name" class="text-xs text-white bg-default"></th>
+                    <th pSortableColumn="name" class="text-xs text-white bg-default">FACTURA</th>
+                    <th pSortableColumn="name" class="text-xs text-white bg-default">PACIENTE</th>
+                    <th pSortableColumn="name" class="text-xs text-white bg-default">MEDICO</th>
+                    <th pSortableColumn="name" class="text-xs text-white bg-default">CONCEPTO</th>
+                    <th pSortableColumn="name" class="text-xs text-white bg-default">FECHA</th>
+                    <th pSortableColumn="name" class="text-xs text-white bg-default">TIPO DE PAGO</th>
+                    <th pSortableColumn="name" class="text-xs text-white bg-default">DESCUENTO</th>
+                    <th pSortableColumn="name" class="text-xs text-white bg-default">TOTAL</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product>
+                </ng-template>
+               </p-table>
             </div>
           </div>
         </div>
