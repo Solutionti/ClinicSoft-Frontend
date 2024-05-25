@@ -3,11 +3,19 @@ import { MenuComponent } from '../../componentes/menu/menu.component';
 import { CerrarsesionComponent } from '../../componentes/cerrarsesion/cerrarsesion.component';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { TableModule } from 'primeng/table';
 
 @Component({
   selector: 'app-pacientes',
   standalone: true,
-  imports: [RouterOutlet,RouterLink,MenuComponent, CerrarsesionComponent, ReactiveFormsModule],
+  imports: [
+    RouterOutlet,
+    RouterLink,
+    MenuComponent,
+    CerrarsesionComponent,
+    ReactiveFormsModule,
+    TableModule
+  ],
   templateUrl: './pacientes.component.html'
 })
 export class PacientesComponent implements OnInit {
