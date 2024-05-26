@@ -72,15 +72,20 @@
               <div class="row mt-2">
                <div class="row">
                 <div class="col-md-4">
-                  <label>DNI</label>
+                  <label>DNI </label>
+                  <div class="input-group">
                   <input
                     type="text"
                     class="form-control form-control-sm"
                     formControlName="dni_admision"
                   >
+                  <button class="btn btn-primary btn-xs" type="button">
+                    <i class="fas fa-fingerprint"></i>
+                  </button>
+                 </div>
                 </div>
                 <div class="col-md-4">
-                  <label>No HC</label>
+                  <label>N° HC</label>
                   <input
                     type="text"
                     class="form-control form-control-sm"
@@ -100,7 +105,7 @@
                   </div>
                 </div>
               </div>
-              <div class="row mt-1">
+              <div class="row ">
                 <div class="col-md-12">
                   <label>Nombre Completo</label>
                   <input
@@ -110,7 +115,7 @@
                   >
                 </div>
               </div>
-              <div class="row mt-2">
+              <div class="row mt-3">
                 <div class="col-md-6">
                   <label>Especialidad</label>
                   <select
@@ -167,7 +172,7 @@
                   >
                 </div>
               </div>
-              <div class="row mt-1">
+              <div class="row mt-3">
                 <div class="col-md-4">
                   <label>Costo</label>
                   <input
@@ -193,7 +198,7 @@
                   >
                 </div>
               </div>
-              <div class="row mt-1">
+              <div class="row mt-3">
                 <div class="col-md-4">
                   <label>Cantidad recibida</label>
                   <input
@@ -212,33 +217,13 @@
                 </div>
                 <div class="col-md-4">
                   <label>Forma de pago</label>
-                  <!-- <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="exampleRadios"
-                      id="exampleRadios1"
-                      value="option1"
-                      checked
-                      formControlName="efectivo_admision"
-                    >
-                    <label class="form-check-label" for="exampleRadios1">
-                      Efectivo
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="exampleRadios"
-                      id="exampleRadios2"
-                      value="option2"
-                      formControlName="tarjeta_admision"
-                    >
-                    <label class="form-check-label" for="exampleRadios2">
-                      Tarjeta
-                    </label>
-                  </div> -->
+                  <select
+                    class="form-control form-control-sm"
+                    formControlName="efectivo_admision"
+                  >
+                    <option value="0">Efectivo</option>
+                    <option value="1">Tarjeta</option>
+                  </select>
                 </div>
               </div>
             </form>

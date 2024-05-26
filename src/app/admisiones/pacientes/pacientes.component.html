@@ -2,6 +2,7 @@
 <!-- * * * * * * * * * * * JERSON GALVEZ ENSUNCHO * * * * * * * * * * * -->
 <!-- ******* * * * * * * * PROYECTO CLINICSOFT * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<p-toast position="top-right"/>
 <div class="min-height-300 bg-default position-absolute w-100"></div>
 <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-1 border-radius-xl my-3 fixed-start ms-4 " style="z-index: 1 !important;" id="sidenav-main">
  <app-menu></app-menu>
@@ -26,7 +27,7 @@
                 <a
                   class="btn btn-danger text-white btn-xs mx-2"
                   [hidden]="btnActualizarHidden"
-                  
+                  (click)="actualizarPaciente()"  
                 >
                   <i class="fas fa-pen text-white"></i> Actualizar
                 </a>
@@ -36,6 +37,7 @@
                   data-bs-target="#staticBackdrop"
                   [hidden]="btnAgregarHidden"
                   [disabled]="crearPacienteForm.invalid"
+                  (click)="crearPaciente()"
                 >
                   <i class="fas fa-database text-white"></i> Crear
                 </button>
@@ -46,14 +48,16 @@
             <div class="col-md-12">
               <div class="table-responsive">
                 <p-table
-                  #dt
-                  [rows]="10"
+                  #pacientes
+                  [rows]="3"
+                  [value]="getPaciente"
                   [paginator]="true"
-                  [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+                  [globalFilterFields]="['documento', 'getPaciente.documento', 'apellido', 'getPaciente.apellido', 'nombre', 'getPaciente.nombre']"
                   [tableStyle]="{ 'min-width': '75rem' }"
                   [rowHover]="true"
                   dataKey="id"
                   currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas"
+                  [showCurrentPageReport]="true"
                 >
                 <ng-template pTemplate="caption">
                   <div class="flex align-items-center justify-content-between">
@@ -61,8 +65,9 @@
                       <i class="pi pi-search"></i>
                       <input 
                         pInputText 
-                        type="text" 
+                        type="text"
                         class="form-control"
+                        (input)="pacientes.filterGlobal($any($event.target).value, 'contains')" 
                         placeholder="Buscar..."
                       />
                     </span>
@@ -70,18 +75,37 @@
                 </ng-template>
                 <ng-template pTemplate="header">
                   <tr>
-                    <th pSortableColumn="name" class="text-xs text-white bg-default"></th>
-                    <th pSortableColumn="name" class="text-xs text-white bg-default">DNI</th>
-                    <th pSortableColumn="name" class="text-xs text-white bg-default">APELLIDOS</th>
-                    <th pSortableColumn="name" class="text-xs text-white bg-default">NOMBRES</th>
-                    <th pSortableColumn="name" class="text-xs text-white bg-default">DIRECCION</th>
-                    <th pSortableColumn="name" class="text-xs text-white bg-default">TELEFONO</th>
-                    <th pSortableColumn="name" class="text-xs text-white bg-default">FECHA NACIMIENTO</th>
-                    <th pSortableColumn="name" class="text-xs text-white bg-default">SEXO</th>
-                    <th pSortableColumn="name" class="text-xs text-white bg-default">ESTADO CIVIL</th>
+                    <th class="text-xs text-white bg-default"></th>
+                    <th pSortableColumn="docuemento" class="text-xs text-white bg-default">DNI</th>
+                    <th pSortableColumn="apellido" class="text-xs text-white bg-default">APELLIDOS</th>
+                    <th pSortableColumn="nombre" class="text-xs text-white bg-default">NOMBRES</th>
+                    <th class="text-xs text-white bg-default">TELEFONO</th>
+                    <th class="text-xs text-white bg-default">FECHA NACIMIENTO</th>
+                    <th class="text-xs text-white bg-default">SEXO</th>
+                    <th class="text-xs text-white bg-default">ESTADO CIVIL</th>
                   </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-product>
+                <ng-template pTemplate="body" let-pacientes>
+                  <tr [pSelectableRow]="pacientes">
+                    <td>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="flexRadioDefault"
+                          id="flexRadioDefault1"
+                          (change)="getPacientesId(pacientes.documento)"
+                        >
+                      </div>
+                    </td>
+                    <td class="text-xs text-uppercase">{{ pacientes.documento }}</td>
+                    <td class="text-xs text-uppercase">{{ pacientes.apellido }}</td>
+                    <td class="text-xs text-uppercase">{{ pacientes.nombre }}</td>
+                    <td class="text-xs text-uppercase">{{ pacientes.telefono }}</td>
+                    <td class="text-xs text-uppercase">{{ pacientes.fecha_nacimiento}}</td>
+                    <td class="text-xs text-uppercase">{{ pacientes.sexo }}</td>
+                    <td class="text-xs text-uppercase">{{ pacientes.estado_civil }}</td>
+                  </tr>
                 </ng-template>
                </p-table>
               </div>
@@ -99,18 +123,19 @@
                 type="number"
                 class="form-control form-control-sm"
                 formControlName="crearpaciente_dni"
+                (keyup.enter)="getPacienteApiPeru()"
               >
-              <button class="btn btn-primary btn-xs " type="button">
+              <button class="btn btn-primary btn-xs" type="button">
                 <i class="fas fa-fingerprint"></i>
               </button>
-            </div>
-            <div
-             class="error"
-             *ngIf="dniControl.invalid && (dniControl.touched || dniControl.dirty)"
-            >
-              <p class="text-danger text-xs font-weight-bold">
-                El campo es obligatorio
-              </p>
+              <div
+               class="error"
+               *ngIf="dniControl.invalid && (dniControl.touched || dniControl.dirty)"
+              >
+                <p class="text-danger text-xs font-weight-bold">
+                  El campo es obligatorio
+                </p>
+              </div>
             </div>
             </div>
             <div class="col-md-4">
@@ -120,6 +145,14 @@
                 class="form-control form-control-sm"
                 formControlName="crearpaciente_apellido"
               >
+              <div
+                class="error"
+                *ngIf="apellidosControl.invalid && (apellidosControl.touched || apellidosControl.dirty)"
+              >
+                <p class="text-danger text-xs font-weight-bold">
+                  El campo es obligatorio
+                </p>
+              </div>
             </div>
             <div class="col-md-4">
               <label>Nombres *</label>
@@ -128,6 +161,14 @@
                 class="form-control form-control-sm"
                 formControlName="crearpaciente_nombre"
               >
+              <div
+                class="error"
+                *ngIf="nombresControl.invalid && (nombresControl.touched || nombresControl.dirty)"
+              >
+                <p class="text-danger text-xs font-weight-bold">
+                  El campo es obligatorio
+                </p>
+              </div>
             </div>
             <div class="col-md-2">
               <label>HC *</label>
@@ -136,11 +177,19 @@
                 class="form-control form-control-sm"
                 formControlName="crearpaciente_hc"
               >
+              <div
+                class="error"
+                *ngIf="hcControl.invalid && (hcControl.touched || hcControl.dirty)"
+              >
+                <p class="text-danger text-xs font-weight-bold">
+                  El campo es obligatorio
+                </p>
+              </div>
             </div>
           </div>
           <div class="row mt-1">
             <div class="col-md-3">
-              <label>Celular *</label>
+              <label>Celular </label>
               <input
                 type="number"
                 class="form-control form-control-sm"
@@ -154,14 +203,21 @@
                 formControlName="crearpaciente_sexo"
               >
                 <option value="">Seleccione una opcion</option>
-                <!-- <option
+                <option
                   *ngFor="let sexo of getSexs"
                   [value]="sexo.codigo"
                 >
                   {{ sexo.descripcion }}
-                </option> -->
-
+                </option>
               </select>
+              <div
+                class="error"
+                *ngIf="sexoControl.invalid && (sexoControl.touched || sexoControl.dirty)"
+              >
+                <p class="text-danger text-xs font-weight-bold">
+                  El campo es obligatorio
+                </p>
+              </div>
             </div>
             <div class="col-md-2">
               <label>Fecha de Nacimiento *</label>
@@ -170,6 +226,14 @@
                 class="form-control form-control-sm"
                 formControlName="crearpaciente_fechanacimiento"
               >
+              <div
+                class="error"
+                *ngIf="nacimientoControl.invalid && (nacimientoControl.touched || nacimientoControl.dirty)"
+              >
+                <p class="text-danger text-xs font-weight-bold">
+                  El campo es obligatorio
+                </p>
+              </div>
             </div>
             <div class="col-md-1">
               <label>Edad</label>
@@ -186,39 +250,65 @@
                 class="form-control form-control-sm"
                 formControlName="crearpaciente_direccion"
               >
+              <div
+                class="error"
+                *ngIf="direccionControl.invalid && (direccionControl.touched || direccionControl.dirty)"
+              >
+                <p class="text-danger text-xs font-weight-bold">
+                  El campo es obligatorio
+                </p>
+              </div>
             </div>
           </div>
-          <div class="row mt-1">
+          <div class="row mt-3">
             <div class="col-md-4">
               <label>Departamento *</label>
               <select
                 class="form-control form-control-sm text-capitalize"
                 formControlName="crearpaciente_departamento"
+                (change)="getProvince()"
               >
                 <option value="">Seleccione una opcion</option>
-                <!-- <option
+                <option
                   *ngFor="let departamento of getDepartament"
                   [value]="departamento.id"
                   >
                   {{ departamento.name }}
 
-                </option> -->
+                </option>
               </select>
+              <div
+                class="error"
+                *ngIf="departamentoControl.invalid && (departamentoControl.touched || departamentoControl.dirty)"
+              >
+                <p class="text-danger text-xs font-weight-bold">
+                  El campo es obligatorio
+                </p>
+              </div>
             </div>
             <div class="col-md-4">
               <label>Provincia *</label>
               <select
                 class="form-control form-control-sm"
                 formControlName="crearpaciente_provincia"
+                (change)="getDistrict()"
               >
                 <option value="">Seleccione una opcion</option>
-                <!-- <option
+                <option
                   *ngFor="let provincia of getProvinces"
                   [value]="provincia.id"
                 >
                   {{ provincia.name }}
-              </option> -->
+              </option>
               </select>
+              <div
+                class="error"
+                *ngIf="provinciaControl.invalid && (provinciaControl.touched || provinciaControl.dirty)"
+              >
+                <p class="text-danger text-xs font-weight-bold">
+                  El campo es obligatorio
+                </p>
+              </div>
             </div>
             <div class="col-md-4">
               <label>Distrito *</label>
@@ -227,24 +317,31 @@
                 formControlName="crearpaciente_distrito"
               >
                 <option value="">Seleccione una opcion</option>
-                <!-- <option
+                <option
                   *ngFor="let distrito of getDistricto"
                   [value]="distrito.id"
                 >
                   {{ distrito.name }}
-                </option> -->
+                </option>
               </select>
+              <div
+                class="error"
+                *ngIf="distritoControl.invalid && (distritoControl.touched || distritoControl.dirty)"
+              >
+                <p class="text-danger text-xs font-weight-bold">
+                  El campo es obligatorio
+                </p>
+              </div>
             </div>
           </div>
-          <div class="row mt-1">
+          <div class="row mt-3">
             <div class="col-md-4">
               <label>Ocupaciòn</label>
-              <select
+              <input
+                type="text"
                 class="form-control form-control-sm"
                 formControlName="crearpaciente_ocupacion"
               >
-                <option value="">Seleccione una opcion</option>
-              </select>
             </div>
             <div class="col-md-4">
               <label>Grado Academico *</label>
@@ -253,14 +350,22 @@
                 formControlName="crearpaciente_grado"
               >
                 <option value="">Seleccione una opcion</option>
-                <!-- <option
+                <option
                   *ngFor="let academico of getAcademic"
                   [value]="academico.codigo"
                   >
                   {{ academico.descripcion }}
 
-                </option> -->
+                </option>
               </select>
+              <div
+                class="error"
+                *ngIf="academicoControl.invalid && (academicoControl.touched || academicoControl.dirty)"
+              >
+                <p class="text-danger text-xs font-weight-bold">
+                  El campo es obligatorio
+                </p>
+              </div>
             </div>
             <div class="col-md-4">
               <label>Estado Civil *</label>
@@ -269,13 +374,21 @@
                 formControlName="crearpaciente_estadocivil"
               >
                 <option value="">Seleccione una opcion</option>
-                <!-- <option
+                <option
                   *ngFor="let estado of getCivilStatu"
                   [value]="estado.codigo"
                 >
                   {{ estado.descripcion }}
-              </option> -->
+              </option>
               </select>
+              <div
+                class="error"
+                *ngIf="civilControl.invalid && (civilControl.touched || civilControl.dirty)"
+              >
+                <p class="text-danger text-xs font-weight-bold">
+                  El campo es obligatorio
+                </p>
+              </div>
             </div>
           </div>
           <div class="row mt-3">
