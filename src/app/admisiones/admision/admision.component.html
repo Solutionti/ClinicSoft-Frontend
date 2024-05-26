@@ -3,12 +3,11 @@
 <!-- * * * * * * * * * * * JERSON GALVEZ ENSUNCHO * * * * * * * * * * * -->
 <!-- ******* * * * * * * * PROYECTO CLINICSOFT * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-
+<p-toast position="top-right"/>
 <div class="min-height-300 bg-default position-absolute w-100"></div>
 <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
   <app-menu></app-menu>
 </aside>
-
 <main class="main-content position-relative border-radius-lg">
   <app-cerrarsesion titulo="Admision"></app-cerrarsesion>
   <div class="container-fluid py-1">
@@ -20,6 +19,7 @@
               <div class="d-flex flex-row-reverse">
                 <a
                   class="btn btn-primary text-white btn-xs mx-1"
+                  (click)="createAdmission()"
                 >
                   <i class="fas fa-database text-white"></i> Crear
                 </a>
@@ -29,8 +29,9 @@
         <div class="row">
           <div class="col-md-12">
             <p-table
-                  #dt
-                  [rows]="10"
+                  #admisiones
+                  [value]="getAdmissions"
+                  [rows]="5"
                   [paginator]="true"
                   [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
                   [tableStyle]="{ 'min-width': '75rem' }"
@@ -46,6 +47,7 @@
                         pInputText
                         type="text"
                         class="form-control"
+                        (input)="admisiones.filterGlobal($any($event.target).value, 'contains')" 
                         placeholder="Buscar..."
                       />
                     </span>
@@ -53,14 +55,41 @@
                 </ng-template>
                 <ng-template pTemplate="header">
                   <tr>
-                    <th  class="text-xs text-white bg-default">PACIENTES</th>
+                    <th  class="text-xs text-white bg-default"></th>
+                    <th  class="text-xs text-white bg-default">PACIENTE</th>
                     <th  class="text-xs text-white bg-default">ESTADO</th>
                     <th  class="text-xs text-white bg-default">DOCTOR</th>
                     <th  class="text-xs text-white bg-default">ESPECIALIDAD</th>
                     <th  class="text-xs text-white bg-default">COSTO</th>
                   </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-product>
+                <ng-template pTemplate="body" let-getAdmissions>
+                  <tr>
+                    <td class="text-xs text-uppercase">
+                      <button
+                        class="btn btn-link text-secondary mb-0"
+                        aria-haspopup="true"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        <i class="fa fa-ellipsis-v text-xs"></i>
+                      </button>
+                      <ul class="dropdown-menu text-capitalize">
+                        <li>
+                          <a
+                            class="dropdown-item"
+                          >
+                            Ver
+                          </a>
+                        </li>
+                      </ul>
+                    </td>
+                    <td class="text-xs text-uppercase">{{ getAdmissions.paciente }}</td>
+                    <td class="text-xs text-uppercase">{{ getAdmissions.estado }}</td>
+                    <td class="text-xs text-uppercase">{{ getAdmissions.medico }}</td>
+                    <td class="text-xs text-uppercase">{{ getAdmissions.especialidad }}</td>
+                    <td class="text-xs text-uppercase">{{ getAdmissions.costo }}</td>
+                  </tr>
                 </ng-template>
                </p-table>
           </div>
@@ -78,6 +107,7 @@
                     type="text"
                     class="form-control form-control-sm"
                     formControlName="dni_admision"
+                    (keyup.enter)="getPacientesId()"
                   >
                   <button class="btn btn-primary btn-xs" type="button">
                     <i class="fas fa-fingerprint"></i>
@@ -123,12 +153,12 @@
                     formControlName="especialidad_admision"
                   >
                     <option value="">Seleccione una opcion</option>
-                    <!-- <option
-                      *ngFor="let especialidad of getSpecialtie"
+                    <option
+                      *ngFor="let especialidad of getSpecialty"
                       [value]="especialidad.codigo_especialidad"
                     >
                       {{ especialidad.descripcion }}
-                    </option> -->
+                    </option>
                   </select>
                 </div>
                 <div class="col-md-6">
@@ -138,12 +168,12 @@
                     formControlName="doctor_admision"
                   >
                     <option value="">Seleccione una opcion</option>
-                    <!-- <option
+                    <option
                       *ngFor="let doctor of getDoctors"
                       [value]="doctor.codigo_doctor"
                     >
                       {{ doctor.nombre }}
-                    </option> -->
+                    </option>
                 </select>
                 </div>
               </div>

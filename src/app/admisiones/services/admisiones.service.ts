@@ -84,4 +84,28 @@ export class AdmisionesService {
         usuario: localStorage.getItem('usuario'),
     })
   }
+
+  // MODULO DE ADMISIONES
+  getAdmission() {
+    const url = `${environment.apiClinicSoft}getAdmission`;
+
+    return this.http.get(url);
+  }
+
+  createAdmission(datos: any ) {
+    const url = `${environment.apiClinicSoft}createAdmission`;
+
+    return this.http.post(url, {
+      documento: datos[0].documento, 
+      medico: datos[0].medico,
+      especialidad: datos[0].especialidad,
+      cola_atencion: datos[0].cola_atencion,
+      costo: datos[0].costo,
+      comision: datos[0].comision,
+      turno: datos[0].turno,
+      usuario: datos[0].usuario,
+      orden__: datos[0].orden__,
+    });
+    
+  }
 }
