@@ -28,13 +28,12 @@ export class LaboratorioComponent implements OnInit {
   }
 
   laboratorioForm = new FormGroup({
-    dni_laboratorio: new FormControl(''),
-    nombre_laboratorio: new FormControl(''),
+    dni_laboratorio: new FormControl({value:'', disabled: false}),
+    nombre_laboratorio: new FormControl({value:'', disabled: true}),
     doctor_laboratorio: new FormControl(''),
-    fecha_laboratorio: new FormControl(''),
-    Efectivo_laboratorio: new FormControl(''),
-    tarjeta_laboratorio: new FormControl(''),
+    fecha_laboratorio: new FormControl({value:'', disabled: true}),
+    Efectivo_laboratorio: new FormControl('0'),
     observacion_laboratorio: new FormControl(''),
-    total_laboratorio: new FormControl(''),
+    total_laboratorio: new FormControl({value:'', disabled: true}),
   });
 }
