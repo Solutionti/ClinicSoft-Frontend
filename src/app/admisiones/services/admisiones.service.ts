@@ -86,10 +86,10 @@ export class AdmisionesService {
   }
 
   // MODULO DE ADMISIONES
-  getAdmission() {
+  getAdmission(estado: any ) {
     const url = `${environment.apiClinicSoft}getAdmission`;
-
-    return this.http.get(url);
+    let params = new HttpParams().set("estado", estado);
+    return this.http.get(url, { params });
   }
 
   createAdmission(datos: any ) {

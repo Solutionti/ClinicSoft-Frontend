@@ -47,4 +47,9 @@ export class ListasService {
 
     return this.http.get(environment.apiClinicSoft + 'getProvince', { params });
   }
+
+  getCategories() {
+    return this.http.get(environment.apiClinicSoft + 'categories');
+  }
+
 }
