@@ -16,8 +16,9 @@
             <div class="col-md-7">
               <div class="table-responsive">
                 <p-table
-                  #dt
+                  #producto
                   [rows]="10"
+                  [value]="getProduct"
                   [paginator]="true"
                   [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
                   [tableStyle]="{ 'min-width': '75rem' }"
@@ -33,6 +34,7 @@
                         pInputText
                         type="text"
                         class="form-control"
+                        (input)="producto.filterGlobal($any($event.target).value, 'contains')"
                         placeholder="Buscar..."
                       />
                     </span>
@@ -44,13 +46,21 @@
                       <th pSortableColumn="name" class="text-xs text-white bg-default">COD</th>
                       <th pSortableColumn="name" class="text-xs text-white bg-default">NOMBRE</th>
                       <th pSortableColumn="name" class="text-xs text-white bg-default">CATEGORIA</th>
-                      <th pSortableColumn="name" class="text-xs text-white bg-default">HISTORIAL</th>
                       <th pSortableColumn="name" class="text-xs text-white bg-default">VALOR</th>
                       <th pSortableColumn="name" class="text-xs text-white bg-default">CANT</th>
                       <th pSortableColumn="name" class="text-xs text-white bg-default">STOCK</th>
                   </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-product>
+                </ng-template>r
+                <ng-template pTemplate="body" let-getProduct>
+                  <tr>
+                    <td> {{ getProduct.codigo }}</td>
+                    <td> {{ getProduct.nombre }}</td>
+                    <td> {{ getProduct.categoria }}</td>
+                    <td> {{ getProduct.precio }}</td>
+                    <td> {{ getProduct.cantidad }}</td>
+                    <td> {{ getProduct.stock }}</td>
+
+                  </tr>
                 </ng-template>
                </p-table>
               </div>
@@ -68,10 +78,8 @@
                     class="form-control form-control-sm"
                     formControlName="categoria_productos"
                   >
-                    <option selected>Caja</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                  <option value="">Seleccione una opcion</option>
+
                   </select>
                 </div>
                 <div class="col-md-6">
@@ -109,10 +117,9 @@
                     aria-label="Default select example"
                     formControlName="medida_productos"
                   >
-                    <option selected>Caja</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option value="">Seleccione una opcion</option>
+                    <option value="">unidades</option>
+
                   </select>
                 </div>
                 <div class="col-md-6">
@@ -140,10 +147,9 @@
                     aria-label="Default select example"
                     formControlName="moneda_productos"
                   >
-                    <option selected>Soles (/s)</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option value="">Soles</option>
+
+
                   </select>
                 </div>
               </div>
@@ -173,3 +179,4 @@
       </div>
     </div>
   </div>
+.
