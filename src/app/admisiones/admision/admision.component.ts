@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MenuComponent } from '../../componentes/menu/menu.component';
 import { CerrarsesionComponent } from '../../componentes/cerrarsesion/cerrarsesion.component';
 import { RouterOutlet } from '@angular/router';
@@ -50,8 +50,8 @@ export class AdmisionComponent implements OnInit {
     hc_admision: new FormControl({value:'', disabled: true}),
     si_admision: new FormControl(),
     nombre_admision: new FormControl({value:'', disabled: true}),
-    especialidad_admision: new FormControl(''),
-    doctor_admision: new FormControl(''),
+    especialidad_admision: new FormControl('', [Validators.required]),
+    doctor_admision: new FormControl('',[Validators.required]),
   });
 
   admisionForm2: FormGroup = new FormGroup({
@@ -59,12 +59,28 @@ export class AdmisionComponent implements OnInit {
     factura_admision: new FormControl({value:'', disabled: true}),
     costo_admision: new FormControl({value:'', disabled: true}),
     descuento_admision: new FormControl(0),
-    comision_admision: new FormControl(0),
-    recibida_admision: new FormControl(''),
+    comision_admision: new FormControl(0,[Validators.required]),
+    recibida_admision: new FormControl('',[Validators.required]),
     devolver_admision: new FormControl({value:'', disabled: true}),
     efectivo_admision: new FormControl('0'),
     total_admision: new FormControl('')
   });
+
+  get especialidadControl(): FormControl {
+    return this.admisionForm.get('especialidad_admision') as FormControl;
+  }
+
+  get doctorControl(): FormControl {
+    return this.admisionForm.get('doctor_admision') as FormControl;
+  }
+
+  get comisionControl(): FormControl {
+    return this.admisionForm2.get('comision_admision') as FormControl;
+  }
+
+  get cantidadControl(): FormControl {
+    return this.admisionForm2.get('recibida_admision') as FormControl;
+  }
 
   getSpecialty: any [] = [];
   getSpecialties() {
@@ -89,8 +105,9 @@ export class AdmisionComponent implements OnInit {
 
   getAdmissions: any[] = [];
   getAdmission() {
+    let estado = "Registrado";
     this.admisionServices
-        .getAdmission()
+        .getAdmission(estado)
         .subscribe((response: any ) => {
           this.getAdmissions = response;
         })

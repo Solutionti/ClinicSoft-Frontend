@@ -17,12 +17,13 @@
           <div class="row">
             <div class="col-md-12">
               <div class="d-flex flex-row-reverse">
-                <a
+                <button
                   class="btn btn-primary text-white btn-xs mx-1"
                   (click)="createAdmission()"
+                  [disabled]="admisionForm.invalid || admisionForm2.invalid"
                 >
                   <i class="fas fa-database text-white"></i> Crear
-                </a>
+              </button>
               </div>
             </div>
           </div>
@@ -165,6 +166,14 @@
                       {{ especialidad.descripcion }}
                     </option>
                   </select>
+                  <div
+                class="error"
+                *ngIf="especialidadControl.invalid && (especialidadControl.touched || especialidadControl.dirty)"
+              >
+                <p class="text-danger text-xs font-weight-bold">
+                  El campo es obligatorio
+                </p>
+              </div>
                 </div>
                 <div class="col-md-6">
                   <label>Doctor</label>
@@ -180,6 +189,14 @@
                       {{ doctor.nombre }}
                     </option>
                 </select>
+                <div
+                class="error"
+                *ngIf="doctorControl.invalid && (doctorControl.touched || doctorControl.dirty)"
+              >
+                <p class="text-danger text-xs font-weight-bold">
+                  El campo es obligatorio
+                </p>
+              </div>
                 </div>
               </div>
             </div>
@@ -231,6 +248,14 @@
                     class="form-control form-control-sm"
                     formControlName="comision_admision"
                   >
+                  <div
+                class="error"
+                *ngIf="comisionControl.invalid && (comisionControl.touched || comisionControl.dirty)"
+              >
+                <p class="text-danger text-xs font-weight-bold">
+                  El campo es obligatorio
+                </p>
+              </div>
                 </div>
               </div>
               <div class="row mt-3">
@@ -241,6 +266,14 @@
                     class="form-control form-control-sm"
                     formControlName="recibida_admision"
                   >
+                  <div
+                    class="error"
+                    *ngIf="cantidadControl.invalid && (cantidadControl.touched || cantidadControl.dirty)"
+                  >
+                <p class="text-danger text-xs font-weight-bold">
+                  El campo es obligatorio
+                </p>
+              </div>
                 </div>
                 <div class="col-md-4">
                   <label>Cantidad a Devolver</label>
@@ -249,6 +282,7 @@
                     class="form-control form-control-sm"
                     formControlName="devolver_admision"
                   >
+                  
                 </div>
                 <div class="col-md-4">
                   <label>Forma de pago</label>

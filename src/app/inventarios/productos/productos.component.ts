@@ -23,12 +23,15 @@ import { InventarioService } from '../services/inventario.service';
 export class ProductosComponent implements OnInit {
 
   constructor(
-    private inventarioServices: InventarioService
+    private inventarioServices: InventarioService,
+    private listaServices: ListasService
+
   ){
 
   }
   ngOnInit(): void {
    this.getProducts();
+   this.getCategories()
   }
 
   productosForm = new FormGroup ({
@@ -52,5 +55,14 @@ export class ProductosComponent implements OnInit {
           console.log(response);
           this.getProduct = response;
     });
+  }
+  getCategorie: any [] = []
+  getCategories() {
+    this.listaServices
+        .getCategories()
+        .subscribe((response: any ) => {
+          console.log(response);
+          this.getCategorie = response
+        });
   }
 }

@@ -3,6 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MenuComponent } from '../../componentes/menu/menu.component';
 import { TableModule } from 'primeng/table';
 import { CerrarsesionComponent } from '../../componentes/cerrarsesion/cerrarsesion.component';
+import { AdmisionesService } from '../services/admisiones.service';
 @Component({
   selector: 'app-triage',
   standalone: true,
@@ -16,6 +17,11 @@ import { CerrarsesionComponent } from '../../componentes/cerrarsesion/cerrarsesi
 })
 export class TriageComponent implements OnInit {
 
+  constructor(
+    private admisionServices: AdmisionesService
+  ) {
+
+  }
 
   ngOnInit(): void {
 
@@ -27,14 +33,26 @@ export class TriageComponent implements OnInit {
     edad_triage: new FormControl({ value: '', disabled: true }),
     doctor_triage: new FormControl({ value: '', disabled: true }),
     especialidad_triage: new FormControl({ value: '', disabled: true }),
-    presion_triage: new FormControl(''),
-    temperatura_triage: new FormControl(''),
-    frecuenciar_triage: new FormControl(''),
-    frecuenciac_triage: new FormControl(''),
-    saturacion_triage: new FormControl(''),
-    peso_triage: new FormControl(''),
-    talla_triage: new FormControl(''),
-    imc_triage: new FormControl(''),
+    presion_triage: new FormControl(0),
+    temperatura_triage: new FormControl(0),
+    frecuenciar_triage: new FormControl(0),
+    frecuenciac_triage: new FormControl(0),
+    saturacion_triage: new FormControl(0),
+    peso_triage: new FormControl(0),
+    talla_triage: new FormControl(0),
+    imc_triage: new FormControl(0),
   });
+
+  getTriage: any[] = [];
+  getAdmission() {
+    let estado = "Registrado";
+    this.admisionServices
+        .getAdmission(estado)
+        .subscribe((response: any ) => {
+          this.getTriage = response;
+        })
+  }
+
+
 
 }
