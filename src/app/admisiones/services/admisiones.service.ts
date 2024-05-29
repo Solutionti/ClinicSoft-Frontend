@@ -108,4 +108,10 @@ export class AdmisionesService {
     });
     
   }
+
+  getEspecialidadCosto(especialidad: any ) {
+    const url = `${environment.apiClinicSoft}getEspecialidadCosto`;
+    let params = new HttpParams().set("especialidad", especialidad);
+    return this.http.get(url, { params });
+  }
 }

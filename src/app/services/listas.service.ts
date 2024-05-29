@@ -46,7 +46,5 @@ export class ListasService {
                                  .set("provincia", provincia);
 
     return this.http.get(environment.apiClinicSoft + 'getProvince', { params });
-    
-
   }
 }

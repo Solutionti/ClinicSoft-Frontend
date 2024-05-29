@@ -55,37 +55,41 @@
                 </ng-template>
                 <ng-template pTemplate="header">
                   <tr>
-                    <th  class="text-xs text-white bg-default"></th>
-                    <th  class="text-xs text-white bg-default">PACIENTE</th>
-                    <th  class="text-xs text-white bg-default">ESTADO</th>
-                    <th  class="text-xs text-white bg-default">DOCTOR</th>
-                    <th  class="text-xs text-white bg-default">ESPECIALIDAD</th>
-                    <th  class="text-xs text-white bg-default">COSTO</th>
+                    <th  class="text-xs text-white bg-default" style="width:5%"></th>
+                    <th  class="text-xs text-white bg-default" style="width:18%">PACIENTE</th>
+                    <th  class="text-xs text-white bg-default" style="width:6%">ESTADO</th>
+                    <th  class="text-xs text-white bg-default" style="width:10%">DOCTOR</th>
+                    <th  class="text-xs text-white bg-default" style="width:10%">ESPECIALIDAD</th>
+                    <th  class="text-xs text-white bg-default" style="width:8%">COSTO</th>
                   </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-getAdmissions>
                   <tr>
-                    <td class="text-xs text-uppercase">
-                      <button
-                        class="btn btn-link text-secondary mb-0"
-                        aria-haspopup="true"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
-                        <i class="fa fa-ellipsis-v text-xs"></i>
-                      </button>
-                      <ul class="dropdown-menu text-capitalize">
-                        <li>
-                          <a
-                            class="dropdown-item"
-                          >
-                            Ver
-                          </a>
-                        </li>
-                      </ul>
+                    <td>
+                      <a class="badge  bg-success">
+                        <i class="fas fa-check fa-xs text-white"></i>
+                      </a>
+                      <a class="badge  bg-danger mx-1">
+                        <i class="fas fa-times fa-xs text-white"></i>
+                      </a>
                     </td>
-                    <td class="text-xs text-uppercase">{{ getAdmissions.paciente }}</td>
-                    <td class="text-xs text-uppercase">{{ getAdmissions.estado }}</td>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div>
+                          <img
+                            src="https://demos.creative-tim.com/soft-ui-design-system-pro/assets/img/team-2.jpg"
+                            class="avatar avatar-sm me-3"
+                          >
+                        </div>
+                        <div class="d-flex flex-column justify-content-center">
+                          <p class="mb-0 text-xs text-uppercase">Jerson Reinel Galvez Ensuncho</p>
+                          <p class="text-xs text-secondary mb-0 text-uppercase">{{ getAdmissions.paciente }}</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="text-xs text-uppercase">
+                      <span class="badge badge-sm badge-success">{{ getAdmissions.estado }}</span> 
+                    </td>
                     <td class="text-xs text-uppercase">{{ getAdmissions.medico }}</td>
                     <td class="text-xs text-uppercase">{{ getAdmissions.especialidad }}</td>
                     <td class="text-xs text-uppercase">{{ getAdmissions.costo }}</td>
@@ -149,8 +153,9 @@
                 <div class="col-md-6">
                   <label>Especialidad</label>
                   <select
-                    class="form-control form-control-sm"
+                    class="form-control form-control-sm text-uppercase"
                     formControlName="especialidad_admision"
+                    (change)="getEspecialidadCosto()"
                   >
                     <option value="">Seleccione una opcion</option>
                     <option
@@ -164,7 +169,7 @@
                 <div class="col-md-6">
                   <label>Doctor</label>
                   <select
-                    class="form-control form-control-sm"
+                    class="form-control form-control-sm text-uppercase"
                     formControlName="doctor_admision"
                   >
                     <option value="">Seleccione una opcion</option>

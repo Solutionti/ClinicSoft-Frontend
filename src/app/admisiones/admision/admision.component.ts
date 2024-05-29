@@ -25,19 +25,25 @@ import { MessageService } from 'primeng/api';
   providers: [MessageService]
 })
 export class AdmisionComponent implements OnInit {
-  @ViewChild('flexSwitchCheckChecked')
-  element!: ElementRef;
+
   constructor(
     private admisionServices: AdmisionesService,
     private listaService: ListasService,
     private messageService: MessageService
   ) { }
 
+  
   ngOnInit(): void {
     this.getSpecialties();
     this.getDoctor();
     this.getAdmission();
   }
+
+  date = new Date();
+  fechaActual = String(this.date.getFullYear() + '-' +
+    String(this.date.getMonth() + 1).padStart(2, '0') + '-' +
+    String(this.date.getDate()).padStart(2, '0')
+  );
 
   admisionForm: FormGroup = new FormGroup({
     dni_admision: new FormControl(''),
@@ -49,11 +55,11 @@ export class AdmisionComponent implements OnInit {
   });
 
   admisionForm2: FormGroup = new FormGroup({
-    fecha_admision: new FormControl({value:'', disabled: true}),
+    fecha_admision: new FormControl({value: this.fechaActual, disabled: true}),
     factura_admision: new FormControl({value:'', disabled: true}),
     costo_admision: new FormControl({value:'', disabled: true}),
-    descuento_admision: new FormControl(''),
-    comision_admision: new FormControl(''),
+    descuento_admision: new FormControl(0),
+    comision_admision: new FormControl(0),
     recibida_admision: new FormControl(''),
     devolver_admision: new FormControl({value:'', disabled: true}),
     efectivo_admision: new FormControl('0'),
@@ -142,6 +148,16 @@ export class AdmisionComponent implements OnInit {
           else {
             this.showError(response.message);
           }
+        });
+  }
+
+  getEspecialidadCosto() {
+    let especialidad = this.admisionForm.get("especialidad_admision")?.value;
+    this.admisionServices
+        .getEspecialidadCosto(especialidad)
+        .subscribe((response: any ) => {
+          this.admisionForm2.controls['costo_admision'].patchValue(response.costo);
+          this.admisionForm2.controls['comision_admision'].patchValue(response.comision_aproximada);
         });
   }
 
