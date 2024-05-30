@@ -53,6 +53,27 @@
                 </ng-template>r
                 <ng-template pTemplate="body" let-getProduct>
                   <tr>
+                    <td>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="flexRadioDefault"
+                          id="flexRadioDefault1"
+                          (change)="pasarDatosForm(
+                            getProduct.categoria,
+                            getProduct.nombre,
+                            getProduct.codigo,
+                            getProduct.codigo_barras,
+                            getProduct.medida,
+                            getProduct.cantidad,
+                            getProduct.precio,
+                            getProduct.moneda,
+                            getProduct.descripcion
+                            )"
+                        >
+                      </div>
+                    </td>
                     <td> {{ getProduct.codigo }}</td>
                     <td> {{ getProduct.nombre }}</td>
                     <td> {{ getProduct.categoria }}</td>
@@ -72,9 +93,9 @@
               <form [formGroup]="productosForm">
               <div class="row mt-1">
                 <div class="col-md-6">
-                  <label>Categoria</label>
+                  <label>Categoria *</label>
                   <select
-                    class="form-control form-control-sm"
+                    class="form-control form-control-sm text-uppercase"
                     formControlName="categoria_productos"
                   >
                   <option value="">Seleccione una opcion</option>
@@ -82,33 +103,57 @@
                     *ngFor="let categoria of getCategorie"
                     [value]="categoria.id"
                   >
-                    {{  categoria.descripcion  }}
+                    {{  categoria.nombre  }}
                   </option>
 
                   </select>
+                  <div
+               class="error"
+               *ngIf="categoriaControl.invalid && (categoriaControl.touched || categoriaControl.dirty)"
+              >
+                <p class="text-danger text-xs font-weight-bold">
+                  El campo es obligatorio
+                </p>
+              </div>
                 </div>
                 <div class="col-md-6">
-                  <label>Nombre</label>
+                  <label>Nombre *</label>
                   <input
                     type="text"
                     class="form-control form-control-sm"
                     formControlName="nombre_productos"
                   >
+                  <div
+                  class="error"
+                  *ngIf="nombreControl.invalid && (nombreControl.touched || nombreControl.dirty)"
+                 >
+                   <p class="text-danger text-xs font-weight-bold">
+                     El campo es obligatorio
+                   </p>
+                 </div>
                 </div>
               </div>
               <div class="row mt-1">
                 <div class="col-md-6">
-                  <label>Codigo</label>
+                  <label>Codigo *</label>
                   <input
-                    type="text"
+                    type="number"
                     class="form-control form-control-sm"
                     formControlName="codigo_productos"
                   >
+                  <div
+                  class="error"
+                  *ngIf="codigoControl.invalid && (codigoControl.touched || codigoControl.dirty)"
+                 >
+                   <p class="text-danger text-xs font-weight-bold">
+                     El campo es obligatorio
+                   </p>
+                 </div>
                 </div>
                 <div class="col-md-6">
                   <label>Codigo de Barras</label>
                   <input
-                    type="text"
+                    type="number"
                     class="form-control form-control-sm"
                     formControlName="barras_productos"
                   >
@@ -116,65 +161,108 @@
               </div>
               <div class="row mt-1">
                 <div class="col-md-6">
-                  <label>Unidad Medida</label>
+                  <label>Unidad Medida *</label>
                   <select
-                    class="form-control form-control-sm"
+                    class="form-control form-control-sm text-uppercase"
                     aria-label="Default select example"
                     formControlName="medida_productos"
                   >
                     <option value="">Seleccione una opcion</option>
-                    <option value="">unidades</option>
+                    <option value="Unidades">unidades</option>
 
                   </select>
+                  <div
+                  class="error"
+                  *ngIf="medidasControl.invalid && (medidasControl.touched || medidasControl.dirty)"
+                 >
+                   <p class="text-danger text-xs font-weight-bold">
+                     El campo es obligatorio
+                   </p>
+                 </div>
                 </div>
                 <div class="col-md-6">
-                  <label>Cantidad</label>
+                  <label>Cantidad *</label>
                   <input
-                    type="text"
+                    type="number"
                     class="form-control form-control-sm"
                     formControlName="cantidad_productos"
                   >
+                  <div
+                  class="error"
+                  *ngIf="cantidadControl.invalid && (cantidadControl.touched || cantidadControl.dirty)"
+                 >
+                   <p class="text-danger text-xs font-weight-bold">
+                     El campo es obligatorio
+                   </p>
+                 </div>
                 </div>
               </div>
               <div class="row mt-1">
                 <div class="col-md-6">
-                  <label>Precio por Unidad</label>
+                  <label>Precio por Unidad *</label>
                   <input
-                    type="text"
+                    type="number"
                     class="form-control form-control-sm"
                     formControlName="precio_productos"
                   >
+                  <div
+                  class="error"
+                  *ngIf="precioControl.invalid && (precioControl.touched || precioControl.dirty)"
+                 >
+                   <p class="text-danger text-xs font-weight-bold">
+                     El campo es obligatorio
+                   </p>
+                 </div>
                 </div>
                 <div class="col-md-6">
-                  <label>Moneda</label>
+                  <label>Moneda *</label>
                   <select
-                    class="form-control form-control-sm"
+                    class="form-control form-control-sm text-uppercase"
                     aria-label="Default select example"
                     formControlName="moneda_productos"
                   >
-                    <option value="">Soles</option>
+                    <option value="s">Soles (/s) *</option>
+
+
 
 
                   </select>
+                  <div
+                  class="error"
+                  *ngIf="monedaControl.invalid && (monedaControl.touched || monedaControl.dirty)"
+                 >
+                   <p class="text-danger text-xs font-weight-bold">
+                     El campo es obligatorio
+                   </p>
+                 </div>
                 </div>
               </div>
               <div class="row mt-1">
                 <div class="col-md-12">
                   <label>Descripción</label>
-                  <div class="form-floating">
                     <textarea
                       class="form-control"
-                      placeholder="Leave a comment here"
-                      id="floatingTextarea2"
                       formControlName="descripcion_productos"
                     ></textarea>
-                    <label for="floatingTextarea2"></label>
                   </div>
-                </div>
               </div>
               <div class="row mt-3">
                 <div class="col-md-12">
-                  <button type="button" class="btn btn-primary btn-sm">Guardar</button>
+                  <button
+                    type="button"
+                    class="btn btn-primary btn-sm"
+                    [hidden]="btnAgregarHidden"
+                    [disabled]="productosForm.invalid"
+                    >
+                    Guardar
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-danger btn-sm mx-2"
+                    [hidden]="btnActualizarHidden"
+                    >
+                    Actualizar
+                  </button>
                 </div>
               </div>
             </form>
