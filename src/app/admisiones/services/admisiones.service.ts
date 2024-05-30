@@ -96,7 +96,7 @@ export class AdmisionesService {
     const url = `${environment.apiClinicSoft}createAdmission`;
 
     return this.http.post(url, {
-      documento: datos[0].documento, 
+      documento: datos[0].documento,
       medico: datos[0].medico,
       especialidad: datos[0].especialidad,
       cola_atencion: datos[0].cola_atencion,
@@ -106,7 +106,7 @@ export class AdmisionesService {
       usuario: datos[0].usuario,
       orden__: datos[0].orden__,
     });
-    
+
   }
 
   getEspecialidadCosto(especialidad: any ) {

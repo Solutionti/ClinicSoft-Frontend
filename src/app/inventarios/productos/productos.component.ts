@@ -1,9 +1,12 @@
+import { ListasService } from './../../services/listas.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MenuComponent } from '../../componentes/menu/menu.component';
 import { CerrarsesionComponent } from '../../componentes/cerrarsesion/cerrarsesion.component';
 import { RouterOutlet } from '@angular/router';
 import { TableModule } from 'primeng/table';
+import { response } from 'express';
+import { InventarioService } from '../services/inventario.service';
 
 @Component({
   selector: 'app-productos',
@@ -19,8 +22,16 @@ import { TableModule } from 'primeng/table';
 })
 export class ProductosComponent implements OnInit {
 
-  ngOnInit(): void {
+  constructor(
+    private inventarioServices: InventarioService,
+    private listaServices: ListasService
 
+  ){
+
+  }
+  ngOnInit(): void {
+   this.getProducts();
+   this.getCategories()
   }
 
   productosForm = new FormGroup ({
@@ -33,8 +44,25 @@ export class ProductosComponent implements OnInit {
     precio_productos: new FormControl(''),
     moneda_productos: new FormControl(''),
     descripcion_productos: new FormControl('')
-
-
-
   });
+
+  getProduct: any [] = [];
+  getProducts(){
+
+    this.inventarioServices
+        .getProducts()
+        .subscribe((response: any) =>{
+          console.log(response);
+          this.getProduct = response;
+    });
+  }
+  getCategorie: any [] = []
+  getCategories() {
+    this.listaServices
+        .getCategories()
+        .subscribe((response: any ) => {
+          console.log(response);
+          this.getCategorie = response
+        });
+  }
 }
