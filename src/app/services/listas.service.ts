@@ -37,7 +37,7 @@ export class ListasService {
 
   getProvince(departamento: any ) {
     let params = new HttpParams().set("departamento", departamento);
-    
+
     return this.http.get(environment.apiClinicSoft + 'getProvince', { params });
   }
 
@@ -49,7 +49,7 @@ export class ListasService {
   }
 
   getCategories() {
-    return this.http.get(environment.apiClinicSoft + 'categories');
+    return this.http.get(environment.apiClinicSoft + 'getCategories');
   }
 
   getLaboratoryTable() {
