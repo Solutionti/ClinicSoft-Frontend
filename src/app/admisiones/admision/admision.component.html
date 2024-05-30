@@ -83,7 +83,7 @@
                           >
                         </div>
                         <div class="d-flex flex-column justify-content-center">
-                          <p class="mb-0 text-xs text-uppercase">Jerson Reinel Galvez Ensuncho</p>
+                          <p class="mb-0 text-xs text-uppercase">{{ getAdmissions.nombre + ' ' + getAdmissions.apellido }}</p>
                           <p class="text-xs text-secondary mb-0 text-uppercase">{{ getAdmissions.paciente }}</p>
                         </div>
                       </div>
@@ -91,8 +91,8 @@
                     <td class="text-xs text-uppercase">
                       <span class="badge badge-sm badge-success">{{ getAdmissions.estado }}</span> 
                     </td>
-                    <td class="text-xs text-uppercase">{{ getAdmissions.medico }}</td>
-                    <td class="text-xs text-uppercase">{{ getAdmissions.especialidad }}</td>
+                    <td class="text-xs text-uppercase">{{ getAdmissions.medicos }}</td>
+                    <td class="text-xs text-uppercase">{{ getAdmissions.especialidades }}</td>
                     <td class="text-xs text-uppercase">{{ getAdmissions.costo }}</td>
                   </tr>
                 </ng-template>

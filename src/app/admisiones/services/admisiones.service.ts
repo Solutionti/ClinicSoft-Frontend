@@ -109,9 +109,13 @@ export class AdmisionesService {
 
   }
 
+  // MODULO DE TRIAGE
   getEspecialidadCosto(especialidad: any ) {
     const url = `${environment.apiClinicSoft}getEspecialidadCosto`;
     let params = new HttpParams().set("especialidad", especialidad);
     return this.http.get(url, { params });
   }
+
+  // MODULO DE LABORATORIO
+  
 }

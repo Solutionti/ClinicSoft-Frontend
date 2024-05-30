@@ -208,7 +208,7 @@
             <div class="col-md-2">
               <label>Sexo *</label>
               <select
-                class="form-control form-control-sm"
+                class="form-control form-control-sm text-uppercase"
                 formControlName="crearpaciente_sexo"
               >
                 <option value="">Seleccione una opcion</option>
@@ -273,11 +273,11 @@
             <div class="col-md-4">
               <label>Departamento *</label>
               <select
-                class="form-control form-control-sm text-capitalize"
+                class="form-control form-control-sm text-uppercase"
                 formControlName="crearpaciente_departamento"
                 (change)="getProvince()"
               >
-                <option value="">Seleccione una opcion</option>
+                <option value="">SELECCIONE UNA OPCION</option>
                 <option
                   *ngFor="let departamento of getDepartament"
                   [value]="departamento.id"
@@ -298,7 +298,7 @@
             <div class="col-md-4">
               <label>Provincia *</label>
               <select
-                class="form-control form-control-sm"
+                class="form-control form-control-sm text-uppercase"
                 formControlName="crearpaciente_provincia"
                 (change)="getDistrict()"
               >
@@ -322,7 +322,7 @@
             <div class="col-md-4">
               <label>Distrito *</label>
               <select
-                class="form-control form-control-sm"
+                class="form-control form-control-sm text-uppercase"
                 formControlName="crearpaciente_distrito"
               >
                 <option value="">Seleccione una opcion</option>
@@ -355,7 +355,7 @@
             <div class="col-md-4">
               <label>Grado Academico *</label>
               <select
-                class="form-control form-control-sm"
+                class="form-control form-control-sm text-uppercase"
                 formControlName="crearpaciente_grado"
               >
                 <option value="">Seleccione una opcion</option>
@@ -379,7 +379,7 @@
             <div class="col-md-4">
               <label>Estado Civil *</label>
               <select
-                class="form-control form-control-sm"
+                class="form-control form-control-sm text-uppercase"
                 formControlName="crearpaciente_estadocivil"
               >
                 <option value="">Seleccione una opcion</option>

@@ -85,10 +85,11 @@ export class TriageComponent implements OnInit {
         })
   }
 
-  PasarValoresTriage(paciente: any, doctor: any, especialidad: any ) {
+  PasarValoresTriage(paciente: any, nombre: any , doctor: any, especialidad: any ) {
     this.triageForm.patchValue(
       {
         dni_triage: paciente,
+        paciente_triage: nombre,
         doctor_triage: doctor,
         especialidad_triage: especialidad,
       }
@@ -101,7 +102,7 @@ export class TriageComponent implements OnInit {
   }
 
   pasarConsulta() {
-    
+
   }
 
   showError(message: string) {

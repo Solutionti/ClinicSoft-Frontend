@@ -52,4 +52,8 @@ export class ListasService {
     return this.http.get(environment.apiClinicSoft + 'categories');
   }
 
+  getLaboratoryTable() {
+    return this.http.get(environment.apiClinicSoft + 'getLaboratoryTable');
+  }
+
 }

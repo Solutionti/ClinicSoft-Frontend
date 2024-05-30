@@ -59,7 +59,7 @@
                           type="radio"
                           name="flexRadioDefault"
                           id="flexRadioDefault1"
-                          (change)="PasarValoresTriage(getTriage.paciente, getTriage.medico, getTriage.especialidad)"
+                          (change)="PasarValoresTriage(getTriage.paciente,getTriage.nombre + ' ' + getTriage.apellido, getTriage.medico, getTriage.especialidad)"
                         >
                       </div>
                     </td>
@@ -72,7 +72,7 @@
                           >
                         </div>
                         <div class="d-flex flex-column justify-content-center">
-                          <p class="mb-0 text-xs text-uppercase">Jerson Reinel Galvez Ensuncho</p>
+                          <p class="mb-0 text-xs text-uppercase">{{ getTriage.nombre + ' ' + getTriage.apellido }}</p>
                           <p class="text-xs text-secondary mb-0 text-uppercase">{{ getTriage.paciente }}</p>
                         </div>
                       </div>
@@ -80,8 +80,8 @@
                     <td class="text-xs text-uppercase">
                       <span class="badge badge-sm badge-info">{{ getTriage.estado }}</span> 
                     </td>
-                    <td class="text-xs text-uppercase"> {{ getTriage.medico }} </td>
-                    <td class="text-xs text-uppercase"> {{ getTriage.especialidad }} </td>
+                    <td class="text-xs text-uppercase"> {{ getTriage.medicos }} </td>
+                    <td class="text-xs text-uppercase"> {{ getTriage.especialidades }} </td>
                    
                   </tr>
                 </ng-template>
@@ -126,7 +126,7 @@
                       <option value="">Seleccione una opcion</option>
                       <option
                         *ngFor="let doctor of getDoctors"
-                        [value]="doctor.codigo_docto"
+                        [value]="doctor.codigo_doctor"
                       >
                         {{ doctor.nombre}}
                       </option>
