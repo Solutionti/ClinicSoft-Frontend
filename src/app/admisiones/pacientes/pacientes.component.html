@@ -76,9 +76,7 @@
                 <ng-template pTemplate="header">
                   <tr>
                     <th class="text-xs text-white bg-default"></th>
-                    <th pSortableColumn="docuemento" class="text-xs text-white bg-default">DNI</th>
-                    <th pSortableColumn="apellido" class="text-xs text-white bg-default">APELLIDOS</th>
-                    <th pSortableColumn="nombre" class="text-xs text-white bg-default">NOMBRES</th>
+                    <th pSortableColumn="docuemento" class="text-xs text-white bg-default" style="width:27%">PACIENTE</th>
                     <th class="text-xs text-white bg-default">TELEFONO</th>
                     <th class="text-xs text-white bg-default">FECHA NACIMIENTO</th>
                     <th class="text-xs text-white bg-default">SEXO</th>
@@ -98,9 +96,20 @@
                         >
                       </div>
                     </td>
-                    <td class="text-xs text-uppercase">{{ pacientes.documento }}</td>
-                    <td class="text-xs text-uppercase">{{ pacientes.apellido }}</td>
-                    <td class="text-xs text-uppercase">{{ pacientes.nombre }}</td>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div>
+                          <img
+                            src="https://demos.creative-tim.com/soft-ui-design-system-pro/assets/img/team-2.jpg"
+                            class="avatar avatar-sm me-3"
+                          >
+                        </div>
+                        <div class="d-flex flex-column justify-content-center">
+                          <p class="mb-0 text-xs text-uppercase"> {{ pacientes.nombre + ' ' + pacientes.apellido }}</p>
+                          <p class="text-xs text-secondary mb-0 text-uppercase">{{ pacientes.documento }}</p>
+                        </div>
+                      </div>
+                    </td>
                     <td class="text-xs text-uppercase">{{ pacientes.telefono }}</td>
                     <td class="text-xs text-uppercase">{{ pacientes.fecha_nacimiento}}</td>
                     <td class="text-xs text-uppercase">{{ pacientes.sexo }}</td>

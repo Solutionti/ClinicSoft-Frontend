@@ -2,7 +2,7 @@
 <!-- * * * * * * * * * * * JERSON GALVEZ ENSUNCHO * * * * * * * * * * * -->
 <!-- ******* * * * * * * * PROYECTO CLINICSOFT * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-
+<p-toast position="top-right"/>
 <div class="min-height-300 bg-default position-absolute w-100"></div>
 <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
   <app-menu></app-menu>
@@ -17,8 +17,9 @@
             <div class="col-md-7">
               <div class="table-responsive">
                 <p-table
-                  #dt
+                  #triage
                   [rows]="10"
+                  [value]="getTriage"
                   [paginator]="true"
                   [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
                   [tableStyle]="{ 'min-width': '75rem' }"
@@ -34,6 +35,7 @@
                         pInputText
                         type="text"
                         class="form-control"
+                        (input)="triage.filterGlobal($any($event.target).value, 'contains')" 
                         placeholder="Buscar..."
                       />
                     </span>
@@ -41,15 +43,47 @@
                 </ng-template>
                 <ng-template pTemplate="header">
                   <tr>
-                    <th class="text-xs text-white bg-default"></th>
-                      <th class="text-xs text-white bg-default">ESTADO</th>
-                      <th class="text-xs text-white bg-default">DNI</th>
-                      <th class="text-xs text-white bg-default">PACIENTE</th>
-                      <th class="text-xs text-white bg-default">DOCTOR</th>
-                      <th class="text-xs text-white bg-default">ESPECIALIDAD</th>
+                    <th class="text-xs text-white bg-default" style="width:1%"></th>
+                    <th class="text-xs text-white bg-default" style="width:10%">PACIENTE</th>
+                      <th class="text-xs text-white bg-default" style="width:5%">ESTADO</th>
+                      <th class="text-xs text-white bg-default" style="width:10%">DOCTOR</th>
+                      <th class="text-xs text-white bg-default" style="width:10%">ESPECIALIDAD</th>
                   </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-product>
+                <ng-template pTemplate="body" let-getTriage>
+                  <tr>
+                    <td>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="flexRadioDefault"
+                          id="flexRadioDefault1"
+                          (change)="PasarValoresTriage(getTriage.paciente, getTriage.medico, getTriage.especialidad)"
+                        >
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div>
+                          <img
+                            src="https://demos.creative-tim.com/soft-ui-design-system-pro/assets/img/team-2.jpg"
+                            class="avatar avatar-sm me-3"
+                          >
+                        </div>
+                        <div class="d-flex flex-column justify-content-center">
+                          <p class="mb-0 text-xs text-uppercase">Jerson Reinel Galvez Ensuncho</p>
+                          <p class="text-xs text-secondary mb-0 text-uppercase">{{ getTriage.paciente }}</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="text-xs text-uppercase">
+                      <span class="badge badge-sm badge-info">{{ getTriage.estado }}</span> 
+                    </td>
+                    <td class="text-xs text-uppercase"> {{ getTriage.medico }} </td>
+                    <td class="text-xs text-uppercase"> {{ getTriage.especialidad }} </td>
+                   
+                  </tr>
                 </ng-template>
                </p-table>
               </div>
@@ -86,10 +120,17 @@
                   <div class="col-md-9">
                     <label>Doctor</label>
                     <select
-                      class="form-control form-control-sm"
+                      class="form-control form-control-sm text-uppercase"
                       formControlName="doctor_triage"
                     >
                       <option value="">Seleccione una opcion</option>
+                      <option
+                        *ngFor="let doctor of getDoctors"
+                        [value]="doctor.codigo_docto"
+                      >
+                        {{ doctor.nombre}}
+                      </option>
+                      
                     </select>
                   </div>
                 </div>
@@ -97,10 +138,16 @@
                   <div class="col-md-7">
                     <label>Especialidad</label>
                     <select
-                      class="form-control form-control-sm"
+                      class="form-control form-control-sm text-uppercase"
                       formControlName="especialidad_triage"
                     >
                       <option value="">Seleccione una opcion</option>
+                      <option
+                        *ngFor="let especialidad of getSpeciality"
+                        [value]="especialidad.codigo_especialidad"
+                      >
+                        {{ especialidad.descripcion }}
+                      </option>
                     </select>
                   </div>
                   <div class="col-md-5">
@@ -178,11 +225,17 @@
                 </div>
                 <div class="row">
                   <div class="col-md-12">
-                    <a
+                    <button
                       class="btn btn-primary text-white btn-xs mx-1 mt-3"
                     >
                       <i class="fas fa-database text-white"></i> Crear
-                    </a>
+                    </button>
+                    <button
+                      class="btn btn-danger text-white btn-xs mx-1 mt-3"
+                      [hidden]="siguienteTriage"
+                    >
+                      Siguiente <i class="fas fa-chevron-right text-white"></i> 
+                    </button>
                   </div>
                 </div>
               </form>
