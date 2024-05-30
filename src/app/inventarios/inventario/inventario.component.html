@@ -19,7 +19,7 @@
             <div class="col-md-7">
               <div class="table-responsive">
                 <p-table
-                  #dt
+                  #inventario
                   [rows]="10"
                   [paginator]="true"
                   [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
@@ -36,6 +36,7 @@
                         pInputText
                         type="text"
                         class="form-control"
+                        (input)="inventario.filterGlobal($any($event.target).value, 'contains')"
                         placeholder="Buscar..."
                       />
                     </span>
