@@ -2,7 +2,7 @@
 <!-- * * * * * * * * * * * JERSON GALVEZ ENSUNCHO * * * * * * * * * * * -->
 <!-- ******* * * * * * * * PROYECTO CLINICSOFT * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-
+<p-toast position="top-right"/>
 <div class="min-height-300 bg-default position-absolute w-100"></div>
 <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
   <app-menu></app-menu>
@@ -16,14 +16,14 @@
           <div class="row">
             <div class="col-md-7">
               <p-table
-                  #dt
-                  [rows]="10"
+                  #laboratorio
+                  [rows]="5"
+                  [value]="getLaboratories"
                   [paginator]="true"
-                  [globalFilterFields]="['namee', 'country.name', 'representative.name', 'status']"
+                  [globalFilterFields]="['codigo', 'getLaboratories.codigo', 'nombre', 'getLaboratories.nombre']"
                   [tableStyle]="{ 'min-width': '75rem' }"
                   [rowHover]="true"
                   dataKey="id"
-                  currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas"
                 >
                 <ng-template pTemplate="caption">
                   <div class="flex align-items-center justify-content-between">
@@ -33,6 +33,7 @@
                         pInputText
                         type="text"
                         class="form-control"
+                        (input)="laboratorio.filterGlobal($any($event.target).value, 'contains')" 
                         placeholder="Buscar..."
                       />
                     </span>
@@ -40,16 +41,22 @@
                 </ng-template>
                 <ng-template pTemplate="header">
                   <tr>
-                    <th pSortableColumn="namee" class="text-xs text-white bg-default"></th>
-                    <th pSortableColumn="namee" class="text-xs text-white bg-default">#</th>
-                    <th pSortableColumn="namee" class="text-xs text-white bg-default">ANALISIS</th>
-                    <th pSortableColumn="namee" class="text-xs text-white bg-default">PRECIO</th>
-                    <th pSortableColumn="namee" class="text-xs text-white bg-default">ESTADO</th>
+                    <th class="text-xs text-white bg-default" style="width:2%"></th>
+                    <th pSortableColumn="codigo" class="text-xs text-white bg-default"style="width:3%">#</th>
+                    <th pSortableColumn="nombre" class="text-xs text-white bg-default" style="width:30%">ANALISIS</th>
+                    <th class="text-xs text-white bg-default" style="width:50%">PRECIO</th>
                   </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-product>
+                <ng-template pTemplate="body" let-getLaboratories>
+                  <tr>
+                    <td></td>
+                    <td class="text-xs text-uppercase">{{ getLaboratories.codigo }}</td>
+                    <td class="text-xs text-uppercase">{{ getLaboratories.nombre }}</td>
+                    <td class="text-xs text-uppercase">{{ getLaboratories.precio }}</td>
+                  </tr>
                 </ng-template>
                </p-table>
+               
             </div>
             <div class="col-md-5">
               <form [formGroup]="laboratorioForm">
@@ -61,6 +68,7 @@
                       type="number"
                       class="form-control form-control-sm"
                       formControlName="dni_laboratorio"
+                      (keyup.enter)="getPacientesId()"
                     >
                     <button class="btn btn-primary btn-xs" type="button">
                       <i class="fas fa-fingerprint"></i>
@@ -80,11 +88,16 @@
                 <div class="col-md-8">
                   <label>Doctor</label>
                   <select
-                    class="form-control form-control-sm"
+                    class="form-control form-control-sm text-uppercase"
                     formControlName="doctor_laboratorio"
                   >
                     <option value="">Seleccione una opcion</option>
-                    
+                    <option
+                      *ngFor="let doctor of getDoctors"
+                      [value]="doctor.codigo_doctor"
+                    >
+                    {{ doctor.nombre }}
+                    </option>
                   </select>
                 </div>
                 <div class="col-md-4">
@@ -100,7 +113,7 @@
                 <div class="col-md-12">
                   <label>Tipo Pago</label>
                   <select
-                    class="form-control form-control-sm"
+                    class="form-control form-control-sm text-uppercase"
                     formControlName="Efectivo_laboratorio"
                   >
                     <option value="0">Efectivo</option>
@@ -117,6 +130,24 @@
                   ></textarea>
                 </div>
               </div>
+              <div class="row mt-4">
+                <div class="col-md-12">
+                  <p-chip 
+                    label="EVALUAC. GENETICA DE PAREJA C. ABORTO HABITUAL (2 CARIO TIPOS" 
+                    image="assets/img/laboratorio.png" 
+                    alt="Avatar image" 
+                    [removable]="true" 
+                  />
+                </div>
+                <div class="col-md-12 mt-3">
+                  <p-chip 
+                    label="EVALUAC. GENETICA DE PAREJA C. ABORTO HABITUAL (2 CARIO TIPOS" 
+                    image="assets/img/laboratorio.png" 
+                    alt="Avatar image" 
+                    [removable]="true" 
+                  />
+                </div>
+              </div>
               <div class="row mt-3">
                 <div class="col-md-2 mt-2">
                   <button class="btn btn-primary btn-xs mt-4">Registrar</button>
@@ -130,47 +161,7 @@
                   >
                 </div>
               </div>
-              <br>
             </form>
-            </div>
-            <div class="row">
-                <div class="col-md-7">
-                  <p-table
-                  #dt
-                  [rows]="10"
-                  [paginator]="true"
-                  [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
-                  [tableStyle]="{ 'min-width': '75rem' }"
-                  [rowHover]="true"
-                  dataKey="id"
-                  currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas"
-                >
-                <ng-template pTemplate="caption">
-                  <div class="flex align-items-center justify-content-between">
-                    <span class="p-input-icon-left">
-                      <i class="pi pi-search"></i>
-                      <input
-                        pInputText
-                        type="text"
-                        class="form-control"
-                        placeholder="Buscar..."
-                      />
-                    </span>
-                  </div>
-                </ng-template>
-                <ng-template pTemplate="header">
-                  <tr>
-                    <th pSortableColumn="name" class="text-xs text-white bg-default"></th>
-                    <th pSortableColumn="name" class="text-xs text-white bg-default">#</th>
-                    <th pSortableColumn="name" class="text-xs text-white bg-default">ANALISIS</th>
-                    <th pSortableColumn="name" class="text-xs text-white bg-default">PRECIO</th>
-                    <th pSortableColumn="name" class="text-xs text-white bg-default">ESTADO</th>
-                  </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-product>
-                </ng-template>
-               </p-table>
-                </div>
             </div>
           </div>
         </div>

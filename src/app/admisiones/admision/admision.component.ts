@@ -87,8 +87,6 @@ export class AdmisionComponent implements OnInit {
     this.listaService
         .getSpecialties()
         .subscribe((response: any ) => {
-          console.log(response);
-
           this.getSpecialty = response;
         })
   }
@@ -98,7 +96,6 @@ export class AdmisionComponent implements OnInit {
     this.listaService
         .getDoctor()
         .subscribe((response: any ) => {
-          console.log(response);
           this.getDoctors = response;
         })
   }
@@ -109,6 +106,7 @@ export class AdmisionComponent implements OnInit {
     this.admisionServices
         .getAdmission(estado)
         .subscribe((response: any ) => {
+          console.log(response);
           this.getAdmissions = response;
         })
   }
@@ -125,7 +123,7 @@ export class AdmisionComponent implements OnInit {
             this.admisionForm.patchValue(
               {
                 hc_admision: response.data.hc,
-                nombre_admision: response.data.nombre  + ' ' + response.apellido
+                nombre_admision: response.data.nombre  + ' ' + response.data.apellido
               }
             );
             this.showSuccess("Se ha encontrado el paciente");

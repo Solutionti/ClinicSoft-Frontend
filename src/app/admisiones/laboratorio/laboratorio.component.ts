@@ -4,6 +4,12 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { CerrarsesionComponent } from '../../componentes/cerrarsesion/cerrarsesion.component';
+import { ListasService } from '../../services/listas.service';
+import { ChipModule } from 'primeng/chip';
+import { CommonModule } from '@angular/common';
+import { AdmisionesService } from '../services/admisiones.service';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-laboratorio',
@@ -13,27 +19,103 @@ import { CerrarsesionComponent } from '../../componentes/cerrarsesion/cerrarsesi
     MenuComponent,
     CerrarsesionComponent,
     ReactiveFormsModule,
-    TableModule
+    TableModule,
+    ChipModule,
+    CommonModule,
+    ToastModule
   ],
+  providers: [MessageService],
   templateUrl: './laboratorio.component.html'
 })
 export class LaboratorioComponent implements OnInit {
 
 
-  constructor() {
+  constructor(
+    private listaServices: ListasService,
+    private admisionServices: AdmisionesService,
+    private messageService: MessageService
+  ) {
 
   }
 
   ngOnInit(): void {
+    this.getLaboratoryTable();
+    this.getDoctor();
   }
+
+  date = new Date();
+  fechaActual = String(this.date.getFullYear() + '-' +
+    String(this.date.getMonth() + 1).padStart(2, '0') + '-' +
+    String(this.date.getDate()).padStart(2, '0')
+  );
 
   laboratorioForm = new FormGroup({
     dni_laboratorio: new FormControl({value:'', disabled: false}),
     nombre_laboratorio: new FormControl({value:'', disabled: true}),
     doctor_laboratorio: new FormControl(''),
-    fecha_laboratorio: new FormControl({value:'', disabled: true}),
+    fecha_laboratorio: new FormControl({value: this.fechaActual, disabled: true}),
     Efectivo_laboratorio: new FormControl('0'),
     observacion_laboratorio: new FormControl(''),
     total_laboratorio: new FormControl({value:'', disabled: true}),
   });
+
+  getLaboratories: any[] = [];
+  getLaboratoryTable() {
+    this.listaServices
+        .getLaboratoryTable()
+        .subscribe((response: any ) => {
+          this.getLaboratories = response;
+        })
+  }
+
+  getPacientesId() {
+    let documento = this.laboratorioForm.get("dni_laboratorio")?.value
+    this.laboratorioForm.controls['nombre_laboratorio'].patchValue("");
+
+    this.admisionServices
+        .getPacientesId(documento)
+        .subscribe((response: any)  => {
+          if(response.status == 200) {
+            this.laboratorioForm.patchValue(
+              {
+                nombre_laboratorio: response.data.nombre  + ' ' + response.apellido
+              }
+            );
+            this.showSuccess("Se ha encontrado el paciente");
+          }
+          else {
+            this.showError(response.message);
+          }
+            
+        })
+  }
+
+  getDoctors: any[] = [];
+  getDoctor() {
+    this.listaServices
+        .getDoctor()
+        .subscribe((response: any ) => {
+          console.log(response);
+          this.getDoctors = response;
+        })
+  }
+
+  showError(message: string) {
+    this.messageService.add(
+      {
+        severity: 'error',
+        summary: 'ClinicSoft Aviso',
+        detail: message
+      }
+    );
+  }
+
+  showSuccess(message: string) {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'ClinicSoft Aviso', 
+      detail: message
+    });
+  }
+
 }
