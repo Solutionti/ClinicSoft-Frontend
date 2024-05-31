@@ -8,7 +8,7 @@
  <app-menu></app-menu>
 </aside>
 <main class="main-content position-relative border-radius-lg">
-  <app-cerrarsesion titulo="Inventarios"></app-cerrarsesion>
+  <app-cerrarsesion titulo="Kardex"></app-cerrarsesion>
   <div class="container-fluid py-1">
     <div class="row ">
       <div class="card">
@@ -36,41 +36,99 @@
           </div>
           <form [formGroup]="kardexForm">
           <div class="row">
-            <div class="col-md-5">
-              <label>Producto</label>
+            <div class="col-md-3">
+              <label>Categoria *</label>
+              <select
+                class="form-control form-control-sm"
+                formControlName="categoria_kardex"
+              >
+                <option value="">Seleccione una opcion</option>
+                <option
+                  *ngFor="let categoria of getCategorie"
+                  [value]="categoria.id"
+                >
+                  {{ categoria.nombre }}
+                </option>
+              </select>
+              <div
+                  class="error"
+                  *ngIf="categoriaControl.invalid && (categoriaControl.touched || categoriaControl.dirty)"
+                 >
+                   <p class="text-danger text-xs font-weight-bold">
+                     El campo es obligatorio
+                   </p>
+                 </div>
+            </div>
+            <div class="col-md-2">
+              <label>Producto *</label>
               <select
                 class="form-control form-control-sm"
                 formControlName="producto_kardex"
               >
                 <option value="">Seleccione una opcion</option>
+                <option
+                  *ngFor="let product of getProduct"
+                  [value]="product.id"
+                >
+                {{ product.descripcion }}
+              </option>
               </select>
+              <div
+              class="error"
+              *ngIf="productoControl.invalid && (productoControl.touched || productoControl.dirty)"
+             >
+               <p class="text-danger text-xs font-weight-bold">
+                 El campo es obligatorio
+               </p>
+             </div>
             </div>
             <div class="col-md-2">
-              <label>Fecha Inicial</label>
+              <label>Fecha Inicial *</label>
               <input
                 type="date"
                 class="form-control form-control-sm"
                 formControlName="inicial_kardex"
               >
+              <div
+              class="error"
+              *ngIf="inicialControl.invalid && (inicialControl.touched || inicialControl.dirty)"
+             >
+               <p class="text-danger text-xs font-weight-bold">
+                 El campo es obligatorio
+               </p>
+             </div>
             </div>
             <div class="col-md-2">
-              <label>Fecha Final</label>
+              <label>Fecha Final *</label>
               <input
                 type="date"
                 class="form-control form-control-sm"
                 formControlName="final_kardex"
               >
+              <div
+              class="error"
+              *ngIf="finalControl.invalid && (finalControl.touched || finalControl.dirty)"
+             >
+               <p class="text-danger text-xs font-weight-bold">
+                 El campo es obligatorio
+               </p>
+             </div>
             </div>
             <div class="col-md-3 mt-1">
               <button class="btn btn-primary btn-xs mt-4"> <i class="fas fa-search"></i> Buscar</button>
-              <button class="btn btn-danger  btn-xs mt-4 mx-2"> <i class="fas fa-file-pdf"></i> Pdf</button>
+              <button
+                class="btn btn-danger  btn-xs mt-4 mx-2"
+                [hidden]="btnPdfHidden"
+              >
+                <i class="fas fa-file-pdf"
+                ></i> Pdf</button>
             </div>
           </div>
         </form>
           <div class="row mt-4">
             <div class="col-md-12">
               <p-table
-                  #dt
+                  #kardex
                   [rows]="10"
                   [paginator]="true"
                   [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
@@ -87,6 +145,7 @@
                         pInputText
                         type="text"
                         class="form-control"
+                        (input)="kardex.filterGlobal($any($event.target).value, 'contains')"
                         placeholder="Buscar..."
                       />
                     </span>
