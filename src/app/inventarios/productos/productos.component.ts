@@ -5,10 +5,10 @@ import { MenuComponent } from '../../componentes/menu/menu.component';
 import { CerrarsesionComponent } from '../../componentes/cerrarsesion/cerrarsesion.component';
 import { RouterOutlet } from '@angular/router';
 import { TableModule } from 'primeng/table';
-import { response } from 'express';
 import { InventarioService } from '../services/inventario.service';
 import { CommonModule } from '@angular/common';
-
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 @Component({
   selector: 'app-productos',
   standalone: true,
@@ -18,16 +18,18 @@ import { CommonModule } from '@angular/common';
     MenuComponent,
     CerrarsesionComponent,
     TableModule,
-    CommonModule
+    CommonModule,
+    ToastModule
   ],
-  templateUrl: './productos.component.html'
+  templateUrl: './productos.component.html',
+  providers: [MessageService]
 })
 export class ProductosComponent implements OnInit {
 
   constructor(
     private inventarioServices: InventarioService,
-    private listaServices: ListasService
-
+    private listaServices: ListasService,
+    private messageService: MessageService
   ){
 
   }
@@ -125,6 +127,52 @@ export class ProductosComponent implements OnInit {
         descripcion_productos: descripcion
       }
      );
+  }
 
+  createProduct(): void {
+    let producto: any = [
+      {
+        categoria: this.productosForm.get("categoria_productos")?.value,
+        nombre: this.productosForm.get("nombre_productos")?.value,
+        codigo: this.productosForm.get("codigo_productos")?.value,
+        barras: this.productosForm.get("barras_productos")?.value,
+        medida: this.productosForm.get("medida_productos")?.value,
+        cantidad: this.productosForm.get("cantidad_productos")?.value,
+        precio_u: this.productosForm.get("precio_productos")?.value,
+        moneda: this.productosForm.get("moneda_productos")?.value,
+        descripcion: this.productosForm.get("descripcion_productos")?.value,
+        usuario: localStorage.getItem("usuario"),
+      }
+    ];
+    this.inventarioServices
+        .createProduct(producto)
+        .subscribe((response: any ) => {
+          if(response.status == 200) {
+            this.showSuccess(response.message);
+            this.getProducts();
+            this.productosForm.reset();
+          }
+          else {
+            this.showError(response.mesagge);
+          }
+        }); 
+  }
+
+  showError(message: string) {
+    this.messageService.add(
+      {
+        severity: 'error',
+        summary: 'ClinicSoft Aviso',
+        detail: message
+      }
+    );
+  }
+
+  showSuccess(message: string) {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'ClinicSoft Aviso', 
+      detail: message
+    });
   }
 }

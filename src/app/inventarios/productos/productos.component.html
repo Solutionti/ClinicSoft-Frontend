@@ -2,6 +2,7 @@
 <!-- * * * * * * * * * * * JERSON GALVEZ ENSUNCHO * * * * * * * * * * * -->
 <!-- ******* * * * * * * * PROYECTO CLINICSOFT * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<p-toast position="top-right"/>
 <div class="min-height-300 bg-default position-absolute w-100"></div>
 <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
   <app-menu></app-menu>
@@ -17,10 +18,10 @@
               <div class="table-responsive">
                 <p-table
                   #producto
-                  [rows]="10"
+                  [rows]="5"
                   [value]="getProduct"
                   [paginator]="true"
-                  [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+                  [globalFilterFields]="['nombre', 'getProduct.nombre', 'categoria', 'getProduct.categoria']"
                   [tableStyle]="{ 'min-width': '75rem' }"
                   [rowHover]="true"
                   dataKey="id"
@@ -43,12 +44,12 @@
                 <ng-template pTemplate="header">
                   <tr>
                     <th pSortableColumn="name" class="text-xs text-white bg-default"></th>
-                      <th pSortableColumn="name" class="text-xs text-white bg-default">COD</th>
-                      <th pSortableColumn="name" class="text-xs text-white bg-default">NOMBRE</th>
-                      <th pSortableColumn="name" class="text-xs text-white bg-default">CATEGORIA</th>
-                      <th pSortableColumn="name" class="text-xs text-white bg-default">VALOR</th>
-                      <th pSortableColumn="name" class="text-xs text-white bg-default">CANT</th>
-                      <th pSortableColumn="name" class="text-xs text-white bg-default">STOCK</th>
+                      <th class="text-xs text-white bg-default">COD</th>
+                      <th pSortableColumn="nombre" class="text-xs text-white bg-default">NOMBRE</th>
+                      <th pSortableColumn="categoria" class="text-xs text-white bg-default">CATEGORIA</th>
+                      <th class="text-xs text-white bg-default">VALOR</th>
+                      <th class="text-xs text-white bg-default">CANT</th>
+                      <th class="text-xs text-white bg-default">STOCK</th>
                   </tr>
                 </ng-template>r
                 <ng-template pTemplate="body" let-getProduct>
@@ -74,12 +75,12 @@
                         >
                       </div>
                     </td>
-                    <td> {{ getProduct.codigo }}</td>
-                    <td> {{ getProduct.nombre }}</td>
-                    <td> {{ getProduct.categoria }}</td>
-                    <td> {{ getProduct.precio }}</td>
-                    <td> {{ getProduct.cantidad }}</td>
-                    <td> {{ getProduct.stock }}</td>
+                    <td class="text-xs text-uppercase"> {{ getProduct.codigo }}</td>
+                    <td class="text-xs text-uppercase"> {{ getProduct.nombre }}</td>
+                    <td class="text-xs text-uppercase"> {{ getProduct.categoria }}</td>
+                    <td class="text-xs text-uppercase"> {{ getProduct.precio }}</td>
+                    <td class="text-xs text-uppercase"> {{ getProduct.cantidad }}</td>
+                    <td class="text-xs text-uppercase"> {{ getProduct.stock }}</td>
                   </tr>
                 </ng-template>
                </p-table>
@@ -101,7 +102,7 @@
                   <option value="">Seleccione una opcion</option>
                   <option
                     *ngFor="let categoria of getCategorie"
-                    [value]="categoria.id"
+                    [value]="categoria.codigo_categoria"
                   >
                     {{  categoria.nombre  }}
                   </option>
@@ -221,11 +222,7 @@
                     aria-label="Default select example"
                     formControlName="moneda_productos"
                   >
-                    <option value="s">Soles (/s) *</option>
-
-
-
-
+                    <option value="PEN">Soles (/s) *</option>
                   </select>
                   <div
                   class="error"
@@ -253,15 +250,9 @@
                     class="btn btn-primary btn-sm"
                     [hidden]="btnAgregarHidden"
                     [disabled]="productosForm.invalid"
+                    (click)="createProduct()"
                     >
                     Guardar
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-danger btn-sm mx-2"
-                    [hidden]="btnActualizarHidden"
-                    >
-                    Actualizar
                   </button>
                 </div>
               </div>

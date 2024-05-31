@@ -116,6 +116,35 @@ export class AdmisionesService {
     return this.http.get(url, { params });
   }
 
+  createTriage(datos: any ) {
+    const url = `${environment.apiClinicSoft}createTriage`;
+
+    return this.http.post(url, {
+      presion_arterial: datos[0].presion_arterial,
+      temperatura: datos[0].temperatura,
+      frecuencia_respiratoria: datos[0].frecuencia_respiratoria,
+      frecuencia_cardiaca: datos[0].frecuencia_cardiaca,
+      saturacion: datos[0].saturacion,
+      peso: datos[0].peso,
+      talla: datos[0].talla,
+      imc: datos[0].imc,
+      paciente: datos[0].paciente,
+      doctor: datos[0].doctor,
+      especialidad: datos[0].especialidad,
+      estado: datos[0].estado,
+      usuario: datos[0].usuario,
+    });
+  }
+
+  PasateStatusAdmission(estado: any, atencion: any ) {
+    const url = `${environment.apiClinicSoft}PasateStatusAdmission`;
+
+    return this.http.post(url, {
+      estado: estado,
+      atencion: atencion
+    });
+  }
+
   // MODULO DE LABORATORIO
   
 }

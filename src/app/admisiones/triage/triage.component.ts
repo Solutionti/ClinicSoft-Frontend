@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MenuComponent } from '../../componentes/menu/menu.component';
 import { TableModule } from 'primeng/table';
 import { CerrarsesionComponent } from '../../componentes/cerrarsesion/cerrarsesion.component';
@@ -41,11 +41,11 @@ export class TriageComponent implements OnInit {
   siguienteTriage = true;
 
   triageForm: FormGroup = new FormGroup({
-    dni_triage: new FormControl({ value: '', disabled: true }),
-    paciente_triage: new FormControl({ value: '', disabled: true }),
+    dni_triage: new FormControl({ value: '', disabled: true }, [Validators.required]),
+    paciente_triage: new FormControl({ value: '', disabled: true }, [Validators.required]),
     edad_triage: new FormControl({ value: '', disabled: true }),
-    doctor_triage: new FormControl({ value: '', disabled: true }),
-    especialidad_triage: new FormControl({ value: '', disabled: true }),
+    doctor_triage: new FormControl({ value: '', disabled: true }, [Validators.required]),
+    especialidad_triage: new FormControl({ value: '', disabled: true }, [Validators.required]),
     presion_triage: new FormControl(0),
     temperatura_triage: new FormControl(0),
     frecuenciar_triage: new FormControl(0),
@@ -97,12 +97,53 @@ export class TriageComponent implements OnInit {
     this.showSuccess("Se ha seleccionado un paciente para toma de triage");
   }
 
-  crearTriage() {
-
+  createTriage() {
+    let triage = [
+      {
+        presion_arterial: this.triageForm.get("presion_triage")?.value,
+        temperatura: this.triageForm.get("temperatura_triage")?.value,
+        frecuencia_respiratoria: this.triageForm.get("frecuenciar_triage")?.value,
+        frecuencia_cardiaca: this.triageForm.get("frecuenciac_triage")?.value,
+        saturacion: this.triageForm.get("saturacion_triage")?.value,
+        peso: this.triageForm.get("peso_triage")?.value,
+        talla: this.triageForm.get("talla_triage")?.value,
+        imc: this.triageForm.get("imc_triage")?.value,
+        paciente: this.triageForm.get("dni_triage")?.value,
+        doctor: this.triageForm.get("doctor_triage")?.value,
+        especialidad: this.triageForm.get("especialidad_triage")?.value,
+        estado: "Activo",
+        usuario: localStorage.getItem("usuario"),
+      }
+    ];
+    this.admisionServices
+        .createTriage(triage)
+        .subscribe((response: any ) => {
+          if(response.status == 200) {
+            this.siguienteTriage = false;
+            this.showSuccess(response.message);
+          }
+          else {
+            this.showError(response.message);
+          }
+        });
   }
 
-  pasarConsulta() {
-
+  PasateStatusAdmission() {
+    let estado = "Consulta",
+        atencion = this.triageForm.get("dni_triage")?.value;
+    this.admisionServices
+        .PasateStatusAdmission(estado, atencion)
+        .subscribe((response: any ) => {
+          if(response.status == 200) {
+            this.triageForm.reset();
+            this.getAdmissionTriage();
+            this.siguienteTriage = true;
+            this.showSuccess(response.message);
+          }
+          else {
+            this.showError(response.message); 
+          }
+        });
   }
 
   showError(message: string) {
