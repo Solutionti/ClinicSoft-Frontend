@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuComponent } from '../../componentes/menu/menu.component';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { CerrarsesionComponent } from '../../componentes/cerrarsesion/cerrarsesion.component';
@@ -50,14 +50,16 @@ export class LaboratorioComponent implements OnInit {
   );
 
   laboratorioForm = new FormGroup({
-    dni_laboratorio: new FormControl({value:'', disabled: false}),
-    nombre_laboratorio: new FormControl({value:'', disabled: true}),
-    doctor_laboratorio: new FormControl(''),
+    dni_laboratorio: new FormControl({value:'', disabled: false}, [Validators.required]),
+    nombre_laboratorio: new FormControl({value:'', disabled: true} , [Validators.required]),
+    doctor_laboratorio: new FormControl('' , [Validators.required]),
     fecha_laboratorio: new FormControl({value: this.fechaActual, disabled: true}),
-    Efectivo_laboratorio: new FormControl('0'),
+    Efectivo_laboratorio: new FormControl('0', [Validators.required]),
     observacion_laboratorio: new FormControl(''),
     total_laboratorio: new FormControl({value:'', disabled: true}),
   });
+
+
 
   getLaboratories: any[] = [];
   getLaboratoryTable() {
