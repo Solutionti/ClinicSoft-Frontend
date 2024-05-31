@@ -16,11 +16,12 @@
           <div class="row">
             <div class="col-md-12">
               <div class="d-flex flex-row-reverse">
-                <a
+                <button
                   class="btn btn-primary text-white btn-xs mx-1"
+                  (click)="createColposcopia()"
                 >
                   <i class="fas fa-database text-white"></i> Crear
-                </a>
+                </button>
               </div>
             </div>
           </div>
@@ -69,7 +70,11 @@
         <div class="row mt-1">
           <div class="col-md-2">
             <label>DNI</label>
-            <input type="number" class="form-control form-control-sm">
+            <input
+              type="number"
+              class="form-control form-control-sm"
+              formControlName="dni_colposcopia"
+            >
           </div>
           <div class="col-md-4">
             <label>Nombre</label>
