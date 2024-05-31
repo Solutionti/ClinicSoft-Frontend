@@ -25,7 +25,7 @@ export class ColposcopiaComponent implements OnInit {
   ){}
 
   ngOnInit(): void {
-
+    this.getColposcopias();
   }
 
   colposcopiaForm: FormGroup = new FormGroup ({
@@ -45,6 +45,16 @@ export class ColposcopiaComponent implements OnInit {
     archivo1_colposcopia: new FormControl(''),
     archivo2_colposcopia: new FormControl('')
 });
+
+getColposcopia: any[] = [];
+getColposcopias() {
+  this.ProcedimientosService
+      .getColposcopias()
+      .subscribe((response: any ) => {
+        this.getColposcopia = response;
+      });
+}
+
 
 createColposcopia(): void {
   let colposcopia: any = [
