@@ -5,6 +5,7 @@ import { MenuComponent } from '../../componentes/menu/menu.component';
 import { CerrarsesionComponent } from '../../componentes/cerrarsesion/cerrarsesion.component';
 import { RouterOutlet } from '@angular/router';
 import { TableModule } from 'primeng/table';
+import { response } from 'express';
 
 @Component({
   selector: 'app-colposcopia',
@@ -26,7 +27,22 @@ export class ColposcopiaComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.getColposcopias()
   }
+
+  getColposcopia: any [] = [];
+  getColposcopias(){
+
+    this.ProcedimientosService
+      .getColposcopias()
+      .subscribe((response: any ) => {
+        console.log(response);
+        this.getColposcopia = response;
+      })
+
+  }
+
+
 
   colposcopiaForm: FormGroup = new FormGroup ({
     dni_colposcopia: new FormControl(''),
@@ -69,9 +85,11 @@ createColposcopia(): void {
   this.ProcedimientosService
     .createColposcopia(colposcopia)
     .subscribe((response: any) =>{
+      console.log(response);
      });
 }
 
 
 
 }
+

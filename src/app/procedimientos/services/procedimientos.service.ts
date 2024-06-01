@@ -10,6 +10,13 @@ export class ProcedimientosService {
     private http: HttpClient
   ) { }
 
+  getColposcopias() {
+    const url =  `${environment.apiClinicSoft}getColposcopias`;
+
+    return this.http.get(url);
+  }
+
+
   createColposcopia(datos: any){
     const url = `${environment.apiClinicSoft}createColposcopia`;
 
