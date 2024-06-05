@@ -102,6 +102,29 @@ export class LaboratorioComponent implements OnInit {
         })
   }
 
+  laboratoryVenta: any [] = [];
+  setDataArrayLaboratory(codigo: any, analisis: any, precio: any  ) {
+    this.laboratoryVenta.push({
+      codigo: codigo,
+      analisis: analisis,
+      precio: precio 
+    });
+    this.sumarElementArray();
+  }
+  
+  sumarElementArray() {
+    let precioAct: any = 0;
+    this.laboratoryVenta.forEach(function(laboratorio: any ) {
+      precioAct +=  laboratorio.precio;
+    });
+
+    this.laboratorioForm.controls['total_laboratorio'].patchValue(precioAct);
+  }
+
+  clickanalisis() {
+    alert();
+  }
+
   showError(message: string) {
     this.messageService.add(
       {
