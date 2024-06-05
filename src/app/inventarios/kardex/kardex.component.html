@@ -4,7 +4,7 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
 
 <div class="min-height-300 bg-default position-absolute w-100"></div>
-<aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
+<aside style="z-index: 1 !important;" class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
  <app-menu></app-menu>
 </aside>
 <main class="main-content position-relative border-radius-lg">
@@ -18,11 +18,13 @@
               <div class="d-flex ">
                 <a
                   class="btn btn-success text-white btn-xs"
+                  (click)="showDialog1()"
                 >
                   <i class="fas fa-plus text-white"></i> Entrada
                 </a>
                 <a
                   class="btn btn-danger text-white btn-xs mx-2"
+                  (click)="showDialog2()"
                 >
                   <i class="fas fa-minus text-white"></i> Salida
                 </a>
@@ -177,4 +179,274 @@
         </div>
       </div>
     </div>
+
+    <!-- MODAL DE ENTRADA DE PRODUCTOS -->
+    <p-dialog
+    header="INGRESO DE PRODUCTOS A LA CLINICA"
+    [modal]="true"
+    [(visible)]="visible"
+    [style]="{ width: '50rem' }"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+    [maximizable]="true">
+
+    <form [formGroup]="entradaForm">
+
+      <div class="row">
+        <div class="col-md-6">
+          <label >Producto *</label>
+          <select
+              class="form-control form-control-sm"
+              formControlName="producto_entrada">
+            <option value="">Seleccione una opcion</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+          <div
+              class="error"
+              *ngIf="producto_entrada.invalid && (producto_entrada.touched || producto_entrada.dirty)"
+             >
+               <p class="text-danger text-xs font-weight-bold">
+                 El campo es obligatorio
+               </p>
+             </div>
+        </div>
+        <div class="col-md-4">
+          <label >Cantidad *</label>
+          <input
+            type="number"
+            class="form-control form-control-sm"
+            formControlName="cantidad_entrada"
+          >
+          <div
+              class="error"
+              *ngIf="cantidad_entrada.invalid && (cantidad_entrada.touched || cantidad_entrada.dirty)"
+             >
+               <p class="text-danger text-xs font-weight-bold">
+                 El campo es obligatorio
+               </p>
+             </div>
+        </div>
+        <div class="col-md-2">
+          <label >Stock *</label>
+          <input
+            type="number"
+            class="form-control form-control-sm"
+            formControlName="stock_entrada"
+          >
+          <div
+              class="error"
+              *ngIf="stock_entrada.invalid && (stock_entrada.touched || stock_entrada.dirty)"
+             >
+               <p class="text-danger text-xs font-weight-bold">
+                 El campo es obligatorio
+               </p>
+             </div>
+        </div>
+      </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label >Seccion *</label>
+            <select
+                class="form-control form-control-sm"
+                formControlName="seccion_entrada">
+
+              <option value="">Seleccione una opcion</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+            <div
+              class="error"
+              *ngIf="seccion_entrada.invalid && (seccion_entrada.touched || seccion_entrada.dirty)"
+             >
+               <p class="text-danger text-xs font-weight-bold">
+                 El campo es obligatorio
+               </p>
+             </div>
+          </div>
+          <div class="col-md-6">
+            <label >Motivo de ingreso *</label>
+            <select
+                class="form-control form-control-sm"
+                formControlName="motivo_entrada">
+
+            <option value="">Seleccione una opcion</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+          <div
+              class="error"
+              *ngIf="motivo_entrada.invalid && (motivo_entrada.touched || motivo_entrada.dirty)"
+             >
+               <p class="text-danger text-xs font-weight-bold">
+                 El campo es obligatorio
+               </p>
+             </div>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col-md-12">
+            <label>Comentarios *</label>
+              <textarea
+                class="form-control"
+                formControlName="comentarios_entrada"
+              ></textarea>
+              <div
+              class="error"
+              *ngIf="comentarios_entrada.invalid && (comentarios_entrada.touched || comentarios_entrada.dirty)"
+             >
+               <p class="text-danger text-xs font-weight-bold">
+                 El campo es obligatorio
+               </p>
+             </div>
+            </div>
+        </div>
+         </form>
+         <ng-template pTemplate="footer">
+          <button
+            class="btn btn-danger btn-sm"
+          >Cancelar</button>
+          <button
+            class="btn btn-primary btn-sm mx-2"
+            [disabled]="entradaForm.invalid"
+          > <i class="fas fa-database text-white"></i> Guardar</button>
+         </ng-template>
+    </p-dialog>
+
+    <p-dialog
+
+    header="SALIDA DE PRODUCTOS DE LA CLINICA"
+    [modal]="true"
+    [(visible)]="visible1"
+    [style]="{ width: '50rem' }"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+    [maximizable]="true">
+
+    <form [formGroup]="salidaForm">
+
+      <div class="row">
+        <div class="col-md-6">
+          <label >Producto *</label>
+          <select
+              class="form-control form-control-sm"
+              formControlName="producto_salida">
+            <option value="">Seleccione una opcion</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+          <div
+              class="error"
+              *ngIf="producto_salida.invalid && (producto_salida.touched || producto_salida.dirty)"
+             >
+               <p class="text-danger text-xs font-weight-bold">
+                 El campo es obligatorio
+               </p>
+             </div>
+        </div>
+        <div class="col-md-4">
+          <label >Cantidad *</label>
+          <input
+            type="number"
+            class="form-control form-control-sm"
+            formControlName="cantidad_salida"
+          >
+          <div
+              class="error"
+              *ngIf="cantidad_salida.invalid && (cantidad_salida.touched || cantidad_salida.dirty)"
+             >
+               <p class="text-danger text-xs font-weight-bold">
+                 El campo es obligatorio
+               </p>
+             </div>
+        </div>
+        <div class="col-md-2">
+          <label >Stock *</label>
+          <input
+            type="number"
+            class="form-control form-control-sm"
+            formControlName="stock_salida"
+          >
+          <div
+              class="error"
+              *ngIf="stock_salida.invalid && (stock_salida.touched || stock_salida.dirty)"
+             >
+               <p class="text-danger text-xs font-weight-bold">
+                 El campo es obligatorio
+               </p>
+             </div>
+        </div>
+      </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label >Seccion *</label>
+            <select
+                class="form-control form-control-sm"
+                formControlName="seccion_salida">
+
+              <option value="">Seleccione una opcion</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+            <div
+              class="error"
+              *ngIf="seccion_salida.invalid && (seccion_salida.touched || seccion_salida.dirty)"
+             >
+               <p class="text-danger text-xs font-weight-bold">
+                 El campo es obligatorio
+               </p>
+             </div>
+          </div>
+          <div class="col-md-6">
+            <label >Motivo de salida *</label>
+            <select
+                class="form-control form-control-sm"
+                formControlName="motivo_salida">
+
+            <option value="">Seleccione una opcion</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+          <div
+              class="error"
+              *ngIf="motivo_salida.invalid && (motivo_salida.touched || motivo_salida.dirty)"
+             >
+               <p class="text-danger text-xs font-weight-bold">
+                 El campo es obligatorio
+               </p>
+             </div>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col-md-12">
+            <label>Comentarios *</label>
+              <textarea
+                class="form-control"
+                formControlName="comentarios_salida"
+              ></textarea>
+              <div
+              class="error"
+              *ngIf="comentarios_salida.invalid && (comentarios_salida.touched || comentarios_salida.dirty)"
+             >
+               <p class="text-danger text-xs font-weight-bold">
+                 El campo es obligatorio
+               </p>
+             </div>
+            </div>
+        </div>
+         </form>
+         <ng-template pTemplate="footer">
+          <button
+            class="btn btn-danger btn-sm"
+          > Cancelar</button>
+          <button
+            class="btn btn-primary btn-sm mx-2"
+            [disabled]="salidaForm.invalid"
+          > <i class="fas fa-database text-white"></i> Guardar</button>
+         </ng-template>
+    </p-dialog>
 

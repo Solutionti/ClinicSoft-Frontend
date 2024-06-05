@@ -26,11 +26,11 @@
             </div>
           </div>
           <p-table
-                  #dt
+                  #colposcopia
                   [rows]="10"
                   [value]="getColposcopia"
                   [paginator]="true"
-                  [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+                  [globalFilterFields]="['nombre', 'getColposcopia.nombre', 'representative.name', 'status']"
                   [tableStyle]="{ 'min-width': '75rem' }"
                   [rowHover]="true"
                   dataKey="id"
@@ -44,6 +44,7 @@
                         pInputText
                         type="text"
                         class="form-control"
+                        (input)="colposcopia.filterGlobal($any($event.target).value, 'contains')"
                         placeholder="Buscar..."
                       />
                     </span>
@@ -149,7 +150,7 @@
               class="form-control form-control-sm"
               formControlName="escamo_colposcopia"
             >
-              <option value="">Seleccione una opcion</option>
+              <option value="0">Seleccione una opcion</option>
               <option value="1">Sin lesiones</option>
               <option value="2">Epitelio Blanco</option>
               <option value="3">Mosaico</option>
@@ -167,7 +168,7 @@
               class="form-control form-control-sm"
               formControlName="cervix_colposcopia"
             >
-              <option value="">Seleccione una opcion</option>
+              <option value="0">Seleccione una opcion</option>
               <option value="1">Sin Lesiones</option>
               <option value="2">Ectopia</option>
               <option value="3">Mosaico</option>
@@ -183,7 +184,7 @@
               class="form-control form-control-sm"
               formControlName="vagina_colposcopia"
             >
-              <option value="">Seleccione una opcion</option>
+              <option value="0">Seleccione una opcion</option>
               <option value="1">Sin Lesiones</option>
               <option value="2">Condilomas</option>
               <option value="3">Flujo</option>
@@ -202,7 +203,7 @@
               class="form-control form-control-sm"
               formControlName="vulva_colposcopia"
             >
-              <option value="">Seleccione una opcion</option>
+              <option value="0">Seleccione una opcion</option>
               <option value="1">Sin lesiones</option>
               <option value="2">Condilomas</option>
               <option value="3">Herpes</option>
@@ -218,7 +219,7 @@
               class="form-control form-control-sm"
               formControlName="perineo_colposcopia"
             >
-              <option value="">Seleccione una opcion</option>
+              <option value="0">Seleccione una opcion</option>
               <option value="1">Sin Lesiones</option>
               <option value="2">Condiloma</option>
 
@@ -230,7 +231,7 @@
               class="form-control form-control-sm"
               formControlName="parianal_colposcopia"
             >
-              <option value="">Seleccione una opcion</option>
+              <option value="0">Seleccione una opcion</option>
               <option value="1">Sin Lesiones</option>
               <option value="2">Condiloma</option>
             </select>
@@ -244,7 +245,7 @@
               class="form-control form-control-sm"
               formControlName="biopsia_colposcopia"
             >
-              <option value="">Seleccione una opcion</option>
+              <option value="0">Seleccione una opcion</option>
               <option value="1">No</option>
               <option value="2">Vulva</option>
               <option value="3">Vagina</option>
@@ -257,7 +258,7 @@
               class="form-control form-control-sm"
               formControlName="papanicolaou_colposcopia"
             >
-              <option value="">Seleccione una opcion</option>
+              <option value="0">Seleccione una opcion</option>
               <option value="1">Si</option>
               <option value="2">No</option>
 

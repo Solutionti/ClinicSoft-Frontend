@@ -5,6 +5,7 @@ import { MenuComponent } from '../../componentes/menu/menu.component';
 import { CerrarsesionComponent } from '../../componentes/cerrarsesion/cerrarsesion.component';
 import { RouterOutlet } from '@angular/router';
 import { TableModule } from 'primeng/table';
+import { response } from 'express';
 
 @Component({
   selector: 'app-colposcopia',
@@ -72,6 +73,8 @@ createColposcopia(): void {
      imagen1: this.colposcopiaForm.get("archivo1_colposcopia")?.value,
      imagen2: this.colposcopiaForm.get("archivo2_colposcopia")?.value,
      usuario: localStorage.getItem("usuario"),
+     vagina: this.colposcopiaForm.get("vagina_colposcopia")?.value,
+     vulva: this.colposcopiaForm.get("vulva_colposcopia")?.value,
      cmp: "123",
 
     }
@@ -79,9 +82,9 @@ createColposcopia(): void {
   this.ProcedimientosService
     .createColposcopia(colposcopia)
     .subscribe((response: any) =>{
+      console.log(response);
      });
 }
 
-
-
 }
+
