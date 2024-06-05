@@ -26,23 +26,8 @@ export class ColposcopiaComponent implements OnInit {
   ){}
 
   ngOnInit(): void {
-
-    this.getColposcopias()
+    this.getColposcopias();
   }
-
-  getColposcopia: any [] = [];
-  getColposcopias(){
-
-    this.ProcedimientosService
-      .getColposcopias()
-      .subscribe((response: any ) => {
-        console.log(response);
-        this.getColposcopia = response;
-      })
-
-  }
-
-
 
   colposcopiaForm: FormGroup = new FormGroup ({
     dni_colposcopia: new FormControl(''),
@@ -61,6 +46,16 @@ export class ColposcopiaComponent implements OnInit {
     archivo1_colposcopia: new FormControl(''),
     archivo2_colposcopia: new FormControl('')
 });
+
+getColposcopia: any[] = [];
+getColposcopias() {
+  this.ProcedimientosService
+      .getColposcopias()
+      .subscribe((response: any ) => {
+        this.getColposcopia = response;
+      });
+}
+
 
 createColposcopia(): void {
   let colposcopia: any = [
@@ -90,8 +85,6 @@ createColposcopia(): void {
       console.log(response);
      });
 }
-
-
 
 }
 

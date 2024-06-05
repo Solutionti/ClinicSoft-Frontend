@@ -11,11 +11,10 @@ export class ProcedimientosService {
   ) { }
 
   getColposcopias() {
-    const url =  `${environment.apiClinicSoft}getColposcopias`;
+    const url = `${environment.apiClinicSoft}getColposcopias`;
 
     return this.http.get(url);
   }
-
 
   createColposcopia(datos: any){
     const url = `${environment.apiClinicSoft}createColposcopia`;
