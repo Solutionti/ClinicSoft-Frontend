@@ -27,14 +27,16 @@ export class ProcedimientosService {
       escamo_columnar: datos[0].escamo_columnar,
       endo_cervix: datos[0].endo_cervix,
       perineo: datos[0].perineo,
-      egion_parianal: datos[0].region_parianal,
+      region_parianal: datos[0].region_parianal,
       biopsia: datos[0].biopsia,
       papanicolaou: datos[0].papanicolaou,
       conclusiones: datos[0].conclusiones,
       imagen1: "pueba",
       imagen2: "prueba",
       usuario: datos[0].usuario,
-      cmp: "123"
+      vagina: datos[0].vagina,
+      vulva: datos[0].vulva,
+      cmp: "123",
     });
   }
 }

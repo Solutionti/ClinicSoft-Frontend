@@ -28,6 +28,7 @@
           <p-table
                   #colposcopia
                   [rows]="10"
+                  [value]="getColposcopia"
                   [paginator]="true"
                   [globalFilterFields]="['nombre', 'getColposcopia.nombre', 'representative.name', 'status']"
                   [tableStyle]="{ 'min-width': '75rem' }"
@@ -60,14 +61,14 @@
                   </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-getColposcopia>
-
-                  <td> {{getColposcopia.opciones}} </td>
-                  <td> {{getColposcopia.informe}} </td>
-                  <td> {{getColposcopia.paciente}} </td>
-                  <td> {{getColposcopia.fecha}} </td>
-                  <td> {{getColposcopia.medico}} </td>
-                  <td> {{getColposcopia.imagenes}} </td>
-
+                  <tr>
+                    <td> {{getColposcopia.opciones}} </td>
+                    <td> {{getColposcopia.conclusiones}} </td>
+                    <td> {{getColposcopia.paciente}} </td>
+                    <td> {{getColposcopia.fecha}} </td>
+                    <td> {{getColposcopia.medico}} </td>
+                    <td> {{getColposcopia.imagenes}} </td>
+                  </tr>
                 </ng-template>
                </p-table>
         <div class="row mt-3">

@@ -78,6 +78,8 @@ createColposcopia(): void {
      imagen1: this.colposcopiaForm.get("archivo1_colposcopia")?.value,
      imagen2: this.colposcopiaForm.get("archivo2_colposcopia")?.value,
      usuario: localStorage.getItem("usuario"),
+     vagina: this.colposcopiaForm.get("vagina_colposcopia")?.value,
+     vulva: this.colposcopiaForm.get("vulva_colposcopia")?.value,
      cmp: "123",
 
     }
