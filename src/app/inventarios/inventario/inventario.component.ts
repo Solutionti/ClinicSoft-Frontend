@@ -4,6 +4,8 @@ import { MenuComponent } from '../../componentes/menu/menu.component';
 import { CerrarsesionComponent } from '../../componentes/cerrarsesion/cerrarsesion.component';
 import { RouterOutlet } from '@angular/router';
 import { TableModule } from 'primeng/table';
+import { InventarioService } from '../services/inventario.service';
+
 
 @Component({
   selector: 'app-inventario',
@@ -19,8 +21,16 @@ import { TableModule } from 'primeng/table';
 })
 export class InventarioComponent  implements OnInit {
 
+  constructor(
+    private inventarioServices: InventarioService,
+
+  ){
+
+  }
+
   ngOnInit(): void {
 
+    this.getInventories();
   }
 
   inventarioForm = new FormGroup({
@@ -31,4 +41,17 @@ export class InventarioComponent  implements OnInit {
     inicial_inventario: new FormControl(''),
     final_inventario: new FormControl(''),
   })
+
+  getInventorie: any [] = [];
+  getInventories(){
+    this.inventarioServices
+    .getInventories()
+    .subscribe((response: any) => {
+      console.log(response);
+
+      this.getInventorie = response;
+    })
+  }
+
+
 }
