@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 
@@ -17,7 +17,19 @@ export class InventarioService {
     return this.http.get(url);
   }
 
-  // CREACION DEL SERVICIO DE CREAR EL PRODUCTO 
+  getInventories() {
+    const url =  `${environment.apiClinicSoft}getInventories`;
+
+    return this.http.get(url);
+  }
+
+  getKardex(producto: any ) {
+    const url =  `${environment.apiClinicSoft}getKardex`;
+    let params = new HttpParams().set("producto", producto);
+    return this.http.get(url, {params});
+  }
+
+  // CREACION DEL SERVICIO DE CREAR EL PRODUCTO
   createProduct(datos: any) {
     const url = `${environment.apiClinicSoft}createProduct`;
 

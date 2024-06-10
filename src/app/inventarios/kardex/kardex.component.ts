@@ -144,7 +144,7 @@ export class KardexComponent implements OnInit {
           this.getProduct = response;
     });
   }
-  getCategorie: any [] = []
+  getCategorie: any [] = [];
   getCategories() {
 
     this.ListasService
@@ -152,7 +152,19 @@ export class KardexComponent implements OnInit {
         .subscribe((response: any ) => {
           console.log(response);
           this.getCategorie = response
-        });
+    });
+  }
+
+  getKarde: any [] = [];
+  getKardex(){
+    let producto = this.kardexForm.get("producto_kardex")?.value;
+    this.InventarioService
+        .getKardex(producto)
+        .subscribe((response: any) => {
+          console.log(response);
+          this.getKarde = response;
+    });
+
   }
 
   showDialog1() {

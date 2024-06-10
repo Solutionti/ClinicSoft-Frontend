@@ -120,6 +120,7 @@
               <button
                 class="btn btn-primary btn-xs mt-4"
                 [disabled]="kardexForm.invalid"
+                (click)="getKardex()"
               >
               <i class="fas fa-search"></i> Buscar</button>
               <button
@@ -137,8 +138,9 @@
               <p-table
                   #kardex
                   [rows]="10"
+                  [value]="getKarde"
                   [paginator]="true"
-                  [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+                  [globalFilterFields]="['nombre', 'getKarde.nombre', 'representative.name', 'status']"
                   [tableStyle]="{ 'min-width': '75rem' }"
                   [rowHover]="true"
                   dataKey="id"
@@ -170,7 +172,16 @@
                     <th pSortableColumn="name" class="text-xs text-white bg-default">SALDO</th>
                   </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-product>
+                <ng-template pTemplate="body" let-getKarde>
+                  <tr>
+                    <td class="text-xs text-uppercase"> {{ getKarde.codigo }} </td>
+                    <td class="text-xs text-uppercase"> {{ getKarde.fecha }} </td>
+                    <td class="text-xs text-uppercase"> {{ getKarde.tipo }} </td>
+                    <td class="text-xs text-uppercase"> {{ getKarde.motivo }} </td>
+                    <td class="text-xs text-uppercase"> {{ getKarde.entrada }} </td>
+                    <td class="text-xs text-uppercase"> {{ getKarde.salida }} </td>
+                    <td class="text-xs text-uppercase"> {{ getKarde.saldo }} </td>
+                  </tr>
                 </ng-template>
                </p-table>
             </div>
