@@ -116,6 +116,11 @@ export class AdmisionesService {
     return this.http.get(url, { params });
   }
 
+  getTriageId (paciente: any ) {
+    const url = `${environment.apiClinicSoft}getTriageId`;
+    const params = new HttpParams().set("paciente", paciente);
+    return this.http.get(url, { params })
+  }
   createTriage(datos: any ) {
     const url = `${environment.apiClinicSoft}createTriage`;
 

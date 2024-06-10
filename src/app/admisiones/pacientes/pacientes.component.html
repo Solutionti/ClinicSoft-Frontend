@@ -18,7 +18,7 @@
               <div class="d-flex flex-row-reverse">
                 <a
                   class="btn btn-success text-white btn-xs"
-                  routerLink="/hc"
+                  [routerLink]="['/hc', paciente]"
                   target="_blank"
                   [hidden]="btnHistoriaHidden"
                 >

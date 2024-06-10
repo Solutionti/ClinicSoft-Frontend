@@ -19,10 +19,10 @@
                     <div class="flex-grow-1 ms-4">
                       <div class="row">
                         <div class="col-lg mb-3 mb-lg-0">
-                          <h4 class="page-header-title h6">Jerson Reinel Galvez Ensuncho</h4>
+                          <h4 class="page-header-title h6">{{ nombrepaciente }}</h4>
                           <ul class="list-inline list-separator">
                             <li class="list-inline-item">
-                              <i class="bi-geo-alt-fill text-primary me-1"></i> 26/12/1993 - 30 años
+                              <i class="bi-geo-alt-fill text-primary me-1"></i> {{ fechanacimiento }} - 30 años
                             </li>
                             <li> Editar - Imprimir</li>
                           </ul>
@@ -49,13 +49,13 @@
                     </div>
                     <div class="col-md-5">
                         <ul class="list-inline ">
-                            <li class="mt-1">175 Mts</li>
-                            <li class="mt-0">80 Kg</li>
-                            <li class="mt-1">10 IMC</li>
-                            <li class="mt-0">20 C</li>
-                            <li class="mt-2">10 r/m</li>
-                            <li class="mt-1">20 mmHg</li>
-                            <li class="mt-0">20 %</li>
+                            <li class="mt-1">{{ estatura }} Mts</li>
+                            <li class="mt-0">{{ peso }} Kg</li>
+                            <li class="mt-1">{{ masa_corporal }} IMC</li>
+                            <li class="mt-0">{{ temperatura }} C</li>
+                            <li class="mt-2">{{ frecuencia_respiratoria }} r/m</li>
+                            <li class="mt-1">{{ frecuencia_cardiaca }} mmHg</li>
+                            <li class="mt-0">{{ porcentaje_grasa }} %</li>
                           </ul>
                     </div>
                 </div>
@@ -67,14 +67,23 @@
               <div class="card-body">
                   <div class="row">
                     <div class="col-md-12">
-                      <ul class="list-inline ">
+                      <ul
+                        class="list-inline"
+                        *ngFor="let archivos of archivospdf"
+                      >
                         <li>
-                         <a href="#">Examen_historial_fisico</a>
-                         <i class="fas fa-file-pdf mx-1 text-danger"></i>
-                        </li>
-                        <small>66 mb | 01-03-2024 12:30 pm</small>
+                          <i class="fas fa-file-pdf mx-1 text-danger"></i>
+                          <a href="#">{{ archivos.titulo }}</a>
+                         </li>
+                        <small>1 mb | {{archivos.fecha}}</small>
                       </ul>
-                      <button class="btn btn-primary btn-xs">Subir archivo</button>
+                      
+                      <button
+                        class="btn btn-primary btn-xs"
+                        (click)="archivos = true"
+                      >
+                        Subir archivo
+                      </button>
                     </div>
                   </div>
               </div>
@@ -179,7 +188,12 @@
                       <div class="row">
                         <div class="col-md-12">
                           <div class="d-grid gap-2">
-                            <button class="btn btn-primary rounded-pill">Nueva Consulta</button>
+                            <button
+                              class="btn btn-primary rounded-pill"
+                              (click)="citas = true"
+                            >
+                              Nueva Consulta
+                            </button>
                           </div>
                         </div>
                       </div>
@@ -216,3 +230,60 @@
         </div>
       </div>
     </div>
+
+<!-- MODAL AGENDAMIENTO DE CITAS  -->
+<p-dialog 
+header="AGENDAMIENTO DE CITAS" 
+[modal]="true"
+[(visible)]="citas" 
+[style]="{ width: '60rem' }" 
+[breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" 
+[maximizable]="true">
+<!-- CONTENIDO -->
+
+<ng-template pTemplate="footer">
+  <button class="btn btn-danger btn-sm">Cancelar</button>
+  <button class="btn btn-primary btn-sm mx-2">Guardar</button>
+</ng-template>
+</p-dialog>
+
+<!--  -->
+<p-dialog
+  header="SUBIR ARCHIVOS"
+  [modal]="true"
+  [(visible)]="archivos"
+  [style]="{ width: '25rem' }"
+>
+  <div class="flex align-items-center gap-3 mb-3">
+    <label>Tipo de Archivo</label>
+    <select
+      class="form-control form-control-sm"
+    >
+      <option value="">Seleccione una opcion</option>
+    </select>
+  </div>
+  <div class="flex align-items-center gap-3 mb-3">
+    <label>Titulo</label>
+    <input
+      type="text"
+      class="form-control form-control-sm"
+      autocomplete="off"
+    />
+  </div>
+  <div class="flex align-items-center gap-3 mb-5">
+      <label>Archivo</label>
+      <input
+        type="file"
+        class="form-control form-control-sm"
+        accept=".pdf"
+      />
+  </div>
+  <div class="flex justify-content-end gap-2">
+    <button
+      class="btn btn-primary btn-sm mx-2"
+      (click)="archivos = false"
+    >
+      Aceptar
+    </button>
+  </div>
+</p-dialog>

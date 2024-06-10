@@ -64,7 +64,7 @@ export const routes: Routes = [
     component: UsuariosComponent,
   },
   {
-    path: 'hc',
+    path: 'hc/:documento',
     component: HistorialpacienteComponent,
   },
 
