@@ -50,9 +50,13 @@
                 <ng-template pTemplate="body" let-getLaboratories>
                   <tr>
                     <td>
-                      <a class="badge bg-success" (click)="setDataArrayLaboratory(getLaboratories.codigo,getLaboratories.nombre,getLaboratories.precio)">
+                      <button 
+                        class="btn btn-success btn-xs"
+                        (click)="setDataArrayLaboratory(getLaboratories.codigo,getLaboratories.nombre,getLaboratories.precio)"
+                        [disabled]="laboratorioForm.invalid"
+                      >
                         <i class="fas fa-check fa-xs text-white"></i>
-                      </a>
+                    </button>
                     </td>
                     <td class="text-xs text-uppercase">{{ getLaboratories.codigo }}</td>
                     <td class="text-xs text-uppercase">{{ getLaboratories.nombre }}</td>
