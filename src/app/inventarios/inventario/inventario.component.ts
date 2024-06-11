@@ -5,7 +5,8 @@ import { CerrarsesionComponent } from '../../componentes/cerrarsesion/cerrarsesi
 import { RouterOutlet } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { InventarioService } from '../services/inventario.service';
-
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-inventario',
@@ -15,42 +16,63 @@ import { InventarioService } from '../services/inventario.service';
     ReactiveFormsModule,
     MenuComponent,
     CerrarsesionComponent,
-    TableModule
+    TableModule,
+    ToastModule
   ],
+  providers:[MessageService],
   templateUrl: './inventario.component.html'
 })
 export class InventarioComponent  implements OnInit {
 
+
   constructor(
     private inventarioServices: InventarioService,
-
+    private messageService: MessageService
   ){
 
   }
 
   ngOnInit(): void {
 
-    this.getInventories();
   }
 
   inventarioForm = new FormGroup({
-    empresa_inventario: new FormControl(''),
+    empresa_inventario: new FormControl('SEDE PRINCIPAL'),
     stock_inventario: new FormControl(''),
-    cant_inventario: new FormControl(''),
-    codigo_inventario: new FormControl(''),
-    inicial_inventario: new FormControl(''),
-    final_inventario: new FormControl(''),
+    cant_inventario: new FormControl('')
   })
 
   getInventorie: any [] = [];
   getInventories(){
+    let cantidad = this.inventarioForm.get('cant_inventario')?.value;
     this.inventarioServices
-    .getInventories()
+    .getInventories(cantidad)
     .subscribe((response: any) => {
-      console.log(response);
-
-      this.getInventorie = response;
+      if(response.status == 200) {
+        this.showSuccess(response.message);
+        this.getInventorie = response.data;
+      }
+      else {
+        this.showError(response.mesagge);
+      }
     })
+  }
+
+  showError(message: string) {
+    this.messageService.add(
+      {
+        severity: 'error',
+        summary: 'ClinicSoft Aviso',
+        detail: message
+      }
+    );
+  }
+  showSuccess(message: string) {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'ClinicSoft Aviso',
+      detail: message
+    });
   }
 
 

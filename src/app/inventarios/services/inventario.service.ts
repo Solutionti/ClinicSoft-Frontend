@@ -17,16 +17,16 @@ export class InventarioService {
     return this.http.get(url);
   }
 
-  getInventories() {
+  getInventories(cantidad: any) {
     const url =  `${environment.apiClinicSoft}getInventories`;
-
-    return this.http.get(url);
+    let params = new HttpParams().set("cantidad", cantidad);
+    return this.http.get(url, { params });
   }
 
   getKardex(producto: any ) {
     const url =  `${environment.apiClinicSoft}getKardex`;
     let params = new HttpParams().set("producto", producto);
-    return this.http.get(url, {params});
+    return this.http.get(url, { params });
   }
 
   // CREACION DEL SERVICIO DE CREAR EL PRODUCTO
