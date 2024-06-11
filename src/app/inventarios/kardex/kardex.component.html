@@ -2,7 +2,7 @@
 <!-- * * * * * * * * * * * JERSON GALVEZ ENSUNCHO * * * * * * * * * * * -->
 <!-- ******* * * * * * * * PROYECTO CLINICSOFT * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-
+<p-toast position="top-right"/>
 <div class="min-height-300 bg-default position-absolute w-100"></div>
 <aside style="z-index: 1 !important;" class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
  <app-menu></app-menu>
@@ -44,7 +44,7 @@
                 class="form-control form-control-sm"
                 formControlName="categoria_kardex"
               >
-                <option value="">Seleccione una opcion</option>
+                <option value="">SELECCIONE UNA OPCION</option>
                 <option
                   *ngFor="let categoria of getCategorie"
                   [value]="categoria.id"
@@ -67,7 +67,7 @@
                 class="form-control form-control-sm"
                 formControlName="producto_kardex"
               >
-                <option value="">Seleccione una opcion</option>
+                <option value="">SELECCIONE UNA OPCION</option>
                 <option
                   *ngFor="let product of getProduct"
                   [value]="product.id"
@@ -208,10 +208,12 @@
           <select
               class="form-control form-control-sm"
               formControlName="producto_entrada">
-            <option value="">Seleccione una opcion</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option value="">SELECCIONE UNA OPCION</option>
+            <option
+              *ngFor="let producto of getProduct"
+              [value]="producto.id"
+            > {{ producto.nombre}} </option>
+
           </select>
           <div
               class="error"
@@ -262,10 +264,9 @@
                 class="form-control form-control-sm"
                 formControlName="seccion_entrada">
 
-              <option value="">Seleccione una opcion</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              <option value="">SELECCIONE UNA OPCION</option>
+              <option value="Salud madre y mujer">SEDE PRINCIPAL</option>
+
             </select>
             <div
               class="error"
@@ -282,10 +283,10 @@
                 class="form-control form-control-sm"
                 formControlName="motivo_entrada">
 
-            <option value="">Seleccione una opcion</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option value="">SELECCIONE UNA OPCION</option>
+            <option value="Compra">Compra de Insumos</option>
+            <option value="Obsequio">Obsequio Empresarial</option>
+            <option value="Temporal">Ingreso Temporal</option>
           </select>
           <div
               class="error"
@@ -322,6 +323,7 @@
           <button
             class="btn btn-primary btn-sm mx-2"
             [disabled]="entradaForm.invalid"
+            (click)="Creatstart()"
           > <i class="fas fa-database text-white"></i> Guardar</button>
          </ng-template>
     </p-dialog>
@@ -343,10 +345,11 @@
           <select
               class="form-control form-control-sm"
               formControlName="producto_salida">
-            <option value="">Seleccione una opcion</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option value="">SELECCIONE UNA OPCION</option>
+            <option
+              *ngFor="let produc of getProduct"
+              [value]="produc.id"
+            > {{produc.nombre}} </option>
           </select>
           <div
               class="error"
@@ -397,10 +400,8 @@
                 class="form-control form-control-sm"
                 formControlName="seccion_salida">
 
-              <option value="">Seleccione una opcion</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              <option value="">SELECCIONE UNA OPCION</option>
+              <option value="Salud madre y mujer">SEDE PRINCIPAL</option>
             </select>
             <div
               class="error"
@@ -417,10 +418,11 @@
                 class="form-control form-control-sm"
                 formControlName="motivo_salida">
 
-            <option value="">Seleccione una opcion</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option value="">SELECCIONE UNA OPCION</option>
+            <option value="Gasto interno">Salida por gasto interno</option>
+            <option value="Vencimiento">Salida por Vencimiento</option>
+            <option value="Prestamo">Salida por Prestamo</option>
+            <option value="Temporal">Salida Temporal</option>
           </select>
           <div
               class="error"
@@ -457,6 +459,7 @@
           <button
             class="btn btn-primary btn-sm mx-2"
             [disabled]="salidaForm.invalid"
+            (click)="createEnd()"
           > <i class="fas fa-database text-white"></i> Guardar</button>
          </ng-template>
     </p-dialog>
