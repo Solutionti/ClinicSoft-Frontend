@@ -175,9 +175,4 @@ export class KardexComponent implements OnInit {
     this.visible1 = true;
   }
 
-  Creatstart(): void {
-    let id_producto = this.kardexForm.get("producto_kardex")?.value,
-        tp_documento = this.kardexForm.get("")?.value.
-
-  }
 }
