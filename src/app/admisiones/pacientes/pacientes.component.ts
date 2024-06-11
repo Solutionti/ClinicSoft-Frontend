@@ -46,6 +46,7 @@ export class PacientesComponent implements OnInit {
   btnActualizarHidden = true;
   btnAgregarHidden = false;
   containerResponsable = true;
+  paciente = "";
 
   crearPacienteForm: FormGroup = new FormGroup({
     crearpaciente_dni: new FormControl('',[Validators.required]),
@@ -236,7 +237,7 @@ export class PacientesComponent implements OnInit {
           this.btnAgregarHidden = true;
           this.btnActualizarHidden = false;
           this.btnHistoriaHidden = false;
-
+          this.paciente = response.data.documento;
           this.crearPacienteForm.patchValue(
             {
                crearpaciente_dni: response.data.documento,
@@ -382,6 +383,8 @@ export class PacientesComponent implements OnInit {
           }
         });
   }
+
+  
 
   showError(message: string) {
     this.messageService.add(

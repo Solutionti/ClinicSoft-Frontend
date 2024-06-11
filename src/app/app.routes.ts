@@ -16,11 +16,16 @@ import { FinanzasComponent } from './contabilidad/finanzas/finanzas.component';
 import { ReporteComponent } from './reportes/reporte/reporte.component';
 import { InicioComponent } from './authorization/inicio/inicio.component';
 import { ProductosComponent } from './inventarios/productos/productos.component';
+import { CitasComponent } from './admisiones/citas/citas.component';
 
 export const routes: Routes = [
   {
     path: '',
     component: IniciarsesionComponent,
+  },
+  {
+    path: 'citas',
+    component: CitasComponent,
   },
   {
     path: 'pacientes',
@@ -59,7 +64,7 @@ export const routes: Routes = [
     component: UsuariosComponent,
   },
   {
-    path: 'hc',
+    path: 'hc/:documento',
     component: HistorialpacienteComponent,
   },
 

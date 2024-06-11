@@ -56,4 +56,11 @@ export class ListasService {
     return this.http.get(environment.apiClinicSoft + 'getLaboratoryTable');
   }
 
+  getDocumentosPdfPacientes(paciente: any ) {
+    let params = new HttpParams().set("paciente", paciente);
+
+    return this.http.get(environment.apiClinicSoft + 'getDocumentosPdfPacientes', { params });
+
+  }
+
 }
