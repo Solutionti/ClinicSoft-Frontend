@@ -17,16 +17,16 @@ export class InventarioService {
     return this.http.get(url);
   }
 
-  getInventories() {
+  getInventories(cantidad: any) {
     const url =  `${environment.apiClinicSoft}getInventories`;
-
-    return this.http.get(url);
+    let params = new HttpParams().set("cantidad", cantidad);
+    return this.http.get(url, { params });
   }
 
   getKardex(producto: any ) {
     const url =  `${environment.apiClinicSoft}getKardex`;
     let params = new HttpParams().set("producto", producto);
-    return this.http.get(url, {params});
+    return this.http.get(url, { params });
   }
 
   // CREACION DEL SERVICIO DE CREAR EL PRODUCTO
@@ -44,6 +44,27 @@ export class InventarioService {
       moneda: datos[0].moneda,
       descripcion: datos[0].descripcion,
       usuario: datos[0].usuario,
+    });
+  }
+
+// kardex
+
+  Creatstart(datos: any) {
+    const url = `${environment.apiClinicSoft}Creatstart`;
+
+    return this.http.post(url, {
+      id_producto: datos[0].id_producto,
+      tp_documento: datos[0].tp_documento,
+      entrada: datos[0].entrada,
+      salida: datos[0].salida,
+      devolucion: datos[0].devolucion,
+      fecha: datos[0].fecha,
+      hora: datos[0].hora,
+      descripcion: datos[0].descripcion,
+      usuario: datos[0].usuario,
+      sede: datos[0].sede,
+      motivo: datos[0].motivo,
+      saldo: datos[0].saldo
     });
   }
 }

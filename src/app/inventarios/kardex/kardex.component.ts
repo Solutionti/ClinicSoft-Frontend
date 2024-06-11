@@ -174,4 +174,5 @@ export class KardexComponent implements OnInit {
   showDialog2() {
     this.visible1 = true;
   }
+
 }

@@ -32,7 +32,7 @@ export class AdmisionComponent implements OnInit {
     private messageService: MessageService
   ) { }
 
-  
+
   ngOnInit(): void {
     this.getSpecialties();
     this.getDoctor();
@@ -131,15 +131,15 @@ export class AdmisionComponent implements OnInit {
           else {
             this.showError(response.message);
           }
-            
+
         })
   }
 
   createAdmission() {
-   
+
     let datos: any = [
       {
-        documento: this.admisionForm.get("dni_admision")?.value, 
+        documento: this.admisionForm.get("dni_admision")?.value,
         medico: this.admisionForm.get("doctor_admision")?.value,
         especialidad: this.admisionForm.get("especialidad_admision")?.value,
         cola_atencion: "No",
@@ -189,7 +189,7 @@ export class AdmisionComponent implements OnInit {
   showSuccess(message: string) {
     this.messageService.add({
       severity: 'success',
-      summary: 'ClinicSoft Aviso', 
+      summary: 'ClinicSoft Aviso',
       detail: message
     });
   }
