@@ -163,8 +163,10 @@ export class KardexComponent implements OnInit {
   getKarde: any [] = [];
   getKardex(){
     let producto = this.kardexForm.get("producto_kardex")?.value;
+    let fechainicial = this.kardexForm.get("inicial_kardex")?.value;
+    let fechafinal = this.kardexForm.get("final_kardex")?.value;
     this.InventarioService
-        .getKardex(producto)
+        .getKardex(producto,fechainicial,fechafinal)
         .subscribe((response: any) => {
           console.log(response);
           this.getKarde = response;
