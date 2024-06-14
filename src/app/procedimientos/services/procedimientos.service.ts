@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 @Injectable({
@@ -37,5 +37,11 @@ export class ProcedimientosService {
       vulva: datos[0].vulva,
       cmp: "123",
     });
+  }
+
+  getQuotePatient(documento: any ) {
+    const url = `${environment.apiClinicSoft}getQuotePatient`;
+    let params = new HttpParams().set("documento", documento);
+    return this.http.get(url, { params });
   }
 }

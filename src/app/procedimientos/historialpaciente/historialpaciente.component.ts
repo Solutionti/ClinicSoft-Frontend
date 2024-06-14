@@ -8,6 +8,7 @@ import { AdmisionesService } from '../../admisiones/services/admisiones.service'
 import { ListasService } from '../../services/listas.service';
 import { CommonModule } from '@angular/common';
 import { DialogModule } from 'primeng/dialog';
+import { ProcedimientosService } from '../services/procedimientos.service';
 @Component({
   selector: 'app-historialpaciente',
   standalone: true,
@@ -22,6 +23,7 @@ export class HistorialpacienteComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private procedimientoService: ProcedimientosService,
     private admisioneServices: AdmisionesService,
     private listaServices: ListasService
   ) { }
@@ -43,7 +45,11 @@ export class HistorialpacienteComponent implements OnInit {
   frecuencia_respiratoria: any = "";
   frecuencia_cardiaca: any = "";
   porcentaje_grasa: any = "";
+
   archivospdf: any[] = [];
+  agendafecha =  "";
+  agendahora =  "";
+  agendadescripcion =  "";
 
   getDataHistoriaCLinica() {
     // DATOS DEL PACIENTE
@@ -75,8 +81,15 @@ export class HistorialpacienteComponent implements OnInit {
           });
       
       // CITAS
+      this.procedimientoService
+          .getQuotePatient(this.paciente)
+          .subscribe((response: any ) => {
+            this.agendafecha =  response.data.fecha;
+            this.agendahora =  response.data.hora;
+            this.agendadescripcion =  response.data.comentarios;
+          });
       // CONSULTAS
-         
+
   }
 
 }
