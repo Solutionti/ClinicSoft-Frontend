@@ -50,21 +50,30 @@ export class InventarioService {
 // kardex
 
   Creatstart(datos: any) {
-    const url = `${environment.apiClinicSoft}Creatstart`;
+    const url = `${environment.apiClinicSoft}creatStart`;
 
     return this.http.post(url, {
-      id_producto: datos[0].id_producto,
-      tp_documento: datos[0].tp_documento,
-      entrada: datos[0].entrada,
-      salida: datos[0].salida,
-      devolucion: datos[0].devolucion,
-      fecha: datos[0].fecha,
-      hora: datos[0].hora,
-      descripcion: datos[0].descripcion,
+      producto: datos[0].producto,
+      cantidad: datos[0].cantidad,
+      stock: datos[0].stock,
+      seccion: datos[0].seccion,
+      comentarios: datos[0].comentarios,
       usuario: datos[0].usuario,
-      sede: datos[0].sede,
-      motivo: datos[0].motivo,
-      saldo: datos[0].saldo
+      motivo: datos[0].motivo
+    });
+  }
+
+  createEnd(datos: any) {
+    const url = `${environment.apiClinicSoft}createEnd`;
+
+    return this.http.post(url, {
+      producto: datos[0].producto,
+      cantidad: datos[0].cantidad,
+      stock: datos[0].stock,
+      seccion: datos[0].seccion,
+      comentarios: datos[0].comentarios,
+      usuario: datos[0].usuario,
+      motivo: datos[0].motivo
     });
   }
 }

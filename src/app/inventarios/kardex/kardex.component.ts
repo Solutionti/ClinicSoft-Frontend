@@ -10,6 +10,8 @@ import internal from 'stream';
 import { CommonModule } from '@angular/common';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-kardex',
   standalone: true,
@@ -21,15 +23,18 @@ import { ButtonModule } from 'primeng/button';
     TableModule,
     CommonModule,
     DialogModule,
-    ButtonModule
+    ButtonModule,
+    ToastModule
   ],
-  templateUrl: './kardex.component.html'
+  templateUrl: './kardex.component.html',
+  providers: [MessageService]
 })
 export class KardexComponent implements OnInit {
 
   constructor(
     private InventarioService: InventarioService,
-    private ListasService: ListasService
+    private ListasService: ListasService,
+    private messageService: MessageService
   ){}
 
   ngOnInit(): void {
@@ -167,6 +172,79 @@ export class KardexComponent implements OnInit {
 
   }
 
+  Creatstart(): void {
+    let entrada: any = [
+      {
+        producto: this.entradaForm.get("producto_entrada")?.value,
+        cantidad: this.entradaForm.get("cantidad_entrada")?.value,
+        stock: this.entradaForm.get("stock_entrada")?.value,
+        seccion: this.entradaForm.get("seccion_entrada")?.value,
+        comentarios: this.entradaForm.get("comentarios_entrada")?.value,
+        motivo: this.entradaForm.get("motivo_entrada")?.value,
+        usuario: localStorage.getItem("usuario"),
+    }
+  ];
+
+  this.InventarioService
+      .Creatstart(entrada)
+      .subscribe((response: any ) => {
+        if(response.status == 200) {
+          this.showSuccess(response.message);
+          this.entradaForm.reset();
+        }
+        else {
+          this.showError(response.mesagge);
+        }
+      });
+  }
+
+  createEnd(): void {
+    let salida: any = [
+      {
+        producto: this.salidaForm.get("producto_salida")?.value,
+        cantidad: this.salidaForm.get("cantidad_salida")?.value,
+        stock: this.salidaForm.get("stock_salida")?.value,
+        seccion: this.salidaForm.get("seccion_salida")?.value,
+        comentarios: this.salidaForm.get("comentarios_salida")?.value,
+        motivo: this.salidaForm.get("motivo_salida")?.value,
+        usuario: localStorage.getItem("usuario"),
+    }
+  ];
+
+  this.InventarioService
+      .Creatstart(salida)
+      .subscribe((response: any ) => {
+        if(response.status == 200) {
+          this.showSuccess(response.message);
+          this.entradaForm.reset();
+        }
+        else {
+          this.showError(response.mesagge);
+        }
+      });
+  }
+
+  showError(message: string) {
+    this.messageService.add(
+      {
+        severity: 'error',
+        summary: 'ClinicSoft Aviso',
+        detail: message
+      }
+    );
+  }
+
+  showSuccess(message: string) {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'ClinicSoft Aviso',
+      detail: message
+    });
+  }
+
+
+
+
   showDialog1() {
     this.visible = true;
   }
@@ -174,5 +252,7 @@ export class KardexComponent implements OnInit {
   showDialog2() {
     this.visible1 = true;
   }
+
+
 
 }
