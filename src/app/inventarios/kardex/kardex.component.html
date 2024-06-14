@@ -161,7 +161,6 @@
                 </ng-template>
                 <ng-template pTemplate="header">
                   <tr>
-                    <th pSortableColumn="name" class="text-xs text-white bg-default"></th>
                     <th pSortableColumn="name" class="text-xs text-white bg-default">#</th>
                     <th pSortableColumn="name" class="text-xs text-white bg-default">FECHA TRANSACCIÓN</th>
                     <th pSortableColumn="name" class="text-xs text-white bg-default">TIPO</th>
@@ -173,9 +172,9 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-getKarde>
                   <tr>
-                    <td class="text-xs text-uppercase"> {{ getKarde.codigo }} </td>
+                    <td class="text-xs text-uppercase"> {{ getKarde.id }} </td>
                     <td class="text-xs text-uppercase"> {{ getKarde.fecha }} </td>
-                    <td class="text-xs text-uppercase"> {{ getKarde.tipo }} </td>
+                    <td class="text-xs text-uppercase"> {{ getKarde.tp_documento }} </td>
                     <td class="text-xs text-uppercase"> {{ getKarde.motivo }} </td>
                     <td class="text-xs text-uppercase"> {{ getKarde.entrada }} </td>
                     <td class="text-xs text-uppercase"> {{ getKarde.salida }} </td>

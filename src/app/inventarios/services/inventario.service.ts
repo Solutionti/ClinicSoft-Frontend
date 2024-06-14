@@ -23,9 +23,11 @@ export class InventarioService {
     return this.http.get(url, { params });
   }
 
-  getKardex(producto: any ) {
+  getKardex(producto: any, fechainicial: any, fechafinal: any) {
     const url =  `${environment.apiClinicSoft}getKardex`;
-    let params = new HttpParams().set("producto", producto);
+    let params = new HttpParams().set("producto", producto)
+                                 .set("fechainicial", fechainicial)
+                                 .set("fechafinal", fechafinal);
     return this.http.get(url, { params });
   }
 
