@@ -72,7 +72,11 @@ export class HistorialpacienteComponent implements OnInit {
           .getDocumentosPdfPacientes(this.paciente)
           .subscribe((response: any ) => {
             this.archivospdf = response;
-          })
+          });
+      
+      // CITAS
+      // CONSULTAS
+         
   }
 
 }
