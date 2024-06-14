@@ -46,10 +46,10 @@ export class ProductosComponent implements OnInit {
     nombre_productos: new FormControl('',[Validators.required]),
     codigo_productos: new FormControl('',[Validators.required]),
     barras_productos: new FormControl(''),
-    medida_productos: new FormControl('',[Validators.required]),
+    medida_productos: new FormControl('Unidades',[Validators.required]),
     cantidad_productos: new FormControl('',[Validators.required]),
     precio_productos: new FormControl('',[Validators.required]),
-    moneda_productos: new FormControl('',[Validators.required]),
+    moneda_productos: new FormControl('PEN',[Validators.required]),
     descripcion_productos: new FormControl('')
   });
 

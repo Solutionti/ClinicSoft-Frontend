@@ -70,6 +70,12 @@
         [disabled]="loginForm.invalid"
       >
         Iniciar sesión
+        <span
+          class="spinner-border spinner-border-sm"
+          aria-hidden="true"
+          [hidden]="spinnerLogin"
+        >
+        </span>
       </button>
     </div>
     </form>

@@ -47,19 +47,19 @@
                       <th pSortableColumn="name" class="text-xs text-white bg-default">COD</th>
                       <th pSortableColumn="name" class="text-xs text-white bg-default">PRODUCTO</th>
                       <th pSortableColumn="name" class="text-xs text-white bg-default">CATEGORIA</th>
+                      <th pSortableColumn="name" class="text-xs text-white bg-default">STOCK</th>
                       <th pSortableColumn="name" class="text-xs text-white bg-default">COSTO</th>
                       <th pSortableColumn="name" class="text-xs text-white bg-default">FECHA INGRESO</th>
-                      <th pSortableColumn="name" class="text-xs text-white bg-default">STOCK</th>
                   </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-getInventorie>
                   <tr>
                     <td class="text-xs text-uppercase"> {{ getInventorie.codigo }} </td>
-                    <td class="text-xs text-uppercase"> {{ getInventorie.producto }} </td>
+                    <td class="text-xs text-uppercase"> {{ getInventorie.nombre }} </td>
                     <td class="text-xs text-uppercase"> {{ getInventorie.categoria }} </td>
+                    <td class="text-xs text-uppercase"> {{ getInventorie.stock }} </td>
                     <td class="text-xs text-uppercase"> {{ getInventorie.precio }} </td>
                     <td class="text-xs text-uppercase"> {{ getInventorie.fecha }} </td>
-                    <td class="text-xs text-uppercase"> {{ getInventorie.stock }} </td>
                   </tr>
                 </ng-template>
                </p-table>
@@ -68,7 +68,7 @@
             <div class="col-md-5">
               <form [formGroup]="inventarioForm">
               <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-4">
                   <label>Empresa</label>
                   <input
                     type="text"
@@ -76,10 +76,10 @@
                     formControlName="empresa_inventario"
                   >
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-6">
                   <label>Por Stock</label>
                   <select
-                    class="form-control form-control-sm"
+                    class="form-control form-control-sm text-uppercase"
                     formControlName="stock_inventario"
                   >
                     <option value="">Seleccione una opcion</option>

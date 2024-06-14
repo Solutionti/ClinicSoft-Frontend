@@ -27,7 +27,7 @@ export class IniciarsesionComponent implements OnInit {
   }
 
   loginAlert = true;
-
+  spinnerLogin = true;
   loginForm: FormGroup = new FormGroup({
     usuario: new FormControl('',[Validators.required]),
     password: new FormControl('',[Validators.required]),
@@ -37,7 +37,7 @@ export class IniciarsesionComponent implements OnInit {
   iniciarSesion(): void {
     let usuario = this.loginForm.get("usuario")?.value,
         password = this.loginForm.get("password")?.value;
-
+    this.spinnerLogin = true;
     this.login
         .iniciarSesion(usuario, password)
         .subscribe((response: any ) => {
@@ -49,16 +49,16 @@ export class IniciarsesionComponent implements OnInit {
             localStorage.setItem("usuario", JSON.stringify(response.users.usuario));
             localStorage.setItem("rol", JSON.stringify(response.users.rol_usuario));
             localStorage.setItem("estado", JSON.stringify(response.users.estado));
+            this.spinnerLogin = false;
             this.showSuccess();
-
             setTimeout(() => {
               this.router.navigate(['/', 'inicio']);
             }, 3000)
-
           }
           else {
             let message = "El usuario y/o contraseña ingresado son invalidos."
             this.showError(message);
+            this.spinnerLogin = true;
           }
         }) 
   }
