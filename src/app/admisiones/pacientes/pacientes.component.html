@@ -2,6 +2,7 @@
 <!-- * * * * * * * * * * * JERSON GALVEZ ENSUNCHO * * * * * * * * * * * -->
 <!-- ******* * * * * * * * PROYECTO CLINICSOFT * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+
 <p-toast position="top-right"/>
 <div class="min-height-300 bg-default position-absolute w-100"></div>
 <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-1 border-radius-xl my-3 fixed-start ms-4 " style="z-index: 1 !important;" id="sidenav-main">
@@ -456,6 +457,13 @@
       </div>
     </div>
   </div>
-
+  <div [hidden]="spinner" class="overlay z-index">
+    <div class="dot-wave">
+      <div class="dot-wave__dot"></div>
+      <div class="dot-wave__dot"></div>
+      <div class="dot-wave__dot"></div>
+      <div class="dot-wave__dot"></div>
+    </div>
+  </div>
 
 

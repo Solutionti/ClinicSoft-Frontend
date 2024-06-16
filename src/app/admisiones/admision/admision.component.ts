@@ -9,6 +9,7 @@ import { ListasService } from '../../services/listas.service';
 import { CommonModule } from '@angular/common';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { PdfService } from '../../services/pdf.service';
 @Component({
   selector: 'app-admision',
   standalone: true,
@@ -29,7 +30,8 @@ export class AdmisionComponent implements OnInit {
   constructor(
     private admisionServices: AdmisionesService,
     private listaService: ListasService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private pdfService: PdfService
   ) { }
 
 
@@ -175,6 +177,7 @@ export class AdmisionComponent implements OnInit {
           this.admisionForm2.controls['comision_admision'].patchValue(response.comision_aproximada);
         });
   }
+
 
   showError(message: string) {
     this.messageService.add(

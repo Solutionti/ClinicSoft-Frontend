@@ -23,6 +23,7 @@ import { MessageService } from 'primeng/api';
     ToastModule
   ],
   templateUrl: './pacientes.component.html',
+  styleUrl: './pacientes.component.css',
   providers: [MessageService]
 })
 export class PacientesComponent implements OnInit {
@@ -31,9 +32,8 @@ export class PacientesComponent implements OnInit {
     private admisionService: AdmisionesService,
     private listaService: ListasService,
     private messageService: MessageService
-  ) {
+  ) {}
 
-  }
   ngOnInit(): void {
     this.getpacientesTable();
     this.getSex();
@@ -41,12 +41,14 @@ export class PacientesComponent implements OnInit {
     this.getAcademics();
     this.getCivilStatus();
   }
-
+  
   btnHistoriaHidden = true;
   btnActualizarHidden = true;
   btnAgregarHidden = false;
   containerResponsable = true;
+  spinner = true;
   paciente = "";
+  
 
   crearPacienteForm: FormGroup = new FormGroup({
     crearpaciente_dni: new FormControl('',[Validators.required]),
@@ -186,6 +188,7 @@ export class PacientesComponent implements OnInit {
   }
 
   getPacienteApiPeru(): void {
+    this.spinner = false;
     let dni = this.crearPacienteForm.get("crearpaciente_dni")?.value;
     this.btnAgregarHidden = false;
     this.btnActualizarHidden = true;
@@ -213,9 +216,12 @@ export class PacientesComponent implements OnInit {
               }
             );
             this.showSuccess("Se ha encontrado un paciente");
+            this.spinner = true;
+
           }
           else {
-            this.showError("No se ha encontrado un paciente asociado al DNI " + dni)
+            this.showError("No se ha encontrado un paciente asociado al DNI " + dni);
+            this.spinner = true;
           }
 
         });
@@ -264,6 +270,7 @@ export class PacientesComponent implements OnInit {
   }
 
   crearPaciente(): void {
+    this.spinner = false;
     let dni = this.crearPacienteForm.get("crearpaciente_dni")?.value,
         apellido = this.crearPacienteForm.get("crearpaciente_apellido")?.value,
         nombre = this.crearPacienteForm.get("crearpaciente_nombre")?.value,
@@ -317,14 +324,17 @@ export class PacientesComponent implements OnInit {
             this.showSuccess(response.message);
             this.getpacientesTable();
             this.crearPacienteForm.reset();
+            this.spinner = true;
           }
           else {
             this.showError(response.message);
+            this.spinner = true;
           }
         });
   }
 
   actualizarPaciente() {
+    this.spinner = false;
     let dni = this.crearPacienteForm.get("crearpaciente_dni")?.value,
         apellido = this.crearPacienteForm.get("crearpaciente_apellido")?.value,
         nombre = this.crearPacienteForm.get("crearpaciente_nombre")?.value,
@@ -377,9 +387,12 @@ export class PacientesComponent implements OnInit {
           if(response.status == 200) {
             this.showSuccess(response.message);
             this.getpacientesTable();
+            this.spinner = true;
+            
           }
           else {
             this.showError(response.message);
+            this.spinner = true;
           }
         });
   }

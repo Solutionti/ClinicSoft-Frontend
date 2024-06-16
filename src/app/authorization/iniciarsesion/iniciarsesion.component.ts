@@ -11,7 +11,8 @@ import { exit } from 'process';
   standalone: true,
   imports: [ReactiveFormsModule,ToastModule],
   templateUrl: './iniciarsesion.component.html',
-  providers: [MessageService]
+  providers: [MessageService],
+  styleUrl: './iniciarsesion.component.css',
 })
 
 export class IniciarsesionComponent implements OnInit {
@@ -20,14 +21,19 @@ export class IniciarsesionComponent implements OnInit {
     private login: LoginService,
     private router: Router,
     private messageService: MessageService
-  ) {}
+  ) {
+    this.spinner = false;
+  }
 
   ngOnInit(): void {
     this.validarSesion();
+    this.spinner = true;
   }
 
   loginAlert = true;
   spinnerLogin = true;
+  spinner = false;
+
   loginForm: FormGroup = new FormGroup({
     usuario: new FormControl('',[Validators.required]),
     password: new FormControl('',[Validators.required]),
@@ -49,16 +55,17 @@ export class IniciarsesionComponent implements OnInit {
             localStorage.setItem("usuario", JSON.stringify(response.users.usuario));
             localStorage.setItem("rol", JSON.stringify(response.users.rol_usuario));
             localStorage.setItem("estado", JSON.stringify(response.users.estado));
-            this.spinnerLogin = false;
+            this.spinner = false;
             this.showSuccess();
             setTimeout(() => {
               this.router.navigate(['/', 'inicio']);
+              this.spinner = true;
             }, 3000)
           }
           else {
             let message = "El usuario y/o contraseña ingresado son invalidos."
             this.showError(message);
-            this.spinnerLogin = true;
+            this.spinner = true;
           }
         }) 
   }
