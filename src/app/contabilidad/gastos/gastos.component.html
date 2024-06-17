@@ -5,9 +5,9 @@
 
 
 <div class="min-height-300 bg-default position-absolute w-100"></div>
-<aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
+<aside style="z-index: 1 !important;" class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
   <app-menu></app-menu>
-</aside>
+ </aside>
 
 <main class="main-content position-relative border-radius-lg">
   <app-cerrarsesion titulo="Gastos"></app-cerrarsesion>
@@ -16,7 +16,23 @@
       <div class="card">
         <div class="container-fluid mt-3">
           <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-12">
+              <div class="d-flex flex-row-reverse">
+                <button
+                class="btn btn-primary text-white btn-xs mx-1"
+                data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop"
+                [hidden]=""
+                [disabled]=""
+                (click)="gastos = true"
+              >
+                <i class="fas fa-database text-white"></i> Crear
+              </button>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
               <div class="table-responsive">
                 <p-table
                   #dt
@@ -56,72 +72,268 @@
                </p-table>
               </div>
             </div>
-            <div class="col-md-5">
-              <form [formGroup]="gastosForm" >
-              <div class="row">
-                <div class="col-md-5">
-                  <label>Empresa</label>
-                  <input
-                    type="text"
-                    class="form-control form-control-sm"
-                    formControlName="empresa_gastos"
-                  >
-                </div>
-                <div class="col-md-5">
-                  <label>Por Stock</label>
-                  <select
-                    class="form-control form-control-sm"
-                    formControlName="stock_gastos"
-                  >
-                    <option value="">Seleccione una opcion</option>
-                  </select>
-                </div>
-                <div class="col-md-2">
-                  <label>Cant</label>
-                  <input
-                      type="text"
-                      class="form-control form-control-sm"
-                      formControlName="cant_gastos"
-                  >
-                  </div>
-              </div>
-              <div class="row mt-1">
-                <div class="col-md-4">
-                    <label>Codigo</label>
-                    <input
-                      type="text"
-                      class="form-control form-control-sm"
-                      formControlName="codigo_gastos"
-                    >
-                  </div>
-                <div class="col-md-4">
-                  <label>Fecha Inicial</label>
-                  <input
-                    type="date"
-                    class="form-control form-control-sm"
-                    formControlName="inicial_gastos"
-                  >
-                </div>
-                <div class="col-md-4">
-                    <label>Fecha Final</label>
-                    <input
-                      type="date"
-                      class="form-control form-control-sm"
-                      formControlName="final_gastos"
-                    >
-                  </div>
-              </div>
-              <div class="row mt-2">
-                <div class="col-md-12">
-                  <button class="btn btn-primary btn-xs mt-2">Agregar</button>
-                  <button class="btn btn-danger btn-xs mt-2 mx-2"> <i class="fas fa-file-pdf"></i> Pdf</button>
-                </div>
-              </div>
-              <br>
-            </form>
-            </div>
           </div>
         </div>
       </div>
     </div>
 </div>
+<p-dialog
+
+    header="REGISTRAR GASTOS"
+    [modal]="true"
+    [(visible)]="gastos"
+    [style]="{ width: '75rem' }"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+    [maximizable]="true"
+>
+    <form [formGroup]="registrarForm">
+      <div class="row">
+        <div class="col-md-6">
+          <h6>INFORMACION DEL COMPROBANTE</h6>
+        </div>
+        <div class="col-md-6">
+          <h6>INFORMACION DEL PROVEDOR</h6>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-4">
+              <label>TIPO COMPROBANTE *</label>
+              <select
+                class="form-control form-control-sm text-uppercase"
+                formControlName="comprobante_gastos"
+              >
+                  <option value="">SELECCIONAR</option>
+                  <option option value="3">VOLETA</option>
+                  <option value="1">FACTURA</option>
+                  <option value="2">RHE</option>
+                  <option value="12">MAQ. TICKETERA</option>
+                  <option value="13">DOC.INS.FINANCIERAS</option>
+                  <option value="14">RECIBOS SERVICIOS PUBLICOS</option>
+                  <option value="9001">OTRAS FACTURAS</option>
+                  <option value="123">GASTOS VARIOS</option>
+              </select>
+              <div
+              class="error"
+              *ngIf="comprobanteControl.invalid && (comprobanteControl.touched || comprobanteControl.dirty)"
+             >
+               <p class="text-danger text-xs font-weight-bold">
+                 El campo es obligatorio
+               </p>
+             </div>
+            </div>
+            <div class="col-md-4">
+              <label>NRO. SERIE *</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="serie_gastos"
+              >
+              <div
+              class="error"
+              *ngIf="serieControl.invalid && (serieControl.touched || serieControl.dirty)"
+             >
+               <p class="text-danger text-xs font-weight-bold">
+                 El campo es obligatorio
+               </p>
+             </div>
+            </div>
+            <div class="col-md-4">
+              <label>NRO. CORRELATIVO *</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="correlativo_gastos"
+              >
+              <div
+              class="error"
+              *ngIf="correlativoControl.invalid && (correlativoControl.touched || correlativoControl.dirty)"
+             >
+               <p class="text-danger text-xs font-weight-bold">
+                 El campo es obligatorio
+               </p>
+             </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 mt-2">
+              <label>OP. GRAVADA *</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="gravada_gastos"
+              >
+              <div
+              class="error"
+              *ngIf="gravadaControl.invalid && (gravadaControl.touched || gravadaControl.dirty)"
+             >
+               <p class="text-danger text-xs font-weight-bold">
+                 El campo es obligatorio
+               </p>
+             </div>
+            </div>
+            <div class="col-md-4 mt-2">
+              <label>IGV *</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="igv_gastos"
+              >
+              <div
+              class="error"
+              *ngIf="igvControl.invalid && (igvControl.touched || igvControl.dirty)"
+             >
+               <p class="text-danger text-xs font-weight-bold">
+                 El campo es obligatorio
+               </p>
+             </div>
+            </div>
+            <div class="col-md-4 mt-2">
+              <label>TOTAL **</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="total_gastos"
+              >
+              <div
+              class="error"
+              *ngIf="totalControl.invalid && (totalControl.touched || totalControl.dirty)"
+             >
+               <p class="text-danger text-xs font-weight-bold">
+                 El campo es obligatorio
+               </p>
+             </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 mt-2">
+              <label></label>
+            </div>
+            <div class="col-md-4 mt-2">
+              <label>FE. EMISION *</label>
+              <input
+                type="date"
+                class="form-control form-control-sm"
+                formControlName="emision_gastos"
+              >
+              <div
+              class="error"
+              *ngIf="emisionControl.invalid && (emisionControl.touched || emisionControl.dirty)"
+             >
+               <p class="text-danger text-xs font-weight-bold">
+                 El campo es obligatorio
+               </p>
+             </div>
+            </div>
+            <div class="col-md-4 mt-2">
+              <label>FE. RECEPCION *</label>
+              <input
+                type="date"
+                class="form-control form-control-sm"
+                formControlName="recepcion_gastos"
+              >
+              <div
+              class="error"
+              *ngIf="recepcionControl.invalid && (recepcionControl.touched || recepcionControl.dirty)"
+             >
+               <p class="text-danger text-xs font-weight-bold">
+                 El campo es obligatorio
+               </p>
+             </div>
+            </div>
+            <div class="col-md-12 mt-2">
+              <label>DETALLE/DESCRIPCION *</label>
+              <textarea
+                class="form-control"
+                formControlName="descripcion_gastos"
+              >
+              </textarea>
+              <div
+              class="error"
+              *ngIf="descripcionControl.invalid && (descripcionControl.touched || descripcionControl.dirty)"
+             >
+               <p class="text-danger text-xs font-weight-bold">
+                 El campo es obligatorio
+               </p>
+             </div>
+            </div>
+          </div>
+        </div>
+            <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-4">
+              <label>TIPO</label>
+              <select
+                class="form-control form-control-sm text-uppercase"
+                formControlName="tipo_gastos"
+              >
+                  <option value="">SELECCIONAR</option>
+                  <option value="6">RUC</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label>N° DOCUMENTO</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="documento_gastos"
+              >
+            </div>
+            <div class="row">
+              <div class="col-md-12 mt-2">
+                <label>RAZON SOCIAL *</label>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  formControlName="razon_gastos"
+                >
+                <div
+              class="error"
+              *ngIf="razonControl.invalid && (razonControl.touched || razonControl.dirty)"
+             >
+               <p class="text-danger text-xs font-weight-bold">
+                 El campo es obligatorio
+               </p>
+             </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 mt-2">
+                <label>INFORMACION DEL COLABORADOR RESPONSABLE</label>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  formControlName="informacion_gastos"
+                >
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 mt-2">
+                <label>RESPONSABLE *</label>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  formControlName="responsable_gastos"
+                >
+                <div
+              class="error"
+              *ngIf="responsableControl.invalid && (responsableControl.touched || responsableControl.dirty)"
+             >
+               <p class="text-danger text-xs font-weight-bold">
+                 El campo es obligatorio
+               </p>
+             </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </form>
+ <ng-template pTemplate="footer">
+  <button
+    class="btn btn-primary btn-sm mx-3"
+    [disabled]=""
+  > <i class="fas fa-database text-white"></i> Guardar</button>
+ </ng-template>
+</p-dialog>
