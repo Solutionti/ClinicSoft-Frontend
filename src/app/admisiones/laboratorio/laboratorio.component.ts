@@ -25,7 +25,8 @@ import { MessageService } from 'primeng/api';
     ToastModule
   ],
   providers: [MessageService],
-  templateUrl: './laboratorio.component.html'
+  templateUrl: './laboratorio.component.html',
+  styleUrl: './laboratorio.component.css',
 })
 export class LaboratorioComponent implements OnInit {
 
@@ -48,6 +49,7 @@ export class LaboratorioComponent implements OnInit {
     String(this.date.getMonth() + 1).padStart(2, '0') + '-' +
     String(this.date.getDate()).padStart(2, '0')
   );
+  spinner = true;
 
   laboratorioForm = new FormGroup({
     dni_laboratorio: new FormControl({value:'', disabled: false}, [Validators.required]),
@@ -71,6 +73,7 @@ export class LaboratorioComponent implements OnInit {
   }
 
   getPacientesId() {
+    this.spinner = false;
     let documento = this.laboratorioForm.get("dni_laboratorio")?.value
     this.laboratorioForm.controls['nombre_laboratorio'].patchValue("");
 
@@ -84,9 +87,11 @@ export class LaboratorioComponent implements OnInit {
               }
             );
             this.showSuccess("Se ha encontrado el paciente");
+            this.spinner = true;
           }
           else {
             this.showError(response.message);
+            this.spinner = true;
           }
             
         })

@@ -50,7 +50,7 @@ export const routes: Routes = [
       import('./admisiones/laboratorio/laboratorio.component').then((c) => c.LaboratorioComponent)
   },
   {
-    path: 'colposcopia',
+    path: 'colposcopias',
     loadComponent: () => 
       import('./procedimientos/colposcopia/colposcopia.component').then((c) => c.ColposcopiaComponent)
   },

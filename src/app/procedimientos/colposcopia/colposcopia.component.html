@@ -26,15 +26,15 @@
             </div>
           </div>
           <p-table
-                  #colposcopia
-                  [rows]="10"
-                  [value]="getColposcopia"
-                  [paginator]="true"
-                  [globalFilterFields]="['nombre', 'getColposcopia.nombre', 'representative.name', 'status']"
-                  [tableStyle]="{ 'min-width': '75rem' }"
-                  [rowHover]="true"
-                  dataKey="id"
-                  currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas"
+            #colposcopia
+            [rows]="10"
+            [value]="getColposcopia"
+            [paginator]="true"
+            [globalFilterFields]="['nombre', 'getColposcopia.nombre', 'representative.name', 'status']"
+            [tableStyle]="{ 'min-width': '75rem' }"
+            [rowHover]="true"
+            dataKey="id"
+            currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} Colposcopias"
                 >
                 <ng-template pTemplate="caption">
                   <div class="flex align-items-center justify-content-between">
@@ -104,9 +104,9 @@
             <h6>Crear Colposcopia</h6>
           </div>
         </div>
-        <form [formGroup]="colposcopiaForm">
-        <div class="row mt-1">
-          <div class="col-md-2">
+        <form [formGroup]="colposcopiasForm">
+          <div class="row mt-1">
+            <div class="col-md-2">
             <label>DNI *</label>
             <input
               type="number"
@@ -150,7 +150,7 @@
               class="form-control form-control-sm"
               formControlName="escamo_colposcopia"
             >
-              <option value="0">Seleccione una opcion</option>
+              <option value="">Seleccione una opcion</option>
               <option value="1">Sin lesiones</option>
               <option value="2">Epitelio Blanco</option>
               <option value="3">Mosaico</option>
@@ -168,7 +168,7 @@
               class="form-control form-control-sm"
               formControlName="cervix_colposcopia"
             >
-              <option value="0">Seleccione una opcion</option>
+              <option value="">Seleccione una opcion</option>
               <option value="1">Sin Lesiones</option>
               <option value="2">Ectopia</option>
               <option value="3">Mosaico</option>
@@ -184,7 +184,7 @@
               class="form-control form-control-sm"
               formControlName="vagina_colposcopia"
             >
-              <option value="0">Seleccione una opcion</option>
+              <option value="">Seleccione una opcion</option>
               <option value="1">Sin Lesiones</option>
               <option value="2">Condilomas</option>
               <option value="3">Flujo</option>
@@ -195,7 +195,6 @@
             </select>
           </div>
         </div>
-
         <div class="row mt-3">
           <div class="col-md-4">
             <label>Vulva *</label>
@@ -203,7 +202,7 @@
               class="form-control form-control-sm"
               formControlName="vulva_colposcopia"
             >
-              <option value="0">Seleccione una opcion</option>
+              <option value="">Seleccione una opcion</option>
               <option value="1">Sin lesiones</option>
               <option value="2">Condilomas</option>
               <option value="3">Herpes</option>
@@ -219,7 +218,7 @@
               class="form-control form-control-sm"
               formControlName="perineo_colposcopia"
             >
-              <option value="0">Seleccione una opcion</option>
+              <option value="">Seleccione una opcion</option>
               <option value="1">Sin Lesiones</option>
               <option value="2">Condiloma</option>
 
@@ -231,13 +230,12 @@
               class="form-control form-control-sm"
               formControlName="parianal_colposcopia"
             >
-              <option value="0">Seleccione una opcion</option>
+              <option value="">Seleccione una opcion</option>
               <option value="1">Sin Lesiones</option>
               <option value="2">Condiloma</option>
             </select>
           </div>
         </div>
-
         <div class="row mt-3">
           <div class="col-md-6">
             <label> Biopsia *</label>
@@ -245,7 +243,7 @@
               class="form-control form-control-sm"
               formControlName="biopsia_colposcopia"
             >
-              <option value="0">Seleccione una opcion</option>
+              <option value="">Seleccione una opcion</option>
               <option value="1">No</option>
               <option value="2">Vulva</option>
               <option value="3">Vagina</option>
@@ -258,42 +256,63 @@
               class="form-control form-control-sm"
               formControlName="papanicolaou_colposcopia"
             >
-              <option value="0">Seleccione una opcion</option>
+              <option value="">Seleccione una opcion</option>
               <option value="1">Si</option>
               <option value="2">No</option>
 
             </select>
           </div>
         </div>
-
         <div class="row mt-3">
           <div class="col-md-6">
             <label>Conclusiones *</label>
             <textarea
-              class="form-control form-control-sm"
-              id="exampleFormControlTextarea1" rows="3"
+              class="form-control"
+              rows="3"
               formControlName="conclusiones_colposcopia"
-            >
-            </textarea>
+            ></textarea>
           </div>
           <div class="col-md-6">
             <label>Seleccione las imagenes *</label>
-            <input
-              class="form-control form-control-sm form-control form-control-sm-sm"
-              id="formFileSm"
-              type="file"
-              formControlName="archivo1_colposcopia"
-            >
-            <input
-              class="form-control form-control-sm form-control form-control-sm-sm mt-4"
-              id="formFileSm"
-              type="file"
-              formControlName="archivo2_colposcopia"
-            >
+            <div class="d-flex px-2 py-1">
+              <div *ngIf="previsualizacion">
+                <img
+                  [src]="previsualizacion"
+                  class="img-fluid avatar mx-3"
+                  width="100px"
+                >
+              </div>
+              <div class="d-flex flex-column justify-content-center">
+                <input
+                  type="file"
+                  id="img1"
+                  class="form-control form-control-sm"
+                  (change)="imageUpload($event)"
+                >
+              </div>
+            </div>
+            <div class="d-flex px-2 py-1">
+              <div *ngIf="previsualizacion2">
+                <img
+                  [src]="previsualizacion2"
+                  class="img-fluid avatar mx-3"
+                  width="100px"
+                >
+              </div>
+              <div class="d-flex flex-column justify-content-center">
+                <input
+                  type="file"
+                  id="img2"
+                  class="form-control form-control-sm"
+                  (change)="imageUpload2($event)"
+                >
+              </div>
+            </div>
           </div>
         </div>
       </form>
+      
       </div>
       </div>
     </div>
-  </div>
+  </div> 

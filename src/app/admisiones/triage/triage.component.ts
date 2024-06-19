@@ -20,7 +20,8 @@ import { MessageService } from 'primeng/api';
     ToastModule
   ],
   providers: [MessageService],
-  templateUrl: './triage.component.html'
+  templateUrl: './triage.component.html',
+  styleUrl: './triage.component.css'
 })
 export class TriageComponent implements OnInit {
 
@@ -39,6 +40,7 @@ export class TriageComponent implements OnInit {
   }
 
   siguienteTriage = true;
+  spinner = true;
 
   triageForm: FormGroup = new FormGroup({
     dni_triage: new FormControl({ value: '', disabled: true }, [Validators.required]),
@@ -98,6 +100,7 @@ export class TriageComponent implements OnInit {
   }
 
   createTriage() {
+    this.spinner = false;
     let triage = [
       {
         presion_arterial: this.triageForm.get("presion_triage")?.value,
@@ -121,14 +124,17 @@ export class TriageComponent implements OnInit {
           if(response.status == 200) {
             this.siguienteTriage = false;
             this.showSuccess(response.message);
+            this.spinner = true;
           }
           else {
             this.showError(response.message);
+            this.spinner = true;
           }
         });
   }
 
   PasateStatusAdmission() {
+    this.spinner = false;
     let estado = "Consulta",
         atencion = this.triageForm.get("dni_triage")?.value;
     this.admisionServices
@@ -139,9 +145,11 @@ export class TriageComponent implements OnInit {
             this.getAdmissionTriage();
             this.siguienteTriage = true;
             this.showSuccess(response.message);
+            this.spinner = true;
           }
           else {
-            this.showError(response.message); 
+            this.showError(response.message);
+            this.spinner = true;
           }
         });
   }

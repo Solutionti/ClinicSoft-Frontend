@@ -23,6 +23,7 @@ import { PdfService } from '../../services/pdf.service';
     ToastModule
   ],
   templateUrl: './admision.component.html',
+  styleUrl: './admision.component.css',
   providers: [MessageService]
 })
 export class AdmisionComponent implements OnInit {
@@ -46,6 +47,7 @@ export class AdmisionComponent implements OnInit {
     String(this.date.getMonth() + 1).padStart(2, '0') + '-' +
     String(this.date.getDate()).padStart(2, '0')
   );
+  spinner = true;
 
   admisionForm: FormGroup = new FormGroup({
     dni_admision: new FormControl(''),
@@ -114,10 +116,10 @@ export class AdmisionComponent implements OnInit {
   }
 
   getPacientesId() {
+    this.spinner = false;
     let documento = this.admisionForm.get("dni_admision")?.value
     this.admisionForm.controls['hc_admision'].patchValue("");
     this.admisionForm.controls['nombre_admision'].patchValue("");
-
     this.admisionServices
         .getPacientesId(documento)
         .subscribe((response: any)  => {
@@ -129,16 +131,18 @@ export class AdmisionComponent implements OnInit {
               }
             );
             this.showSuccess("Se ha encontrado el paciente");
+            this.spinner = true;
           }
           else {
             this.showError(response.message);
+            this.spinner = true;
           }
 
         })
   }
 
   createAdmission() {
-
+    this.spinner = false;
     let datos: any = [
       {
         documento: this.admisionForm.get("dni_admision")?.value,
@@ -161,9 +165,11 @@ export class AdmisionComponent implements OnInit {
             this.getAdmission();
             this.admisionForm.reset();
             this.admisionForm2.reset();
+            this.spinner = true;
           }
           else {
             this.showError(response.message);
+            this.spinner = true;
           }
         });
   }
