@@ -8,8 +8,10 @@ import { AdmisionesService } from '../services/admisiones.service';
 import { ListasService } from '../../services/listas.service';
 import { CommonModule } from '@angular/common';
 import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { PdfService } from '../../services/pdf.service';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ButtonModule } from 'primeng/button';
 @Component({
   selector: 'app-admision',
   standalone: true,
@@ -20,11 +22,13 @@ import { PdfService } from '../../services/pdf.service';
     CerrarsesionComponent,
     TableModule,
     CommonModule,
-    ToastModule
+    ToastModule,
+    ConfirmDialogModule,
+    ButtonModule
   ],
   templateUrl: './admision.component.html',
   styleUrl: './admision.component.css',
-  providers: [MessageService]
+  providers: [ConfirmationService,MessageService]
 })
 export class AdmisionComponent implements OnInit {
 
@@ -32,7 +36,7 @@ export class AdmisionComponent implements OnInit {
     private admisionServices: AdmisionesService,
     private listaService: ListasService,
     private messageService: MessageService,
-    private pdfService: PdfService
+    private confirmationService: ConfirmationService,
   ) { }
 
 
@@ -110,7 +114,6 @@ export class AdmisionComponent implements OnInit {
     this.admisionServices
         .getAdmission(estado)
         .subscribe((response: any ) => {
-          console.log(response);
           this.getAdmissions = response;
         })
   }
@@ -182,6 +185,46 @@ export class AdmisionComponent implements OnInit {
           this.admisionForm2.controls['costo_admision'].patchValue(response.costo);
           this.admisionForm2.controls['comision_admision'].patchValue(response.comision_aproximada);
         });
+  }
+
+  PasateStatusAdmission(documento: any ) {
+    let estado = "Triage";
+    this.confirmationService.confirm({
+      header: 'Estas seguro ?',
+      message: 'Desea pasar el paciente a atencion de triage',
+      accept: () => {
+          this.spinner = false;
+          this.admisionServices
+              .PasateStatusAdmission(estado, documento)
+              .subscribe((response: any ) => {
+                if(response.status == 200) {
+                  this.showSuccess(response.message);
+                  this.getAdmission();
+                  this.spinner = true;
+                }
+                else {
+                  this.showError(response.message);
+                  this.spinner = true;
+                }
+              })
+        },
+        reject: () => {
+          // si es incorrecto
+        }
+    });
+  }
+
+  CancelarAdmision(documento: any ) {
+    this.confirmationService.confirm({
+      header: 'Estas seguro ?',
+      message: 'Desea cancelar la admision del paciente ' + documento,
+      accept: () => {
+          // si es correcto
+      },
+      reject: () => {
+          // si es incorrecto
+      }
+    });
   }
 
 

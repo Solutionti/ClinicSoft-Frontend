@@ -17,14 +17,15 @@
               <h6>Especialidades</h6>
               <div class="table-responsive">
                 <p-table
-                  #dt
+                  #especialidades
                   [rows]="10"
+                  [value]="getSpeciality"
                   [paginator]="true"
-                  [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+                  [globalFilterFields]="['name', 'getSpeciality.name', 'representative.name', 'getSpeciality']"
                   [tableStyle]="{ 'min-width': '75rem' }"
                   [rowHover]="true"
                   dataKey="id"
-                  currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas"
+                  currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} Especialidades"
                 >
                 <ng-template pTemplate="caption">
                   <div class="flex justify-content-between">
@@ -34,6 +35,7 @@
                         pInputText
                         type="text"
                         class="form-control"
+                        (input)="especialidades.filterGlobal($any($event.target).value, 'contains')" 
                         placeholder="Buscar..."
                       />
                     </span>
@@ -47,14 +49,21 @@
                 </ng-template>
                 <ng-template pTemplate="header">
                   <tr>
-                    <th pSortableColumn="name" class="text-xs text-white bg-default"></th>
-                      <th pSortableColumn="name" class="text-xs text-white bg-default">NOMBRE</th>
-                      <th pSortableColumn="name" class="text-xs text-white bg-default">PRECIO</th>
-                      <th pSortableColumn="name" class="text-xs text-white bg-default">COMISION</th>
-                      <th pSortableColumn="name" class="text-xs text-white bg-default">ESTADO</th>
+                    <th pSortableColumn="name" class="text-xs text-white bg-default" style="width:5%"></th>
+                    <th pSortableColumn="name" class="text-xs text-white bg-default" style="width:15%">NOMBRE</th>
+                    <th pSortableColumn="name" class="text-xs text-white bg-default" style="width:10%">PRECIO</th>
+                    <th pSortableColumn="name" class="text-xs text-white bg-default" style="width:10%">COMISION</th>
+                    <th pSortableColumn="name" class="text-xs text-white bg-default">ESTADO</th>
                   </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-product>
+                <ng-template pTemplate="body" let-getSpeciality>
+                  <tr>
+                    <td class="text-xs text-uppercase"></td>
+                    <td class="text-xs text-uppercase"> {{ getSpeciality.descripcion }}</td>
+                    <td class="text-xs text-uppercase"> {{ getSpeciality.costo }}</td>
+                    <td class="text-xs text-uppercase"> {{ getSpeciality.comision_aproximada }}</td>
+                    <td class="text-xs text-uppercase"> {{ getSpeciality.estado }}</td>
+                  </tr>
                 </ng-template>
                </p-table>
               </div>
@@ -63,8 +72,9 @@
               <h6>Laboratorio</h6>
               <div class="table-responsive">
                 <p-table
-                  #dt
-                  [rows]="10"
+                  #laboratorios
+                  [rows]="7"
+                  [value]="getLaboratory"
                   [paginator]="true"
                   [globalFilterFields]="['namee', 'country.name', 'representative.name', 'status']"
                   [tableStyle]="{ 'min-width': '75rem' }"
@@ -80,6 +90,7 @@
                         pInputText
                         type="text"
                         class="form-control"
+                        (input)="laboratorios.filterGlobal($any($event.target).value, 'contains')" 
                         placeholder="Buscar..."
                       />
                     </span>
@@ -93,14 +104,19 @@
                 </ng-template>
                 <ng-template pTemplate="header">
                   <tr>
-                    <th pSortableColumn="namee" class="text-xs text-white bg-default"></th>
-                    <th pSortableColumn="namee" class="text-xs text-white bg-default">NOMBRE</th>
-                    <th pSortableColumn="namee" class="text-xs text-white bg-default">PRECIO</th>
-                    <th pSortableColumn="namee" class="text-xs text-white bg-default">COMISION</th>
-                    <th pSortableColumn="namee" class="text-xs text-white bg-default">ESTADO</th>
+                    <th pSortableColumn="name" class="text-xs text-white bg-default" style="width:5%"></th>
+                    <th pSortableColumn="name" class="text-xs text-white bg-default" style="width:15%">NOMBRE</th>
+                    <th pSortableColumn="name" class="text-xs text-white bg-default" style="width:10%">PRECIO</th>
+                    <th pSortableColumn="name" class="text-xs text-white bg-default">ESTADO</th>
                   </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-product>
+                <ng-template pTemplate="body" let-getLaboratory>
+                  <tr>
+                    <td class="text-xs text-uppercase"></td>
+                    <td class="text-xs text-uppercase">{{ getLaboratory.nombre }}</td>
+                    <td class="text-xs text-uppercase">{{ getLaboratory.precio }}</td>
+                    <td class="text-xs text-uppercase">{{ getLaboratory.estado }}</td>
+                  </tr>
                 </ng-template>
                </p-table>
               </div>

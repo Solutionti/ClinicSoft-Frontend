@@ -4,6 +4,7 @@ import { MenuComponent } from '../../componentes/menu/menu.component';
 import { CerrarsesionComponent } from '../../componentes/cerrarsesion/cerrarsesion.component';
 import { RouterOutlet } from '@angular/router';
 import { TableModule } from 'primeng/table';
+import { ContabilidadService } from '../services/contabilidad.service';
 
 @Component({
   selector: 'app-pagos',
@@ -19,7 +20,20 @@ import { TableModule } from 'primeng/table';
 })
 export class PagosComponent implements OnInit {
 
-  ngOnInit(): void {
+  constructor(
+    private contabilidadService: ContabilidadService
+  ){}
 
+  ngOnInit(): void {
+    this.getPayments();
+  }
+
+  getPayment: any[] = [];
+  getPayments() {
+    this.contabilidadService
+        .getPayments()
+        .subscribe((response: any ) => {
+          this.getPayment = response;
+        });
   }
 }
