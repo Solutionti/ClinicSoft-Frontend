@@ -215,11 +215,25 @@ export class AdmisionComponent implements OnInit {
   }
 
   CancelarAdmision(documento: any ) {
+    let estado = "Cancelada";
     this.confirmationService.confirm({
       header: 'Estas seguro ?',
       message: 'Desea cancelar la admision del paciente ' + documento,
       accept: () => {
-          // si es correcto
+        this.spinner = false;
+        this.admisionServices
+            .PasateStatusAdmission(estado, documento)
+            .subscribe((response: any ) => {
+              if(response.status == 200) {
+                this.showSuccess(response.message);
+                this.getAdmission();
+                this.spinner = true;
+              }
+              else {
+                this.showError(response.message);
+                this.spinner = true;
+              }
+            })
       },
       reject: () => {
           // si es incorrecto
