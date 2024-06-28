@@ -11,6 +11,7 @@ import { ListasService } from '../../services/listas.service';
 import { AdmisionesService } from '../../admisiones/services/admisiones.service';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { PdfService } from '../../services/pdf.service';
 
 @Component({
   selector: 'app-colposcopia',
@@ -38,6 +39,7 @@ export class ColposcopiaComponent implements OnInit {
     private listaServices: ListasService,
     private admisionServices: AdmisionesService,
     private messageService: MessageService,
+    private PdfServices: PdfService
   ){}
 
   ngOnInit(): void {
@@ -180,6 +182,11 @@ extraerBase64 = async($event: any ) => new Promise((resolve, reject) => {
   catch (e) {
   }
 });
+
+generarPdfColposcopia() {
+  this.PdfServices
+      .generarPdfColposcopia();
+}
 
 showError(message: string) {
   this.messageService.add(

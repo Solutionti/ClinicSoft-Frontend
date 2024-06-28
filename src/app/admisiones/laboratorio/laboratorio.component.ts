@@ -83,7 +83,7 @@ export class LaboratorioComponent implements OnInit {
           if(response.status == 200) {
             this.laboratorioForm.patchValue(
               {
-                nombre_laboratorio: response.data.nombre  + ' ' + response.apellido
+                nombre_laboratorio: response.data.nombre  + ' ' + response.data.apellido
               }
             );
             this.showSuccess("Se ha encontrado el paciente");
@@ -126,8 +126,13 @@ export class LaboratorioComponent implements OnInit {
     this.laboratorioForm.controls['total_laboratorio'].patchValue(precioAct);
   }
 
-  clickanalisis() {
-    alert();
+  clickanalisis(codigos: any ) {
+    for(let i = 0; i < this.laboratoryVenta.length; i++){
+      if(this.laboratoryVenta[i].codigo === codigos){
+        this.laboratoryVenta.splice(i, 1);
+      }
+    }
+    this.sumarElementArray();
   }
 
   showError(message: string) {
