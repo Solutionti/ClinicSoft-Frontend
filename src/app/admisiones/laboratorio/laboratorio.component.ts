@@ -50,7 +50,7 @@ export class LaboratorioComponent implements OnInit {
     String(this.date.getDate()).padStart(2, '0')
   );
   spinner = true;
-
+  pdflaboratorio = true;
   laboratorioForm = new FormGroup({
     dni_laboratorio: new FormControl({value:'', disabled: false}, [Validators.required]),
     nombre_laboratorio: new FormControl({value:'', disabled: true} , [Validators.required]),
@@ -107,14 +107,22 @@ export class LaboratorioComponent implements OnInit {
         })
   }
 
-  laboratoryVenta: any [] = [];
-  setDataArrayLaboratory(codigo: any, analisis: any, precio: any  ) {
+  laboratoryVenta: any[] = [];
+  setDataArrayLaboratory(codigo: any, analisis: any, precio: any  ): any  {
+    
     this.laboratoryVenta.push({
       codigo: codigo,
       analisis: analisis,
       precio: precio 
     });
+    
+    for(let i = 0; i < this.getLaboratories.length; i++){
+      if(this.getLaboratories[i].codigo === codigo){
+        this.getLaboratories.splice(i, 1);
+      }
+    }
     this.sumarElementArray();
+    this.showSuccess("Se ha agregado un Item ");
   }
   
   sumarElementArray() {
@@ -126,13 +134,20 @@ export class LaboratorioComponent implements OnInit {
     this.laboratorioForm.controls['total_laboratorio'].patchValue(precioAct);
   }
 
-  clickanalisis(codigos: any ) {
+  clickanalisis(codigo: any, nombre: any, precio: any  ) {
     for(let i = 0; i < this.laboratoryVenta.length; i++){
-      if(this.laboratoryVenta[i].codigo === codigos){
+      if(this.laboratoryVenta[i].codigo === codigo){
         this.laboratoryVenta.splice(i, 1);
       }
     }
     this.sumarElementArray();
+    this.showSuccess("Se ha quitado el laboratorio de la lista");
+
+    this.getLaboratories.unshift({
+      codigo: codigo,
+      nombre: nombre,
+      precio: precio 
+    });
   }
 
   showError(message: string) {
