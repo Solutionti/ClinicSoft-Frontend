@@ -12,6 +12,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { PdfService } from '../../services/pdf.service';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ButtonModule } from 'primeng/button';
+
 @Component({
   selector: 'app-admision',
   standalone: true,
@@ -123,6 +124,7 @@ export class AdmisionComponent implements OnInit {
     let documento = this.admisionForm.get("dni_admision")?.value
     this.admisionForm.controls['hc_admision'].patchValue("");
     this.admisionForm.controls['nombre_admision'].patchValue("");
+
     this.admisionServices
         .getPacientesId(documento)
         .subscribe((response: any)  => {

@@ -7,6 +7,10 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
+import { ListasService } from '../../services/listas.service';
+import { AdmisionesService } from '../../admisiones/services/admisiones.service';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-colposcopia',
@@ -18,26 +22,34 @@ import { CommonModule } from '@angular/common';
     MenuComponent,
     CerrarsesionComponent,
     TableModule,
-    CommonModule
+    CommonModule,
+    ToastModule
   ],
-  templateUrl: './colposcopia.component.html'
+  templateUrl: './colposcopia.component.html',
+  providers: [MessageService],
+  styleUrl: './colposcopia.component.css'
 })
 
 export class ColposcopiaComponent implements OnInit {
 
   constructor(
     private ProcedimientosService: ProcedimientosService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private listaServices: ListasService,
+    private admisionServices: AdmisionesService,
+    private messageService: MessageService,
   ){}
 
   ngOnInit(): void {
     this.getColposcopias();
+    this.getMedicos();
   }
 
   getColposcopia: any[] = [];
   file: any= [];
   previsualizacion: string = "";
   previsualizacion2: string = "";
+  spinner = true;
 
   colposcopiasForm = new FormGroup ({
     dni_colposcopia: new FormControl(''),
@@ -61,6 +73,40 @@ getColposcopias() {
       .subscribe((response: any ) => {
         this.getColposcopia = response;
       });
+}
+
+getMedico: any[] = [];
+getMedicos() {
+  this.listaServices
+      .getDoctor()
+      .subscribe((response: any ) => {
+        this.getMedico = response;
+      });
+}
+
+getPacientesId() {
+  this.spinner = false;
+  let documento = this.colposcopiasForm.get("dni_colposcopia")?.value
+  this.colposcopiasForm.controls['nombre_colposcopia'].patchValue("");
+
+  this.admisionServices
+        .getPacientesId(documento)
+        .subscribe((response: any)  => {
+          if(response.status == 200) {
+            this.colposcopiasForm.patchValue(
+              {
+                nombre_colposcopia: response.data.nombre  + ' ' + response.data.apellido
+              }
+            );
+            this.showSuccess("Se ha encontrado el paciente");
+            this.spinner = true;
+          }
+          else {
+            this.showError(response.message);
+            this.spinner = true;
+          }
+
+        })
 }
 
 createColposcopia(): void {
@@ -134,6 +180,24 @@ extraerBase64 = async($event: any ) => new Promise((resolve, reject) => {
   catch (e) {
   }
 });
+
+showError(message: string) {
+  this.messageService.add(
+    {
+      severity: 'error',
+      summary: 'ClinicSoft Aviso',
+      detail: message
+    }
+  );
+}
+
+showSuccess(message: string) {
+  this.messageService.add({
+    severity: 'success',
+    summary: 'ClinicSoft Aviso',
+    detail: message
+  });
+}
 
 }
 
