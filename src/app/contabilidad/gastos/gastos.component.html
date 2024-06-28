@@ -35,10 +35,11 @@
             <div class="col-md-12">
               <div class="table-responsive">
                 <p-table
-                  #dt
+                  #gastostable
                   [rows]="10"
+                  [value]="getGastos"
                   [paginator]="true"
-                  [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+                  [globalFilterFields]="['name', 'getGastos.name', '', 'getGastos.']"
                   [tableStyle]="{ 'min-width': '75rem' }"
                   [rowHover]="true"
                   dataKey="id"
@@ -52,6 +53,7 @@
                         pInputText
                         type="text"
                         class="form-control"
+                        (input)="gastostable.filterGlobal($any($event.target).value, 'contains')" 
                         placeholder="Buscar..."
                       />
                     </span>
@@ -67,7 +69,21 @@
                       <th class="text-xs text-white bg-default">COLABORADOR</th>
                   </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-product>
+                <ng-template pTemplate="body" let-getGastos>
+                  <tr>
+                    <td>
+                      <a
+                        class="badge bg-success"
+                      >
+                        <i class="fas fa-file-pdf fa-xs text-white"></i>
+                      </a>
+                    </td>
+                    <td class="text-xs text-uppercase">{{ getGastos.serie + ' - ' + '000' +getGastos.serie  + ' |' + '$'+ getGastos.sub_total   }}</td>
+                    <td class="text-xs text-uppercase">{{ getGastos.razon_social }}</td>
+                    <td class="text-xs text-uppercase">{{ getGastos.descripcion}}</td>
+                    <td class="text-xs text-uppercase">{{ getGastos.f_recepcion}}</td>
+                    <td class="text-xs text-uppercase">{{ getGastos.codigo_usuario}}</td>
+                  </tr>
                 </ng-template>
                </p-table>
               </div>

@@ -7,6 +7,7 @@ import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { ToastModule } from 'primeng/toast';
 import { CommonModule } from '@angular/common';
+import { ContabilidadService } from '../services/contabilidad.service';
 
 @Component({
   selector: 'app-gastos',
@@ -24,12 +25,15 @@ import { CommonModule } from '@angular/common';
   templateUrl: './gastos.component.html'
 })
 export class GastosComponent implements OnInit {
+
   gastos = false;
-  constructor(){
+  constructor(
+    private contabilidadServices: ContabilidadService
+  ){
 
   }
   ngOnInit(): void {
-
+    this.getGasto();
   }
 
   registrarForm: FormGroup = new FormGroup({
@@ -81,5 +85,15 @@ export class GastosComponent implements OnInit {
   }
   get responsableControl(): FormControl {
     return this.registrarForm.get('responsable_gastos') as FormControl;
+  }
+
+  getGastos: any[] = [];
+  getGasto() {
+    this.contabilidadServices
+        .getGasto()
+        .subscribe((response: any ) => {
+          console.log(response);
+          this.getGastos = response;
+        });
   }
 }
