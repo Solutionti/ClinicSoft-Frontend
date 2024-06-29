@@ -23,7 +23,13 @@
                   [disabled]="admisionForm.invalid || admisionForm2.invalid"
                 >
                   <i class="fas fa-database text-white"></i> Crear
-              </button>
+                </button>
+                <button
+                  class="btn btn-danger text-white btn-xs mx-2"
+                  [hidden]="pdfFactura"
+                >
+                  <i class="fas fa-file-pdf text-white"></i> Factura
+                </button>
               </div>
             </div>
           </div>

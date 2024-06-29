@@ -38,6 +38,7 @@ export class AdmisionComponent implements OnInit {
     private listaService: ListasService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
+    private pdfServices: PdfService
   ) { }
 
 
@@ -53,6 +54,7 @@ export class AdmisionComponent implements OnInit {
     String(this.date.getDate()).padStart(2, '0')
   );
   spinner = true;
+  pdfFactura = true;
 
   admisionForm: FormGroup = new FormGroup({
     dni_admision: new FormControl(''),
@@ -171,6 +173,7 @@ export class AdmisionComponent implements OnInit {
             this.admisionForm.reset();
             this.admisionForm2.reset();
             this.spinner = true;
+            this.pdfFactura = false;
           }
           else {
             this.showError(response.message);
@@ -241,6 +244,10 @@ export class AdmisionComponent implements OnInit {
           // si es incorrecto
       }
     });
+  }
+
+  pdfsFactura() {
+
   }
 
 
