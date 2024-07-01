@@ -63,7 +63,10 @@
                 <ng-template pTemplate="body" let-getColposcopia>
                   <tr>
                     <td>
-                      <a class="badge bg-danger">
+                      <a
+                        class="badge bg-danger"
+                        (click)="generarPdfColposcopia()"
+                      >
                         <i class="fas fa-file-pdf fa-xs text-white"></i>
                       </a>
                     </td>

@@ -157,12 +157,13 @@
                   <button
                     class="btn btn-primary btn-xs mt-4"
                     [disabled]="laboratorioForm.invalid"
-                    
+                    (click)="CreateExamenLaboratory()"
                   >
                     Registrar
                   </button>
                   <button
                     class="btn btn-danger btn-xs mx-1 mt-4"
+                    (click)="pdfFacturaLaboratorio()"
                     [hidden]="pdflaboratorio"
                   >
                     <i class="fas fa-file-pdf">  Pdf</i>

@@ -125,10 +125,11 @@
               <i class="fas fa-search"></i> Buscar</button>
               <button
                 class="btn btn-danger  btn-xs mt-4 mx-2"
-                [hidden]="btnPdfHidden"
+                
+                (click)="pdfKardex()"
               >
                 <i class="fas fa-file-pdf"
-                ></i> Pdf</button>
+              ></i> Pdf</button>
             </div>
           </div>
         </form>

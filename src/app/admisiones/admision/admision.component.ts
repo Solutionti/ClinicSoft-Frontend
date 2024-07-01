@@ -246,8 +246,9 @@ export class AdmisionComponent implements OnInit {
     });
   }
 
-  pdfsFactura() {
-
+  pdfFacturaAdmision() {
+    this.pdfServices
+        .pdfFacturaAdmision();
   }
 
 

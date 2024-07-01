@@ -12,6 +12,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { PdfService } from '../../services/pdf.service';
 @Component({
   selector: 'app-kardex',
   standalone: true,
@@ -34,7 +35,8 @@ export class KardexComponent implements OnInit {
   constructor(
     private InventarioService: InventarioService,
     private ListasService: ListasService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private pdfServices: PdfService
   ){}
 
   ngOnInit(): void {
@@ -224,6 +226,11 @@ export class KardexComponent implements OnInit {
           this.showError(response.mesagge);
         }
       });
+  }
+
+  pdfKardex() {
+    this.pdfServices
+        .generarPdfKardex();
   }
 
   showError(message: string) {

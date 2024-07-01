@@ -7,6 +7,7 @@ import { TableModule } from 'primeng/table';
 import { InventarioService } from '../services/inventario.service';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { PdfService } from '../../services/pdf.service';
 
 @Component({
   selector: 'app-inventario',
@@ -27,7 +28,8 @@ export class InventarioComponent  implements OnInit {
 
   constructor(
     private inventarioServices: InventarioService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private pdfServices: PdfService
   ){
 
   }
@@ -37,7 +39,7 @@ export class InventarioComponent  implements OnInit {
   }
 
   inventarioForm = new FormGroup({
-    empresa_inventario: new FormControl('SEDE PRINCIPAL'),
+    empresa_inventario: new FormControl({value:'SEDE PRINCIPAL', disabled: true}),
     stock_inventario: new FormControl(''),
     cant_inventario: new FormControl('')
   })
@@ -56,6 +58,11 @@ export class InventarioComponent  implements OnInit {
         this.showError(response.mesagge);
       }
     })
+  }
+
+  pdfInventario() {
+    this.pdfServices
+        .generarPdfInventario();
   }
 
   showError(message: string) {

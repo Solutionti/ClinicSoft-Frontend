@@ -11,6 +11,26 @@ export class PdfService {
     private http: HttpClient
   ) { }
 
+  pdfFacturaAdmision() {
+    const token: any  = localStorage.getItem("token");
+    const newtoken = token.substring(1, token.length - 1);
+
+    const url =  `${environment.apiClinicSoft}pdfFacturaAdmision`;
+
+    window.open(url, "_blank", " width=950, height=1000");
+    return this.http.get(url);
+  }
+
+  pdfFacturaLaboratorio() {
+    const token: any  = localStorage.getItem("token");
+    const newtoken = token.substring(1, token.length - 1);
+
+    const url =  `${environment.apiClinicSoft}pdfFacturaLaboratorio`;
+
+    window.open(url, "_blank", " width=950, height=1000");
+    return this.http.get(url);
+  }
+
   generarPdfColposcopia(){
     const token: any  = localStorage.getItem("token");
     const newtoken = token.substring(1, token.length - 1);
@@ -46,6 +66,26 @@ export class PdfService {
     const newtoken = token.substring(1, token.length - 1);
 
     const url =  `${environment.apiClinicSoft}pdfCaja`;
+
+    window.open(url, "_blank", " width=950, height=1000");
+    return this.http.get(url);
+  }
+
+  generarPdfInventario() {
+    const token: any  = localStorage.getItem("token");
+    const newtoken = token.substring(1, token.length - 1);
+
+    const url =  `${environment.apiClinicSoft}pdfInventario`;
+
+    window.open(url, "_blank", " width=950, height=1000");
+    return this.http.get(url);
+  }
+
+  generarPdfKardex() {
+    const token: any  = localStorage.getItem("token");
+    const newtoken = token.substring(1, token.length - 1);
+
+    const url =  `${environment.apiClinicSoft}pdfKardex`;
 
     window.open(url, "_blank", " width=950, height=1000");
     return this.http.get(url);

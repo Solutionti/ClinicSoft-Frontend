@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { AdmisionesService } from '../services/admisiones.service';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { PdfService } from '../../services/pdf.service';
 
 @Component({
   selector: 'app-laboratorio',
@@ -34,7 +35,8 @@ export class LaboratorioComponent implements OnInit {
   constructor(
     private listaServices: ListasService,
     private admisionServices: AdmisionesService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private pdfServices: PdfService
   ) {
 
   }
@@ -60,8 +62,6 @@ export class LaboratorioComponent implements OnInit {
     observacion_laboratorio: new FormControl(''),
     total_laboratorio: new FormControl({value:'', disabled: true}),
   });
-
-
 
   getLaboratories: any[] = [];
   getLaboratoryTable() {
@@ -148,6 +148,47 @@ export class LaboratorioComponent implements OnInit {
       nombre: nombre,
       precio: precio 
     });
+  }
+
+  CreateExamenLaboratory() {
+    this.spinner = false;
+    let datos: any  = [
+      {
+        dni_paciente: this.laboratorioForm.get("dni_laboratorio")?.value,
+        medico: this.laboratorioForm.get("doctor_laboratorio")?.value,
+        tipo_deposito: this.laboratorioForm.get("Efectivo_laboratorio")?.value,
+        descripcion: this.laboratorioForm.get("observacion_laboratorio")?.value,
+        estado: "Pago",
+        fecha: this.laboratorioForm.get("fecha_laboratorio")?.value,
+        hora: this.laboratorioForm.get("00:00")?.value,
+        total: this.laboratorioForm.get("total_laboratorio")?.value,
+        usuario: localStorage.getItem('usuario'),
+        analisis: this.laboratoryVenta
+      }
+    ]
+    this.admisionServices
+        .CreateExamenLaboratory(datos)
+        .subscribe((response: any ) => {
+          if(response.status == 200) {
+            this.showSuccess(response.message);
+            this.spinner = true;
+            this.pdflaboratorio = false;
+          }
+          else {
+            this.showError(response.message);
+            this.spinner = true;
+            this.pdflaboratorio = true;
+          }
+        })
+  }
+
+  pdfFacturaLaboratorio() {
+    this.pdfServices
+        .pdfFacturaLaboratorio();
+
+    setTimeout(() => {
+      location.reload();
+    }, 3000);
   }
 
   showError(message: string) {

@@ -151,5 +151,20 @@ export class AdmisionesService {
   }
 
   // MODULO DE LABORATORIO
-  
+  CreateExamenLaboratory(datos: any ) {
+    const url = `${environment.apiClinicSoft}CreateExamenLaboratory`;
+
+    return this.http.post(url, {
+      dni_paciente: datos[0].dni_paciente,
+      medico: datos[0].medico,
+      tipo_deposito: datos[0].tipo_deposito,
+      descripcion: datos[0].descripcion,
+      estado: datos[0].estado,
+      fecha: datos[0].fecha,
+      hora: datos[0].hora,
+      total: datos[0].total,
+      usuario: datos[0].usuario,
+      analisis: datos[0].analisis,
+    });
+  }
 }

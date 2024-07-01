@@ -39,7 +39,7 @@ export class ColposcopiaComponent implements OnInit {
     private listaServices: ListasService,
     private admisionServices: AdmisionesService,
     private messageService: MessageService,
-    private PdfServices: PdfService
+    private PdfServices: PdfService,
   ){}
 
   ngOnInit(): void {
