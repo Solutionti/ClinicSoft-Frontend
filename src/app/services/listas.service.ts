@@ -63,4 +63,8 @@ export class ListasService {
 
   }
 
+  getUsersAll() {
+    return this.http.get(environment.apiClinicSoft + 'getUsersAll');
+  }
+
 }

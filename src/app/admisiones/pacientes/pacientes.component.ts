@@ -41,14 +41,14 @@ export class PacientesComponent implements OnInit {
     this.getAcademics();
     this.getCivilStatus();
   }
-  
+
   btnHistoriaHidden = true;
   btnActualizarHidden = true;
   btnAgregarHidden = false;
   containerResponsable = true;
   spinner = true;
   paciente = "";
-  
+
 
   crearPacienteForm: FormGroup = new FormGroup({
     crearpaciente_dni: new FormControl('',[Validators.required]),
@@ -193,7 +193,7 @@ export class PacientesComponent implements OnInit {
     this.btnAgregarHidden = false;
     this.btnActualizarHidden = true;
     this.btnHistoriaHidden = true;
-    
+
     this.admisionService
         .getPacienteApiPeru(dni)
         .subscribe((response: any ) => {
@@ -201,9 +201,9 @@ export class PacientesComponent implements OnInit {
 
             setTimeout(() => {
               this.getProvince();
-              this.getDistrict(); 
+              this.getDistrict();
             }, 3000);
-            
+
             this.crearPacienteForm.patchValue(
               {
                 crearpaciente_apellido: response.data.apellido_paterno + ' ' + response.data.apellido_materno,
@@ -388,7 +388,7 @@ export class PacientesComponent implements OnInit {
             this.showSuccess(response.message);
             this.getpacientesTable();
             this.spinner = true;
-            
+
           }
           else {
             this.showError(response.message);
@@ -397,7 +397,7 @@ export class PacientesComponent implements OnInit {
         });
   }
 
-  
+
 
   showError(message: string) {
     this.messageService.add(
@@ -412,7 +412,7 @@ export class PacientesComponent implements OnInit {
   showSuccess(message: string) {
     this.messageService.add({
       severity: 'success',
-      summary: 'ClinicSoft Aviso', 
+      summary: 'ClinicSoft Aviso',
       detail: message
     });
   }

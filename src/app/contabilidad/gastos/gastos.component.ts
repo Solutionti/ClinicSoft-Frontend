@@ -1,3 +1,4 @@
+import { ListasService } from './../../services/listas.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MenuComponent } from '../../componentes/menu/menu.component';
@@ -8,6 +9,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ToastModule } from 'primeng/toast';
 import { CommonModule } from '@angular/common';
 import { ContabilidadService } from '../services/contabilidad.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-gastos',
@@ -22,18 +24,25 @@ import { ContabilidadService } from '../services/contabilidad.service';
     ToastModule,
     CommonModule
   ],
-  templateUrl: './gastos.component.html'
+  templateUrl: './gastos.component.html',
+  styleUrl: './gastos.component.css',
+  providers: [MessageService]
 })
 export class GastosComponent implements OnInit {
 
   gastos = false;
+  spinner=  true;
+
   constructor(
-    private contabilidadServices: ContabilidadService
+    private contabilidadServices: ContabilidadService,
+    private ListasService: ListasService,
+    private messageService: MessageService
   ){
 
   }
   ngOnInit(): void {
-    this.getGasto();
+    //this.getGasto();
+    this.getUsersAll();
   }
 
   registrarForm: FormGroup = new FormGroup({
@@ -96,4 +105,97 @@ export class GastosComponent implements OnInit {
           this.getGastos = response;
         });
   }
+
+
+  getUsers: any[] = [];
+  getUsersAll() {
+    this.ListasService
+       .getUsersAll()
+       .subscribe((response: any) => {
+        console.log(response);
+        this.getUsers = response;
+
+       })
+  }
+
+  createGasto(): void {
+    this.spinner = false;
+    let tipo_doc = this.registrarForm.get("comprobante_gastos")?.value,
+        nro_doc = this.registrarForm.get("documento_gastos")?.value,
+        razon_social = this.registrarForm.get("razon_gastos")?.value,
+        descripcion = this.registrarForm.get("descripcion_gastos")?.value,
+        f_recepcion = this.registrarForm.get("recepcion_gastos")?.value,
+        f_emision = this.registrarForm.get("emision_gastos")?.value,
+        tipo_cpe = this.registrarForm.get("comprobante_gastos")?.value,
+        serie = this.registrarForm.get("serie_gastos")?.value,
+        numero = this.registrarForm.get("correlativo_gastos")?.value,
+        sub_total = this.registrarForm.get("total_gastos")?.value,
+        igv = this.registrarForm.get("igv_gastos")?.value,
+        op_grav = this.registrarForm.get("gravada_gastos")?.value,
+        op_inafec = "0",
+        op_exone = "0",
+        monto = this.registrarForm.get("total_gastos")?.value,
+        rpta_sunat = "0",
+        estado = "0",
+        codigo_usuario = this.registrarForm.get("responsable_gastos")?.value,
+        codigo_usuario_sys = this.registrarForm.get("responsable_gastos")?.value;
+
+        let gastos: any = [{
+
+          "tipo_doc": tipo_doc,
+          "nro_doc": nro_doc,
+          "razon_social": razon_social,
+          "descripcion": descripcion,
+          "f_recepcion": f_recepcion,
+          "f_emision": f_emision,
+          "tipo_cpe": tipo_cpe,
+          "serie": serie,
+          "numero": numero,
+          "sub_total": sub_total,
+          "igv": igv,
+          "op_grav": op_grav,
+          "op_inafec": op_inafec,
+          "op_exone": op_exone,
+          "monto": monto,
+          "rpta_sunat": rpta_sunat,
+          "estado": estado,
+          "codigo_usuario": codigo_usuario,
+          "codigo_usuario_sys": codigo_usuario_sys,
+
+        }
+      ];
+
+      this.contabilidadServices
+          .createGasto(gastos)
+          .subscribe((response: any) =>{
+            if(response.status == 200) {
+              this.showSuccess(response.message);
+              this.getGasto();
+              this.spinner = true;
+            }
+            else {
+              this.showError(response.message);
+              this.spinner = true;
+            }
+          })
+  }
+
+  showError(message: string) {
+    this.messageService.add(
+      {
+        severity: 'error',
+        summary: 'ClinicSoft Aviso',
+        detail: message
+      }
+    );
+  }
+
+  showSuccess(message: string) {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'ClinicSoft Aviso',
+      detail: message
+    });
+  }
+
 }
