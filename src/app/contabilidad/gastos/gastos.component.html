@@ -53,7 +53,7 @@
                         pInputText
                         type="text"
                         class="form-control"
-                        (input)="gastostable.filterGlobal($any($event.target).value, 'contains')" 
+                        (input)="gastostable.filterGlobal($any($event.target).value, 'contains')"
                         placeholder="Buscar..."
                       />
                     </span>
@@ -296,6 +296,12 @@
                 formControlName="documento_gastos"
               >
             </div>
+            <div class="col-md-1 mt-4">
+              <button class="btn btn-danger btn-sm mt-1">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+
             <div class="row">
               <div class="col-md-12 mt-2">
                 <label>RAZON SOCIAL *</label>
@@ -327,11 +333,13 @@
             <div class="row">
               <div class="col-md-12 mt-2">
                 <label>RESPONSABLE *</label>
-                <input
-                  type="text"
-                  class="form-control form-control-sm"
-                  formControlName="responsable_gastos"
-                >
+                <select
+                class="form-control form-control-sm text-uppercase"
+                formControlName="tipo_gastos"
+              >
+                  <option value="">SELECCIONAR</option>
+                  <option value="6">RESPONSABLE</option>
+              </select>
                 <div
               class="error"
               *ngIf="responsableControl.invalid && (responsableControl.touched || responsableControl.dirty)"
