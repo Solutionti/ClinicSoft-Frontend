@@ -20,6 +20,7 @@ export class HistorialpacienteComponent implements OnInit {
   paciente: any = "";
   citas = false;
   archivos = false;
+  historiaclinica = true;
 
   constructor(
     private route: ActivatedRoute,
