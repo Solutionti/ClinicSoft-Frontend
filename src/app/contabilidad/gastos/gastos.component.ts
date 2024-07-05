@@ -41,7 +41,7 @@ export class GastosComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    //this.getGasto();
+    this.getGasto();
     this.getUsersAll();
   }
 

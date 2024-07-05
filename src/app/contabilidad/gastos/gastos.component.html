@@ -341,12 +341,12 @@
                 <label>RESPONSABLE *</label>
                 <select
                 class="form-control form-control-sm text-uppercase"
-                formControlName="tipo_gastos"
+                formControlName="responsable_gastos"
               >
                   <option value="">SELECCIONAR COLABORADOR</option>
                   <option
                   *ngFor="let responsable of getUsers"
-                  [value]="responsable.id"
+                  [value]="responsable.codigo_usuario"
                   >
                     {{ responsable.usuario }}
                 </option>
