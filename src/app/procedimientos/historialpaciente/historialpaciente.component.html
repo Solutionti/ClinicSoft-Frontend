@@ -275,11 +275,113 @@ header="HISTORIA CLINICA DEL PACIENTE"
     <button class="nav-link  btn-primary" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Procedimientos</button>
   </div>
   <div class="tab-content" id="v-pills-tabContent">
-    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" tabindex="0">...</div>
-    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" tabindex="0">...</div>
-    <div class="tab-pane fade" id="v-pills-disabled" role="tabpanel" aria-labelledby="v-pills-disabled-tab" tabindex="0">...</div>
-    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab" tabindex="0">...</div>
-    <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab" tabindex="0">...</div>
+    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" tabindex="0">
+      ANTECEDENTES
+    </div>
+    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" tabindex="0">
+      EXAMEN FISICO
+    </div>
+    <div class="tab-pane fade" id="v-pills-disabled" role="tabpanel" aria-labelledby="v-pills-disabled-tab" tabindex="0">
+      PLAN DE TRABAJO
+    </div>
+    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab" tabindex="0">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <p-table
+            #diagnosticos
+            [rows]="5"
+            [paginator]="true"
+            [globalFilterFields]="['nombre', 'getProduct.nombre', 'categoria', 'getProduct.categoria']"
+            [tableStyle]="{ 'min-width': '75rem' }"
+            [rowHover]="true"
+            dataKey="id"
+            currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas"
+          >
+          <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+              <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input
+                  pInputText
+                  type="text"
+                  class="form-control"
+                  placeholder="Buscar..."
+                />
+              </span>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th class="text-xs text-white bg-default" style="width:5%"></th>
+              <th class="text-xs text-white bg-default" style="width:15%">CODIGO</th>
+              <th class="text-xs text-white bg-default" style="width:80%">NOMBRE DIAGNOSTICO</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-getUser>
+            <tr>
+              <td class="text-xs text-uppercase"></td>
+              <td class="text-xs text-uppercase"></td>
+              <td class="text-xs text-uppercase"></td>
+            </tr>
+          </ng-template>
+         </p-table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="tab-pane fade"
+      id="v-pills-settings"
+      role="tabpanel"
+      aria-labelledby="v-pills-settings-tab"
+      tabindex="0"
+    >
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <p-table
+          #procedimientos
+          [rows]="5"
+          [paginator]="true"
+          [globalFilterFields]="['nombre', 'getProduct.nombre', 'categoria', 'getProduct.categoria']"
+          [tableStyle]="{ 'min-width': '75rem' }"
+          [rowHover]="true"
+          dataKey="id"
+          currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas"
+        >
+        <ng-template pTemplate="caption">
+          <div class="flex align-items-center justify-content-between">
+            <span class="p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input
+                pInputText
+                type="text"
+                class="form-control"
+                placeholder="Buscar..."
+              />
+            </span>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="text-xs text-white bg-default" style="width:5%"></th>
+            <th class="text-xs text-white bg-default" style="width:15%">CODIGO</th>
+            <th class="text-xs text-white bg-default" style="width:80%">NOMBRE PROCEDIMIENTO</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-getUser>
+          <tr>
+            <td class="text-xs text-uppercase"></td>
+            <td class="text-xs text-uppercase"></td>
+            <td class="text-xs text-uppercase"></td>
+          </tr>
+        </ng-template>
+       </p-table>
+        </div>
+      </div>
+    </div>
+    </div>
   </div>
 </div>
 <ng-template pTemplate="footer">

@@ -9,10 +9,20 @@ import { ListasService } from '../../services/listas.service';
 import { CommonModule } from '@angular/common';
 import { DialogModule } from 'primeng/dialog';
 import { ProcedimientosService } from '../services/procedimientos.service';
+import { TableModule } from 'primeng/table';
+
 @Component({
   selector: 'app-historialpaciente',
   standalone: true,
-  imports: [RouterOutlet,ReactiveFormsModule,MenuComponent,CerrarsesionComponent, CommonModule,DialogModule],
+  imports: [
+    RouterOutlet,
+    ReactiveFormsModule,
+    MenuComponent,
+    CerrarsesionComponent,
+    CommonModule,
+    DialogModule,
+    TableModule
+  ],
   templateUrl: './historialpaciente.component.html'
 })
 export class HistorialpacienteComponent implements OnInit {

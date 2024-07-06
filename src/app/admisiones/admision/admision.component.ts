@@ -174,6 +174,21 @@ export class AdmisionComponent implements OnInit {
             this.admisionForm2.reset();
             this.spinner = true;
             this.pdfFactura = false;
+
+            // Transaccion
+            let datos2 = [
+              {
+                transaccion: "Creacion de admision",
+                valor: datos.costo,
+                usuario: localStorage.getItem('usuario'),
+                tipoingreso: "Ingreso"
+              }
+            ];
+            this.listaService
+                .createTransaccion(datos2)
+                .subscribe((response: any ) => {
+
+                })
           }
           else {
             this.showError(response.message);

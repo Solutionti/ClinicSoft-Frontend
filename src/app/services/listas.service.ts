@@ -63,4 +63,17 @@ export class ListasService {
 
   }
 
+  createTransaccion(datos: any ) {
+    return this.http.post(environment.apiClinicSoft + 'createTransaccionTraza', { 
+      transaccion: datos[0].transaccion,
+      valor: datos[0].valor,
+      usuario: datos[0].usuario,
+      tipoingreso: datos[0].tipoingreso,
+     });
+  }
+
+  getTransaccion() {
+    return this.http.get(environment.apiClinicSoft + 'createTransaccionTraza');
+  }
+
 }
