@@ -73,7 +73,11 @@ export class ListasService {
   }
 
   getTransaccion() {
-    return this.http.get(environment.apiClinicSoft + 'createTransaccionTraza');
+    return this.http.get(environment.apiClinicSoft + 'getTransaccion');
   }
 
+  getUsersAll() {
+    return this.http.get(environment.apiClinicSoft + 'getUsersAll');
+  }
+  
 }

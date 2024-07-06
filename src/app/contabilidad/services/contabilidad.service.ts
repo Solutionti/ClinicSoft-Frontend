@@ -46,5 +46,32 @@ export class ContabilidadService {
     });
   }
 
-  
+  createGasto(datos: any) {
+    const url =  `${environment.apiClinicSoft}createGasto`;
+
+    return this.http.post(url, {
+      tipo_doc: datos[0].tipo_doc,
+      nro_doc: datos[0].nro_doc,
+      razon_social: datos[0].razon_social,
+      descripcion: datos[0].descripcion,
+      f_recepcion: datos[0].f_recepcion,
+      f_emision: datos[0].f_emision,
+      tipo_cpe: datos[0].tipo_cpe,
+      serie: datos[0].serie,
+      numero: datos[0].numero,
+      sub_total: datos[0].sub_total,
+      igv: datos[0].igv,
+      op_grav: datos[0].op_grav,
+      op_inafec: datos[0].op_inafec,
+      op_exone: datos[0].op_exone,
+      monto: datos[0].monto,
+      rpta_sunat: datos[0].rpta_sunat,
+      estado: datos[0].estado,
+      codigo_usuario: datos[0].codigo_usuario,
+      codigo_usuario_sys: datos[0].codigo_usuario_sys
+
+    });
+  }
+
+
 }

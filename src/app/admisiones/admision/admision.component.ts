@@ -188,7 +188,7 @@ export class AdmisionComponent implements OnInit {
                 .createTransaccion(datos2)
                 .subscribe((response: any ) => {
 
-                })
+                });
           }
           else {
             this.showError(response.message);

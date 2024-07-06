@@ -173,6 +173,21 @@ export class LaboratorioComponent implements OnInit {
             this.showSuccess(response.message);
             this.spinner = true;
             this.pdflaboratorio = false;
+
+            // Transaccion
+            let datos2 = [
+              {
+                transaccion: "Creacion de laboratorio",
+                valor: datos.total,
+                usuario: localStorage.getItem('usuario'),
+                tipoingreso: "Ingreso"
+              }
+            ];
+            this.listaServices
+                .createTransaccion(datos2)
+                .subscribe((response: any ) => {
+
+                });
           }
           else {
             this.showError(response.message);
