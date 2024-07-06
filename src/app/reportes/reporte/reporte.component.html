@@ -53,7 +53,7 @@
           <h6 class="text-center mb-0">Efectivo</h6>
           <!-- <span class="text-xs">Belong Interactive</span> -->
           <hr class="horizontal dark my-3">
-          <h5 class="mb-0">+$2000</h5>
+          <h5 class="mb-0">+${{ efectivo }}</h5>
           </div>
           </div>
           </div>
@@ -68,7 +68,7 @@
           <h6 class="text-center mb-0">Tarjeta</h6>
           <!-- <span class="text-xs">Freelance Payment</span> -->
           <hr class="horizontal dark my-3">
-          <h5 class="mb-0">$455.00</h5>
+          <h5 class="mb-0">+${{targeta}}</h5>
           </div>
           </div>
           </div>
@@ -222,36 +222,41 @@
           <h6 class="mb-0">Ultimas Transacciones</h6>
           </div>
           <div class="col-md-6 d-flex justify-content-end align-items-center">
-          <i class="far fa-calendar-alt me-2"></i>
-          <small>06 - 30 junio 2024</small>
+          <i class="fas fa-calendar-alt me-2"></i>
+          <small>{{ fechaActual}}</small>
           </div>
           </div>
           </div>
           <div class="card-body pt-4 p-3">
           <h6 class="text-uppercase text-body text-xs font-weight-bolder mb-3">Hoy</h6>
           <ul class="list-group">
-          <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+          <li
+            class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg"
+            *ngFor="let transacciones of transaccion"
+          >
           <div class="d-flex align-items-center">
-          <button class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-down"></i></button>
+          <button
+            class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"
+            *ngIf="transacciones.tipoingreso == 'Ingreso'"
+            >
+            <i class="fas fa-arrow-up"></i>
+          </button>
+          <button
+            class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"
+            *ngIf="transacciones.tipoingreso == 'Gasto'"
+          >
+          <i
+            class="fas fa-arrow-down"
+          >
+          </i>
+          </button>
           <div class="d-flex flex-column">
-          <h6 class="mb-1 text-dark text-sm">Netflix 2</h6>
-          <span class="text-xs">27 March 2020, at 12:30 PM</span>
+          <h6 class="mb-1 text-dark text-sm">{{ transacciones.transaccion }}</h6>
+          <span class="text-xs">{{ transacciones.fecha }}, at {{ transacciones.hora }}</span>
           </div>
           </div>
-          <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
-          - $ 2,5000
-          </div>
-          </li>
-          <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-          <div class="d-flex align-items-center">
-          <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-up"></i></button>
-          <div class="d-flex flex-column">
-          <h6 class="mb-1 text-dark text-sm">Apple</h6>
-          <span class="text-xs">27 March 2020, at 04:30 AM</span>
-          </div>
-          </div>
-          <div class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
-          + $ 2,000
+          <div class="d-flex align-items-center text-dark text-gradient text-sm font-weight-bold">
+          $ {{ transacciones.valor }} 
           </div>
           </li>
           </ul>

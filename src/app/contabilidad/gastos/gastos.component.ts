@@ -177,9 +177,9 @@ export class GastosComponent implements OnInit {
             let datos2 = [
               {
                 transaccion: "Creacion de laboratorio",
-                valor: gastos.sub_total,
+                valor: gastos[0].sub_total,
                 usuario: localStorage.getItem('usuario'),
-                tipoingreso: "Ingreso"
+                tipoingreso: "Gasto"
               }
             ];
             this.ListasService

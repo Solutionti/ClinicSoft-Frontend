@@ -179,7 +179,7 @@ export class AdmisionComponent implements OnInit {
             let datos2 = [
               {
                 transaccion: "Creacion de admision",
-                valor: datos.costo,
+                valor: datos[0].costo,
                 usuario: localStorage.getItem('usuario'),
                 tipoingreso: "Ingreso"
               }

@@ -113,13 +113,16 @@
               <h6 class="text-capitalize">Flujo Mes a Mes </h6>
               <p class="text-sm mb-0">
                 <i class="fa fa-arrow-up text-success"></i>
-                <span class="font-weight-bold">4% more</span> in 2024
+                <span class="font-weight-bold"> 100% mas</span> en 2024
               </p>
             </div>
             <div class="card-body p-3">
-              <div class="chart">
-                <canvas id="chart-line" class="chart-canvas" height="300"></canvas>
-              </div>
+              <p-chart
+                type="line"
+                [data]="data"
+                [options]="options"
+                height="300px"
+              />
             </div>
           </div>
         </div>
@@ -128,7 +131,7 @@
             <div id="carouselExampleCaptions" class="carousel slide h-100" data-bs-ride="carousel">
               <div class="carousel-inner border-radius-lg h-100">
                 <div class="carousel-item h-100 active" style="background-image: url('http://localhost/CODEIGNITER/ClinicSoft/public/img/theme/carousel-3.jpg');
-      background-size: cover;">
+                 background-size: cover;">
                   <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
                     <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
                       <i class="ni ni-camera-compact text-dark opacity-10"></i>
@@ -160,7 +163,24 @@
               </div>
             </div>
             <div class="table-responsive">
-              <!-- contenido donde esta pacientes nuevos -->
+              <div
+                class="d-flex px-2 py-1"
+                *ngFor="let paciente of newpatient"
+              >
+                <div>
+                  <img
+                    src="https://radiarte.com/application/files/6917/0923/2244/depositphotos_134255588-stock-illustration-empty-photo-of-male-profile.jpg"
+                    class="avatar avatar-sm me-3"
+                  >
+                </div>
+                <div class="d-flex flex-column justify-content-center">
+                  <p class="mb-0 text-xs text-uppercase">{{ paciente.nombre +' '+ paciente.apellido }}</p>
+                  <p class="text-xs text-secondary mb-0 text-uppercase">{{ paciente.documento }}</p>
+                </div>
+              </div>
+              <div class="text-center mt-4" *ngIf="newpatient.length == 0">
+                <h6>No hay pacientes nuevos</h6>
+              </div>
             </div>  
           </div>
         </div>
@@ -177,8 +197,8 @@
                       <i class="fas fa-bed text-white opacity-10"></i>
                     </div>
                     <div class="d-flex flex-column">
-                      <h6 class="mb-1 text-dark text-sm">Patologia</h6>
-                      <span class="text-xs">1 pacientes <span class="font-weight-bold">40 patologia</span></span>
+                      <h6 class="mb-1 text-dark text-sm">Laboratorio</h6>
+                      <span class="text-xs">{{ pacientes }} pacientes <span class="font-weight-bold">40 Laboratorios</span></span>
                     </div>
                   </div>
                   <div class="d-flex">
@@ -191,8 +211,8 @@
                         <i class="fas fa-bed text-white opacity-10"></i>
                       </div>
                       <div class="d-flex flex-column">
-                        <h6 class="mb-1 text-dark text-sm">Patologia</h6>
-                        <span class="text-xs">1 pacientes <span class="font-weight-bold">40 patologia</span></span>
+                        <h6 class="mb-1 text-dark text-sm">Citas</h6>
+                        <span class="text-xs">{{ pacientes }} pacientes <span class="font-weight-bold">40 citas</span></span>
                       </div>
                     </div>
                     <div class="d-flex">
@@ -206,7 +226,7 @@
                       </div>
                       <div class="d-flex flex-column">
                         <h6 class="mb-1 text-dark text-sm">Patologia</h6>
-                        <span class="text-xs">1 pacientes <span class="font-weight-bold">40 patologia</span></span>
+                        <span class="text-xs">{{ pacientes }} pacientes <span class="font-weight-bold">40 patologias</span></span>
                       </div>
                     </div>
                     <div class="d-flex">
@@ -220,7 +240,7 @@
                     </div>
                     <div class="d-flex flex-column">
                       <h6 class="mb-1 text-dark text-sm">Ecografias</h6>
-                      <span class="text-xs">1 pacientes <span class="font-weight-bold">40 ecografias</span></span>
+                      <span class="text-xs">{{ pacientes }} pacientes <span class="font-weight-bold">40 ecografias</span></span>
                     </div>
                   </div>
                   <div class="d-flex">

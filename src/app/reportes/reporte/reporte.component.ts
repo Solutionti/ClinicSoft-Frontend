@@ -18,9 +18,15 @@ import { CommonModule } from '@angular/common';
   ],
   templateUrl: './reporte.component.html'
 })
+
 export class ReporteComponent implements OnInit {
   
   filtrobusqueda = true;
+  date = new Date();
+  fechaActual = String(this.date.getFullYear() + '-' +
+    String(this.date.getMonth() + 1).padStart(2, '0') + '-' +
+    String(this.date.getDate()).padStart(2, '0')
+  );
 
   constructor(
     private PdfServices: PdfService,
@@ -29,6 +35,9 @@ export class ReporteComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDoctores();
+    this.getTransaccion();
+    this.countEfectivo();
+    this.countTargeta();
   };
 
 
@@ -65,4 +74,24 @@ export class ReporteComponent implements OnInit {
           this.transaccion = response;
         });
   }
+
+  efectivo = "";
+  countEfectivo() {
+    this.ListaServices
+        .countEfectivo()
+        .subscribe((response: any ) => {
+          this.efectivo = response;
+        });
+  }
+
+  targeta = "";
+  countTargeta() {
+
+    this.ListaServices
+    .countTargeta()
+    .subscribe((response: any ) => {
+      this.targeta = response;
+    });
+  }
+
 }

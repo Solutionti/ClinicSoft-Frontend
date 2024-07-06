@@ -178,7 +178,7 @@ export class LaboratorioComponent implements OnInit {
             let datos2 = [
               {
                 transaccion: "Creacion de laboratorio",
-                valor: datos.total,
+                valor: datos[0].total,
                 usuario: localStorage.getItem('usuario'),
                 tipoingreso: "Ingreso"
               }

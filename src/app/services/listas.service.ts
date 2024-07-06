@@ -79,5 +79,14 @@ export class ListasService {
   getUsersAll() {
     return this.http.get(environment.apiClinicSoft + 'getUsersAll');
   }
+
+
+  countEfectivo() {
+    return this.http.get(environment.apiClinicSoft + 'countEfectivo');
+  }
+
+  countTargeta() {
+    return this.http.get(environment.apiClinicSoft + 'countTargeta');
+  }
   
 }
