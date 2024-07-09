@@ -45,7 +45,35 @@
               </div>
             </div>
           </div>
+          <form [formGroup]="consultaPacienteForm">
           <div class="row">
+              <div class="col-md-6">
+                <label>Tipo de Documento</label>
+                <select
+                  class="form-control form-control-sm"
+                  formControlName="tpdocumento_consulta"
+                >
+                  <option value="DNI">DNI</option>
+                  <option value="ME">Menor de edad</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label>Documento / DNI *</label>
+                <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    formControlName="documento_consulta"
+                    (keyup.enter)="getpacientesTable()"
+                  >
+                  <button class="btn btn-primary btn-xs" type="button">
+                    <i class="fas fa-fingerprint"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="row mt-3">
             <div class="col-md-12">
               <div class="table-responsive">
                 <p-table
