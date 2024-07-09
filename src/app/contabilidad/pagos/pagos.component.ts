@@ -5,6 +5,7 @@ import { CerrarsesionComponent } from '../../componentes/cerrarsesion/cerrarsesi
 import { RouterOutlet } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { ContabilidadService } from '../services/contabilidad.service';
+import { PdfService } from '../../services/pdf.service';
 
 @Component({
   selector: 'app-pagos',
@@ -21,7 +22,8 @@ import { ContabilidadService } from '../services/contabilidad.service';
 export class PagosComponent implements OnInit {
 
   constructor(
-    private contabilidadService: ContabilidadService
+    private contabilidadService: ContabilidadService,
+    private PdfServices: PdfService
   ){}
 
   ngOnInit(): void {
@@ -35,5 +37,10 @@ export class PagosComponent implements OnInit {
         .subscribe((response: any ) => {
           this.getPayment = response;
         });
+  }
+
+  generarpdfPagos() {
+    this.PdfServices
+        .generarpdfPagos();
   }
 }

@@ -90,4 +90,14 @@ export class PdfService {
     window.open(url, "_blank", " width=950, height=1000");
     return this.http.get(url);
   }
+
+  generarpdfPagos() {
+    const token: any  = localStorage.getItem("token");
+    const newtoken = token.substring(1, token.length - 1);
+
+    const url =  `${environment.apiClinicSoft}pdfPagos`;
+
+    window.open(url, "_blank", " width=950, height=1000");
+    return this.http.get(url);
+  }
 }

@@ -77,7 +77,7 @@
                          </li>
                         <small>1 mb | {{archivos.fecha}}</small>
                       </ul>
-                      
+
                       <button
                         class="btn btn-primary btn-xs"
                         (click)="archivos = true"
@@ -258,12 +258,12 @@
     </div>
 
 <!-- MODAL AGENDAMIENTO DE CITAS  -->
-<p-dialog 
-header="HISTORIA CLINICA DEL PACIENTE" 
+<p-dialog
+header="HISTORIA CLINICA DEL PACIENTE"
 [modal]="true"
-[(visible)]="citas" 
-[style]="{ width: '75rem' }" 
-[breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" 
+[(visible)]="citas"
+[style]="{ width: '75rem' }"
+[breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
 [maximizable]="true">
 <!-- CONTENIDO -->
 <div class="d-flex align-items-start">
@@ -276,7 +276,170 @@ header="HISTORIA CLINICA DEL PACIENTE"
   </div>
   <div class="tab-content" id="v-pills-tabContent">
     <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" tabindex="0">
-      ANTECEDENTES
+      <!-- ANTECEDENTES -->
+       <div class="container-fluid">
+        <p class="text-white">************************************************************************************************************+******</p>
+         <form [formGroup]="antecedentesForm">
+          <div class="row">
+            <div class="col-md-12">
+              <label>FAMILIARES</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="antecedentes_familiares"
+              >
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-12">
+              <label>PATOLOGICOS</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="antecedentes_patologicos"
+              >
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-12">
+              <label>GINECO-OBSTETRICOS</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="antecedentes_gineco"
+              >
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-6">
+              <label>FUM</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="antecedentes_fum"
+              >
+            </div>
+            <div class="col-md-6">
+              <label>RM (RET.MENSTR)</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="antecedentes_rm"
+              >
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-6">
+              <label>FLUJO GENITAL</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="antecedentes_flujo"
+              >
+            </div>
+            <div class="col-md-6">
+              <label>No PAREJAS</label>
+              <input
+                type="number"
+                class="form-control form-control-sm"
+                formControlName="antecedentes_parejas"
+              >
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-4">
+              <label>GESTAS</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="antecedentes_gestas"
+              >
+            </div>
+            <div class="col-md-4">
+              <label>PARTOS</label>
+              <input
+                type="number"
+                class="form-control form-control-sm"
+                formControlName="antecedentes_partos"
+              >
+            </div>
+            <div class="col-md-4">
+              <label>ABORTOS</label>
+              <input
+                type="number"
+                class="form-control form-control-sm"
+                formControlName="antecedentes_abortos"
+              >
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-4">
+              <label>ANTICONCEPTIVOS</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="antecedentes_anticonceptivos"
+              >
+            </div>
+            <div class="col-md-4">
+              <label>TIPOS</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="antecedentes_tipos"
+              >
+            </div>
+            <div class="col-md-4">
+              <label>TIEMPO</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="antecedentes_tiempo"
+              >
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-12">
+              <label>CIRUGIA GINECOLOGICA</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="antecedentes_cirugia"
+              >
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-12">
+              <label>OTROS</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="antecedentes_otros"
+              >
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-6">
+              <label>FECHA PAP</label>
+              <input
+                type="date"
+                class="form-control form-control-sm"
+                formControlName="antecedentes_fecha"
+              >
+            </div>
+            <div class="col-md-6">
+              <label>No HIJOS</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="antecedentes_hijos"
+              >
+            </div>
+          </div>
+         </form>
+
+       </div>
+
     </div>
     <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" tabindex="0">
       EXAMEN FISICO

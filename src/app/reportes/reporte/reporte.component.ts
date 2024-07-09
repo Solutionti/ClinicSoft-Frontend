@@ -20,7 +20,7 @@ import { CommonModule } from '@angular/common';
 })
 
 export class ReporteComponent implements OnInit {
-  
+
   filtrobusqueda = true;
   date = new Date();
   fechaActual = String(this.date.getFullYear() + '-' +

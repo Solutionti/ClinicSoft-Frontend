@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { DialogModule } from 'primeng/dialog';
 import { ProcedimientosService } from '../services/procedimientos.service';
 import { TableModule } from 'primeng/table';
+import { Footer } from 'primeng/api';
 
 @Component({
   selector: 'app-historialpaciente',
@@ -62,6 +63,27 @@ export class HistorialpacienteComponent implements OnInit {
   agendahora =  "";
   agendadescripcion =  "";
 
+  antecedentesForm: FormGroup = new FormGroup ({
+    antecedentes_familiares: new FormControl(''),
+    antecedentes_patologicos: new FormControl(''),
+    antecedentes_gineco: new FormControl(''),
+    antecedentes_fum: new FormControl(''),
+    antecedentes_rm: new FormControl(''),
+    antecedentes_flujo: new FormControl(''),
+    antecedentes_parejas: new FormControl(''),
+    antecedentes_gestas: new FormControl(''),
+    antecedentes_partos: new FormControl(''),
+    antecedentes_abortos: new FormControl(''),
+    antecedentes_anticonceptivos: new FormControl(''),
+    antecedentes_tipos: new FormControl(''),
+    antecedentes_tiempo: new FormControl(''),
+    antecedentes_cirugia: new FormControl(''),
+    antecedentes_otros: new FormControl(''),
+    antecedentes_fecha: new FormControl(''),
+    antecedentes_hijos: new FormControl('')
+
+  });
+
   getDataHistoriaCLinica() {
     // DATOS DEL PACIENTE
     this.admisioneServices
@@ -70,7 +92,7 @@ export class HistorialpacienteComponent implements OnInit {
       this.nombrepaciente = response.data.nombre + ' ' + response.data.apellido;
       this.fechanacimiento = response.data.fecha_nacimiento;
       });
-      
+
       // TRIAGE DEL PACIENTE
       this.admisioneServices
           .getTriageId(this.paciente)
@@ -90,7 +112,7 @@ export class HistorialpacienteComponent implements OnInit {
           .subscribe((response: any ) => {
             this.archivospdf = response;
           });
-      
+
       // CITAS
       this.procedimientoService
           .getQuotePatient(this.paciente)
