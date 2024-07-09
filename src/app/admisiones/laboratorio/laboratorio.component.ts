@@ -31,7 +31,7 @@ import { PdfService } from '../../services/pdf.service';
 })
 export class LaboratorioComponent implements OnInit {
 
-
+  
   constructor(
     private listaServices: ListasService,
     private admisionServices: AdmisionesService,
