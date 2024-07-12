@@ -442,7 +442,23 @@ header="HISTORIA CLINICA DEL PACIENTE"
 
     </div>
     <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" tabindex="0">
-      EXAMEN FISICO
+     <!-- EXAMEN FISICO -->
+
+     <div class="container-fluid">
+      <p class="text-white">************************************************************************************************************+******</p>
+      <form [formGroup]="examenForm">
+      <div class="row">
+      <div class="col-md-4">
+        <label>PIEL Y TSCS</label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          formControlName="piel_examen"
+        >
+      </div>
+      </div>
+      </form>
+     </div>
     </div>
     <div class="tab-pane fade" id="v-pills-disabled" role="tabpanel" aria-labelledby="v-pills-disabled-tab" tabindex="0">
       PLAN DE TRABAJO

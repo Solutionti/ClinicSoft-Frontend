@@ -81,6 +81,10 @@ export class HistorialpacienteComponent implements OnInit {
     antecedentes_otros: new FormControl(''),
     antecedentes_fecha: new FormControl(''),
     antecedentes_hijos: new FormControl('')
+  });
+
+  examenForm: FormGroup = new FormGroup({
+    piel_examen: new FormControl(''),
 
   });
 
