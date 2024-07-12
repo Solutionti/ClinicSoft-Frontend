@@ -30,6 +30,7 @@ export class EcografiaComponent implements OnInit {
   }
 
   ecografia1: boolean = false;
+
   date = new Date();
   fechaActual = String(this.date.getFullYear() + '-' +
     String(this.date.getMonth() + 1).padStart(2, '0') + '-' +
@@ -43,6 +44,8 @@ export class EcografiaComponent implements OnInit {
     fecha_ecografia: new FormControl({value: this.fechaActual, disabled: true}),
     observacion_ecografia: new FormControl(''),
   });
+
+  
 
   showmodal1() {
     this.ecografia1 = true;

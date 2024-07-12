@@ -137,27 +137,54 @@
 
 <!-- MODAL DE ECOGRAFIAS  -->
 <p-dialog 
-    header="Header" 
+    header="TIPO DE ECOGRAFIA A GENERAR" 
     [modal]="true"
     [(visible)]="ecografia1" 
-    [style]="{ width: '70rem' }" 
+    [style]="{ width: '50rem' }" 
     [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" 
     [maximizable]="true">
     <!-- CONTENIDO -->
 
+    <p-table
+                  #ecografias
+                  [rows]="5"
+                  [paginator]="true"
+                  [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+                  [tableStyle]="{ 'min-width': '75rem' }"
+                  [rowHover]="true"
+                  dataKey="id"
+                  currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas"
+                >
+                <ng-template pTemplate="caption">
+                  <div class="flex align-items-center justify-content-between">
+                    <span class="p-input-icon-left">
+                      <i class="pi pi-search"></i>
+                      <input
+                        pInputText
+                        type="text"
+                        class="form-control"
+                        (input)="ecografias.filterGlobal($any($event.target).value, 'contains')" 
+                        placeholder="Buscar..."
+                      />
+                    </span>
+                  </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th  class="text-xs text-white bg-default" style="width:5%"></th>
+                    <th  class="text-xs text-white bg-default" style="width:7%">ID</th>
+                    <th  class="text-xs text-white bg-default" style="width:40%">TIPO DE ECOGRAFIA</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-getAdmissions>
+                  
+                </ng-template>
+               </p-table>
+
     <ng-template pTemplate="footer">
       <button class="btn btn-danger btn-sm">Cancelar</button>
       <button class="btn btn-primary btn-sm mx-2">Guardar</button>
-      <!-- <p-button 
-          label="Cancel" 
-          [text]="true" 
-          severity="secondary" 
-          (click)="visible = false" />
-      <p-button 
-          label="Save" 
-          [outlined]="true" 
-          severity="secondary" 
-          (click)="visible = false" 
-        /> -->
   </ng-template>
 </p-dialog>
+
+

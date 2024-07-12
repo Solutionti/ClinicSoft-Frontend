@@ -35,7 +35,7 @@ export class PacientesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getpacientesTable();
+    // this.getpacientesTable();
     this.getSex();
     this.getDepartaments();
     this.getAcademics();
@@ -120,6 +120,11 @@ export class PacientesComponent implements OnInit {
   get civilControl(): FormControl {
     return this.crearPacienteForm.get('crearpaciente_estadocivil') as FormControl;
   }
+
+  consultaPacienteForm = new FormGroup({
+    tpdocumento_consulta: new FormControl('DNI'),
+    documento_consulta: new FormControl()
+  });
 
   getSexs: any[] = [];
   getSex() {
@@ -226,13 +231,17 @@ export class PacientesComponent implements OnInit {
 
         });
   }
-
+  
   getPaciente: any [] = [];
+
   getpacientesTable() {
+    this.spinner = false;
+    let documento = this.consultaPacienteForm.get("documento_consulta")?.value;
     this.admisionService
-        .getpacientesTable()
+        .getpacientesTable(documento)
         .subscribe((response: any ) => {
           this.getPaciente = response;
+          this.spinner = true;
         })
   }
 
