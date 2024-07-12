@@ -265,11 +265,14 @@ header="HISTORIA CLINICA DEL PACIENTE"
 [style]="{ width: '75rem' }"
 [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
 [maximizable]="true">
+
 <!-- CONTENIDO -->
 <div class="d-flex align-items-start">
   <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
     <button class="nav-link active btn-primary" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Antecedentes</button>
+    <button class="nav-link  btn-primary" id="v-pills-anamnesis-tab" data-bs-toggle="pill" data-bs-target="#v-pills-anamnesis" type="button" role="tab" aria-controls="v-pills-anamnesis" aria-selected="true">Anamnesis</button>
     <button class="nav-link  btn-primary" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Examen fisico</button>
+    <button class="nav-link  btn-primary" id="v-pills-consulta-tab" data-bs-toggle="pill" data-bs-target="#v-pills-consulta" type="button" role="tab" aria-controls="v-pills-consulta" aria-selected="false">Consulta</button>
     <button class="nav-link  btn-primary" id="v-pills-disabled-tab" data-bs-toggle="pill" data-bs-target="#v-pills-disabled" type="button" role="tab" aria-controls="v-pills-disabled" aria-selected="false">Plan de trabajo</button>
     <button class="nav-link  btn-primary" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Diagnosticos</button>
     <button class="nav-link  btn-primary" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Procedimientos</button>
@@ -719,6 +722,13 @@ header="HISTORIA CLINICA DEL PACIENTE"
       </div>
     </div>
     </div>
+    <div class="tab-pane fade" id="v-pills-anamnesis" role="tabpanel" aria-labelledby="v-pills-anamnesis-tab" tabindex="0">
+      <h2>Anamnesis</h2>
+    </div>
+    <div class="tab-pane fade" id="v-pills-consulta" role="tabpanel" aria-labelledby="v-pills-consulta-tab" tabindex="0">
+      <h2>consulta</h2>
+    </div>
+
   </div>
 </div>
 <ng-template pTemplate="footer">
