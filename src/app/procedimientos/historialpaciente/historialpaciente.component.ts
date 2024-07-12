@@ -84,7 +84,26 @@ export class HistorialpacienteComponent implements OnInit {
   });
 
   examenForm: FormGroup = new FormGroup({
-    piel_examen: new FormControl(''),
+    examen_piel: new FormControl(''),
+    examen_tiroides: new FormControl(''),
+    examen_mamas: new FormControl(''),
+    examen_respiratorio: new FormControl(''),
+    examen_cardiovascular: new FormControl(''),
+    examen_abdomen: new FormControl(''),
+    examen_genito: new FormControl(''),
+    examen_tacto: new FormControl(''),
+    examen_locomotor: new FormControl(''),
+    examen_sistema: new FormControl(''),
+  });
+
+  planForm: FormGroup = new FormGroup({
+    plan_examen: new FormControl(''),
+    plan_procedimiento: new FormControl(''),
+    plan_interconsulta: new FormControl(''),
+    plan_tratamiento: new FormControl(''),
+    plan_referencia: new FormControl(''),
+    plan_cita: new FormControl(''),
+    plan_firma: new FormControl(''),
 
   });
 

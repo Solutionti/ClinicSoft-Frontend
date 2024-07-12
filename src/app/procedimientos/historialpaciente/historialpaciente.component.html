@@ -447,21 +447,179 @@ header="HISTORIA CLINICA DEL PACIENTE"
      <div class="container-fluid">
       <p class="text-white">************************************************************************************************************+******</p>
       <form [formGroup]="examenForm">
-      <div class="row">
+      <div class="row mt-2">
       <div class="col-md-4">
         <label>PIEL Y TSCS</label>
         <input
           type="text"
           class="form-control form-control-sm"
-          formControlName="piel_examen"
+          formControlName="examen_piel"
         >
       </div>
+      <div class="col-md-4">
+        <label>TIROIDES</label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          formControlName="examen_tiroides"
+        >
+      </div>
+      <div class="col-md-4">
+        <label>MAMAS</label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          formControlName="examen_mamas"
+        >
+      </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-4">
+          <label>A RESPIRATORIO</label>
+          <input
+            type="text"
+            class="form-control form-control-sm"
+            formControlName="examen_respiratorio"
+          >
+        </div>
+        <div class="col-md-4">
+          <label>A CARDIOVASCULAR</label>
+          <input
+            type="text"
+            class="form-control form-control-sm"
+            formControlName="examen_cardiovascular"
+          >
+        </div>
+        <div class="col-md-4">
+          <label>ABDOMEN</label>
+          <input
+            type="text"
+            class="form-control form-control-sm"
+            formControlName="examen_abdomen"
+          >
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-3">
+          <label>A GENITO - URINARIO</label>
+          <input
+            type="text"
+            class="form-control form-control-sm"
+            formControlName="examen_genito"
+          >
+        </div>
+        <div class="col-md-3">
+          <label>TACTO RECTAL</label>
+          <input
+            type="text"
+            class="form-control form-control-sm"
+            formControlName="examen_tacto"
+          >
+        </div>
+        <div class="col-md-3">
+          <label>LOCOMOTOR</label>
+          <input
+            type="text"
+            class="form-control form-control-sm"
+            formControlName="examen_locomotor"
+          >
+        </div>
+        <div class="col-md-3">
+          <label>SISTEMA NERVIOSO</label>
+          <input
+            type="text"
+            class="form-control form-control-sm"
+            formControlName="examen_sistema"
+          >
+        </div>
       </div>
       </form>
      </div>
     </div>
     <div class="tab-pane fade" id="v-pills-disabled" role="tabpanel" aria-labelledby="v-pills-disabled-tab" tabindex="0">
-      PLAN DE TRABAJO
+      <!-- PLAN DE TRABAJO -->
+       <div class="container-fluid">
+        <p class="text-white">************************************************************************************************************+******</p>
+        <form [formGroup]="planForm">
+          <div class="row mt-2">
+            <div class="col-md-12">
+              <label>EXAMEN DE AYUDA AL DX</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="plan_examen"
+              >
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-12">
+              <label>PROCEDIMIENTOS</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="plan_procedimiento"
+              >
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-12">
+              <label>INTERCONSULTAS</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="plan_interconsulta"
+              >
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-12">
+              <label>TRATAMIENTO</label>
+              <div class="form-floating">
+                <textarea
+                  class="form-control form-control-sm"
+                  formControlName="plan_tratamiento"
+                  placeholder="Leave a comment here"
+                  id="floatingTextarea"
+                >
+              </textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-12">
+              <label>REFERENCIA</label>
+              <div class="form-floating">
+                <textarea
+                  class="form-control form-control-sm"
+                  formControlName="plan_referencia"
+                  placeholder="Leave a comment here"
+                  id="floatingTextarea"
+                >
+              </textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-6">
+              <label>PROXIMA CITA</label>
+              <input
+                type="date"
+                class="form-control form-control-sm"
+                formControlName="plan_cita"
+              >
+            </div>
+            <div class="col-md-6">
+              <label>FIRMA DEL MEDICO</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="plan_firma"
+              >
+            </div>
+          </div>
+
+        </form>
+       </div>
     </div>
     <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab" tabindex="0">
       <div class="container">
