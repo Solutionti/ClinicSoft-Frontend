@@ -723,12 +723,168 @@ header="HISTORIA CLINICA DEL PACIENTE"
     </div>
     </div>
     <div class="tab-pane fade" id="v-pills-anamnesis" role="tabpanel" aria-labelledby="v-pills-anamnesis-tab" tabindex="0">
-      <h2>Anamnesis</h2>
+     <!-- <h2>Anamnesis</h2> -->
+      <div class="container-fluid">
+        <p class="text-white">************************************************************************************************************+******</p>
+        <form [formGroup]="anamnesisForm" >
+        <div class="row mt-2">
+          <div class="col-md-12">
+            <select
+              class="form-select form-select-sm form-control form-control-sm"
+              aria-label="Small select example"
+              formControlName="anamnesis_directa"
+            >
+              <option value="1">DIRECTA</option>
+            </select>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-md-4">
+            <label>EMPRESA</label>
+            <input
+              type="text"
+              class="form-control form-control-sm"
+              formControlName="anamnesis_empresa"
+            >
+          </div>
+          <div class="col-md-4">
+            <label>COMPAÑIA</label>
+            <input
+              type="text"
+              class="form-control form-control-sm"
+              formControlName="anamnesis_compañia"
+            >
+          </div>
+          <div class="col-md-4">
+            <label>IAFA</label>
+            <input
+              type="text"
+              class="form-control form-control-sm"
+              formControlName="anamnesis_iafa"
+            >
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-md-12">
+            <label>NOMBRES Y APELLIDOS DEL ACOMPAÑANTE</label>
+            <input
+              type="text"
+              class="form-control form-control-sm"
+              formControlName="anamnesis_acompañante"
+            >
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-md-6">
+            <label>DNI</label>
+            <input
+              type="number"
+              class="form-control form-control-sm"
+              formControlName="anamnesis_dni"
+            >
+          </div>
+          <div class="col-md-6">
+            <label>CELULAR</label>
+            <input
+              type="number"
+              class="form-control form-control-sm"
+              formControlName="anamnesis_celular"
+            >
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-md-12">
+            <label>MOTIVO CONSULTA</label>
+            <textarea
+              class="form-control form-control-sm"
+              formControlName="anamnesis_consulta"
+            ></textarea>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-md-12">
+            <label>TRATAMIENTO ANTERIOR</label>
+            <textarea
+              class="form-control form-control-sm"
+              formControlName="anamnesis_tratamiento"
+            ></textarea>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-md-12">
+            <label>ENFERMEDAD ACTUAL</label>
+            <input
+              type="text"
+              class="form-control form-control-sm"
+              formControlName="anamnesis_enfermedad"
+            >
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-md-4">
+            <label>TIEMPO DE ENFERMEDAD</label>
+            <input
+              type="text"
+              class="form-control form-control-sm"
+              formControlName="anamnesis_tiempo"
+            >
+          </div>
+          <div class="col-md-4">
+            <label>INICIO</label>
+            <input
+              type="text"
+              class="form-control form-control-sm"
+              formControlName="anamnesis_inicio"
+            >
+          </div>
+          <div class="col-md-4">
+            <label>CURSO</label>
+            <input
+              type="text"
+              class="form-control form-control-sm"
+              formControlName="anamnesis_curso"
+            >
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-md-12">
+            <label>SINTOMAS</label>
+            <input
+              type="text"
+              class="form-control form-control-sm"
+              formControlName="anamnesis_sintomas"
+            >
+          </div>
+        </div>
+      </form>
+      </div>
     </div>
     <div class="tab-pane fade" id="v-pills-consulta" role="tabpanel" aria-labelledby="v-pills-consulta-tab" tabindex="0">
-      <h2>consulta</h2>
+     <!--  <h2>consulta</h2> -->
+       <div class="container-fluid">
+        <p class="text-white">************************************************************************************************************+******</p>
+        <form [formGroup]="consultaForm">
+          <div class="row mt-2">
+            <div class="col-md-12">
+              <label>MOTIVO CONSULTA</label>
+              <textarea
+              class="form-control form-control-sm"
+              formControlName="consulta_motivo"
+            ></textarea>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-12">
+              <label>SIGNOS Y SINTOMAS</label>
+              <textarea
+              class="form-control form-control-sm"
+              formControlName="consulta_sintomas"
+            ></textarea>
+            </div>
+          </div>
+        </form>
+       </div>
     </div>
-
   </div>
 </div>
 <ng-template pTemplate="footer">

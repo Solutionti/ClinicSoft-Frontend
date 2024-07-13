@@ -104,7 +104,28 @@ export class HistorialpacienteComponent implements OnInit {
     plan_referencia: new FormControl(''),
     plan_cita: new FormControl(''),
     plan_firma: new FormControl(''),
+  });
 
+  anamnesisForm: FormGroup = new FormGroup ({
+    anamnesis_directa: new FormControl(''),
+    anamnesis_empresa: new FormControl(''),
+    anamnesis_compañia: new FormControl(''),
+    anamnesis_iafa: new FormControl(''),
+    anamnesis_acompañante: new FormControl(''),
+    anamnesis_dni: new FormControl(''),
+    anamnesis_celular: new FormControl(''),
+    anamnesis_consulta: new FormControl(''),
+    anamnesis_tratamiento: new FormControl(''),
+    anamnesis_enfermedad: new FormControl(''),
+    anamnesis_tiempo: new FormControl(''),
+    anamnesis_inicio: new FormControl(''),
+    anamnesis_curso: new FormControl(''),
+    anamnesis_sintomas: new FormControl(''),
+  });
+
+  consultaForm: FormGroup = new FormGroup ({
+    consulta_motivo: new FormControl(''),
+    consulta_sintomas: new FormControl(''),
   });
 
   getDataHistoriaCLinica() {
