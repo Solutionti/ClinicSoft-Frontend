@@ -24,7 +24,7 @@
                             <li class="list-inline-item">
                               <i class="bi-geo-alt-fill text-primary me-1"></i> {{ fechanacimiento }} - 30 años
                             </li>
-                            <li> Editar - <a (click)="imprimirhistoriaclinica()" class="text-primary">Imprimir</a> </li>
+                            <li> <a class="text-danger" (click)="citas = true"> Nueva</a> - <a (click)="imprimirhistoriaclinica()" class="text-primary">Imprimir</a> </li>
                           </ul>
                         </div>
                       </div>
@@ -123,7 +123,48 @@
         </a>
       </div>
       <div id="btn-icon-start-collapseTwo" class="accordion-collapse collapse" aria-labelledby="btn-icon-start-headingTwo" data-bs-parent="#accordionBtnIconStartExample">
-        <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-btn-icon-start</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+        <div class="accordion-body">
+          <div class="row">
+            <div class="col-md-4" style="color:gray !important">
+              <h6 >Familiares</h6>
+              <h6>Patologicos</h6>
+              <h6>Gineco - Obstetricos</h6>
+              <h6>Fum</h6>
+              <h6>RM (RET.MENSTR)</h6>
+              <h6>Flujo Genital</h6>
+              <h6>No Parejas</h6>
+              <h6>Gestas</h6>
+              <h6>Partos</h6>
+              <h6>Abortos</h6>
+              <h6>Anticonceptivos</h6>
+              <h6>Tipos</h6>
+              <h6>Tiempo</h6>
+              <h6>Cirugia Ginecologia</h6>
+              <h6>Otros</h6>
+              <h6>Fecha PAP</h6>
+              <h6>No Hijos</h6>
+            </div>
+            <div class="col-md-8">
+              <h6 style="color:gray !important" ><i class="fas fa-check text-success"></i> Familiares</h6>
+              <h6 style="color:gray !important"><i class="fas fa-check text-success"></i> Patologicos</h6>
+              <h6 style="color:gray !important"><i class="fas fa-check text-success"></i> Gineco - Obstetricos</h6>
+              <h6 style="color:gray !important"><i class="fas fa-check text-success"></i> Fum</h6>
+              <h6 style="color:gray !important"><i class="fas fa-check text-success"></i> RM (RET.MENSTR)</h6>
+              <h6 style="color:gray !important"><i class="fas fa-check text-success"></i> Flujo Genital</h6>
+              <h6 style="color:gray !important"><i class="fas fa-check text-success"></i> No Parejas</h6>
+              <h6 style="color:gray !important"><i class="fas fa-check text-success"></i> Gestas</h6>
+              <h6 style="color:gray !important"><i class="fas fa-check text-success"></i> Partos</h6>
+              <h6 style="color:gray !important"><i class="fas fa-check text-success"></i> Abortos</h6>
+              <h6 style="color:gray !important"><i class="fas fa-check text-success"></i> Anticonceptivos</h6>
+              <h6 style="color:gray !important"><i class="fas fa-check text-success"></i> Tipos</h6>
+              <h6 style="color:gray !important"><i class="fas fa-check text-success"></i> Tiempo</h6>
+              <h6 style="color:gray !important"><i class="fas fa-check text-success"></i> Cirugia Ginecologia</h6>
+              <h6 style="color:gray !important"><i class="fas fa-check text-success"></i> Otros</h6>
+              <h6 style="color:gray !important"><i class="fas fa-check text-success"></i> Fecha PAP</h6>
+              <h6 style="color:gray !important"><i class="fas fa-check text-success"></i> No Hijos</h6>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <!-- <div class="accordion-item">
@@ -190,7 +231,6 @@
                           <div class="d-grid gap-2">
                             <button
                               class="btn btn-primary rounded-pill"
-                              (click)="citas = true"
                             >
                               Nueva Consulta
                             </button>
@@ -327,6 +367,20 @@ header="HISTORIA CLINICA DEL PACIENTE"
       [hidden]="axamen_fisico"
     >
       Examen fisico
+    </button>
+    <button
+      class="nav-link  btn-primary"
+      id="v-pills-fisico2-tab"
+      data-bs-toggle="pill"
+      data-bs-target="#v-pills-fisico2"
+      type="button"
+      role="tab"
+      aria-controls="v-pills-fisico2"
+      aria-selected="false"
+      >
+      <!-- [disabled]="axamen_fisico"
+      [hidden]="axamen_fisico" -->
+      Examen fisico2
     </button>
     <button
       class="nav-link  btn-primary"
@@ -650,7 +704,7 @@ header="HISTORIA CLINICA DEL PACIENTE"
     <div class="tab-pane fade" id="v-pills-disabled" role="tabpanel" aria-labelledby="v-pills-disabled-tab" tabindex="0">
       <!-- PLAN DE TRABAJO -->
        <div class="container-fluid">
-        <p class="text-white">************************************************************************************************************+******</p>
+        <p class="text-white">*******************************************************************************************************************</p>
         <form [formGroup]="planForm">
           <div class="row mt-2">
             <div class="col-md-12">
@@ -732,6 +786,7 @@ header="HISTORIA CLINICA DEL PACIENTE"
         </form>
        </div>
     </div>
+    
     <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab" tabindex="0">
       <div class="container">
         <div class="row">
@@ -992,6 +1047,9 @@ header="HISTORIA CLINICA DEL PACIENTE"
           </div>
         </form>
        </div>
+    </div>
+    <div class="tab-pane fade" id="v-pills-fisico2" role="tabpanel" aria-labelledby="v-pills-fisico2-tab" tabindex="0">
+      <h3>fisico</h3>
     </div>
   </div>
 </div>
