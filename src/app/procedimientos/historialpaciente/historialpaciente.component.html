@@ -144,7 +144,7 @@
               <h6>Fecha PAP</h6>
               <h6>No Hijos</h6>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-8">
               <h6 style="color:gray !important" ><i class="fas fa-check text-success"></i> Familiares</h6>
               <h6 style="color:gray !important"><i class="fas fa-check text-success"></i> Patologicos</h6>
               <h6 style="color:gray !important"><i class="fas fa-check text-success"></i> Gineco - Obstetricos</h6>
@@ -367,6 +367,20 @@ header="HISTORIA CLINICA DEL PACIENTE"
       [hidden]="axamen_fisico"
     >
       Examen fisico
+    </button>
+    <button
+      class="nav-link  btn-primary"
+      id="v-pills-fisico2-tab"
+      data-bs-toggle="pill"
+      data-bs-target="#v-pills-fisico2"
+      type="button"
+      role="tab"
+      aria-controls="v-pills-fisico2"
+      aria-selected="false"
+      >
+      <!-- [disabled]="axamen_fisico"
+      [hidden]="axamen_fisico" -->
+      Examen fisico2
     </button>
     <button
       class="nav-link  btn-primary"
@@ -690,7 +704,7 @@ header="HISTORIA CLINICA DEL PACIENTE"
     <div class="tab-pane fade" id="v-pills-disabled" role="tabpanel" aria-labelledby="v-pills-disabled-tab" tabindex="0">
       <!-- PLAN DE TRABAJO -->
        <div class="container-fluid">
-        <p class="text-white">************************************************************************************************************+******</p>
+        <p class="text-white">*******************************************************************************************************************</p>
         <form [formGroup]="planForm">
           <div class="row mt-2">
             <div class="col-md-12">
@@ -772,6 +786,7 @@ header="HISTORIA CLINICA DEL PACIENTE"
         </form>
        </div>
     </div>
+    
     <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab" tabindex="0">
       <div class="container">
         <div class="row">
@@ -1032,6 +1047,9 @@ header="HISTORIA CLINICA DEL PACIENTE"
           </div>
         </form>
        </div>
+    </div>
+    <div class="tab-pane fade" id="v-pills-fisico2" role="tabpanel" aria-labelledby="v-pills-fisico2-tab" tabindex="0">
+      <h3>fisico</h3>
     </div>
   </div>
 </div>
