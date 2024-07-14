@@ -11,6 +11,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ProcedimientosService } from '../services/procedimientos.service';
 import { TableModule } from 'primeng/table';
 import { Footer } from 'primeng/api';
+import { PdfService } from '../../services/pdf.service';
 
 @Component({
   selector: 'app-historialpaciente',
@@ -33,11 +34,21 @@ export class HistorialpacienteComponent implements OnInit {
   archivos = false;
   historiaclinica = true;
 
+  //
+  antecedentes = true;
+  anamnesis = true;
+  axamen_fisico = true;
+  consulta = true;
+  plan_trabajo = true;
+  diagnostico = true;
+  procedimiento  = true;
+
   constructor(
     private route: ActivatedRoute,
     private procedimientoService: ProcedimientosService,
     private admisioneServices: AdmisionesService,
-    private listaServices: ListasService
+    private listaServices: ListasService,
+    private pdfServices: PdfService
   ) { }
 
   ngOnInit(): void {
@@ -128,6 +139,10 @@ export class HistorialpacienteComponent implements OnInit {
     consulta_sintomas: new FormControl(''),
   });
 
+  historiaTipoForm: FormGroup = new FormGroup ({
+    tphistoria: new FormControl({value: '', disabled: false})
+  });
+
   getDataHistoriaCLinica() {
     // DATOS DEL PACIENTE
     this.admisioneServices
@@ -166,7 +181,40 @@ export class HistorialpacienteComponent implements OnInit {
             this.agendadescripcion =  response.data.comentarios;
           });
       // CONSULTAS
-
   }
 
+  habilitarMenu() {
+    this.historiaTipoForm.get("tphistoria")?.disable();
+    let historia = this.historiaTipoForm.get("tphistoria")?.value;
+
+    if(historia == "1") {
+      this.anamnesis = false;
+      this.axamen_fisico = false;
+      this.plan_trabajo = false;
+      this.diagnostico = false;
+      this.procedimiento  = false;
+    }
+    else if(historia == "2") {
+      this.antecedentes = false;
+      this.consulta = false;
+      this.axamen_fisico = false;
+      this.diagnostico = false;
+      this.procedimiento  = false;
+    }
+    else if(historia == "") {
+      this.antecedentes = true;
+      this.anamnesis = true;
+      this.axamen_fisico = true;
+      this.consulta = true;
+      this.plan_trabajo = true;
+      this.diagnostico = true;
+      this.procedimiento  = true;
+    }
+  }
+
+  imprimirhistoriaclinica(){
+    this.pdfServices
+    .pdfHistoriaClinica()
+  }
+  
 }

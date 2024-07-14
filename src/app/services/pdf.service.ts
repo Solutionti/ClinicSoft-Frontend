@@ -11,6 +11,16 @@ export class PdfService {
     private http: HttpClient
   ) { }
 
+  pdfHistoriaClinica() {
+    const token: any  = localStorage.getItem("token");
+    const newtoken = token.substring(1, token.length - 1);
+
+    const url =  `${environment.apiClinicSoft}pdfHistoriaClinica`;
+
+    window.open(url, "_blank", " width=950, height=1000");
+    return this.http.get(url);
+  }
+
   pdfFacturaAdmision() {
     const token: any  = localStorage.getItem("token");
     const newtoken = token.substring(1, token.length - 1);
