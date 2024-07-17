@@ -147,7 +147,6 @@ export class KardexComponent implements OnInit {
     this.InventarioService
         .getProducts()
         .subscribe((response: any) =>{
-          console.log(response);
           this.getProduct = response;
     });
   }
@@ -157,7 +156,6 @@ export class KardexComponent implements OnInit {
     this.ListasService
         .getCategories()
         .subscribe((response: any ) => {
-          console.log(response);
           this.getCategorie = response
     });
   }
@@ -170,7 +168,6 @@ export class KardexComponent implements OnInit {
     this.InventarioService
         .getKardex(producto,fechainicial,fechafinal)
         .subscribe((response: any) => {
-          console.log(response);
           this.getKarde = response;
     });
 

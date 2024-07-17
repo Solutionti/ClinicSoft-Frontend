@@ -70,9 +70,9 @@
                 <option value="">SELECCIONE UNA OPCION</option>
                 <option
                   *ngFor="let product of getProduct"
-                  [value]="product.id"
+                  [value]="product.codigo_producto"
                 >
-                {{ product.descripcion }}
+                {{ product.nombre }}
               </option>
               </select>
               <div
@@ -210,7 +210,7 @@
             <option value="">SELECCIONE UNA OPCION</option>
             <option
               *ngFor="let producto of getProduct"
-              [value]="producto.id"
+              [value]="producto.codigo_producto"
             > {{ producto.nombre}} </option>
 
           </select>
@@ -347,8 +347,10 @@
             <option value="">SELECCIONE UNA OPCION</option>
             <option
               *ngFor="let produc of getProduct"
-              [value]="produc.id"
-            > {{produc.nombre}} </option>
+              [value]="produc.codigo_producto"
+            >
+              {{ produc.nombre }}
+            </option>
           </select>
           <div
               class="error"

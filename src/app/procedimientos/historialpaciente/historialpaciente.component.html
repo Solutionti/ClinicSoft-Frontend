@@ -2,6 +2,7 @@
 <!-- * * * * * * * * * * * JERSON GALVEZ ENSUNCHO * * * * * * * * * * * -->
 <!-- ******* * * * * * * * PROYECTO CLINICSOFT * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<p-toast position="top-right"/>
 <div class="min-height-300 bg-default position-absolute w-100"></div>
 <main class="main-content position-relative border-radius-lg">
   <app-cerrarsesion titulo="Historial Paciente"></app-cerrarsesion>
@@ -73,7 +74,12 @@
                       >
                         <li>
                           <i class="fas fa-file-pdf mx-1 text-danger"></i>
-                          <a href="#">{{ archivos.titulo }}</a>
+                          <a
+                            href="http://localhost:8000/archivospdf/{{ archivos.url_documento }}"
+                            target="_blank"
+                          >
+                            {{ archivos.titulo }}
+                          </a>
                          </li>
                         <small>1 mb | {{archivos.fecha}}</small>
                       </ul>
@@ -1066,34 +1072,41 @@ header="HISTORIA CLINICA DEL PACIENTE"
   [(visible)]="archivos"
   [style]="{ width: '25rem' }"
 >
-  <div class="flex align-items-center gap-3 mb-3">
-    <label>Tipo de Archivo</label>
-    <select
-      class="form-control form-control-sm"
-    >
-      <option value="">Seleccione una opcion</option>
-    </select>
-  </div>
-  <div class="flex align-items-center gap-3 mb-3">
-    <label>Titulo</label>
-    <input
-      type="text"
-      class="form-control form-control-sm"
-      autocomplete="off"
-    />
-  </div>
-  <div class="flex align-items-center gap-3 mb-5">
-      <label>Archivo</label>
-      <input
-        type="file"
+  <form [formGroup]="cargueDocumentosForm">
+    <div class="flex align-items-center gap-3 mb-3">
+      <label>Tipo de Archivo</label>
+      <select
         class="form-control form-control-sm"
-        accept=".pdf"
+        formControlName="tparchivo"
+      >
+        <option value="">Seleccione una opcion</option>
+        <option value="HF">Historial Fisico</option>
+        <option value="LB">Laboratorio</option>
+      </select>
+    </div>
+    <div class="flex align-items-center gap-3 mb-3">
+      <label>Titulo</label>
+      <input
+        type="text"
+        class="form-control form-control-sm"
+        formControlName="titulo"
+        autocomplete="off"
       />
-  </div>
+    </div>
+    <div class="flex align-items-center gap-3 mb-5">
+        <label>Archivo</label>
+        <input
+          type="file"
+          class="form-control form-control-sm"
+          (change)="cargueDocumento($event)"
+          accept=".pdf"
+        />
+    </div>
+    </form>
   <div class="flex justify-content-end gap-2">
     <button
       class="btn btn-primary btn-sm mx-2"
-      (click)="archivos = false"
+      (click)="subirArchivosPdf()"
     >
       Aceptar
     </button>
@@ -1124,5 +1137,13 @@ header="HISTORIA CLINICA DEL PACIENTE"
         <button type="button" class="btn btn-primary">Understood</button>
       </div>
     </div>
+  </div>
+</div>
+<div [hidden]="spinner" class="overlay z-index">
+  <div class="dot-wave">
+    <div class="dot-wave__dot"></div>
+    <div class="dot-wave__dot"></div>
+    <div class="dot-wave__dot"></div>
+    <div class="dot-wave__dot"></div>
   </div>
 </div>

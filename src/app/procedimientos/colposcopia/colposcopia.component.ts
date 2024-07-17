@@ -51,6 +51,8 @@ export class ColposcopiaComponent implements OnInit {
   file: any= [];
   previsualizacion: string = "";
   previsualizacion2: string = "";
+  public archivo1: any = [];
+  public archivo2: any = [];
   spinner = true;
 
   colposcopiasForm = new FormGroup ({
@@ -111,55 +113,93 @@ getPacientesId() {
         })
 }
 
-createColposcopia(): void {
-  let colposcopia: any = [
-    {
-     paciente: this.colposcopiasForm.get("dni_colposcopia")?.value,
-     fecha: this.colposcopiasForm.get("fecha_colposcopia")?.value,
-     medico: this.colposcopiasForm.get("medico_colposcopia")?.value,
-     escamo_columnar: this.colposcopiasForm.get("escamo_colposcopia")?.value,
-     endo_cervix: this.colposcopiasForm.get("cervix_colposcopia")?.value,
-     perineo: this.colposcopiasForm.get("perineo_colposcopia")?.value,
-     region_parianal: this.colposcopiasForm.get("parianal_colposcopia")?.value,
-     biopsia: this.colposcopiasForm.get("biopsia_colposcopia")?.value,
-     papanicolaou: this.colposcopiasForm.get("papanicolaou_colposcopia")?.value,
-     conclusiones: this.colposcopiasForm.get("conclusiones_colposcopia")?.value,
-     imagen1: this.colposcopiasForm.get("archivo1_colposcopia")?.value,
-     imagen2: this.colposcopiasForm.get("archivo2_colposcopia")?.value,
-     usuario: localStorage.getItem("usuario"),
-     vagina: this.colposcopiasForm.get("vagina_colposcopia")?.value,
-     vulva: this.colposcopiasForm.get("vulva_colposcopia")?.value,
-     cmp: "123",
-
-    }
-  ];
-  this.ProcedimientosService
-    .createColposcopia(colposcopia)
-    .subscribe((response: any) =>{
-      console.log(response);
-     });
-}
-
 imageUpload(e: any  ): void {
+  this.archivo1 = [];
   const target = e.target as HTMLInputElement;
   const archivo = e.target.files[0];
 
   this.extraerBase64(archivo).then((imagen: any ) => {
-    console.log(imagen);
     this.previsualizacion = imagen.base;
   });
-  // this.file.push(archivo);
-  // console.log(this.file);
+
+  this.archivo1.push(archivo);
+}
+
+createColposcopia(): any  {
+     this.spinner = false;
+     let paciente: any = this.colposcopiasForm.get("dni_colposcopia")?.value,
+     fecha: any = this.colposcopiasForm.get("fecha_colposcopia")?.value,
+     medico: any = this.colposcopiasForm.get("medico_colposcopia")?.value,
+     escamo_columnar: any = this.colposcopiasForm.get("escamo_colposcopia")?.value,
+     endo_cervix: any = this.colposcopiasForm.get("cervix_colposcopia")?.value,
+     perineo: any = this.colposcopiasForm.get("perineo_colposcopia")?.value,
+     region_parianal: any = this.colposcopiasForm.get("parianal_colposcopia")?.value,
+     biopsia: any = this.colposcopiasForm.get("biopsia_colposcopia")?.value,
+     papanicolaou: any = this.colposcopiasForm.get("papanicolaou_colposcopia")?.value,
+     conclusiones: any = this.colposcopiasForm.get("conclusiones_colposcopia")?.value,
+     usuario: any = localStorage.getItem("usuario"),
+     vagina: any = this.colposcopiasForm.get("vagina_colposcopia")?.value,
+     vulva: any = this.colposcopiasForm.get("vulva_colposcopia")?.value,
+     cmp: any = "123";
+
+
+  try {
+    const formdata = new FormData();
+
+    this.archivo1.forEach((element: any) => {
+      formdata.append('archivo', this.archivo1[0]);
+    });
+    this.archivo1.forEach((element: any) => {
+      formdata.append('archivo1', this.archivo2[0]);
+    });
+
+    formdata.append('paciente', paciente);
+    formdata.append('fecha', fecha);
+    formdata.append('medico', medico);
+    formdata.append('escamo_columnar', escamo_columnar);
+    formdata.append('endo_cervix', endo_cervix);
+    formdata.append('perineo', perineo);
+    formdata.append('region_parianal', region_parianal);
+    formdata.append('biopsia', biopsia);
+    formdata.append('papanicolaou', papanicolaou);
+    formdata.append('conclusiones', conclusiones);
+    formdata.append('usuario', usuario);
+    formdata.append('vagina', vagina);
+    formdata.append('vulva', vulva);
+    formdata.append('cmp', cmp);
+
+    this.ProcedimientosService
+    .createColposcopia(formdata)
+    .subscribe((response: any) =>{
+      if(response.status == 200) {
+        this.showSuccess(response.message);
+        this.getColposcopias();
+        this.spinner = true;
+        setTimeout(() => {
+          location.reload();
+        }, 3000);
+      }
+      else {
+        this.showError(response.message);
+        this.spinner = true;
+      }
+     });
+  }
+  catch(e) {
+
+  }
 }
 
 imageUpload2(e: any  ): void {
+  this.archivo2 = [];
   const target = e.target as HTMLInputElement;
   const archivo = e.target.files[0];
 
   this.extraerBase64(archivo).then((imagen: any ) => {
-    console.log(imagen);
     this.previsualizacion2 = imagen.base;
   });
+
+  this.archivo2.push(archivo);
 }
 
 extraerBase64 = async($event: any ) => new Promise((resolve, reject) => {

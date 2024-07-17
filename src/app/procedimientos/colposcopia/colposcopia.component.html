@@ -18,7 +18,7 @@
               <div class="d-flex flex-row-reverse">
                 <button
                   class="btn btn-primary text-white btn-xs mx-1"
-                  (click)="generarPdfColposcopia()"
+                  (click)="createColposcopia()"
                 >
                   <i class="fas fa-database text-white"></i> Crear
                 </button>
@@ -89,14 +89,24 @@
                     <td class="text-xs text-uppercase">{{ getColposcopia.medico }}</td>
                     <td>
                       <div>
-                        <img
-                          src="https://demos.creative-tim.com/soft-ui-design-system-pro/assets/img/team-2.jpg"
-                          class="avatar avatar-sm me-3"
+                        <a
+                          href="http://localhost:8000/colposcopia/{{getColposcopia.imagen1}}"
+                          target="_blank"
                         >
-                        <img
-                          src="https://demos.creative-tim.com/soft-ui-design-system-pro/assets/img/team-2.jpg"
-                          class="avatar avatar-sm me-3"
+                          <img
+                            src="http://localhost:8000/colposcopia/{{getColposcopia.imagen1}}"
+                            class="avatar avatar-sm me-3" 
+                          >
+                        </a>
+                        <a
+                          href="http://localhost:8000/colposcopia/{{getColposcopia.imagen2}}"
+                          target="_blank"
                         >
+                          <img
+                            src="http://localhost:8000/colposcopia/{{getColposcopia.imagen2}}"
+                            class="avatar avatar-sm me-3"
+                          >
+                        </a>
                       </div>
                     </td>
                   </tr>

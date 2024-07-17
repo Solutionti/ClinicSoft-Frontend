@@ -10,8 +10,9 @@ import { CommonModule } from '@angular/common';
 import { DialogModule } from 'primeng/dialog';
 import { ProcedimientosService } from '../services/procedimientos.service';
 import { TableModule } from 'primeng/table';
-import { Footer } from 'primeng/api';
+import { Footer, MessageService } from 'primeng/api';
 import { PdfService } from '../../services/pdf.service';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-historialpaciente',
@@ -23,9 +24,12 @@ import { PdfService } from '../../services/pdf.service';
     CerrarsesionComponent,
     CommonModule,
     DialogModule,
-    TableModule
+    TableModule,
+    ToastModule
   ],
-  templateUrl: './historialpaciente.component.html'
+  providers: [MessageService],
+  templateUrl: './historialpaciente.component.html',
+  styleUrl: './historialpaciente.component.css',
 })
 export class HistorialpacienteComponent implements OnInit {
 
@@ -33,7 +37,7 @@ export class HistorialpacienteComponent implements OnInit {
   citas = false;
   archivos = false;
   historiaclinica = true;
-
+  spinner = true;
   //
   antecedentes = true;
   anamnesis = true;
@@ -48,6 +52,7 @@ export class HistorialpacienteComponent implements OnInit {
     private procedimientoService: ProcedimientosService,
     private admisioneServices: AdmisionesService,
     private listaServices: ListasService,
+    private messageService: MessageService,
     private pdfServices: PdfService
   ) { }
 
@@ -143,6 +148,11 @@ export class HistorialpacienteComponent implements OnInit {
     tphistoria: new FormControl({value: '', disabled: false})
   });
 
+  cargueDocumentosForm: FormGroup = new FormGroup ({
+    tparchivo: new FormControl(''),
+    titulo: new FormControl(''),
+  });
+
   getDataHistoriaCLinica() {
     // DATOS DEL PACIENTE
     this.admisioneServices
@@ -212,9 +222,75 @@ export class HistorialpacienteComponent implements OnInit {
     }
   }
 
+
   imprimirhistoriaclinica(){
+    this.spinner = false;
+
     this.pdfServices
-    .pdfHistoriaClinica()
+    .pdfHistoriaClinica();
+    this.spinner = true;
+
+  }
+
+  archivopdf: any = [];
+
+  cargueDocumento(e: any ) {
+    const target = e.target as HTMLInputElement;
+    const archivo = e.target.files[0];
+    this.archivopdf.push(archivo);
+  }
+
+  subirArchivosPdf() {
+    this.spinner = false;
+    let tparchivo = this.cargueDocumentosForm.get("tparchivo")?.value,
+        titulo = this.cargueDocumentosForm.get("titulo")?.value,
+        usuario: any  = localStorage.getItem("usuario");
+
+    const formdata = new FormData();
+
+    this.archivopdf.forEach((element: any) => {
+      formdata.append('pdfs', this.archivopdf[0]);
+    });
+      formdata.append('paciente', '1110542802');
+      formdata.append('tparchivo', tparchivo);
+      formdata.append('titulo', titulo);
+      formdata.append('usuario', usuario);
+
+      this.procedimientoService
+          .subirArchivosPdf(formdata)
+          .subscribe((response: any ) => {
+            if(response.status == 200) {
+              this.showSuccess(response.message);
+              this.listaServices
+                  .getDocumentosPdfPacientes(this.paciente)
+                  .subscribe((response: any ) => {
+                    this.archivospdf = response;
+              });
+              this.spinner = true;
+            }
+            else {
+              this.showError(response.message);
+              this.spinner = true;
+            }
+          });
+  }
+
+  showError(message: string) {
+    this.messageService.add(
+      {
+        severity: 'error',
+        summary: 'ClinicSoft Aviso',
+        detail: message
+      }
+    );
+  }
+  
+  showSuccess(message: string) {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'ClinicSoft Aviso',
+      detail: message
+    });
   }
   
 }
