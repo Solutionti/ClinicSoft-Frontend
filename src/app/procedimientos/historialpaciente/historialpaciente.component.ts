@@ -152,6 +152,22 @@ export class HistorialpacienteComponent implements OnInit {
     tparchivo: new FormControl(''),
     titulo: new FormControl(''),
   });
+
+  fisicoForm: FormGroup = new FormGroup ({
+    fisico_piel: new FormControl(''),
+    fisico_cuello: new FormControl(''),
+    fisico_respiratorio: new FormControl(''),
+    fisico_cardio: new FormControl(''),
+    fisico_abdomen: new FormControl(''),
+    fisico_cabeza: new FormControl(''),
+    fisico_locomotor: new FormControl(''),
+    fisico_sistema: new FormControl(''),
+    fisico_apetito: new FormControl(''),
+    fisico_sed: new FormControl(''),
+    fisico_orina: new FormControl(''),
+  });
+
+
   createHistoriaClinica(): void {
     //this.spinner = false;
 
@@ -171,17 +187,18 @@ export class HistorialpacienteComponent implements OnInit {
         inicio: this.anamnesisForm.get("anamnesis_inicio")?.value,
         curso: this.anamnesisForm.get("anamnesis_curso")?.value,
         sintomas: this.anamnesisForm.get("anamnesis_sintomas")?.value,
-        cabeza: "nn",
-        cuello: "nn",
-        ap_respiratoria: "nn",
-        ap_cardio: "nn",
-        abdomen: "nn",
+        piel: this.fisicoForm.get("fisico_piel")?.value,
+        cuello: this.fisicoForm.get("fisico_cuello")?.value,
+        ap_respiratoria: this.fisicoForm.get("fisico_respiratorio")?.value,
+        ap_cardio: this.fisicoForm.get("fisico_cardio")?.value,
+        abdomen: this.fisicoForm.get("fisico_abdomen")?.value,
+        cabeza: this.fisicoForm.get("fisico_cabeza")?.value,
         ap_genitourinario: "nn",
-        loco_motor: "nn",
-        sistema_nervioso: "nn",
-        apetito: "nn",
-        sed: "nn",
-        orina: "nn",
+        loco_motor: this.fisicoForm.get("fisico_locomotor")?.value,
+        sistema_nervioso: this.fisicoForm.get("fisico_sistema")?.value,
+        apetito: this.fisicoForm.get("fisico_apetito")?.value,
+        sed: this.fisicoForm.get("fisico_sed")?.value,
+        orina: this.fisicoForm.get("fisico_orina")?.value,
         examen_dx: this.planForm.get("plan_examen")?.value,
         procedimientos: this.planForm.get("plan_procedimiento")?.value,
         interconsultas: this.planForm.get("plan_interconsulta")?.value,
@@ -370,7 +387,7 @@ export class HistorialpacienteComponent implements OnInit {
       }
     );
   }
-  
+
   showSuccess(message: string) {
     this.messageService.add({
       severity: 'success',

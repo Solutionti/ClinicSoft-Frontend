@@ -792,7 +792,7 @@ header="HISTORIA CLINICA DEL PACIENTE"
         </form>
        </div>
     </div>
-    
+
     <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab" tabindex="0">
       <div class="container">
         <div class="row">
@@ -1055,7 +1055,118 @@ header="HISTORIA CLINICA DEL PACIENTE"
        </div>
     </div>
     <div class="tab-pane fade" id="v-pills-fisico2" role="tabpanel" aria-labelledby="v-pills-fisico2-tab" tabindex="0">
-      <h3>fisico</h3>
+      <!--<h3>fisico</h3> -->
+      <div class="container-fluid">
+        <p class="text-white">************************************************************************************************************+******</p>
+        <form [formGroup]="fisicoForm">
+          <div class="row mt-2">
+            <div class="col-md-12">
+              <label>PIEL</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="fisico_piel"
+              >
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-12">
+              <label>CUELLO</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="fisico_cuello"
+              >
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-12">
+              <label>AP RESPIRATORIO</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="fisico_respiratorio"
+              >
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-12">
+              <label>AP CARDIO VASCULAR</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="fisico_cardio"
+              >
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-12">
+              <label>ABDOMEN</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="fisico_abdomen"
+              >
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-12">
+              <label>CABEZA</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="fisico_cabeza"
+              >
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-12">
+              <label>LOCOMOTOR</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="fisico_locomotor"
+              >
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-12">
+              <label>SISTEMA NERVIOSO</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="fisico_sistema"
+              >
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-4">
+              <label>APETITO</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="fisico_apetito"
+              >
+            </div>
+            <div class="col-md-4">
+              <label>SED</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="fisico_sed"
+              >
+            </div>
+            <div class="col-md-4">
+              <label>ORINA</label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                formControlName="fisico_orina"
+              >
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>
