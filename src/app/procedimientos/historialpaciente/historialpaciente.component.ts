@@ -42,6 +42,7 @@ export class HistorialpacienteComponent implements OnInit {
   antecedentes = true;
   anamnesis = true;
   axamen_fisico = true;
+  axamen_fisico2 = true;
   consulta = true;
   plan_trabajo = true;
   diagnostico = true;
@@ -302,7 +303,7 @@ export class HistorialpacienteComponent implements OnInit {
 
     if(historia == "1") {
       this.anamnesis = false;
-      this.axamen_fisico = false;
+      this.axamen_fisico2 = false;
       this.plan_trabajo = false;
       this.diagnostico = false;
       this.procedimiento  = false;
@@ -318,6 +319,7 @@ export class HistorialpacienteComponent implements OnInit {
       this.antecedentes = true;
       this.anamnesis = true;
       this.axamen_fisico = true;
+      this.axamen_fisico2 = true;
       this.consulta = true;
       this.plan_trabajo = true;
       this.diagnostico = true;
