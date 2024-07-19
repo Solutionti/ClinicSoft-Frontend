@@ -170,7 +170,7 @@ export class HistorialpacienteComponent implements OnInit {
 
 
   createHistoriaClinica(): void {
-    //this.spinner = false;
+    this.spinner = false;
 
     let pacientes: any = [
       {
@@ -253,9 +253,19 @@ export class HistorialpacienteComponent implements OnInit {
         this.procedimientoService
             .createHistoriaClinica(pacientes)
             .subscribe((response: any ) => {
+              if(response.status == 200) {
+                this.showSuccess(response.message);
+                this.spinner = true;
 
-
-            })
+                setTimeout(() => {
+                  location.reload();
+                }, 3000);
+              }
+              else {
+                this.showError(response.message);
+                this.spinner = true;
+              }
+            });
 
   };
 
