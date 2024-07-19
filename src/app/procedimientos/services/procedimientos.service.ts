@@ -18,7 +18,7 @@ export class ProcedimientosService {
 
   createColposcopia(formdata: FormData){
     const url = `${environment.apiClinicSoft}createColposcopia`;
-    
+
     return this.http.post(url,formdata);
   }
 
@@ -26,6 +26,7 @@ export class ProcedimientosService {
     const url = `${environment.apiClinicSoft}createHistoriaClinica`;
 
     return this.http.post(url,{
+      tphistoria: datos[0].tphistoria,
       anamnesis: datos[0].anamnesis,
       empresa: datos[0].empresa,
       compania: datos[0].compania,

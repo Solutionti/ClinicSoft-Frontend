@@ -1172,7 +1172,10 @@ header="HISTORIA CLINICA DEL PACIENTE"
 </div>
 <ng-template pTemplate="footer">
   <button class="btn btn-danger btn-sm">Cancelar</button>
-  <button class="btn btn-primary btn-sm mx-2">Guardar</button>
+  <button
+    class="btn btn-primary btn-sm mx-2"
+    (click)="createHistoriaClinica()"
+  >Guardar</button>
 </ng-template>
 </p-dialog>
 

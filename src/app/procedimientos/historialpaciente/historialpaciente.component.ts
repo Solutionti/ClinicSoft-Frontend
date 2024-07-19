@@ -173,6 +173,7 @@ export class HistorialpacienteComponent implements OnInit {
 
     let pacientes: any = [
       {
+        tphistoria: this.historiaTipoForm.get("tphistoria")?.value,
         anamnesis: this.anamnesisForm.get("anamnesis_directa")?.value,
         empresa: this.anamnesisForm.get("anamnesis_empresa")?.value,
         compania: this.anamnesisForm.get("anamnesis_compañia")?.value,
@@ -193,7 +194,7 @@ export class HistorialpacienteComponent implements OnInit {
         ap_cardio: this.fisicoForm.get("fisico_cardio")?.value,
         abdomen: this.fisicoForm.get("fisico_abdomen")?.value,
         cabeza: this.fisicoForm.get("fisico_cabeza")?.value,
-        ap_genitourinario: "nn",
+        ap_genitourinario: "",
         loco_motor: this.fisicoForm.get("fisico_locomotor")?.value,
         sistema_nervioso: this.fisicoForm.get("fisico_sistema")?.value,
         apetito: this.fisicoForm.get("fisico_apetito")?.value,
@@ -203,11 +204,12 @@ export class HistorialpacienteComponent implements OnInit {
         procedimientos: this.planForm.get("plan_procedimiento")?.value,
         interconsultas: this.planForm.get("plan_interconsulta")?.value,
         tratamiento: this.planForm.get("plan_tratamiento")?.value,
-        plan_trabajo: "nn",
+        plan_trabajo: "",
         referencia: this.planForm.get("plan_referencia")?.value,
         proxima_cita: this.planForm.get("plan_cita")?.value,
         firma_medico: this.planForm.get("plan_firma")?.value,
-        usuario: "nn",
+        usuario: localStorage.getItem("usuario"),
+        //
         familiares1: this.antecedentesForm.get("antecedentes_familiares")?.value,
         patologicos1: this.antecedentesForm.get("antecedentes_patologicos")?.value,
         gineco_obstetrico1: this.antecedentesForm.get("antecedentes_gineco")?.value,
@@ -237,12 +239,12 @@ export class HistorialpacienteComponent implements OnInit {
         tacto_rectal1: this.examenForm.get("examen_tacto")?.value,
         locomotor1: this.examenForm.get("examen_locomotor")?.value,
         sistema_nervioso1: this.examenForm.get("examen_sistema")?.value,
-        examenes_auxiiliares1: "nn",
-        plan_trabajo1: "nn",
-        tratamiento1: "nn",
-        proxima_cita1: "nn",
-        firma_medico1: "nn",
-        estado1: "nn",
+        examenes_auxiiliares1: "",
+        plan_trabajo1: "",
+        tratamiento1: "",
+        proxima_cita1: "",
+        firma_medico1: "",
+        estado1: "Activo",
         usuario1: localStorage.getItem("usuario")
           }
         ];
