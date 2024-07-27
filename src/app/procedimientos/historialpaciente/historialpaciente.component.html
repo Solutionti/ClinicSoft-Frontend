@@ -206,11 +206,121 @@
       <div class="accordion-item">
         <div class="accordion-header" id="btn-icon-start-headingThree">
           <a class="accordion-button collapsed" role="button" data-bs-toggle="collapse" data-bs-target="#diagnosticos" aria-expanded="false" aria-controls="diagnosticos">
-              <span class="ps-1 text-info text-bold"><i class="fas fa-plus"></i> DIAGNOSTICOS y PROCEDIMIENTOS</span>
+              <span class="ps-1 text-info text-bold"><i class="fas fa-plus"></i> DIAGNOSTICOS</span>
           </a>
         </div>
         <div id="diagnosticos" class="accordion-collapse collapse" aria-labelledby="btn-icon-start-headingThree" data-bs-parent="#accordionBtnIconStartExample">
-          <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-btn-icon-start</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+          <div class="accordion-body">
+            <!--PONER TABLA-->
+            <div class="row">
+              <div class="col-md-12">
+                <div class="table-responsive">
+                  <p-table
+                    #diagnosticos
+                    [rows]="3"
+                    [value]="getDiagnostico"
+                    [paginator]="true"
+                    [globalFilterFields]="['documento', 'getDiagnostico.documento', 'apellido', 'getDiagnostico.apellido', 'nombre', 'getDiagnostico.nombre']"
+                    [tableStyle]="{ 'min-width': '75rem' }"
+                    [rowHover]="true"
+                    dataKey="id"
+                    currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas"
+                    [showCurrentPageReport]="true"
+                  >
+                  <ng-template pTemplate="caption">
+                    <div class="flex align-items-center justify-content-between">
+                      <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input
+                          pInputText
+                          type="text"
+                          class="form-control"
+                          (input)="diagnosticos.filterGlobal($any($event.target).value, 'contains')"
+                          placeholder="Buscar..."
+                        />
+                      </span>
+                    </div>
+                  </ng-template>
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th class="text-xs text-white bg-default"></th>
+                      <th pSortableColumn="docuemento" class="text-xs text-white bg-default" style="width:27%">CODIGO</th>
+                      <th class="text-xs text-white bg-default">NOMBRE DIAGNOSTICO</th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-diagnosticos>
+                    <tr>
+                      <td></td>
+                      <td class="text-xs text-uppercase">{{ diagnosticos.clave }}</td>
+                      <td class="text-xs text-uppercase">{{ diagnosticos.descripcion }}</td>
+                    </tr>
+                  </ng-template>
+                 </p-table>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header" id="btn-icon-start-headingThree">
+          <a class="accordion-button collapsed" role="button" data-bs-toggle="collapse" data-bs-target="#procedimientos" aria-expanded="false" aria-controls="procedimientos">
+              <span class="ps-1 text-info text-bold"><i class="fas fa-plus"></i> PROCEDIMIENTOS</span>
+          </a>
+        </div>
+        <div id="procedimientos" class="accordion-collapse collapse" aria-labelledby="btn-icon-start-headingThree" data-bs-parent="#accordionBtnIconStartExample">
+          <div class="accordion-body">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="table-responsive">
+                  <p-table
+                    #procedimientos
+                    [rows]="3"
+                    [value]="getDiagnostico"
+                    [paginator]="true"
+                    [globalFilterFields]="['documento', 'getDiagnostico.documento', 'apellido', 'getDiagnostico.apellido', 'nombre', 'getDiagnostico.nombre']"
+                    [tableStyle]="{ 'min-width': '75rem' }"
+                    [rowHover]="true"
+                    dataKey="id"
+                    currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas"
+                    [showCurrentPageReport]="true"
+                  >
+                  <ng-template pTemplate="caption">
+                    <div class="flex align-items-center justify-content-between">
+                      <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input
+                          pInputText
+                          type="text"
+                          class="form-control"
+                          (input)="procedimientos.filterGlobal($any($event.target).value, 'contains')"
+                          placeholder="Buscar..."
+                        />
+                      </span>
+                    </div>
+                  </ng-template>
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th class="text-xs text-white bg-default"></th>
+                      <th pSortableColumn="docuemento" class="text-xs text-white bg-default" style="width:27%">CODIGO</th>
+                      <th class="text-xs text-white bg-default">NOMBRE PROCEDIMIENTO</th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-procedimientos>
+                    <tr>
+                      <td></td>
+                      <td class="text-xs text-uppercase">{{ procedimientos.clave }}</td>
+                      <td class="text-xs text-uppercase">{{ procedimientos.descripcion }}</td>
+                    </tr>
+                  </ng-template>
+                 </p-table>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="accordion-item">
@@ -230,7 +340,60 @@
           </a>
         </div>
         <div id="examenesauxiliares" class="accordion-collapse collapse" aria-labelledby="btn-icon-start-headingThree" data-bs-parent="#accordionBtnIconStartExample">
-          <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-btn-icon-start</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+          <div class="accordion-body">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="table-responsive">
+                  <p-table
+                    #examen
+                    [rows]="3"
+                    [value]="getDocumentosPacient"
+                    [paginator]="true"
+                    [globalFilterFields]="['documento', 'getDocumentosPacient.documento', 'apellido', 'getDocumentosPacient.apellido', 'nombre', 'getDocumentosPacient.nombre']"
+                    [tableStyle]="{ 'min-width': '75rem' }"
+                    [rowHover]="true"
+                    dataKey="id"
+                    currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas"
+                    [showCurrentPageReport]="true"
+                  >
+                  <ng-template pTemplate="caption">
+                    <div class="flex align-items-center justify-content-between">
+                      <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input
+                          pInputText
+                          type="text"
+                          class="form-control"
+                          (input)="examen.filterGlobal($any($event.target).value, 'contains')"
+                          placeholder="Buscar..."
+                        />
+                      </span>
+                    </div>
+                  </ng-template>
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th class="text-xs text-white bg-default"></th>
+                      <th pSortableColumn="docuemento" class="text-xs text-white bg-default" style="width:27%">TIPO DOCUMENTO</th>
+                      <th class="text-xs text-white bg-default">TITULO</th>
+                      <th class="text-xs text-white bg-default">FECHA</th>
+                      <th class="text-xs text-white bg-default">ARCHIVO</th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-examen>
+                    <tr>
+                      <td></td>
+                      <td class="text-xs text-uppercase">{{ examen.tp_documento }}</td>
+                      <td class="text-xs text-uppercase">{{ examen.titulo }}</td>
+                      <td class="text-xs text-uppercase">{{ examen.fecha }}</td>
+                      <td class="text-xs text-uppercase">{{ examen.url_documento }}</td>
+                    </tr>
+
+                  </ng-template>
+                 </p-table>
+                </div>
+              </div>
+              </div>
+          </div>
         </div>
       </div>
   </div>
@@ -311,8 +474,6 @@
           </div>
         </div>
       </div>
-    </div>
-
 <!-- MODAL AGENDAMIENTO DE CITAS  -->
 <p-dialog
 header="HISTORIA CLINICA DEL PACIENTE"

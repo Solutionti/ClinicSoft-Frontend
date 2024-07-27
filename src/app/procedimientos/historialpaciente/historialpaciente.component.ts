@@ -61,6 +61,8 @@ export class HistorialpacienteComponent implements OnInit {
    this.paciente = this.route.snapshot.paramMap.get("documento");
 
    this.getDataHistoriaCLinica();
+   this.getDiagnosticos();
+   this.getDocumentosPaciente();
   }
 
   nombrepaciente: any = "";
@@ -408,6 +410,28 @@ export class HistorialpacienteComponent implements OnInit {
       summary: 'ClinicSoft Aviso',
       detail: message
     });
+  }
+
+  getDiagnostico: any[] = [];
+  getDiagnosticos(){
+    this.listaServices
+        .getDiagnosticos()
+        .subscribe((response: any ) =>{
+          console.log(response);
+          this.getDiagnostico = response;
+        })
+
+  }
+  getDocumentosPacient: any[] = [];
+  getDocumentosPaciente(){
+    let paciente = "1110542802";
+    this.listaServices
+        .getDocumentosPaciente(paciente)
+        .subscribe((response: any ) => {
+          console.log(response);
+          this.getDocumentosPacient = response;
+        })
+
   }
 
 }

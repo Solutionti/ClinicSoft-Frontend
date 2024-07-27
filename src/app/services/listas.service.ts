@@ -64,7 +64,7 @@ export class ListasService {
   }
 
   createTransaccion(datos: any ) {
-    return this.http.post(environment.apiClinicSoft + 'createTransaccionTraza', { 
+    return this.http.post(environment.apiClinicSoft + 'createTransaccionTraza', {
       transaccion: datos[0].transaccion,
       valor: datos[0].valor,
       usuario: datos[0].usuario,
@@ -88,5 +88,14 @@ export class ListasService {
   countTargeta() {
     return this.http.get(environment.apiClinicSoft + 'countTargeta');
   }
-  
+
+  getDiagnosticos() {
+    return this.http.get(environment.apiClinicSoft + 'getDiagnosticos');
+  }
+
+  getDocumentosPaciente(paciente: any ) {
+    let params = new HttpParams().set("paciente", paciente)
+    return this.http.get(environment.apiClinicSoft + 'getDocumentosPaciente', { params });
+  }
+
 }
