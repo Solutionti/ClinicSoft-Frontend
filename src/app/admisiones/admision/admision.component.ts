@@ -65,7 +65,7 @@ export class AdmisionComponent implements OnInit {
     doctor_admision: new FormControl('',[Validators.required]),
   });
 
-  admisionForm2: FormGroup = new FormGroup({
+  admisionForm2 =  new FormGroup({
     fecha_admision: new FormControl({value: this.fechaActual, disabled: true}),
     factura_admision: new FormControl({value:'', disabled: true}),
     costo_admision: new FormControl({value:'', disabled: true}),
@@ -75,6 +75,10 @@ export class AdmisionComponent implements OnInit {
     devolver_admision: new FormControl({value:'', disabled: true}),
     efectivo_admision: new FormControl('0'),
     total_admision: new FormControl('')
+  });
+
+  totalform =  new FormGroup({
+    total: new FormControl({value:'', disabled: true})
   });
 
   get especialidadControl(): FormControl {
@@ -91,6 +95,25 @@ export class AdmisionComponent implements OnInit {
 
   get cantidadControl(): FormControl {
     return this.admisionForm2.get('recibida_admision') as FormControl;
+  }
+
+  calcularDevolucion() {
+
+    let costo: any = this.admisionForm2.get("costo_admision")?.value,
+        descuento: any  = this.admisionForm2.get("descuento_admision")?.value,
+        recibida: any = this.admisionForm2.get("recibida_admision")?.value;
+
+        let descuentos: any = (costo - descuento);
+        let total: any  = (recibida -descuentos);
+
+        this.admisionForm2.patchValue({
+          devolver_admision: total
+        });
+
+        this.totalform.patchValue({
+          total: descuentos
+        });
+
   }
 
   getSpecialty: any [] = [];

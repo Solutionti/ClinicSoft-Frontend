@@ -55,7 +55,7 @@
                         pInputText
                         type="text"
                         class="form-control"
-                        (input)="admisiones.filterGlobal($any($event.target).value, 'contains')" 
+                        (input)="admisiones.filterGlobal($any($event.target).value, 'contains')"
                         placeholder="Buscar..."
                       />
                     </span>
@@ -102,7 +102,7 @@
                       </div>
                     </td>
                     <td class="text-xs text-uppercase">
-                      <span class="badge badge-sm badge-success">{{ getAdmissions.estado }}</span> 
+                      <span class="badge badge-sm badge-success">{{ getAdmissions.estado }}</span>
                     </td>
                     <td class="text-xs text-uppercase">{{ getAdmissions.medicos }}</td>
                     <td class="text-xs text-uppercase">{{ getAdmissions.especialidades }}</td>
@@ -278,6 +278,7 @@
                     type="number"
                     class="form-control form-control-sm"
                     formControlName="recibida_admision"
+                    (blur)="calcularDevolucion()"
                   >
                   <div
                     class="error"
@@ -295,7 +296,7 @@
                     class="form-control form-control-sm"
                     formControlName="devolver_admision"
                   >
-                  
+
                 </div>
                 <div class="col-md-4">
                   <label>Forma de pago *</label>
@@ -311,17 +312,21 @@
             </form>
             </div>
           </div>
-          <div class="row mt-3">
-            <div class="col-md-2 offset-md-7">
-              <h5 class="text-center">TOTAL</h5>
+          <form [formGroup]="totalform">
+            <div class="row mt-3">
+              <div class="col-md-2 offset-md-7">
+                <h5 class="text-center">TOTAL</h5>
+              </div>
+              <div class="col-md-3">
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  formControlName="total"
+                >
+              </div>
             </div>
-            <div class="col-md-3">
-              <input
-                type="text"
-                class="form-control form-control-sm"
-              >
-            </div>
-          </div>
+
+          </form>
         </div>
       </div>
     </div>
