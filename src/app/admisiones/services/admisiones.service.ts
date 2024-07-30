@@ -18,9 +18,10 @@ export class AdmisionesService {
     return this.http.get(url);
   }
 
-  getpacientesTable(documento: any ) {
+  getpacientesTable(documento: any, apellido: any) {
     const url =  `${environment.apiClinicSoft}getPatients`;
-    let params = new HttpParams().set("documento", documento);
+    let params = new HttpParams().set("documento", documento)
+                                 .set("apellido", apellido);
     return this.http.get(url, { params });
   }
 

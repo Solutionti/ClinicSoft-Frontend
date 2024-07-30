@@ -157,7 +157,7 @@ export class AdmisionComponent implements OnInit {
         especialidad: this.admisionForm.get("especialidad_admision")?.value,
         cola_atencion: "No",
         costo: this.admisionForm2.get("costo_admision")?.value,
-        comision: this.admisionForm.get("comision_admision")?.value,
+        comision: this.admisionForm2.get("comision_admision")?.value,
         turno: 0,
         usuario: localStorage.getItem('usuario'),
         orden__: 1,

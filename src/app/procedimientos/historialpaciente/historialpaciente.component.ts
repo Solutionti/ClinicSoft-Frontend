@@ -417,7 +417,6 @@ export class HistorialpacienteComponent implements OnInit {
     this.listaServices
         .getDiagnosticos()
         .subscribe((response: any ) =>{
-          console.log(response);
           this.getDiagnostico = response;
         })
 
@@ -428,7 +427,6 @@ export class HistorialpacienteComponent implements OnInit {
     this.listaServices
         .getDocumentosPaciente(paciente)
         .subscribe((response: any ) => {
-          console.log(response);
           this.getDocumentosPacient = response;
         })
 

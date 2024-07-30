@@ -123,7 +123,8 @@ export class PacientesComponent implements OnInit {
 
   consultaPacienteForm = new FormGroup({
     tpdocumento_consulta: new FormControl('DNI'),
-    documento_consulta: new FormControl()
+    documento_consulta: new FormControl(''),
+    apellido_consulta: new FormControl(''),
   });
 
   getSexs: any[] = [];
@@ -237,8 +238,9 @@ export class PacientesComponent implements OnInit {
   getpacientesTable() {
     this.spinner = false;
     let documento = this.consultaPacienteForm.get("documento_consulta")?.value;
+    let apellido = this.consultaPacienteForm.get("apellido_consulta")?.value;
     this.admisionService
-        .getpacientesTable(documento)
+        .getpacientesTable(documento, apellido)
         .subscribe((response: any ) => {
           this.getPaciente = response;
           this.spinner = true;

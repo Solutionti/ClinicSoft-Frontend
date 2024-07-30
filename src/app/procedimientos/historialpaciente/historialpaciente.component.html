@@ -243,14 +243,12 @@
                   </ng-template>
                   <ng-template pTemplate="header">
                     <tr>
-                      <th class="text-xs text-white bg-default"></th>
-                      <th pSortableColumn="docuemento" class="text-xs text-white bg-default" style="width:27%">CODIGO</th>
+                      <th pSortableColumn="docuemento" class="text-xs text-white bg-default" style="width:10%">CODIGO</th>
                       <th class="text-xs text-white bg-default">NOMBRE DIAGNOSTICO</th>
                     </tr>
                   </ng-template>
                   <ng-template pTemplate="body" let-diagnosticos>
                     <tr>
-                      <td></td>
                       <td class="text-xs text-uppercase">{{ diagnosticos.clave }}</td>
                       <td class="text-xs text-uppercase">{{ diagnosticos.descripcion }}</td>
                     </tr>
@@ -303,14 +301,12 @@
                   </ng-template>
                   <ng-template pTemplate="header">
                     <tr>
-                      <th class="text-xs text-white bg-default"></th>
-                      <th pSortableColumn="docuemento" class="text-xs text-white bg-default" style="width:27%">CODIGO</th>
+                      <th pSortableColumn="docuemento" class="text-xs text-white bg-default" style="width:10%">CODIGO</th>
                       <th class="text-xs text-white bg-default">NOMBRE PROCEDIMIENTO</th>
                     </tr>
                   </ng-template>
                   <ng-template pTemplate="body" let-procedimientos>
                     <tr>
-                      <td></td>
                       <td class="text-xs text-uppercase">{{ procedimientos.clave }}</td>
                       <td class="text-xs text-uppercase">{{ procedimientos.descripcion }}</td>
                     </tr>
@@ -372,16 +368,14 @@
                   </ng-template>
                   <ng-template pTemplate="header">
                     <tr>
-                      <th class="text-xs text-white bg-default"></th>
-                      <th pSortableColumn="docuemento" class="text-xs text-white bg-default" style="width:27%">TIPO DOCUMENTO</th>
-                      <th class="text-xs text-white bg-default">TITULO</th>
-                      <th class="text-xs text-white bg-default">FECHA</th>
+                      <th pSortableColumn="docuemento" class="text-xs text-white bg-default" style="width:12%">TIPO DOCUMENTO</th>
+                      <th class="text-xs text-white bg-default" style="width:25%">TITULO</th>
+                      <th class="text-xs text-white bg-default" style="width:10%">FECHA</th>
                       <th class="text-xs text-white bg-default">ARCHIVO</th>
                     </tr>
                   </ng-template>
                   <ng-template pTemplate="body" let-examen>
                     <tr>
-                      <td></td>
                       <td class="text-xs text-uppercase">{{ examen.tp_documento }}</td>
                       <td class="text-xs text-uppercase">{{ examen.titulo }}</td>
                       <td class="text-xs text-uppercase">{{ examen.fecha }}</td>
@@ -399,7 +393,6 @@
   </div>
   <!-- End Accordion -->
                    </div>
-                 </div>
                </div>
                <div class="col-md-3">
                 <div class="card card-dashed h-900">
