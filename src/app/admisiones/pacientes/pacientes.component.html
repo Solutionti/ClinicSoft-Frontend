@@ -47,26 +47,37 @@
           </div>
           <form [formGroup]="consultaPacienteForm">
           <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-3">
                 <label>Tipo de Documento</label>
                 <select
                   class="form-control form-control-sm"
                   formControlName="tpdocumento_consulta"
                 >
                   <option value="DNI">DNI</option>
-                  <option value="ME">Menor de edad</option>
                 </select>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-5">
+                <label>Nombres / Apellidos </label>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  formControlName="apellido_consulta"
+                  (keyup.enter)="getpacientesTable()"
+                >
+              </div>
+              <div class="col-md-4">
                 <label>Documento / DNI *</label>
                 <div class="input-group">
                   <input
-                    type="text"
+                    type="number"
                     class="form-control form-control-sm"
                     formControlName="documento_consulta"
                     (keyup.enter)="getpacientesTable()"
                   >
-                  <button class="btn btn-primary btn-xs" type="button">
+                  <button
+                    class="btn btn-primary btn-xs"
+                    type="button"
+                  >
                     <i class="fas fa-fingerprint"></i>
                   </button>
                 </div>
@@ -85,7 +96,7 @@
                   [tableStyle]="{ 'min-width': '75rem' }"
                   [rowHover]="true"
                   dataKey="id"
-                  currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas"
+                  currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} Pacientes"
                   [showCurrentPageReport]="true"
                 >
                 <ng-template pTemplate="caption">
