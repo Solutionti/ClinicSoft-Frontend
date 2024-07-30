@@ -94,7 +94,8 @@ export class ListasService {
   }
 
   getDocumentosPaciente(paciente: any ) {
-    let params = new HttpParams().set("paciente", paciente)
+    let params = new HttpParams().set("paciente", paciente);
+
     return this.http.get(environment.apiClinicSoft + 'getDocumentosPaciente', { params });
   }
 
