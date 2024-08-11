@@ -27,6 +27,7 @@ import { MessageService } from 'primeng/api';
   providers: [MessageService]
 })
 export class PacientesComponent implements OnInit {
+  date: any;
 
   constructor(
     private admisionService: AdmisionesService,
@@ -126,6 +127,27 @@ export class PacientesComponent implements OnInit {
     documento_consulta: new FormControl(''),
     apellido_consulta: new FormControl(''),
   });
+
+
+  calcularEdad(){
+    let fecha = this.crearPacienteForm.get("crearpaciente_fechanacimiento")?.value;
+    let edadCalculada: number = 0;
+    const date: Date = new Date();
+    const cumple: Date = new Date('"' + fecha + '"');
+
+    let age: number = date.getFullYear() - cumple.getFullYear();
+    const month: number = date.getMonth() - cumple.getMonth();
+    if (month < 0 || (month === 0 && date.getDate() < cumple.getDate())) {
+      age--;
+    }
+
+    edadCalculada = age;
+    this.crearPacienteForm.patchValue({
+      crearpaciente_edad: edadCalculada
+     })
+
+
+  }
 
   getSexs: any[] = [];
   getSex() {
@@ -232,7 +254,7 @@ export class PacientesComponent implements OnInit {
 
         });
   }
-  
+
   getPaciente: any [] = [];
 
   getpacientesTable() {
