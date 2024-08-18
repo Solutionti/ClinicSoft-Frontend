@@ -21,95 +21,100 @@ import { CitasComponent } from './admisiones/citas/citas.component';
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => 
-    import('./authorization/iniciarsesion/iniciarsesion.component').then((c) => c.IniciarsesionComponent) 
+    loadComponent: () =>
+    import('./authorization/iniciarsesion/iniciarsesion.component').then((c) => c.IniciarsesionComponent)
   },
   {
     path: 'citas',
-    loadComponent: () => 
+    loadComponent: () =>
       import('./admisiones/citas/citas.component').then((c) => c.CitasComponent)
   },
   {
     path: 'pacientes',
-    loadComponent: () => 
+    loadComponent: () =>
       import('./admisiones/pacientes/pacientes.component').then((c) => c.PacientesComponent)
   },
   {
     path: 'triage',
-    loadComponent: () => 
+    loadComponent: () =>
       import('./admisiones/triage/triage.component').then((c) => c.TriageComponent)
   },
   {
     path: 'admision',
-    loadComponent: () => 
+    loadComponent: () =>
       import('./admisiones/admision/admision.component').then((c) => c.AdmisionComponent)
   },
   {
     path: 'laboratorio',
-    loadComponent: () => 
+    loadComponent: () =>
       import('./admisiones/laboratorio/laboratorio.component').then((c) => c.LaboratorioComponent)
   },
   {
     path: 'colposcopias',
-    loadComponent: () => 
+    loadComponent: () =>
       import('./procedimientos/colposcopia/colposcopia.component').then((c) => c.ColposcopiaComponent)
   },
   {
     path: 'ecografias',
-    loadComponent: () => 
+    loadComponent: () =>
       import('./ecografias/ecografia/ecografia.component').then((c) => c.EcografiaComponent)
   },
   {
     path: 'inventario',
-    loadComponent: () => 
+    loadComponent: () =>
       import('./inventarios/inventario/inventario.component').then((c) => c.InventarioComponent)
   },
   {
     path: 'kardex',
-    loadComponent: () => 
+    loadComponent: () =>
       import('./inventarios/kardex/kardex.component').then((c) => c.KardexComponent)
   },
   {
     path: 'usuarios',
-    loadComponent: () => 
+    loadComponent: () =>
       import('./authorization/usuarios/usuarios.component').then((c) => c.UsuariosComponent)
   },
   {
     path: 'hc/:documento',
-    loadComponent: () => 
+    loadComponent: () =>
       import('./procedimientos/historialpaciente/historialpaciente.component').then((c) => c.HistorialpacienteComponent)
   },
 
   {
     path: 'pagos',
-    loadComponent: () => 
+    loadComponent: () =>
       import('./contabilidad/pagos/pagos.component').then((c) => c.PagosComponent)
   },
   {
     path: 'gastos',
-    loadComponent: () => 
+    loadComponent: () =>
       import('./contabilidad/gastos/gastos.component').then((c) => c.GastosComponent)
   },
   {
     path: 'finanzas',
-    loadComponent: () => 
+    loadComponent: () =>
       import('./contabilidad/finanzas/finanzas.component').then((c) => c.FinanzasComponent)
   },
   {
     path: 'reportes',
-    loadComponent: () => 
+    loadComponent: () =>
       import('./reportes/reporte/reporte.component').then((c) => c.ReporteComponent)
   },
-  
+
   {
     path: 'inicio',
-    loadComponent: () => 
+    loadComponent: () =>
       import('./authorization/inicio/inicio.component').then((c) => c.InicioComponent)
   },
   {
     path: 'productos',
-    loadComponent: () => 
+    loadComponent: () =>
       import('./inventarios/productos/productos.component').then((c) => c.ProductosComponent)
+  },
+  {
+    path: 'doctores',
+    loadComponent: () =>
+      import('./authorization/doctores/doctores.component').then((c) => c.DoctoresComponent)
   },
 
 ];

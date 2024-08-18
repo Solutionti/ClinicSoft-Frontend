@@ -218,7 +218,6 @@
                   <p-table
                     #diagnosticos
                     [rows]="3"
-                    [value]="getDiagnostico"
                     [paginator]="true"
                     [globalFilterFields]="['documento', 'getDiagnostico.documento', 'apellido', 'getDiagnostico.apellido', 'nombre', 'getDiagnostico.nombre']"
                     [tableStyle]="{ 'min-width': '75rem' }"
@@ -248,10 +247,7 @@
                     </tr>
                   </ng-template>
                   <ng-template pTemplate="body" let-diagnosticos>
-                    <tr>
-                      <td class="text-xs text-uppercase">{{ diagnosticos.clave }}</td>
-                      <td class="text-xs text-uppercase">{{ diagnosticos.descripcion }}</td>
-                    </tr>
+
                   </ng-template>
                  </p-table>
                 </div>
@@ -276,7 +272,6 @@
                   <p-table
                     #procedimientos
                     [rows]="3"
-                    [value]="getDiagnostico"
                     [paginator]="true"
                     [globalFilterFields]="['documento', 'getDiagnostico.documento', 'apellido', 'getDiagnostico.apellido', 'nombre', 'getDiagnostico.nombre']"
                     [tableStyle]="{ 'min-width': '75rem' }"
@@ -306,10 +301,7 @@
                     </tr>
                   </ng-template>
                   <ng-template pTemplate="body" let-procedimientos>
-                    <tr>
-                      <td class="text-xs text-uppercase">{{ procedimientos.clave }}</td>
-                      <td class="text-xs text-uppercase">{{ procedimientos.descripcion }}</td>
-                    </tr>
+
                   </ng-template>
                  </p-table>
                 </div>
@@ -963,9 +955,10 @@ header="HISTORIA CLINICA DEL PACIENTE"
           <div class="col-md-12">
             <p-table
             #diagnosticos
+            [value]="getDiagnostico"
             [rows]="5"
             [paginator]="true"
-            [globalFilterFields]="['nombre', 'getProduct.nombre', 'categoria', 'getProduct.categoria']"
+            [globalFilterFields]="['nombre', 'getDiagnostico.nombre', 'categoria', 'getDiagnostico.categoria']"
             [tableStyle]="{ 'min-width': '75rem' }"
             [rowHover]="true"
             dataKey="id"
@@ -991,11 +984,11 @@ header="HISTORIA CLINICA DEL PACIENTE"
               <th class="text-xs text-white bg-default" style="width:80%">NOMBRE DIAGNOSTICO</th>
             </tr>
           </ng-template>
-          <ng-template pTemplate="body" let-getUser>
+          <ng-template pTemplate="body" let-diagnosticos>
             <tr>
-              <td class="text-xs text-uppercase"></td>
-              <td class="text-xs text-uppercase"></td>
-              <td class="text-xs text-uppercase"></td>
+              <td></td>
+              <td class="text-xs text-uppercase">{{ diagnosticos.clave }}</td>
+              <td class="text-xs text-uppercase">{{ diagnosticos.descripcion }}</td>
             </tr>
           </ng-template>
          </p-table>
@@ -1015,9 +1008,10 @@ header="HISTORIA CLINICA DEL PACIENTE"
         <div class="col-md-12">
           <p-table
           #procedimientos
+          [value]="getDiagnostico"
           [rows]="5"
           [paginator]="true"
-          [globalFilterFields]="['nombre', 'getProduct.nombre', 'categoria', 'getProduct.categoria']"
+          [globalFilterFields]="['nombre', 'getDiagnostico.nombre', 'categoria', 'getDiagnostico.categoria']"
           [tableStyle]="{ 'min-width': '75rem' }"
           [rowHover]="true"
           dataKey="id"
@@ -1043,11 +1037,11 @@ header="HISTORIA CLINICA DEL PACIENTE"
             <th class="text-xs text-white bg-default" style="width:80%">NOMBRE PROCEDIMIENTO</th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-getUser>
+        <ng-template pTemplate="body" let-procedimientos>
           <tr>
-            <td class="text-xs text-uppercase"></td>
-            <td class="text-xs text-uppercase"></td>
-            <td class="text-xs text-uppercase"></td>
+            <td></td>
+            <td class="text-xs text-uppercase">{{ procedimientos.clave }}</td>
+            <td class="text-xs text-uppercase">{{ procedimientos.descripcion }}</td>
           </tr>
         </ng-template>
        </p-table>

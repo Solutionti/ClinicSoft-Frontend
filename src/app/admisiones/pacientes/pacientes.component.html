@@ -28,7 +28,7 @@
                 <a
                   class="btn btn-danger text-white btn-xs mx-2"
                   [hidden]="btnActualizarHidden"
-                  (click)="actualizarPaciente()"  
+                  (click)="actualizarPaciente()"
                 >
                   <i class="fas fa-pen text-white"></i> Actualizar
                 </a>
@@ -103,11 +103,11 @@
                   <div class="flex align-items-center justify-content-between">
                     <span class="p-input-icon-left">
                       <i class="pi pi-search"></i>
-                      <input 
-                        pInputText 
+                      <input
+                        pInputText
                         type="text"
                         class="form-control"
-                        (input)="pacientes.filterGlobal($any($event.target).value, 'contains')" 
+                        (input)="pacientes.filterGlobal($any($event.target).value, 'contains')"
                         placeholder="Buscar..."
                       />
                     </span>
@@ -288,6 +288,7 @@
                 type="date"
                 class="form-control form-control-sm"
                 formControlName="crearpaciente_fechanacimiento"
+                (blur)="calcularEdad()"
               >
               <div
                 class="error"
@@ -304,6 +305,8 @@
                 type="number"
                 class="form-control form-control-sm"
                 formControlName="crearpaciente_edad"
+
+
               >
             </div>
             <div class="col-md-4">
