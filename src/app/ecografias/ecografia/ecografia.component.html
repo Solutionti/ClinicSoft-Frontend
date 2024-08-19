@@ -2,6 +2,7 @@
 <!-- * * * * * * * * * * * JERSON GALVEZ ENSUNCHO * * * * * * * * * * * -->
 <!-- ******* * * * * * * * PROYECTO CLINICSOFT * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<p-toast position="top-right"/>
 <div class="min-height-300 bg-default position-absolute w-100"></div>
 <aside 
   class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4"
@@ -11,119 +12,72 @@
   <app-menu></app-menu>
 </aside>
 <main class="main-content position-relative border-radius-lg">
-  <app-cerrarsesion titulo="Ecografias"></app-cerrarsesion>
-  <div class="container-fluid py-1">
+  <app-cerrarsesion titulo="Ecografia de mama"></app-cerrarsesion>
+  <div class="container-fluid ">
     <div class="row ">
       <div class="card">
         <div class="container-fluid mt-3">
           <div class="row">
-            <div class="col-md-7">
-              <p-table
-                  #dt
-                  [rows]="10"
-                  [paginator]="true"
-                  [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
-                  [tableStyle]="{ 'min-width': '75rem' }"
-                  [rowHover]="true"
-                  dataKey="id"
-                  currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas"
-                >
-                <ng-template pTemplate="caption">
-                  <div class="flex align-items-center justify-content-between">
-                    <span class="p-input-icon-left">
-                      <i class="pi pi-search"></i>
-                      <input
-                        pInputText
-                        type="text"
-                        class="form-control"
-                        placeholder="Buscar..."
-                      />
-                    </span>
-                  </div>
-                </ng-template>
-                <ng-template pTemplate="header">
-                  <tr>
-                    <th pSortableColumn="name" class="text-xs text-white bg-default"></th>
-                    <th pSortableColumn="name" class="text-xs text-white bg-default">#</th>
-                    <th pSortableColumn="name" class="text-xs text-white bg-default">ECOGRAFIA</th>
-                    <th pSortableColumn="name" class="text-xs text-white bg-default">FECHA</th>
-                    <th pSortableColumn="name" class="text-xs text-white bg-default">ESTADO</th>
-                    <th pSortableColumn="name" class="text-xs text-white bg-default">PDF</th>
-                  </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-product>
-                </ng-template>
-               </p-table>
-            </div>
-
-            <div class="col-md-5">
-              <form [formGroup]="ecografiaForm">
+            <div class="col-md-12">
+              <form [formGroup]="ecografiaMamaForm">
               <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-3">
                   <label>DNI *</label>
                   <div class="input-group">
                   <input
                     type="text"
                     class="form-control form-control-sm"
-                    formControlName="dni_ecografia"
+                    formControlName="dni_ecografia_mama"
+                    (keyup.enter)="buscarPacientes()"
                   >
                   <button class="btn btn-primary btn-xs" type="button">
                     <i class="fas fa-fingerprint"></i>
                   </button>
                 </div>
               </div>
-                <div class="col-md-7">
-                    <label>Nombre Paciente *</label>
-                    <input
-                      type="text"
-                      class="form-control form-control-sm"
-                      formControlName="nombre_ecografia"
-                    >
-                  </div>
+              <div class="col-md-3">
+                <label>Nombre</label>
+                <input
+                   type="text"
+                   class="form-control form-control-sm"
+                   formControlName="nombre_ecografia_mama"
+                 >
+              </div>
+              <div class="col-md-3">
+                <label>Apellidos</label>
+                <input
+                   type="text"
+                   class="form-control form-control-sm"
+                   formControlName="apellido_ecografia_mama"
+                 >
+              </div>
+              <div class="col-md-1">
+                <label>Edad</label>
+                <input
+                   type="text"
+                   class="form-control form-control-sm"
+                   formControlName="edad_ecografia_mama"
+                 >
+              </div>
+              <div class="col-md-2">
+                <label>HC</label>
+                <input
+                   type="text"
+                   class="form-control form-control-sm"
+                   formControlName="hc_ecografia_mama"
+                 >
+              </div>
               </div>
               <div class="row mt-1">
-                <div class="col-md-8">
-                  <label>Tipo Ecografia *</label>
-                  <div class="input-group">
-                  <select
-                    class="form-control form-control-sm"
-                    formControlName="tipo_ecografia"
-                  >
-                    <option value="">Seleccione una opcion</option>
-                    <option value="" >Ecografia de mama</option>
-                    <option value="">Ecografia transvaginal</option>
-                    <option value="">Ecografia pelvica</option>
-                    <option value="">Ecografia morfologica</option>
-                    <option value="">Ecografia genetica</option>
-                    <option value="">Ecografia obstetrica</option>
-                  </select>
-                  <button class="btn btn-danger btn-xs" type="button" (click)="showmodal1()">
-                    <i class="fas fa-eye"></i>
+                <div class="col-md-3">
+                  <button class="btn btn-primary btn-xs mt-2">
+                    Guardar
                   </button>
-                </div>
-              </div>
-                <div class="col-md-4">
-                  <label>Fecha *</label>
-                  <input
-                    type="date"
-                    class="form-control form-control-sm"
-                    formControlName="fecha_ecografia"
-                  >
-                </div>
-              </div>
-
-              <div class="row mt-1">
-                <div class="col-md-12">
-                  <label>Observación</label>
-                  <textarea
-                    class="form-control form-control-sm"
-                    formControlName="observacion_ecografia"
-                  ></textarea>
-                </div>
-              </div>
-              <div class="row mt-1">
-                <div class="col-md-2">
-                  <button class="btn btn-primary btn-xs mt-2">Documento</button>
+                  <button
+                    class="btn btn-danger btn-xs mt-2 mx-2"
+                  > <i class="fas fa-file-pdf"></i>
+                    Imprimir
+                  </button>
                 </div>
               </div>
             </form>
@@ -134,57 +88,12 @@
       </div>
     </div>
 </div>
-
-<!-- MODAL DE ECOGRAFIAS  -->
-<p-dialog 
-    header="TIPO DE ECOGRAFIA A GENERAR" 
-    [modal]="true"
-    [(visible)]="ecografia1" 
-    [style]="{ width: '50rem' }" 
-    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" 
-    [maximizable]="true">
-    <!-- CONTENIDO -->
-
-    <p-table
-                  #ecografias
-                  [rows]="5"
-                  [paginator]="true"
-                  [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
-                  [tableStyle]="{ 'min-width': '75rem' }"
-                  [rowHover]="true"
-                  dataKey="id"
-                  currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas"
-                >
-                <ng-template pTemplate="caption">
-                  <div class="flex align-items-center justify-content-between">
-                    <span class="p-input-icon-left">
-                      <i class="pi pi-search"></i>
-                      <input
-                        pInputText
-                        type="text"
-                        class="form-control"
-                        (input)="ecografias.filterGlobal($any($event.target).value, 'contains')" 
-                        placeholder="Buscar..."
-                      />
-                    </span>
-                  </div>
-                </ng-template>
-                <ng-template pTemplate="header">
-                  <tr>
-                    <th  class="text-xs text-white bg-default" style="width:5%"></th>
-                    <th  class="text-xs text-white bg-default" style="width:7%">ID</th>
-                    <th  class="text-xs text-white bg-default" style="width:40%">TIPO DE ECOGRAFIA</th>
-                  </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-getAdmissions>
-                  
-                </ng-template>
-               </p-table>
-
-    <ng-template pTemplate="footer">
-      <button class="btn btn-danger btn-sm">Cancelar</button>
-      <button class="btn btn-primary btn-sm mx-2">Guardar</button>
-  </ng-template>
-</p-dialog>
-
-
+<!-- spinner -->
+<div [hidden]="spinner" class="overlay z-index">
+  <div class="dot-wave">
+    <div class="dot-wave__dot"></div>
+    <div class="dot-wave__dot"></div>
+    <div class="dot-wave__dot"></div>
+    <div class="dot-wave__dot"></div>
+  </div>
+</div>

@@ -6,6 +6,10 @@ import { RouterOutlet } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
+import { AdmisionesService } from '../../admisiones/services/admisiones.service';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+
 @Component({
   selector: 'app-ecografia',
   standalone: true,
@@ -16,13 +20,20 @@ import { ButtonModule } from 'primeng/button';
     CerrarsesionComponent,
     TableModule,
     DialogModule,
-    ButtonModule
+    ButtonModule,
+    ToastModule,
   ],
-  templateUrl: './ecografia.component.html'
+  templateUrl: './ecografia.component.html',
+  styleUrl: './ecografia.component.css',
+  providers: [ConfirmationService,MessageService]
 })
 export class EcografiaComponent implements OnInit {
 
-  constructor() {
+  constructor(
+    private admisionServices: AdmisionesService,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService,
+  ) {
   }
 
   ngOnInit(): void {
@@ -30,6 +41,7 @@ export class EcografiaComponent implements OnInit {
   }
 
   ecografia1: boolean = false;
+  spinner = true;
 
   date = new Date();
   fechaActual = String(this.date.getFullYear() + '-' +
@@ -37,17 +49,55 @@ export class EcografiaComponent implements OnInit {
     String(this.date.getDate()).padStart(2, '0')
   );
 
-  ecografiaForm = new FormGroup({
-    dni_ecografia: new FormControl(''),
-    nombre_ecografia: new FormControl(''),
-    tipo_ecografia: new FormControl(''),
-    fecha_ecografia: new FormControl({value: this.fechaActual, disabled: true}),
-    observacion_ecografia: new FormControl(''),
+  ecografiaMamaForm = new FormGroup({
+    dni_ecografia_mama: new FormControl(''),
+    nombre_ecografia_mama: new FormControl({value:'', disabled: true}),
+    apellido_ecografia_mama: new FormControl({value:'', disabled: true}),
+    edad_ecografia_mama: new FormControl({value:'', disabled: true}),
+    hc_ecografia_mama: new FormControl({value:'', disabled: true}),
   });
 
-  
+  buscarPacientes() {
+    this.spinner = false;
+    let documento = this.ecografiaMamaForm.get("dni_ecografia_mama")?.value;
 
-  showmodal1() {
-    this.ecografia1 = true;
+    this.admisionServices
+        .getPacientesId(documento)
+        .subscribe((response: any ) => {
+          if(response.status == 200) {
+
+            this.ecografiaMamaForm.patchValue({
+              nombre_ecografia_mama: response.data.nombre,
+              apellido_ecografia_mama: response.data.apellido,
+              edad_ecografia_mama: response.data.edad,
+              hc_ecografia_mama: response.data.hc,
+            });
+            this.showSuccess("Se ha encontrado el paciente");
+            this.spinner = true;
+
+          }
+          else {
+            this.showError(response.message);
+            this.spinner = true;
+          }
+        });
+  }
+
+  showError(message: string) {
+    this.messageService.add(
+      {
+        severity: 'error',
+        summary: 'ClinicSoft Aviso',
+        detail: message
+      }
+    );
+  }
+
+  showSuccess(message: string) {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'ClinicSoft Aviso',
+      detail: message
+    });
   }
 }

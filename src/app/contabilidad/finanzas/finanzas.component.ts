@@ -6,7 +6,7 @@ import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { ListasService } from '../../services/listas.service';
 import { AdmisionesService } from '../../admisiones/services/admisiones.service';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, RequiredValidator, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ContabilidadService } from '../services/contabilidad.service';
 import { ToastModule } from 'primeng/toast';
@@ -51,15 +51,15 @@ export class FinanzasComponent implements OnInit {
   getLaboratory: any[] = [];
 
   especialidadForm = new FormGroup({
-    especialidad_espec: new FormControl(''),
-    precio_espec: new FormControl(''),
-    comision_espec: new FormControl(''),
+    especialidad_espec: new FormControl('', [Validators.required]),
+    precio_espec: new FormControl('', [Validators.required]),
+    comision_espec: new FormControl('', [Validators.required]),
   });
 
   laboratorioForm = new FormGroup({
-    servicio_laboratorio: new FormControl(''),
-    precio_laboratorio: new FormControl(''),
-    estado_laboratorio: new FormControl(''),
+    servicio_laboratorio: new FormControl('', [Validators.required]),
+    precio_laboratorio: new FormControl('', [Validators.required]),
+    estado_laboratorio: new FormControl('', [Validators.required]),
   });
 
   getSpecialties() {

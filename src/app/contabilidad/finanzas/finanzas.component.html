@@ -59,7 +59,13 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-getSpeciality>
                   <tr>
-                    <td class="text-xs text-uppercase"></td>
+                    <td class="text-xs text-uppercase">
+                      <a
+                        class="badge bg-danger"
+                      >
+                        <i class="fas fa-pen fa-xs text-white"></i>
+                      </a>
+                    </td>
                     <td class="text-xs text-uppercase"> {{ getSpeciality.descripcion }}</td>
                     <td class="text-xs text-uppercase"> {{ getSpeciality.costo }}</td>
                     <td class="text-xs text-uppercase"> {{ getSpeciality.comision_aproximada }}</td>
@@ -106,6 +112,7 @@
                 <ng-template pTemplate="header">
                   <tr>
                     <th pSortableColumn="name" class="text-xs text-white bg-default" style="width:5%"></th>
+                    <th pSortableColumn="name" class="text-xs text-white bg-default" style="width:5%">CODIGO</th>
                     <th pSortableColumn="name" class="text-xs text-white bg-default" style="width:15%">NOMBRE</th>
                     <th pSortableColumn="name" class="text-xs text-white bg-default" style="width:10%">PRECIO</th>
                     <th pSortableColumn="name" class="text-xs text-white bg-default">ESTADO</th>
@@ -113,7 +120,14 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-getLaboratory>
                   <tr>
-                    <td class="text-xs text-uppercase"></td>
+                    <td class="text-xs text-uppercase">
+                      <a
+                        class="badge bg-danger"
+                      >
+                        <i class="fas fa-pen fa-xs text-white"></i>
+                      </a>
+                    </td>
+                    <td class="text-xs text-uppercase">{{ getLaboratory.codigo }}</td>
                     <td class="text-xs text-uppercase">{{ getLaboratory.nombre }}</td>
                     <td class="text-xs text-uppercase">{{ getLaboratory.precio }}</td>
                     <td class="text-xs text-uppercase">{{ getLaboratory.estado }}</td>
@@ -148,7 +162,7 @@
     <div class="flex align-items-center gap-3 mb-3">
       <label>Precio</label>
       <input
-        type="text"
+        type="number"
         class="form-control form-control-sm"
         formControlName="precio_espec"
         autocomplete="off"
@@ -157,7 +171,7 @@
     <div class="flex align-items-center gap-3 mb-5">
       <label>Comision Aproximada</label>
       <input
-        type="text"
+        type="number"
         class="form-control form-control-sm"
         formControlName="comision_espec"
         autocomplete="off"
@@ -168,6 +182,7 @@
     <button
       class="btn btn-primary btn-sm mx-2"
       (click)="CreateEspeciality()"
+      [disabled]="especialidadForm.invalid"
     >
       Aceptar
     </button>
@@ -182,7 +197,6 @@
 >
   <!-- <span class="p-text-secondary block mb-3">Update your information.</span> -->
    <form [formGroup]="laboratorioForm">
-
      <div class="flex align-items-center gap-3 mb-3">
        <label>Servicio</label>
        <input
@@ -195,7 +209,7 @@
      <div class="flex align-items-center gap-3 mb-3">
        <label>Precio</label>
        <input
-         type="text"
+         type="number"
          class="form-control form-control-sm"
          formControlName="precio_laboratorio"
          autocomplete="off" 
@@ -217,6 +231,7 @@
     <button
       class="btn btn-primary btn-sm mx-2"
       (click)="CreateLaboratory()"
+      [disabled]="laboratorioForm.invalid"
     >
       Aceptar
     </button>
