@@ -54,11 +54,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./procedimientos/colposcopia/colposcopia.component').then((c) => c.ColposcopiaComponent)
   },
-  {
-    path: 'ecografias',
-    loadComponent: () =>
-      import('./ecografias/ecografia/ecografia.component').then((c) => c.EcografiaComponent)
-  },
+
   {
     path: 'inventario',
     loadComponent: () =>
@@ -115,6 +111,16 @@ export const routes: Routes = [
     path: 'doctores',
     loadComponent: () =>
       import('./authorization/doctores/doctores.component').then((c) => c.DoctoresComponent)
+  },
+  {
+    path: 'ecografias',
+    loadComponent: () =>
+      import('./ecografias/ecografia/ecografia.component').then((c) => c.EcografiaComponent)
+  },
+  {
+    path: 'ecografiaprostatica',
+    loadComponent: () =>
+      import('./ecografias/ecografiaprostatica/ecografiaprostatica.component').then((c) => c.EcografiaprostaticaComponent)
   },
 
 ];
