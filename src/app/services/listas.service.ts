@@ -45,7 +45,7 @@ export class ListasService {
     let params = new HttpParams().set("departamento", departamento)
                                  .set("provincia", provincia);
 
-    return this.http.get(environment.apiClinicSoft + 'getProvince', { params });
+    return this.http.get(environment.apiClinicSoft + 'getDistrict', { params });
   }
 
   getCategories() {

@@ -196,6 +196,14 @@ export class PacientesComponent implements OnInit {
         })
   }
 
+  getProvince2(departamento: any ) {
+    this.listaService
+        .getProvince(departamento)
+        .subscribe((response: any ) => {
+          this.getProvinces = response;
+        })
+  }
+
   getDistricto: any[] = [];
   getDistrict(){
     let provincia = this.crearPacienteForm.get("crearpaciente_provincia")?.value,
@@ -229,7 +237,10 @@ export class PacientesComponent implements OnInit {
 
             setTimeout(() => {
               this.getProvince();
-              this.getDistrict();
+              
+            }, 3000);
+            setTimeout(() => {
+              this.getDistrict();              
             }, 3000);
 
             this.crearPacienteForm.patchValue(
@@ -283,6 +294,8 @@ export class PacientesComponent implements OnInit {
           this.btnActualizarHidden = false;
           this.btnHistoriaHidden = false;
           this.paciente = response.data.documento;
+          this.getProvince2(response.data.departamento);
+          this.getDistrict2(response.data.provincia, response.data.departamento);
           this.crearPacienteForm.patchValue(
             {
                crearpaciente_dni: response.data.documento,
@@ -361,7 +374,7 @@ export class PacientesComponent implements OnInit {
         .subscribe((response: any) => {
           if(response.status == 200) {
             this.showSuccess(response.message);
-            this.getpacientesTable();
+            // this.getpacientesTable();
             this.crearPacienteForm.reset();
             this.spinner = true;
           }
