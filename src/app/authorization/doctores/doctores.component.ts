@@ -40,4 +40,21 @@ export class DoctoresComponent {
     crear_foto: new FormControl('')
   });
 
+  configuracionForm = new FormGroup({
+    config_documento: new FormControl(''),
+    config_nombre: new FormControl(''),
+    config_telefono: new FormControl(''),
+    config_direccion: new FormControl(''),
+    config_correo: new FormControl(''),
+    config_perfil: new FormControl(''),
+    config_todos: new FormControl(''),
+    config_lunes: new FormControl(''),
+    config_martes: new FormControl(''),
+    config_miercoles: new FormControl(''),
+    config_jueves: new FormControl(''),
+    config_viernes: new FormControl(''),
+    config_sabado: new FormControl(''),
+    config_domingo: new FormControl('')
+  });
+
 }
