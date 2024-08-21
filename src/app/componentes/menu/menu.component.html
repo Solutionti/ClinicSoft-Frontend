@@ -12,68 +12,84 @@
     <ul class="navbar-nav">
       <li class="nav-item">
          <a class="nav-link" routerLink="/inicio">
-           <i class="fas fa-home"></i>
+           <i class="fas fa-home text-primary"></i>
            <span>Inicio</span>
          </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/citas" target="_blank">
+            <i class="fas fa-calendar-alt text-primary"></i>
+            <span>Citas</span>
+          </a>
+        </li>
        <li class="nav-item ">
           <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#atencion">
-          <i class="fas fa-user-nurse"></i>
+          <i class="fas fa-hospital text-primary"></i>
           <span class="sidenav-normal "> Admisiones <b class="caret"></b></span>
           </a>
           <div class="collapse " id="atencion">
              <ul class="nav nav-sm flex-column">
-                <li class="nav-item">
-                  <a class="nav-link" routerLink="/citas" target="_blank">
+                <!-- <li class="nav-item">
+                  <a class="nav-link" >
                   <span class="sidenav-normal">Citas</span>
                   </a>
+                 </li> -->
+                 <li class="nav-item">
+                    <a class="nav-link" routerLink="/admision">
+                    <span class="sidenav-normal">Admisión</span>
+                    </a>
                  </li>
                <li class="nav-item">
                   <a class="nav-link"  routerLink="/pacientes">
                   <span class="sidenav-normal">Pacientes</span>
                   </a>
                </li>
-                <li class="nav-item">
-                   <a class="nav-link" routerLink="/admision">
-                   <span class="sidenav-normal">Admisión</span>
-                   </a>
-                </li>
-                <li class="nav-item">
-                   <a class="nav-link " routerLink="/triage">
-                   <span class="sidenav-normal"> Triage</span>
-                   </a>
-                </li>
-                <li class="nav-item">
-                   <a class="nav-link " routerLink="/laboratorio">
-                   <span class="sidenav-normal">Laboratorio</span>
-                   </a>
-                </li>
              </ul>
           </div>
        </li>
        <li class="nav-item ">
          <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#procedimientos">
-         <i class="fas fa-flask"></i>
+         <i class="fas fa-flask text-primary"></i>
          <span class="sidenav-normal ">Procedimientos<b class="caret"></b></span>
          </a>
          <div class="collapse " id="procedimientos">
             <ul class="nav nav-sm flex-column">
               <li class="nav-item">
+                <a class="nav-link " routerLink="/triage">
+                <span class="sidenav-normal"> Triage</span>
+                </a>
+             </li>
+             <li class="nav-item">
+                <a class="nav-link " routerLink="/laboratorio">
+                <span class="sidenav-normal">Laboratorio</span>
+                </a>
+             </li>
+              <li class="nav-item">
                 <a class="nav-link" routerLink="/colposcopias">
                    <span class="sidenav-normal">Colposcopia</span>
                 </a>
               </li>
-               <li class="nav-item">
-                  <a class="nav-link" routerLink="/ecografias">
-                    <span class="sidenav-normal">Ecografias</span>
-                  </a>
-               </li>
             </ul>
          </div>
       </li>
+      <li class="nav-item ">
+        <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#ecografias">
+        <i class="fas fa-user-nurse text-primary"></i>
+        <span class="sidenav-normal ">Ecografias<b class="caret"></b></span>
+        </a>
+        <div class="collapse " id="ecografias">
+           <ul class="nav nav-sm flex-column">
+             <li class="nav-item">
+               <a class="nav-link" routerLink="/ecografias">
+                 <span class="sidenav-normal">Ecografia de mama</span>
+               </a>
+             </li>
+           </ul>
+        </div>
+     </li>
        <li class="nav-item ">
        <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#inventarios">
-       <i class="fa fa-shopping-cart"></i>
+       <i class="fa fa-shopping-cart text-primary"></i>
        <span class="sidenav-normal ">Inventarios<b class="caret"></b></span>
        </a>
        <div class="collapse " id="inventarios">
@@ -98,7 +114,7 @@
       </li>
       <li class="nav-item ">
        <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#seguridad">
-       <i class="fas fa-cogs"></i>
+       <i class="fas fa-cogs text-primary"></i>
        <span class="sidenav-normal ">Seguridad<b class="caret"></b></span>
        </a>
        <div class="collapse " id="seguridad">
@@ -119,7 +135,7 @@
 
       <li class="nav-item ">
        <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#contable">
-       <i class="fas fa-money-bill"></i>
+       <i class="fas fa-money-bill text-primary"></i>
        <span class="sidenav-normal ">Contabilidad<b class="caret"></b></span>
        </a>
        <div class="collapse " id="contable">
@@ -144,26 +160,26 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/reportes">
-          <i class="fas fa-chart-pie"></i>
+          <i class="fas fa-chart-pie text-primary"></i>
           <span>Reportes</span>
         </a>
       </li>
 
       <li class="nav-item">
        <a class="nav-link">
-         <i class="fas fa-pills"></i>
+         <i class="fas fa-pills text-primary"></i>
          <span>Farmacia</span>
        </a>
      </li>
      <li class="nav-item">
        <a class="nav-link">
-         <i class="fas fa-vial"></i>
+         <i class="fas fa-vial text-primary"></i>
          <span>Resultados</span>
        </a>
      </li>
      <li class="nav-item">
       <a class="nav-link">
-        <i class="fas fa-info-circle"></i>
+        <i class="fas fa-info-circle text-primary"></i>
         <span> Version 3.0.0.0</span>
       </a>
      </li>

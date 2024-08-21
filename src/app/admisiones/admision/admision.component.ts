@@ -12,6 +12,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { PdfService } from '../../services/pdf.service';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ButtonModule } from 'primeng/button';
+import { ContabilidadService } from '../../contabilidad/services/contabilidad.service';
 
 @Component({
   selector: 'app-admision',
@@ -36,6 +37,7 @@ export class AdmisionComponent implements OnInit {
   constructor(
     private admisionServices: AdmisionesService,
     private listaService: ListasService,
+    private contabilidadServices: ContabilidadService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private pdfServices: PdfService
@@ -73,7 +75,7 @@ export class AdmisionComponent implements OnInit {
     comision_admision: new FormControl(0,[Validators.required]),
     recibida_admision: new FormControl('',[Validators.required]),
     devolver_admision: new FormControl({value:'', disabled: true}),
-    efectivo_admision: new FormControl('0'),
+    efectivo_admision: new FormControl('Efectivo'),
     total_admision: new FormControl('')
   });
 
@@ -191,13 +193,6 @@ export class AdmisionComponent implements OnInit {
         .createAdmission(datos)
         .subscribe((response: any ) => {
           if(response.status == 200) {
-            this.showSuccess(response.message);
-            this.getAdmission();
-            this.admisionForm.reset();
-            this.admisionForm2.reset();
-            this.spinner = true;
-            this.pdfFactura = false;
-
             // Transaccion
             let datos2 = [
               {
@@ -212,6 +207,37 @@ export class AdmisionComponent implements OnInit {
                 .subscribe((response: any ) => {
 
                 });
+            
+            // Pagos
+            let datos3: any = [
+              {
+                dni_paciente: this.admisionForm.get("dni_admision")?.value,
+                medico: this.admisionForm.get("doctor_admision")?.value,
+                especialidad: this.admisionForm.get("especialidad_admision")?.value,
+                atencion: 18,
+                descuento: this.admisionForm2.get("descuento_admision")?.value,
+                comision: this.admisionForm2.get("comision_admision")?.value,
+                descripcion: "",
+                total: this.admisionForm2.get("costo_admision")?.value,
+                cantidad_recibida: this.admisionForm2.get("recibida_admision")?.value,
+                tipo_deposito: this.admisionForm2.get("efectivo_admision")?.value,
+                estado: "Pago",
+                usuario: localStorage.getItem('usuario'),
+              }
+            ];
+            this.contabilidadServices
+                .createPayment(datos3)
+                .subscribe((response: any ) => {
+
+                })
+
+            this.showSuccess(response.message);
+            this.getAdmission();
+            this.admisionForm.reset();
+            this.admisionForm2.reset();
+            this.spinner = true;
+            this.pdfFactura = false;
+
           }
           else {
             this.showError(response.message);

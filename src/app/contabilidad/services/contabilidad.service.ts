@@ -17,6 +17,25 @@ export class ContabilidadService {
     return this.http.get(url);
   }
 
+  createPayment(datos: any ) {
+    const url =  `${environment.apiClinicSoft}createPayment`;
+
+    return this.http.post(url, {
+      dni_paciente: datos[0].dni_paciente,
+      medico: datos[0].medico,
+      especialidad: datos[0].especialidad,
+      atencion: datos[0].atencion,
+      descuento: datos[0].descuento,
+      comision: datos[0].comision,
+      descripcion: datos[0].descripcion,
+      total: datos[0].total,
+      cantidad_recibida: datos[0].cantidad_recibida,
+      tipo_deposito: datos[0].tipo_deposito,
+      estado: datos[0].estado,
+      usuario: datos[0].usuario,
+    })
+  }
+
   getGasto() {
     const url =  `${environment.apiClinicSoft}getGasto`;
 

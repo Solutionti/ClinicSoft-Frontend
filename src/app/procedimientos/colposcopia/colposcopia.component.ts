@@ -54,11 +54,16 @@ export class ColposcopiaComponent implements OnInit {
   public archivo1: any = [];
   public archivo2: any = [];
   spinner = true;
+  date = new Date();
+  fechaActual = String(this.date.getFullYear() + '-' +
+    String(this.date.getMonth() + 1).padStart(2, '0') + '-' +
+    String(this.date.getDate()).padStart(2, '0')
+  );
 
   colposcopiasForm = new FormGroup ({
     dni_colposcopia: new FormControl(''),
-    nombre_colposcopia: new FormControl(''),
-    fecha_colposcopia: new FormControl(''),
+    nombre_colposcopia: new FormControl({value: '', disabled: true }),
+    fecha_colposcopia: new FormControl({value: this.fechaActual, disabled: true }),
     medico_colposcopia: new FormControl(''),
     escamo_colposcopia: new FormControl(''),
     cervix_colposcopia: new FormControl(''),

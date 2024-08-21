@@ -17,9 +17,10 @@ export class InventarioService {
     return this.http.get(url);
   }
 
-  getInventories(cantidad: any) {
+  getInventories(cantidad: any, signo: any) {
     const url =  `${environment.apiClinicSoft}getInventories`;
-    let params = new HttpParams().set("cantidad", cantidad);
+    let params = new HttpParams().set("cantidad", cantidad)
+                                 .set("signo", signo);
     return this.http.get(url, { params });
   }
 

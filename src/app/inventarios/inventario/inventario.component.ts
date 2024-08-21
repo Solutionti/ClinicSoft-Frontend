@@ -47,13 +47,14 @@ export class InventarioComponent  implements OnInit {
   getInventorie: any [] = [];
   getInventories(){
     let cantidad = this.inventarioForm.get('cant_inventario')?.value;
+    let signo = this.inventarioForm.get('stock_inventario')?.value;
     this.inventarioServices
-    .getInventories(cantidad)
-    .subscribe((response: any) => {
-      if(response.status == 200) {
-        this.showSuccess(response.message);
-        this.getInventorie = response.data;
-      }
+        .getInventories(cantidad, signo)
+        .subscribe((response: any) => {
+          if(response.status == 200) {
+            this.showSuccess(response.message);
+            this.getInventorie = response.data;
+          }
       else {
         this.showError(response.mesagge);
       }

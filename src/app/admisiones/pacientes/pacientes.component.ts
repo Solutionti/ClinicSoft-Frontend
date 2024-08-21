@@ -55,7 +55,7 @@ export class PacientesComponent implements OnInit {
     crearpaciente_dni: new FormControl('',[Validators.required]),
     crearpaciente_apellido: new FormControl('',[Validators.required]),
     crearpaciente_nombre: new FormControl('',[Validators.required]),
-    crearpaciente_hc: new FormControl('',[Validators.required]),
+    crearpaciente_hc: new FormControl({value: '', disabled: true},[Validators.required]),
     crearpaciente_celular: new FormControl(''),
     crearpaciente_sexo: new FormControl('',[Validators.required]),
     crearpaciente_fechanacimiento: new FormControl('',[Validators.required]),
@@ -246,9 +246,15 @@ export class PacientesComponent implements OnInit {
             this.showSuccess("Se ha encontrado un paciente");
             this.spinner = true;
 
+            this.crearPacienteForm.patchValue({
+              crearpaciente_hc: dni
+            });
           }
           else {
             this.showError("No se ha encontrado un paciente asociado al DNI " + dni);
+            this.crearPacienteForm.patchValue({
+              crearpaciente_hc: dni
+            });
             this.spinner = true;
           }
 

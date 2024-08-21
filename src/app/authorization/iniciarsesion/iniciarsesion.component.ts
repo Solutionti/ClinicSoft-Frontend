@@ -33,6 +33,9 @@ export class IniciarsesionComponent implements OnInit {
   loginAlert = true;
   spinnerLogin = true;
   spinner = false;
+  typepassword = 'password';
+  ocultarhidden = true;
+  verhidden = false
 
   loginForm: FormGroup = new FormGroup({
     usuario: new FormControl('',[Validators.required]),
@@ -101,5 +104,17 @@ export class IniciarsesionComponent implements OnInit {
     else{
       this.router.navigate(['/']);
     }
+  }
+
+  verContrasena() {
+    this.typepassword = 'text';
+    this.verhidden = true;
+    this.ocultarhidden = false;
+  }
+
+  ocultarContrasena() {
+    this.typepassword = 'password';
+    this.verhidden = false;
+    this.ocultarhidden = true;
   }
 }
