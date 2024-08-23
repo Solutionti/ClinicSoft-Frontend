@@ -102,7 +102,6 @@ export class LaboratorioComponent implements OnInit {
     this.listaServices
         .getDoctor()
         .subscribe((response: any ) => {
-          console.log(response);
           this.getDoctors = response;
         })
   }
@@ -172,8 +171,8 @@ export class LaboratorioComponent implements OnInit {
           if(response.status == 200) {
             this.showSuccess(response.message);
             this.spinner = true;
-            this.pdflaboratorio = false;
-
+            // generar pdf
+            this.pdfFacturaLaboratorio(response.codigo);
             // Transaccion
             let datos2 = [
               {
@@ -197,9 +196,10 @@ export class LaboratorioComponent implements OnInit {
         })
   }
 
-  pdfFacturaLaboratorio() {
+  pdfFacturaLaboratorio(codigo: any ) {
+
     this.pdfServices
-        .pdfFacturaLaboratorio();
+        .pdfFacturaLaboratorio(codigo);
 
     setTimeout(() => {
       location.reload();

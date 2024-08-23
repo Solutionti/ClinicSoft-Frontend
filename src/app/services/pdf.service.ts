@@ -21,24 +21,24 @@ export class PdfService {
     return this.http.get(url);
   }
 
-  pdfFacturaAdmision() {
+  pdfFacturaAdmision(admision: any ) {
     const token: any  = localStorage.getItem("token");
     const newtoken = token.substring(1, token.length - 1);
 
-    const url =  `${environment.apiClinicSoft}pdfFacturaAdmision`;
+    const url =  `${environment.apiClinicSoft}pdfFacturaAdmision?admision=` + admision;
 
     window.open(url, "_blank", " width=950, height=1000");
     return this.http.get(url);
   }
 
-  pdfFacturaLaboratorio() {
+  pdfFacturaLaboratorio(codigo: any) {
     const token: any  = localStorage.getItem("token");
     const newtoken = token.substring(1, token.length - 1);
 
-    const url =  `${environment.apiClinicSoft}pdfFacturaLaboratorio`;
-
+    const url =  `${environment.apiClinicSoft}pdfFacturaLaboratorio?codigo=` + codigo;
+    let params = new HttpParams().set("codigo", codigo);
     window.open(url, "_blank", " width=950, height=1000");
-    return this.http.get(url);
+    return this.http.get(url, { params });
   }
 
   generarPdfColposcopia(){
@@ -51,51 +51,51 @@ export class PdfService {
     return this.http.get(url);
   }
 
-  generarPdfGastos(){
+  generarPdfGastos(fechainicial: any, fechafinal: any ){
     const token: any  = localStorage.getItem("token");
     const newtoken = token.substring(1, token.length - 1);
 
-    const url =  `${environment.apiClinicSoft}pdfGastos`;
+    const url =  `${environment.apiClinicSoft}pdfGastos?fechainicial=` + fechainicial + '&fechafinal=' +fechafinal ;
 
     window.open(url, "_blank", " width=950, height=1000");
     return this.http.get(url);
   }
 
-  generarPdfLaboratorio(){
+  generarPdfLaboratorio(fechainicial: any , fechafinal: any){
     const token: any  = localStorage.getItem("token");
     const newtoken = token.substring(1, token.length - 1);
 
-    const url =  `${environment.apiClinicSoft}pdfLaboratorio`;
+    const url =  `${environment.apiClinicSoft}pdfLaboratorio?fechainicial=` + fechainicial + '&fechafinal=' +fechafinal ;
 
     window.open(url, "_blank", " width=950, height=1000");
     return this.http.get(url);
   }
 
-  generarPdfCaja(){
+  generarPdfCaja(doctor: any ,fechainicial: any ,fechafinal: any ){
     const token: any  = localStorage.getItem("token");
     const newtoken = token.substring(1, token.length - 1);
 
-    const url =  `${environment.apiClinicSoft}pdfCaja`;
+    const url =  `${environment.apiClinicSoft}pdfCaja?doctor=` + doctor + '&fechainicial=' + fechainicial + '&fechafinal=' + fechafinal;
 
     window.open(url, "_blank", " width=950, height=1000");
     return this.http.get(url);
   }
 
-  generarPdfInventario() {
+  generarPdfInventario(cantidad: any , valor: any ) {
     const token: any  = localStorage.getItem("token");
     const newtoken = token.substring(1, token.length - 1);
 
-    const url =  `${environment.apiClinicSoft}pdfInventario`;
+    const url =  `${environment.apiClinicSoft}pdfInventario?cantidad=` + cantidad + '&valor=' + valor;
 
     window.open(url, "_blank", " width=950, height=1000");
     return this.http.get(url);
   }
 
-  generarPdfKardex() {
+  generarPdfKardex(producto: any ,fechainicial: any ,fechafinal: any ) {
     const token: any  = localStorage.getItem("token");
     const newtoken = token.substring(1, token.length - 1);
 
-    const url =  `${environment.apiClinicSoft}pdfKardex`;
+    const url =  `${environment.apiClinicSoft}pdfKardex?producto=` + producto + '&fechainicial=' + fechainicial + '&fechafinal=' + fechafinal;
 
     window.open(url, "_blank", " width=950, height=1000");
     return this.http.get(url);

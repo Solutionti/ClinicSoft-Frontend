@@ -99,4 +99,11 @@ export class ListasService {
     return this.http.get(environment.apiClinicSoft + 'getDocumentosPaciente', { params });
   }
 
+  contarMesAMes(fechainicial: any, fechafinal: any ) {
+
+    let params =  new HttpParams().set("fechainicial", fechainicial)
+                                  .set("fechafinal", fechafinal);
+    return this.http.get(environment.apiClinicSoft + 'contarMesAMes', { params });
+  }
+
 }

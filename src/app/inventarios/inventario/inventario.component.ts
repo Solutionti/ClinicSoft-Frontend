@@ -62,8 +62,11 @@ export class InventarioComponent  implements OnInit {
   }
 
   pdfInventario() {
+    let valor = this.inventarioForm.get("stock_inventario")?.value,
+        cantidad = this.inventarioForm.get("cant_inventario")?.value;
+
     this.pdfServices
-        .generarPdfInventario();
+        .generarPdfInventario(cantidad, valor);
   }
 
   showError(message: string) {

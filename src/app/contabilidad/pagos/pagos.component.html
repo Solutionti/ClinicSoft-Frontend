@@ -12,7 +12,22 @@
 <main class="main-content position-relative border-radius-lg">
   <app-cerrarsesion titulo="Pagos"></app-cerrarsesion>
   <div class="container-fluid py-1">
-    <div class="row ">
+    <div class="row">
+      <div class="card">
+        <div class="container-fluid mt-3">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="d-flex flex-row-reverse">
+                <button
+                  class="btn btn-danger text-white btn-xs mx-1"
+                  (click)="generarpdfPagos()"
+                >
+                  <i class="fas fa-file-pdf  text-white"></i> Generar pdf
+                </button>
+                
+              </div>
+            </div>
+          </div>
       <div class="card">
         <div class="container-fluid mt-3">
           <div class="row">
@@ -43,7 +58,6 @@
                 </ng-template>
                 <ng-template pTemplate="header">
                   <tr>
-                    <th pSortableColumn="name" class="text-xs text-white bg-default"></th>
                     <th pSortableColumn="name" class="text-xs text-white bg-default">FACTURA</th>
                     <th pSortableColumn="name" class="text-xs text-white bg-default">PACIENTE</th>
                     <th pSortableColumn="name" class="text-xs text-white bg-default">MEDICO</th>
@@ -56,15 +70,6 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-getPayment>
                   <tr>
-                    <td>
-                      <a
-                        class="badge bg-danger mx-1"
-                        (click)="generarpdfPagos()"
-
-                      >
-                      <i class="fas fa-file-pdf fa-xs text-white"></i>
-                    </a>
-                    </td>
                     <td class="text-xs text-uppercase">{{ 'FA0' + getPayment.codigo_pago }}</td>
                     <td class="text-xs text-uppercase">{{ getPayment.nombre + ' ' + getPayment.apellido  }}</td>
                     <td class="text-xs text-uppercase">{{ getPayment.medico }}</td>
