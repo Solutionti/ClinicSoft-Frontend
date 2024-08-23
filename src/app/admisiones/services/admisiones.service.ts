@@ -105,7 +105,6 @@ export class AdmisionesService {
       comision: datos[0].comision,
       turno: datos[0].turno,
       usuario: datos[0].usuario,
-      orden__: datos[0].orden__,
     });
 
   }
