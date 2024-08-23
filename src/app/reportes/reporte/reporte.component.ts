@@ -6,15 +6,18 @@ import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { ListasService } from '../../services/listas.service';
 import { CommonModule } from '@angular/common';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { subscribe } from 'diagnostics_channel';
 @Component({
   selector: 'app-reporte',
   standalone: true,
   imports: [
     CerrarsesionComponent,
+    ReactiveFormsModule,
     MenuComponent,
     DialogModule,
     ButtonModule,
-    CommonModule
+    CommonModule,
   ],
   templateUrl: './reporte.component.html'
 })
@@ -38,22 +41,43 @@ export class ReporteComponent implements OnInit {
     this.getTransaccion();
     this.countEfectivo();
     this.countTargeta();
+    this.cargarMesaMes()
   };
 
+  reportesForm = new FormGroup({
+    doctor_reportes: new FormControl(''),
+    fechainicial_reportes: new FormControl(''),
+    fechafinal_reportes: new FormControl(''),
+  });
+
+  enero  = "";
+  marzo  = "";
+  mayo  = "";
+  julio  = "";
+  septiembre  = "";
+  noviembre  = "";
 
   generarPdfGastos() {
+    let fechainicial= this.reportesForm.get("fechainicial_reportes")?.value,
+        fechafinal= this.reportesForm.get("fechafinal_reportes")?.value;
     this.PdfServices
-        .generarPdfGastos();
+        .generarPdfGastos(fechainicial, fechafinal);
   }
 
   generarPdfLaboratorio() {
+    let fechainicial= this.reportesForm.get("fechainicial_reportes")?.value,
+        fechafinal= this.reportesForm.get("fechafinal_reportes")?.value;
+
     this.PdfServices
-        .generarPdfLaboratorio();
+        .generarPdfLaboratorio(fechainicial, fechafinal);
   }
 
   generarPdfCaja() {
+    let doctor = this.reportesForm.get("doctor_reportes")?.value,
+        fechainicial= this.reportesForm.get("fechainicial_reportes")?.value,
+        fechafinal= this.reportesForm.get("fechafinal_reportes")?.value;
     this.PdfServices
-        .generarPdfCaja();
+        .generarPdfCaja(doctor,fechainicial,fechafinal);
   }
 
   getDoctor: any[] = [];
@@ -80,6 +104,7 @@ export class ReporteComponent implements OnInit {
     this.ListaServices
         .countEfectivo()
         .subscribe((response: any ) => {
+          console.log(response);
           this.efectivo = response;
         });
   }
@@ -90,8 +115,65 @@ export class ReporteComponent implements OnInit {
     this.ListaServices
     .countTargeta()
     .subscribe((response: any ) => {
+      console.log(response);
       this.targeta = response;
     });
+  }
+
+  contarEneroFebrero() {
+    this.ListaServices
+        .contarMesAMes("2024-01-01", "2024-01-29")
+        .subscribe((response: any ) => {
+          this.enero = response;
+        });
+  }
+
+  contarMarzoAbril() {
+    this.ListaServices
+        .contarMesAMes("2024-03-01", "2024-04-31")
+        .subscribe((response: any ) => {
+          this.marzo = response;
+        });
+  }
+
+  contarMayoJunio() {
+    this.ListaServices
+        .contarMesAMes("2024-05-01", "2024-06-31")
+        .subscribe((response: any ) => {
+          this.mayo = response;
+        });
+  }
+
+  contarJulioAgosto() {
+    this.ListaServices
+        .contarMesAMes("2024-07-01", "2024-08-31")
+        .subscribe((response: any ) => {
+          this.julio = response;
+        });
+  }
+
+  contarSeptiembreOctubre() {
+    this.ListaServices
+        .contarMesAMes("2024-09-01", "2024-10-31")
+        .subscribe((response: any ) => {
+          this.septiembre = response;
+        });
+  }
+  contarNoviembreDiciembre() {
+    this.ListaServices
+        .contarMesAMes("2024-11-01", "2024-12-31")
+        .subscribe((response: any ) => {
+          this.noviembre = response;
+        });
+  }
+
+  cargarMesaMes() {
+    this.contarEneroFebrero();
+    this.contarMarzoAbril();
+    this.contarMayoJunio();
+    this.contarJulioAgosto();
+    this.contarSeptiembreOctubre();
+    this.contarNoviembreDiciembre();
   }
 
 }

@@ -49,8 +49,8 @@ export class GastosComponent implements OnInit {
     comprobante_gastos: new FormControl('',[Validators.required]),
     serie_gastos: new FormControl('',[Validators.required]),
     correlativo_gastos: new FormControl('',[Validators.required]),
-    gravada_gastos: new FormControl('',[Validators.required]),
-    igv_gastos: new FormControl('',[Validators.required]),
+    gravada_gastos: new FormControl({ value:'', disabled: true },[Validators.required]),
+    igv_gastos: new FormControl({ value:'', disabled: true },[Validators.required]),
     total_gastos: new FormControl('',[Validators.required]),
     emision_gastos: new FormControl('',[Validators.required]),
     recepcion_gastos: new FormControl('',[Validators.required]),
@@ -211,6 +211,28 @@ export class GastosComponent implements OnInit {
       summary: 'ClinicSoft Aviso',
       detail: message
     });
+  }
+
+  calcularInpuestos() {
+    let comprobante = this.registrarForm.get("comprobante_gastos")?.value,
+        total = this.registrarForm.get("total_gastos")?.value;
+
+    let gravada: any  = (total / 1.18).toFixed(2);
+    let igv: any  = (total - gravada).toFixed(2);
+
+    if(comprobante == "1") {
+      this.registrarForm.patchValue({
+        gravada_gastos: gravada,
+        igv_gastos: igv
+      });
+
+    }
+    else {
+      this.registrarForm.patchValue({
+        gravada_gastos: 0,
+        igv_gastos: 0
+      }); 
+    }
   }
 
 }

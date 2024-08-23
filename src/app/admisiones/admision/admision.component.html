@@ -24,13 +24,6 @@
                 >
                   <i class="fas fa-database text-white"></i> Crear
                 </button>
-                <button
-                  class="btn btn-danger text-white btn-xs mx-2"
-                  (click)="pdfFacturaAdmision()"
-                  [hidden]="pdfFactura"
-                >
-                  <i class="fas fa-file-pdf text-white"></i> Factura
-                </button>
               </div>
             </div>
           </div>
@@ -63,7 +56,7 @@
                 </ng-template>
                 <ng-template pTemplate="header">
                   <tr>
-                    <th  class="text-xs text-white bg-default" style="width:5%"></th>
+                    <th  class="text-xs text-white bg-default" style="width:8%"></th>
                     <th  class="text-xs text-white bg-default" style="width:18%">PACIENTE</th>
                     <th  class="text-xs text-white bg-default" style="width:6%">ESTADO</th>
                     <th  class="text-xs text-white bg-default" style="width:10%">DOCTOR</th>
@@ -79,6 +72,12 @@
                         (click)="PasateStatusAdmission(getAdmissions.paciente)"
                       >
                         <i class="fas fa-check fa-xs text-white"></i>
+                      </a>
+                      <a
+                        class="badge bg-primary mx-1"
+                        (click)="pdfFacturaAdmision(getAdmissions.codigo_atencion)"
+                      >
+                        <i class="fas fa-file-pdf fa-xs text-white"></i>
                       </a>
                       <a
                         class="badge  bg-danger mx-1"

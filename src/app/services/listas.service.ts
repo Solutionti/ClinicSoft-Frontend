@@ -45,7 +45,7 @@ export class ListasService {
     let params = new HttpParams().set("departamento", departamento)
                                  .set("provincia", provincia);
 
-    return this.http.get(environment.apiClinicSoft + 'getProvince', { params });
+    return this.http.get(environment.apiClinicSoft + 'getDistrict', { params });
   }
 
   getCategories() {
@@ -97,6 +97,13 @@ export class ListasService {
     let params = new HttpParams().set("paciente", paciente);
 
     return this.http.get(environment.apiClinicSoft + 'getDocumentosPaciente', { params });
+  }
+
+  contarMesAMes(fechainicial: any, fechafinal: any ) {
+
+    let params =  new HttpParams().set("fechainicial", fechainicial)
+                                  .set("fechafinal", fechafinal);
+    return this.http.get(environment.apiClinicSoft + 'contarMesAMes', { params });
   }
 
 }

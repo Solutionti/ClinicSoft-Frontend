@@ -226,8 +226,12 @@ export class KardexComponent implements OnInit {
   }
 
   pdfKardex() {
+    let producto = this.kardexForm.get("producto_kardex")?.value,
+    fechainicial = this.kardexForm.get("inicial_kardex")?.value,
+    fechafinal = this.kardexForm.get("final_kardex")?.value;
+
     this.pdfServices
-        .generarPdfKardex();
+        .generarPdfKardex(producto,fechainicial,fechafinal);
   }
 
   showError(message: string) {
@@ -247,9 +251,6 @@ export class KardexComponent implements OnInit {
       detail: message
     });
   }
-
-
-
 
   showDialog1() {
     this.visible = true;
