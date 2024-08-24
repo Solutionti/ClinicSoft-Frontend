@@ -81,7 +81,7 @@
                       <a
                         class="badge bg-success"
                       >
-                        <i class="fas fa-file-pdf fa-xs text-white"></i>
+                        <i class="fas fa-pen fa-xs text-white"></i>
                       </a>
                     </td>
                     <td class="text-xs text-uppercase">{{ getGastos.serie + ' - ' + '000' +getGastos.serie  + ' |' + '$'+ getGastos.sub_total   }}</td>
@@ -125,6 +125,7 @@
               <select
                 class="form-control form-control-sm text-uppercase"
                 formControlName="comprobante_gastos"
+                (change)="calcularInpuestos()"
               >
                   <option value="">SELECCIONAR</option>
                   <option option value="3">VOLETA</option>
@@ -182,9 +183,10 @@
             <div class="col-md-4 mt-2">
               <label>OP. GRAVADA *</label>
               <input
-                type="text"
+                type="number"
                 class="form-control form-control-sm"
                 formControlName="gravada_gastos"
+                step="0.01"
               >
               <div
               class="error"
@@ -198,9 +200,10 @@
             <div class="col-md-4 mt-2">
               <label>IGV *</label>
               <input
-                type="text"
+                type="number"
                 class="form-control form-control-sm"
                 formControlName="igv_gastos"
+                step="0.01"
               >
               <div
               class="error"
@@ -212,11 +215,12 @@
              </div>
             </div>
             <div class="col-md-4 mt-2">
-              <label>TOTAL **</label>
+              <label>TOTAL *</label>
               <input
                 type="text"
                 class="form-control form-control-sm"
                 formControlName="total_gastos"
+                (keyup)="calcularInpuestos()"
               >
               <div
               class="error"
