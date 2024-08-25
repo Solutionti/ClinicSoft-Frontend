@@ -874,9 +874,9 @@ header="HISTORIA CLINICA DEL PACIENTE"
             <p-table
             #diagnosticos
             [value]="getDiagnostico"
-            [rows]="5"
+            [rows]="2"
             [paginator]="true"
-            [globalFilterFields]="['nombre', 'getDiagnostico.nombre', 'categoria', 'getDiagnostico.categoria']"
+            [globalFilterFields]="['clave', 'getDiagnostico.clave', 'descripcion', 'getDiagnostico.descripcion']"
             [tableStyle]="{ 'min-width': '75rem' }"
             [rowHover]="true"
             dataKey="id"
@@ -890,6 +890,7 @@ header="HISTORIA CLINICA DEL PACIENTE"
                   pInputText
                   type="text"
                   class="form-control"
+                  (input)="diagnosticos.filterGlobal($any($event.target).value, 'contains')"
                   placeholder="Buscar..."
                 />
               </span>
@@ -898,8 +899,8 @@ header="HISTORIA CLINICA DEL PACIENTE"
           <ng-template pTemplate="header">
             <tr>
               <th class="text-xs text-white bg-default" style="width:5%"></th>
-              <th class="text-xs text-white bg-default" style="width:15%">CODIGO</th>
-              <th class="text-xs text-white bg-default" style="width:80%">NOMBRE DIAGNOSTICO</th>
+              <th class="text-xs text-white bg-default" style="width:15%" pSortableColumn="clave">CODIGO</th>
+              <th class="text-xs text-white bg-default" style="width:80%" pSortableColumn="descripcion">NOMBRE DIAGNOSTICO</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-diagnosticos>
@@ -942,9 +943,9 @@ header="HISTORIA CLINICA DEL PACIENTE"
           <p-table
           #procedimientos
           [value]="getProcedimiento"
-          [rows]="5"
+          [rows]="2"
           [paginator]="true"
-          [globalFilterFields]="['nombre', 'getProcedimiento.nombre', 'categoria', 'getProcedimiento.categoria']"
+          [globalFilterFields]="['codigo_cpt', 'getProcedimiento.codigo_cpt', 'nombre', 'getProcedimiento.nombre']"
           [tableStyle]="{ 'min-width': '75rem' }"
           [rowHover]="true"
           dataKey="id"
@@ -958,6 +959,7 @@ header="HISTORIA CLINICA DEL PACIENTE"
                 pInputText
                 type="text"
                 class="form-control"
+                (input)="procedimientos.filterGlobal($any($event.target).value, 'contains')"
                 placeholder="Buscar..."
               />
             </span>
@@ -966,8 +968,8 @@ header="HISTORIA CLINICA DEL PACIENTE"
         <ng-template pTemplate="header">
           <tr>
             <th class="text-xs text-white bg-default" style="width:5%"></th>
-            <th class="text-xs text-white bg-default" style="width:15%">CODIGO</th>
-            <th class="text-xs text-white bg-default" style="width:80%">NOMBRE PROCEDIMIENTO</th>
+            <th class="text-xs text-white bg-default" style="width:15%" pSortableColumn="codigo_cpt">CODIGO</th>
+            <th class="text-xs text-white bg-default" style="width:80%" pSortableColumn="nombre">NOMBRE PROCEDIMIENTO</th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-getProcedimiento>
