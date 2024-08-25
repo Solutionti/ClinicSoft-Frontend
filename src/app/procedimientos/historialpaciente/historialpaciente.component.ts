@@ -315,6 +315,7 @@ export class HistorialpacienteComponent implements OnInit {
       // CONSULTAS
   }
 
+
   habilitarMenu() {
     this.historiaTipoForm.get("tphistoria")?.disable();
     let historia = this.historiaTipoForm.get("tphistoria")?.value;
@@ -325,6 +326,14 @@ export class HistorialpacienteComponent implements OnInit {
       this.plan_trabajo = false;
       this.diagnostico = false;
       this.procedimiento  = false;
+
+      this.procedimientoService
+          .getcountCantidadHistorias(1, "10275915")
+          .subscribe((response: any ) => {
+            this.historiaTipoForm.patchValue({
+              consecutivo_historia: response
+            });
+          })
     }
     else if(historia == "2") {
       this.antecedentes = false;
@@ -332,6 +341,14 @@ export class HistorialpacienteComponent implements OnInit {
       this.axamen_fisico = false;
       this.diagnostico = false;
       this.procedimiento  = false;
+
+      this.procedimientoService
+          .getcountCantidadHistorias(2, "10275915")
+          .subscribe((response: any ) => {
+            this.historiaTipoForm.patchValue({
+              consecutivo_historia: response
+            });
+          })
     }
     else if(historia == "") {
       this.antecedentes = true;
@@ -342,6 +359,10 @@ export class HistorialpacienteComponent implements OnInit {
       this.plan_trabajo = true;
       this.diagnostico = true;
       this.procedimiento  = true;
+
+      this.historiaTipoForm.patchValue({
+        consecutivo_historia: ""
+      });
     }
   }
 
