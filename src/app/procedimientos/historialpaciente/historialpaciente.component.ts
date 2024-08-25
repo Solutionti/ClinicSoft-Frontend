@@ -186,7 +186,7 @@ export class HistorialpacienteComponent implements OnInit {
         compania: this.anamnesisForm.get("anamnesis_compañia")?.value,
         iafa: this.anamnesisForm.get("anamnesis_iafa")?.value,
         nombre_acompanante: this.anamnesisForm.get("anamnesis_acompañante")?.value,
-        dni: this.anamnesisForm.get("anamnesis_dni")?.value,
+        dni: this.paciente,
         celular: this.anamnesisForm.get("anamnesis_celular")?.value,
         motivo_consulta: this.anamnesisForm.get("anamnesis_consulta")?.value,
         tratamiento_anterior: this.anamnesisForm.get("anamnesis_tratamiento")?.value,
@@ -328,7 +328,7 @@ export class HistorialpacienteComponent implements OnInit {
       this.procedimiento  = false;
 
       this.procedimientoService
-          .getcountCantidadHistorias(1, "10275915")
+          .getcountCantidadHistorias(1, this.paciente)
           .subscribe((response: any ) => {
             this.historiaTipoForm.patchValue({
               consecutivo_historia: response
@@ -343,7 +343,7 @@ export class HistorialpacienteComponent implements OnInit {
       this.procedimiento  = false;
 
       this.procedimientoService
-          .getcountCantidadHistorias(2, "10275915")
+          .getcountCantidadHistorias(2, this.paciente)
           .subscribe((response: any ) => {
             this.historiaTipoForm.patchValue({
               consecutivo_historia: response
@@ -395,7 +395,7 @@ export class HistorialpacienteComponent implements OnInit {
     this.archivopdf.forEach((element: any) => {
       formdata.append('pdfs', this.archivopdf[0]);
     });
-      formdata.append('paciente', '1110542802');
+      formdata.append('paciente', this.paciente);
       formdata.append('tparchivo', tparchivo);
       formdata.append('titulo', titulo);
       formdata.append('usuario', usuario);
@@ -458,7 +458,7 @@ export class HistorialpacienteComponent implements OnInit {
 
   getDocumentosPacient: any[] = [];
   getDocumentosPaciente(){
-    let paciente = "1110542802";
+    let paciente = this.paciente;
     this.listaServices
         .getDocumentosPaciente(paciente)
         .subscribe((response: any ) => {
