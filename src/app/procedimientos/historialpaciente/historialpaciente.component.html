@@ -870,7 +870,7 @@ header="HISTORIA CLINICA DEL PACIENTE"
     <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab" tabindex="0">
       <div class="container">
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-8">
             <p-table
             #diagnosticos
             [value]="getDiagnostico"
@@ -904,12 +904,27 @@ header="HISTORIA CLINICA DEL PACIENTE"
           </ng-template>
           <ng-template pTemplate="body" let-diagnosticos>
             <tr>
-              <td></td>
+              <td>
+                <button 
+                  class="btn btn-success btn-xs"
+                >
+                  <i class="fas fa-check fa-xs text-white"></i>
+                </button>
+              </td>
               <td class="text-xs text-uppercase">{{ diagnosticos.clave }}</td>
               <td class="text-xs text-uppercase">{{ diagnosticos.descripcion }}</td>
             </tr>
           </ng-template>
          </p-table>
+          </div>
+          <div class="col-md-4">
+            <h6 class="text-uppercase">Diagnosticos relacionados</h6>
+              <p-chip 
+                label= "Colera debido a vibrio cholerae o1, biotipo cholerae" 
+                image="assets/img/laboratorio.png" 
+                alt="Avatar image"
+                [removable]="false" 
+              />
           </div>
         </div>
       </div>
@@ -923,13 +938,13 @@ header="HISTORIA CLINICA DEL PACIENTE"
     >
     <div class="container">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-8">
           <p-table
           #procedimientos
-          [value]="getDiagnostico"
+          [value]="getProcedimiento"
           [rows]="5"
           [paginator]="true"
-          [globalFilterFields]="['nombre', 'getDiagnostico.nombre', 'categoria', 'getDiagnostico.categoria']"
+          [globalFilterFields]="['nombre', 'getProcedimiento.nombre', 'categoria', 'getProcedimiento.categoria']"
           [tableStyle]="{ 'min-width': '75rem' }"
           [rowHover]="true"
           dataKey="id"
@@ -955,14 +970,29 @@ header="HISTORIA CLINICA DEL PACIENTE"
             <th class="text-xs text-white bg-default" style="width:80%">NOMBRE PROCEDIMIENTO</th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-procedimientos>
+        <ng-template pTemplate="body" let-getProcedimiento>
           <tr>
-            <td></td>
-            <td class="text-xs text-uppercase">{{ procedimientos.clave }}</td>
-            <td class="text-xs text-uppercase">{{ procedimientos.descripcion }}</td>
+            <td>
+              <button 
+                class="btn btn-success btn-xs"
+              >
+                <i class="fas fa-check fa-xs text-white"></i>
+              </button>
+            </td>
+            <td class="text-xs text-uppercase">{{ getProcedimiento.codigo_cpt }}</td>
+            <td class="text-xs text-uppercase">{{ getProcedimiento.nombre }}</td>
           </tr>
         </ng-template>
        </p-table>
+        </div>
+        <div class="col-md-4">
+          <h6 class="text-uppercase">Procedimientos relacionados</h6>
+            <p-chip 
+              label= "Colera debido a vibrio cholerae o1, biotipo cholerae" 
+              image="assets/img/laboratorio.png" 
+              alt="Avatar image"
+              [removable]="false" 
+            />
         </div>
       </div>
     </div>

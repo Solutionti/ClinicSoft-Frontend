@@ -13,6 +13,7 @@ import { TableModule } from 'primeng/table';
 import { Footer, MessageService } from 'primeng/api';
 import { PdfService } from '../../services/pdf.service';
 import { ToastModule } from 'primeng/toast';
+import { ChipModule } from 'primeng/chip';
 
 @Component({
   selector: 'app-historialpaciente',
@@ -25,7 +26,8 @@ import { ToastModule } from 'primeng/toast';
     CommonModule,
     DialogModule,
     TableModule,
-    ToastModule
+    ToastModule,
+    ChipModule,
   ],
   providers: [MessageService],
   templateUrl: './historialpaciente.component.html',
@@ -62,6 +64,7 @@ export class HistorialpacienteComponent implements OnInit {
 
    this.getDataHistoriaCLinica();
    this.getDiagnosticos();
+   this.getProcedimientos();
    this.getDocumentosPaciente();
   }
 
@@ -422,6 +425,16 @@ export class HistorialpacienteComponent implements OnInit {
         })
 
   }
+
+  getProcedimiento: any[] = [];
+  getProcedimientos() {
+    this.listaServices
+    .getProcedimientos()
+    .subscribe((response: any ) =>{
+      this.getProcedimiento = response;
+    })
+  }
+
   getDocumentosPacient: any[] = [];
   getDocumentosPaciente(){
     let paciente = "1110542802";

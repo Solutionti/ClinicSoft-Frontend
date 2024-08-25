@@ -93,6 +93,10 @@ export class ListasService {
     return this.http.get(environment.apiClinicSoft + 'getDiagnosticos');
   }
 
+  getProcedimientos() {
+    return this.http.get(environment.apiClinicSoft + 'getProcedimientos');
+  }
+
   getDocumentosPaciente(paciente: any ) {
     let params = new HttpParams().set("paciente", paciente);
 
