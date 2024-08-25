@@ -148,7 +148,8 @@ export class HistorialpacienteComponent implements OnInit {
   });
 
   historiaTipoForm: FormGroup = new FormGroup ({
-    tphistoria: new FormControl({value: '', disabled: false})
+    tphistoria: new FormControl({value: '', disabled: false}),
+    consecutivo_historia: new FormControl({value: '', disabled: true}),
   });
 
   cargueDocumentosForm: FormGroup = new FormGroup ({
