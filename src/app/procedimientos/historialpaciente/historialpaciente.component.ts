@@ -129,7 +129,7 @@ export class HistorialpacienteComponent implements OnInit {
   });
 
   anamnesisForm: FormGroup = new FormGroup ({
-    anamnesis_directa: new FormControl(''),
+    anamnesis_directa: new FormControl('D'),
     anamnesis_empresa: new FormControl(''),
     anamnesis_compañia: new FormControl(''),
     anamnesis_iafa: new FormControl(''),
@@ -465,6 +465,82 @@ export class HistorialpacienteComponent implements OnInit {
           this.getDocumentosPacient = response;
         })
 
+  }
+
+  diagnosticoRelacionado: any[] = [];
+  vincularDiagnosticosHistoria(codigo: any, descripcion: any ) {
+    this.diagnosticoRelacionado.push(
+      {
+        historia: 1,
+        paciente: this.paciente,
+        codigodiagnostico: codigo,
+        nombrediagnostico: descripcion,
+        tpespecialidad: 1,
+        historia2: 1,
+        fecha: '26-08-2024',
+        usuario: localStorage.getItem('usuario')
+      }
+    );
+
+    for(let i = 0; i < this.getDiagnostico.length; i++){
+      if(this.getDiagnostico[i].clave === codigo){
+        this.getDiagnostico.splice(i, 1);
+      }
+    }
+    
+    this.showSuccess("Se ha agregado un Item ");
+  }
+
+  dbclickDiagnostico(codigo: any, descripcion: any ) {
+    for(let i = 0; i < this.diagnosticoRelacionado.length; i++){
+      if(this.diagnosticoRelacionado[i].codigodiagnostico === codigo){
+        this.diagnosticoRelacionado.splice(i, 1);
+      }
+    }
+    this.showSuccess("Se ha quitado el diagnostico de la lista");
+
+    this.getDiagnostico.unshift({
+      clave: codigo,
+      descripcion: descripcion,
+    });
+  }
+
+  procedimientoRelacionado: any[] = [];
+  vincularProcedimientosHistoria(codigo: any, descripcion: any ) {
+    this.procedimientoRelacionado.push(
+      {
+        historia: 1,
+        paciente: this.paciente,
+        codprocedimiento: codigo,
+        nomprocedimiento: descripcion,
+        especialidad: "1",
+        history: 1,
+        fecha: '26-08-2024',
+        usuario: localStorage.getItem('usuario')
+      }
+    );
+
+    for(let i = 0; i < this.getProcedimiento.length; i++){
+      if(this.getProcedimiento[i].codigo_cpt === codigo){
+        this.getProcedimiento.splice(i, 1);
+      }
+    }
+    console.log(this.procedimientoRelacionado);
+    this.showSuccess("Se ha agregado un Item ");
+  }
+
+  dbclickProcedimiento(codigo: any, descripcion: any ) {
+    for(let i = 0; i < this.procedimientoRelacionado.length; i++){
+      if(this.procedimientoRelacionado[i].codprocedimiento === codigo){
+        this.procedimientoRelacionado.splice(i, 1);
+      }
+    }
+    this.showSuccess("Se ha quitado el procedimiento de la lista");
+
+    this.getProcedimiento.unshift({
+      codigo_cpt: codigo,
+      nombre: descripcion,
+    });
   }
 
 }

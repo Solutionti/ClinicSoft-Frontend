@@ -845,15 +845,15 @@ header="HISTORIA CLINICA DEL PACIENTE"
             </div>
           </div>
           <div class="row mt-2">
-            <div class="col-md-6">
+            <!-- <div class="col-md-6">
               <label>PROXIMA CITA</label>
               <input
                 type="date"
                 class="form-control form-control-sm"
                 formControlName="plan_cita"
               >
-            </div>
-            <div class="col-md-6">
+            </div> -->
+            <div class="col-md-12">
               <label>FIRMA DEL MEDICO</label>
               <input
                 type="text"
@@ -908,6 +908,7 @@ header="HISTORIA CLINICA DEL PACIENTE"
               <td>
                 <button 
                   class="btn btn-success btn-xs"
+                  (click)="vincularDiagnosticosHistoria(diagnosticos.clave, diagnosticos.descripcion)"
                 >
                   <i class="fas fa-check fa-xs text-white"></i>
                 </button>
@@ -920,13 +921,19 @@ header="HISTORIA CLINICA DEL PACIENTE"
           </div>
           <div class="col-md-4">
             <h6 class="text-uppercase">Diagnosticos relacionados</h6>
+              <div
+                class="col-md-12 mt-3"
+                *ngFor="let diagnostico of diagnosticoRelacionado"
+              >
               <p-chip 
-                label= "Colera debido a vibrio cholerae o1, biotipo cholerae" 
+                label= "{{ diagnostico.nombrediagnostico }}" 
                 image="assets/img/laboratorio.png" 
                 alt="Avatar image"
-                [removable]="false" 
+                [removable]="false"
+                (dblclick)="dbclickDiagnostico(diagnostico.codigodiagnostico, diagnostico.nombrediagnostico)"
               />
-          </div>
+            </div>
+        </div>
         </div>
       </div>
     </div>
@@ -977,6 +984,7 @@ header="HISTORIA CLINICA DEL PACIENTE"
             <td>
               <button 
                 class="btn btn-success btn-xs"
+                (click)="vincularProcedimientosHistoria(getProcedimiento.codigo_cpt, getProcedimiento.nombre)"
               >
                 <i class="fas fa-check fa-xs text-white"></i>
               </button>
@@ -989,12 +997,18 @@ header="HISTORIA CLINICA DEL PACIENTE"
         </div>
         <div class="col-md-4">
           <h6 class="text-uppercase">Procedimientos relacionados</h6>
+            <div
+              class="col-md-12 mt-3"
+              *ngFor="let procedimiento of procedimientoRelacionado"
+            >
             <p-chip 
-              label= "Colera debido a vibrio cholerae o1, biotipo cholerae" 
+              label= "{{ procedimiento.nomprocedimiento }}" 
               image="assets/img/laboratorio.png" 
               alt="Avatar image"
-              [removable]="false" 
+              [removable]="false"
+              (dblclick)="dbclickProcedimiento(procedimiento.codprocedimiento,procedimiento.nomprocedimiento)"
             />
+            </div>
         </div>
       </div>
     </div>
@@ -1011,7 +1025,9 @@ header="HISTORIA CLINICA DEL PACIENTE"
               aria-label="Small select example"
               formControlName="anamnesis_directa"
             >
-              <option value="1">DIRECTA</option>
+              <option value="D">DIRECTA</option>
+              <option value="I">INDIRECTA</option>
+              <option value="M">MIXTA</option>
             </select>
           </div>
         </div>
@@ -1370,7 +1386,178 @@ header="HISTORIA CLINICA DEL PACIENTE"
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+        <nav>
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">ALERGIAS</button>
+            <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">MEDICAMENTOS</button>
+            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false" disabled>DIETA NUTRICIONAL</button>
+          </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+           <div class="container">
+             <div class="row mt-4">
+             <div class="col-md-12">
+               <label>Tipo de alergia</label>
+               <select
+                 class="form-control"
+               >
+                 <option value="">SELECCIONA UNA OPCION</option>
+                 <option value="Medicamentos">ALERGIA A MEDICAMENTOS</option>
+                 <option value="Otras">OTRAS ALERGIAS</option>
+               </select>
+             </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-md-12">
+                <label>Descripcion</label>
+                <textarea
+                  class="form-control"
+                ></textarea>
+              </div>
+            </div>
+           </div>
+          </div>
+          <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+            <div class="container">
+              <div class="row mt-4">
+                <div class="col-md-3">
+                  <label>Fecha</label>
+                  <input type="date" class="form-control">
+                </div>
+                <div class="col-md-4">
+                  <label>Doctor</label>
+                  <input type="text" class="form-control">
+                </div>
+                <div class="col-md-5">
+                  <label>Paciente</label>
+                  <input type="text" class="form-control">
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-7">
+                  <label>Medicamento</label>
+                  <div class="input-group ">
+                    <input type="text" class="form-control">
+                    <button
+                      class="btn btn-primary"
+                      type="button"
+                    >
+                      <i class="fas fa-eye"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <label>Cantidad</label>
+                  <input type="number" class="form-control">
+                </div>
+                <div class="col-md-3">
+                  <label>Dosis</label>
+                  <select
+                    class="form-control text-uppercase"
+                  >
+                    <option value="">Seleccione la dosis</option>
+                    <option value="Noespecificada">No especifica</option>
+                    <option value="Ampolla">Ampolla</option>
+                    <option value="Aplicación">Aplicación</option>
+                    <option value="Capsula">Capsula</option>
+                    <option value="Comprimido">Comprimido</option>
+                    <option value="Cucharada">Cucharada</option>
+                    <option value="Cucharadita_5ML">Cucharadita 5ML</option>
+                    <option value="Dosis">Dosis</option>
+                    <option value="Exposición">Exposición</option>
+                    <option value="Gota">Gota</option>
+                    <option value="Gragea">Gragea</option>
+                    <option value="Mililitros">Mililitros</option>
+                    <option value="Puff">Puff</option>
+                    <option value="Sesión">Sesión</option>
+                    <option value="Sobre">Sobre</option>
+                    <option value="Tableta">Tableta</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row ">
+                <div class="col-md-4">
+                  <label>Via Aplicación</label>
+                  <select
+                    class="form-control text-uppercase"
+                  >
+                    <option value="">Seleccione la via aplicación</option>
+                      <option value="Via_oral">Via oral</option>
+                      <option value="Via_intramuscular">Via intramuscular</option>
+                      <option value="Via_intravenoso">Via intravenoso</option>
+                      <option value="Vaginal">Vaginal</option>
+                      <option value="Transtraqueal">Transtraqueal</option>
+                      <option value="Transdermica">Transdermica</option>
+                      <option value="Topica">Topica</option>
+                      <option value="Sub_lingual">Sub lingual</option>
+                      <option value="Sub_cutanea">Sub cutanea</option>
+                      <option value="Rectal">Rectal</option>
+                      <option value="Por_sng">Por sng</option>
+                      <option value="Por_gastronomica">Por gastronomica</option>
+                      <option value="Parenteral">Parenteral </option>
+                      <option value="Sub_lingual">Sub lingual</option>
+                      <option value="Sub_cutanea">Sub cutanea</option>
+                      <option value="Ojo_derecha">Ojo derecho</option>
+                      <option value="Ojo_izquierdo">Ojo izquierdo</option>
+                      <option value="Oido_derecho">Oido derecho</option>
+                      <option value="Oido_izquierdo">Oido izquierdo</option>
+                      <option value="No_especifica">No especifica</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label>Frecuencia</label>
+                  <select
+                    class="form-control text-uppercase"
+                  >
+                  <option value="">Seleccione la frecuencia</option>
+                      <option value="No_especifica">No especifica</option>
+                      <option value="dos_al_dia">2 veces al día</option>
+                      <option value="tres_al_dia">3 veces al día</option>
+                      <option value="al_acostarse">Al acostarse</option>
+                      <option value="al_dia">Al día</option>
+                      <option value="cada_doce_horas">Cada 12 horas</option>
+                      <option value="cada_dos_horas">Cada 2 horas</option>
+                      <option value="cada_tres_horas">Cada 3 horas</option>
+                      <option value="cada_cuatro_horas">Cada 4 horas</option>
+                      <option value="cada_seis_horas">Cada 6 horas</option>
+                      <option value="cada_ocho_horas">Cada 8 horas</option>
+                      <option value="dos_veces_por_semana">Dos veces por semana</option>
+                      <option value="en_ayunas">En ayunas</option>
+                      <option value="en_la_mañana">En la mañana</option>
+                      <option value="mañana_noche">En la mañana, noche</option>
+                      <option value="noche">En la noche</option>
+                      <option value="tarde">En la tarde</option>
+                      <option value="mañana_tarde_noche">Mañana,Tarde,Noche</option>
+                      <option value="tres_veces_semana">Tres veces por semana</option>
+                      <option value="una_vez_semana">Una vez por semana</option> 
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label>Duración</label>
+                  <select
+                    class="form-control text-uppercase"
+                  >
+                    <option value="">Seleccione la duración</option>
+                      <option value="cinco_dias">05 días</option>
+                      <option value="diez_dias">10 días</option>
+                      <option value="quince_dias">15 días</option>
+                      <option value="treinta_dias">30 días</option>
+                      <option value="dos_dias">Dos días</option>
+                      <option value="durante_tres_meses">Durante 3 meses</option>
+                      <option value="tres_dias">Tres días</option>
+                      <option value="un dia">Un día</option>
+                      <option value="una_semana">Una semana</option>
+                      <option value="unica_vez">Unica vez</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+            <!--  -->
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>

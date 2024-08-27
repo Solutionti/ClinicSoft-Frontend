@@ -85,6 +85,11 @@ export const routes: Routes = [
       import('./authorization/inicio/inicio.component').then((c) => c.InicioComponent)
   },
   {
+    path: 'permisos',
+    loadComponent: () =>
+      import('./authorization/permisousuario/permisousuario.component').then((c) => c.PermisousuarioComponent)
+  },
+  {
     path: 'productos',
     loadComponent: () =>
       import('./inventarios/productos/productos.component').then((c) => c.ProductosComponent)
