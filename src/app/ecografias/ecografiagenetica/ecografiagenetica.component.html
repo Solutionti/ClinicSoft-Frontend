@@ -1,1 +1,316 @@
-<p>ecografiagenetica works!</p>
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  * -->
+<!-- * * * * * * * * * * * JERSON GALVEZ ENSUNCHO * * * * * * * * * * * -->
+<!-- ******* * * * * * * * PROYECTO CLINICSOFT * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<!--<p-toast position="top-right"/>-->
+<div class="min-height-300 bg-default position-absolute w-100"></div>
+<aside
+  class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4"
+  id="sidenav-main"
+  style="z-index: 1 !important;"
+>
+  <app-menu></app-menu>
+</aside>
+<main class="main-content position-relative border-radius-lg">
+  <app-cerrarsesion titulo="Ecografia genetica"></app-cerrarsesion>
+  <form [formGroup]="geneticaForm">
+    <div class="container-fluid ">
+      <div class="row ">
+        <div class="card">
+          <div class="container-fluid mt-3">
+            <div class="row">
+              <div class="col-md-12">
+                <form>
+                <div class="row">
+                  <div class="col-md-3">
+                    <label>DNI *</label>
+                    <div class="input-group">
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      formControlName="genetica_dni"
+                    >
+                    <button class="btn btn-primary btn-xs" type="button">
+                      <i class="fas fa-fingerprint"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <label>Nombre</label>
+                  <input
+                     type="text"
+                     class="form-control form-control-sm"
+                     formControlName="genetica_nombre"
+                   >
+                </div>
+                <div class="col-md-3">
+                  <label>Apellidos</label>
+                  <input
+                     type="text"
+                     class="form-control form-control-sm"
+                     formControlName="genetica_apellido"
+                   >
+                </div>
+                <div class="col-md-1">
+                  <label>Edad</label>
+                  <input
+                     type="text"
+                     class="form-control form-control-sm"
+                     formControlName="genetica_edad"
+                   >
+                </div>
+                <div class="col-md-2">
+                  <label>HC</label>
+                  <input
+                     type="text"
+                     class="form-control form-control-sm"
+                     formControlName="genetica_hc"
+                   >
+                </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3">
+                     <label>Feto / Embriòn</label>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="inlineRadioOptions"
+                        id="inlineRadio1"
+                        value="option1"
+                        formControlName="genetica_unico"
+                      >
+                      <label class="form-check-label" for="inlineRadio1">Unico</label>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="inlineRadioOptions"
+                        id="inlineRadio2"
+                        value="option2"
+                        formControlName="genetica_multiple"
+                      >
+                      <label class="form-check-label" for="inlineRadio2">Multiple</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-2">
+                <div class="col-md-3">
+                     <label>Situaciòn</label>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="inlineRadioOptions"
+                        id="inlineRadio1"
+                        value="option1"
+                        formControlName="genetica_cefalico"
+                      >
+                      <label class="form-check-label" for="inlineRadio1">Cefalico</label>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="inlineRadioOptions"
+                        id="inlineRadio2"
+                        value="option2"
+                        formControlName="genetica_podatico"
+                      >
+                      <label class="form-check-label" for="inlineRadio2">Podatico</label>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="inlineRadioOptions"
+                        id="inlineRadio2"
+                        value="option2"
+                        formControlName="genetica_indiferente"
+                      >
+                      <label class="form-check-label" for="inlineRadio2">Indiferente</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                   <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Liquido amniotico</label>
+                         <textarea
+                          class="form-control"
+                          rows="1"
+                          formControlName="genetica_liquido"
+                          >
+                        volumen normal para la ededad gestacional
+                        </textarea>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-md-1">
+                      <div class="form-group">
+                        <label>Placenta</label>
+                          <input
+                            type="text"
+                            class="form-control form-control-sm"
+                            placeholder="Grados"
+                            formControlName="genetica_placenta"
+                          >
+                      </div>
+                   </div>
+                   <div class="col-md-1">
+                      <label>LCR</label>
+                      <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        formControlName="genetica_lcr"
+                      >
+                   </div>
+                   <div class="col-md-1 mt-4">
+                     <label class="mt-3">mm</label>
+                   </div>
+                   <div class="col-md-1">
+                      <label>LCF</label>
+                      <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        formControlName="genetica_lcf"
+                      >
+                   </div>
+                   <div class="col-md-1 mt-4 text-center">
+                     <label class="mt-3">X</label>
+                   </div>
+                   <div class="col-md-1">
+                      <label>. </label>
+                      <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        formControlName="genetica_punto"
+                      >
+                   </div>
+                   <div class="col-md-2">
+                      <label>Art Uterina Derecha</label>
+                      <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        formControlName="genetica_art_derecha"
+                      >
+                   </div>
+                   <div class="col-md-2">
+                      <label>Art Uterina Izquierda</label>
+                      <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        formControlName="genetica_art_izquierdo"
+                      >
+                   </div>
+                   <div class="col-md-2">
+                      <label>IP Promedio</label>
+                      <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        formControlName="genetica_promedio"
+                      >
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-md-4">
+                      <div class="form-group">
+                         <label for=""></label>
+                         <textarea
+                            class="form-control"
+                            rows="1"
+                            formControlName="genetica_hueso_nasal"
+                         >
+                          Hueso nasal presente
+                         </textarea>
+                      </div>
+                   </div>
+                   <div class="col-md-2">
+                      <label>Translucencia nucal</label>
+                      <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        formControlName="genetica_translucencia"
+                      >
+                   </div>
+                   <div class="col-md-1 mt-4">
+                     <label class="mt-3">mm</label>
+                   </div>
+                   <div class="col-md-5">
+                      <div class="form-group">
+                         <label for=""></label>
+                         <textarea
+                            class="form-control"
+                            rows="1"
+                            formControlName="genetica_ductus_venosa"
+                          >
+                          Ductus venosa onda trifasica normal.
+                          </textarea>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-md-6">
+                      <div class="form-group">
+                         <label>Conclusion</label>
+                         <textarea
+                            rows="2"
+                            class="form-control"
+                            formControlName="genetica_conclusion"
+                          >
+                        </textarea>
+                      </div>
+                   </div>
+                   <div class="col-md-6">
+                      <div class="form-group">
+                         <label>Sugerencia</label>
+                         <textarea
+                            rows="2"
+                            class="form-control"
+                            formControlName="genetica_sugerencia"
+                          >
+                        </textarea>
+                      </div>
+                   </div>
+                </div>
+            </form>
+              <div class="row mt-1">
+                <div class="col-md-3">
+                  <button class="btn btn-primary btn-xs mt-2">
+                    Guardar
+                  </button>
+                  <button
+                    class="btn btn-danger btn-xs mt-2 mx-2"
+                  > <i class="fas fa-file-pdf"></i>
+                    Imprimir
+                  </button>
+                </div>
+              </div>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<!-- spinner -->
+<div class="overlay z-index">
+  <div class="dot-wave">
+    <div class="dot-wave__dot"></div>
+    <div class="dot-wave__dot"></div>
+    <div class="dot-wave__dot"></div>
+    <div class="dot-wave__dot"></div>
+  </div>
+</div>

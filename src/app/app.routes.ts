@@ -89,7 +89,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./inventarios/productos/productos.component').then((c) => c.ProductosComponent)
   },
-  
+
   {
     path: 'ecografias',
     loadComponent: () =>
@@ -100,5 +100,32 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./ecografias/ecografiaprostatica/ecografiaprostatica.component').then((c) => c.EcografiaprostaticaComponent)
   },
+  {
+    path: 'ecografiatransvaginal',
+    loadComponent: () =>
+      import('./ecografias/ecografiatransvaginal/ecografiatransvaginal.component').then((c) => c.EcografiatransvaginalComponent)
+  },
+  {
+    path: 'ecografiapelvica',
+    loadComponent: () =>
+      import('./ecografias/ecografiapelvica/ecografiapelvica.component').then((c) => c.EcografiapelvicaComponent)
+  },
+  {
+    path: 'ecografiagenetica',
+    loadComponent: () =>
+      import('./ecografias/ecografiagenetica/ecografiagenetica.component').then((c) => c.EcografiageneticaComponent)
+  },
+  {
+    path: 'ecografiaobstetrica',
+    loadComponent: () =>
+      import('./ecografias/ecografiaobstetrica/ecografiaobstetrica.component').then((c) => c.EcografiaobstetricaComponent)
+  },
+  {
+    path: 'ecografiamorfologica',
+    loadComponent: () =>
+      import('./ecografias/ecografiamorfologica/ecografiamorfologica.component').then((c) => c.EcografiamorfologicaComponent)
+  },
+
+
 
 ];
