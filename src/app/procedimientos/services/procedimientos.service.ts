@@ -22,6 +22,13 @@ export class ProcedimientosService {
     return this.http.post(url,formdata);
   }
 
+  getcountCantidadHistorias(tphistoria: any, paciente: any  ) {
+    const url = `${environment.apiClinicSoft}getcountCantidadHistorias`;
+    let params = new HttpParams().set("tphistoria", tphistoria).set("paciente", paciente);
+
+    return this.http.get(url, { params });
+  }
+
   createHistoriaClinica(datos: any){
     const url = `${environment.apiClinicSoft}createHistoriaClinica`;
 

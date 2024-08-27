@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
   }
 
   validarSesion2() {
-    const token: any  = localStorage.getItem('token');
+    let  token: any  = localStorage.getItem('token');
     if(token == null) {
       this.router.navigate(['/']);
     }

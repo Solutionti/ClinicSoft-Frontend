@@ -49,8 +49,9 @@ export class EcografiaComponent implements OnInit {
     String(this.date.getDate()).padStart(2, '0')
   );
 
+  //definir el formGroup
   ecografiaMamaForm = new FormGroup({
-    dni_ecografia_mama: new FormControl(''),
+    dni_ecografia_mama: new FormControl(''), // asi se de definir 
     nombre_ecografia_mama: new FormControl({value:'', disabled: true}),
     apellido_ecografia_mama: new FormControl({value:'', disabled: true}),
     edad_ecografia_mama: new FormControl({value:'', disabled: true}),

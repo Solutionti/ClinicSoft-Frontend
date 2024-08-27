@@ -13,6 +13,7 @@ import { TableModule } from 'primeng/table';
 import { Footer, MessageService } from 'primeng/api';
 import { PdfService } from '../../services/pdf.service';
 import { ToastModule } from 'primeng/toast';
+import { ChipModule } from 'primeng/chip';
 
 @Component({
   selector: 'app-historialpaciente',
@@ -25,7 +26,8 @@ import { ToastModule } from 'primeng/toast';
     CommonModule,
     DialogModule,
     TableModule,
-    ToastModule
+    ToastModule,
+    ChipModule,
   ],
   providers: [MessageService],
   templateUrl: './historialpaciente.component.html',
@@ -62,6 +64,7 @@ export class HistorialpacienteComponent implements OnInit {
 
    this.getDataHistoriaCLinica();
    this.getDiagnosticos();
+   this.getProcedimientos();
    this.getDocumentosPaciente();
   }
 
@@ -148,7 +151,8 @@ export class HistorialpacienteComponent implements OnInit {
   });
 
   historiaTipoForm: FormGroup = new FormGroup ({
-    tphistoria: new FormControl({value: '', disabled: false})
+    tphistoria: new FormControl({value: '', disabled: false}),
+    consecutivo_historia: new FormControl({value: '', disabled: true}),
   });
 
   cargueDocumentosForm: FormGroup = new FormGroup ({
@@ -182,7 +186,7 @@ export class HistorialpacienteComponent implements OnInit {
         compania: this.anamnesisForm.get("anamnesis_compañia")?.value,
         iafa: this.anamnesisForm.get("anamnesis_iafa")?.value,
         nombre_acompanante: this.anamnesisForm.get("anamnesis_acompañante")?.value,
-        dni: this.anamnesisForm.get("anamnesis_dni")?.value,
+        dni: this.paciente,
         celular: this.anamnesisForm.get("anamnesis_celular")?.value,
         motivo_consulta: this.anamnesisForm.get("anamnesis_consulta")?.value,
         tratamiento_anterior: this.anamnesisForm.get("anamnesis_tratamiento")?.value,
@@ -311,6 +315,7 @@ export class HistorialpacienteComponent implements OnInit {
       // CONSULTAS
   }
 
+
   habilitarMenu() {
     this.historiaTipoForm.get("tphistoria")?.disable();
     let historia = this.historiaTipoForm.get("tphistoria")?.value;
@@ -321,6 +326,14 @@ export class HistorialpacienteComponent implements OnInit {
       this.plan_trabajo = false;
       this.diagnostico = false;
       this.procedimiento  = false;
+
+      this.procedimientoService
+          .getcountCantidadHistorias(1, this.paciente)
+          .subscribe((response: any ) => {
+            this.historiaTipoForm.patchValue({
+              consecutivo_historia: response
+            });
+          })
     }
     else if(historia == "2") {
       this.antecedentes = false;
@@ -328,6 +341,14 @@ export class HistorialpacienteComponent implements OnInit {
       this.axamen_fisico = false;
       this.diagnostico = false;
       this.procedimiento  = false;
+
+      this.procedimientoService
+          .getcountCantidadHistorias(2, this.paciente)
+          .subscribe((response: any ) => {
+            this.historiaTipoForm.patchValue({
+              consecutivo_historia: response
+            });
+          })
     }
     else if(historia == "") {
       this.antecedentes = true;
@@ -338,6 +359,10 @@ export class HistorialpacienteComponent implements OnInit {
       this.plan_trabajo = true;
       this.diagnostico = true;
       this.procedimiento  = true;
+
+      this.historiaTipoForm.patchValue({
+        consecutivo_historia: ""
+      });
     }
   }
 
@@ -370,7 +395,7 @@ export class HistorialpacienteComponent implements OnInit {
     this.archivopdf.forEach((element: any) => {
       formdata.append('pdfs', this.archivopdf[0]);
     });
-      formdata.append('paciente', '1110542802');
+      formdata.append('paciente', this.paciente);
       formdata.append('tparchivo', tparchivo);
       formdata.append('titulo', titulo);
       formdata.append('usuario', usuario);
@@ -421,9 +446,19 @@ export class HistorialpacienteComponent implements OnInit {
         })
 
   }
+
+  getProcedimiento: any[] = [];
+  getProcedimientos() {
+    this.listaServices
+    .getProcedimientos()
+    .subscribe((response: any ) =>{
+      this.getProcedimiento = response;
+    })
+  }
+
   getDocumentosPacient: any[] = [];
   getDocumentosPaciente(){
-    let paciente = "1110542802";
+    let paciente = this.paciente;
     this.listaServices
         .getDocumentosPaciente(paciente)
         .subscribe((response: any ) => {

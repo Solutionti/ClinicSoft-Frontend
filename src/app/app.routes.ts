@@ -1,22 +1,4 @@
 import { Routes } from '@angular/router';
-import { IniciarsesionComponent } from './authorization/iniciarsesion/iniciarsesion.component';
-import { PacientesComponent } from './admisiones/pacientes/pacientes.component';
-import { TriageComponent } from './admisiones/triage/triage.component';
-import { AdmisionComponent } from './admisiones/admision/admision.component';
-import { LaboratorioComponent } from './admisiones/laboratorio/laboratorio.component';
-import { ColposcopiaComponent } from './procedimientos/colposcopia/colposcopia.component';
-import { EcografiaComponent } from './ecografias/ecografia/ecografia.component';
-import { InventarioComponent } from './inventarios/inventario/inventario.component';
-import { KardexComponent } from './inventarios/kardex/kardex.component';
-import { UsuariosComponent } from './authorization/usuarios/usuarios.component';
-import { HistorialpacienteComponent } from './procedimientos/historialpaciente/historialpaciente.component';
-import { PagosComponent } from './contabilidad/pagos/pagos.component';
-import { GastosComponent } from './contabilidad/gastos/gastos.component';
-import { FinanzasComponent } from './contabilidad/finanzas/finanzas.component';
-import { ReporteComponent } from './reportes/reporte/reporte.component';
-import { InicioComponent } from './authorization/inicio/inicio.component';
-import { ProductosComponent } from './inventarios/productos/productos.component';
-import { CitasComponent } from './admisiones/citas/citas.component';
 
 export const routes: Routes = [
   {
@@ -54,11 +36,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./procedimientos/colposcopia/colposcopia.component').then((c) => c.ColposcopiaComponent)
   },
-  {
-    path: 'ecografias',
-    loadComponent: () =>
-      import('./ecografias/ecografia/ecografia.component').then((c) => c.EcografiaComponent)
-  },
+
   {
     path: 'inventario',
     loadComponent: () =>
@@ -111,10 +89,16 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./inventarios/productos/productos.component').then((c) => c.ProductosComponent)
   },
+  
   {
-    path: 'doctores',
+    path: 'ecografias',
     loadComponent: () =>
-      import('./authorization/doctores/doctores.component').then((c) => c.DoctoresComponent)
+      import('./ecografias/ecografia/ecografia.component').then((c) => c.EcografiaComponent)
+  },
+  {
+    path: 'ecografiaprostatica',
+    loadComponent: () =>
+      import('./ecografias/ecografiaprostatica/ecografiaprostatica.component').then((c) => c.EcografiaprostaticaComponent)
   },
 
 ];

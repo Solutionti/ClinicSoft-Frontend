@@ -1,0 +1,244 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  * -->
+<!-- * * * * * * * * * * * JERSON GALVEZ ENSUNCHO * * * * * * * * * * * -->
+<!-- ******* * * * * * * * PROYECTO CLINICSOFT * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<!-- <p-toast position="top-right"/> -->
+<div class="min-height-300 bg-default position-absolute w-100"></div>
+<aside 
+  class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4"
+  id="sidenav-main"
+  
+>
+  <app-menu></app-menu>
+</aside>
+<main class="main-content position-relative border-radius-lg">
+  <app-cerrarsesion titulo="Ecografia prostatica"></app-cerrarsesion>
+  <div class="container-fluid ">
+    <div class="row ">
+      <div class="card">
+        <div class="container-fluid mt-3">
+          <div class="row">
+            <div class="col-md-12">
+              <form [formGroup]="ecografiaProstaticaForm">
+              <div class="row">
+                <div class="col-md-3">
+                  <label>DNI *</label>
+                  <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    formControlName="dni_ecografia_prostatica"
+                  >
+                  <button class="btn btn-primary btn-xs" type="button">
+                    <i class="fas fa-fingerprint"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <label>Nombre</label>
+                <input
+                   type="text"
+                   class="form-control form-control-sm"
+                   formControlName="nombre_ecografia_prostatica"
+                 >
+              </div>
+              <div class="col-md-3">
+                <label>Apellidos</label>
+                <input
+                   type="text"
+                   class="form-control form-control-sm"
+                   formControlName="apellido_ecografia_prostatica"
+                 >
+              </div>
+              <div class="col-md-1">
+                <label>Edad</label>
+                <input
+                   type="text"
+                   class="form-control form-control-sm"
+                   formControlName="edad_ecografia_prostatica"
+                 >
+              </div>
+              <div class="col-md-2">
+                <label>HC</label>
+                <input
+                   type="text"
+                   class="form-control form-control-sm"
+                   formControlName="hc_ecografia_prostatica"
+                 >
+                </div>
+              </div>
+              <!-- contenido nuevo  -->
+              <div class="row mb-3">
+                <div class="col-md-8">
+                    <label for="motivo" class="form-label">Motivo del Examen</label>
+                    <input type="text" class="form-control form-control-sm" id="motivo" formControlName="motivo">
+                </div>
+                <div class="col-md-4">
+                    <label for="fecha" class="form-label">Fecha</label>
+                    <input type="date" class="form-control form-control-sm" id="fecha" formControlName="fecha">
+                </div>
+            </div>
+            
+            <h5 class="mt-4">Hallazgos</h5>
+            <h6 class="mt-3">Vejiga</h6>
+            <!-- Vejiga, Paredes, Contenido anecoico e Imágenes expansivas en una sola línea -->
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <label for="replicacion" class="form-label">Replicación</label>
+                    <select class="form-select form-select-sm" id="replicacion" formControlName="replicacion">
+                        <option>Normal</option>
+                        <option>Mínimo</option>
+                        <option>Excesivo</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="paredes" class="form-label">Paredes</label>
+                    <select class="form-select form-select-sm" id="paredes" formControlName="paredes">
+                        <option>Normal</option>
+                        <option>Delgada</option>
+                        <option>Engrosada</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="contenido" class="form-label">Contenido anecoico</label>
+                    <select class="form-select form-select-sm" id="contenido" formControlName="contenido" (change)="onContenidoChange($event)">
+                        <option value="Sí">Sí</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <div class="col-md-3" *ngIf="isContenidoAnecoicoNo">
+                    <label for="detalle_contenido" class="form-label">Detalle Contenido</label>
+                    <input type="text" class="form-control form-control-sm" id="detalle_contenido" formControlName="detalle_contenido">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <!-- Imágenes expansivas -->
+                <div class="col-md-3">
+                    <label for="imagenes_expansivas" class="form-label">Imágenes expansivas</label>
+                    <select class="form-select form-select-sm" id="imagenes_expansivas" formControlName="imagenes_expansivas" (change)="onImagenesExpansivasChange($event)">
+                        <option value="No">No</option>
+                        <option value="Sí">Sí</option>
+                    </select>
+                </div>
+                <div class="col-md-3" *ngIf="isImagenesExpansivasSi">
+                    <label for="detalle_imagenes" class="form-label">Detalle Imágenes</label>
+                    <input type="text" class="form-control form-control-sm" id="detalle_imagenes" formControlName="detalle_imagenes">
+                </div>
+                
+                <!-- Cálculos en su interior -->
+                <div class="col-md-3">
+                    <label for="calculos" class="form-label">Cálculos en su interior</label>
+                    <select class="form-select form-select-sm" id="calculos" formControlName="calculos" (change)="onCalculosChange($event)">
+                        <option value="No">No</option>
+                        <option value="Sí">Sí</option>
+                    </select>
+                </div>
+                <div class="col-md-3" *ngIf="isCalculosSi">
+                    <label for="detalle_calculos" class="form-label">Detalle Cálculos</label>
+                    <input type="text" class="form-control form-control-sm" id="detalle_calculos" formControlName="detalle_calculos">
+                </div>
+            </div>
+            
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label for="vol_pre" class="form-label">Vol.pre-miccional (cc)</label>
+                    <input type="text" class="form-control form-control-sm" id="vol_pre" formControlName="vol_pre">
+                </div>
+            
+                <div class="col-md-4">
+                    <label for="vol_post" class="form-label">Vol.post-miccional (cc)</label>
+                    <input type="text" class="form-control form-control-sm" id="vol_post" formControlName="vol_post">
+                </div>
+            
+                <div class="col-md-4">
+                    <label for="retencion" class="form-label">% de retención</label>
+                    <input type="text" class="form-control form-control-sm" id="retencion" formControlName="retencion">
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="descripcion" class="form-label">Descripción/Otros</label>
+                <textarea class="form-control form-control-sm" id="descripcion" formControlName="descripcion" rows="3"></textarea>
+            </div>
+            
+            <h6 class="mt-4">Próstata</h6>
+            <div class="row mb-3">
+                <!-- Bordes -->
+                <div class="col-md-4">
+                    <label for="bordes" class="form-label">Bordes</label>
+                    <select class="form-select form-select-sm" id="bordes" formControlName="bordes">
+                        <option>Regulares</option>
+                        <option>Irregulares</option>
+                    </select>
+                </div>
+            
+                <!-- Dimensiones (Transverso, Antero posterior, Longitudinal) -->
+                <div class="col-md-2">
+                    <label for="transverso" class="form-label">Transverso (mm)</label>
+                    <input type="text" class="form-control form-control-sm" id="transverso" formControlName="transverso">
+                </div>
+                <div class="col-md-2">
+                    <label for="antero_posterior" class="form-label">Antero posterior (mm)</label>
+                    <input type="text" class="form-control form-control-sm" id="antero_posterior" formControlName="antero_posterior">
+                </div>
+                <div class="col-md-2">
+                    <label for="longitudinal" class="form-label">Longitudinal (mm)</label>
+                    <input type="text" class="form-control form-control-sm" id="longitudinal" formControlName="longitudinal">
+                </div>
+            
+                <!-- Volumen (cc) -->
+                <div class="col-md-2">
+                    <label for="volumen" class="form-label">Volumen (cc)</label>
+                    <input type="text" class="form-control form-control-sm" id="volumen" formControlName="volumen">
+                    <small class="form-text text-muted">V.N 15cc</small>
+                </div>
+            </div>
+            
+            <div class="d-flex align-items-center mt-4">
+                <h6 class="mb-0">Observaciones</h6>
+                <div class="ms-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="otra" id="otra" formControlName="observacion" (change)="onObservacionChange($event)">
+                        <label class="form-check-label" for="otra">Agregar</label>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-3" *ngIf="isObservacionOtra">
+                <textarea class="form-control form-control-sm" id="observacion_textarea" formControlName="observacion_textarea" rows="3" placeholder="Escriba su observación"></textarea>
+            </div>
+            
+            <h6 class="mt-4">Conclusiones</h6>
+            <div class="mb-3">
+                <textarea class="form-control form-control-sm" id="conclusiones" formControlName="conclusiones" rows="3" placeholder="Escriba sus conclusiones"></textarea>
+            </div>
+            
+              <!--  -->
+            </form>
+            <div class="row mt-1">
+              <div class="col-md-3">
+                <button class="btn btn-primary btn-xs mt-2">
+                  Guardar
+                </button>
+                <button
+                  class="btn btn-danger btn-xs mt-2 mx-2"
+                > <i class="fas fa-file-pdf"></i>
+                  Imprimir
+                </button>
+              </div>
+            </div>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<!-- spinner -->
+<!-- <div [hidden]="spinner" class="overlay z-index">
+  <div class="dot-wave">
+    <div class="dot-wave__dot"></div>
+    <div class="dot-wave__dot"></div>
+    <div class="dot-wave__dot"></div>
+    <div class="dot-wave__dot"></div>
+  </div>
+</div> -->
