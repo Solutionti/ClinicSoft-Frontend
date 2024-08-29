@@ -90,7 +90,6 @@ export class CitasComponent implements OnInit  {
     this.listaServices
         .getDoctor()
         .subscribe((response: any ) => {
-          console.log(response);
           this.getDoctor = response;
           
         });
@@ -108,13 +107,14 @@ export class CitasComponent implements OnInit  {
 
   loadEvents(fetchInfo: any , successCallback: any , failureCallback: any ) {
     let url = `${environment.apiClinicSoft}getCitas/` + this.doctor;
-    
+
     this.http.get<any[]>(url).subscribe(
       data => {
         const events = data.map(event => ({
           title: event.title,
           start: event.start,
-          end: event.end
+          end: event.end,
+          color: event.color
         }));
         successCallback(events);
       },

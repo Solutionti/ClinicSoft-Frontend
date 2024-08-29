@@ -40,6 +40,7 @@ export class UsuariosComponent implements OnInit {
     correo: new FormControl('', [Validators.required]),
     telefono: new FormControl(''),
     permiso: new FormControl('', [Validators.required]),
+    color: new FormControl(''),
     usuario: new FormControl('', [Validators.required]),
     contrasena: new FormControl('', [Validators.required]),
     estado: new FormControl('Activo', [Validators.required]),
@@ -73,6 +74,7 @@ export class UsuariosComponent implements OnInit {
         estado: this.usuariosForm.get("estado")?.value,
         usuario_creacion: localStorage.getItem('usuario'),
         cmp: 0,
+        color: this.usuariosForm.get("color")?.value,
       }
     ];
     this.loginServices
