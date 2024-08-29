@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CerrarsesionComponent } from '../../componentes/cerrarsesion/cerrarsesion.component';
 import { MenuComponent } from '../../componentes/menu/menu.component';
-
 import { FullCalendarComponent, FullCalendarModule } from '@fullcalendar/angular';
-import { Calendar, CalendarOptions } from '@fullcalendar/core';
+import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
@@ -13,8 +12,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListasService } from '../../services/listas.service';
 import { CommonModule } from '@angular/common';
-import { TableModule } from 'primeng/table';
-import { DialogModule } from 'primeng/dialog';
+
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -35,7 +33,7 @@ import { DatePipe } from '@angular/common';
 
 export class CitasComponent implements OnInit  {
   date: Date[] | undefined;
-  
+
   constructor(
     private listaServices: ListasService,
     private datePipe: DatePipe
@@ -52,7 +50,13 @@ export class CitasComponent implements OnInit  {
   });
 
   RegistroCitasForm = new FormGroup({
-    
+    medico_cita: new FormControl(''),
+    fecha_cita: new FormControl(''),
+    dni_cita: new FormControl(''),
+    nombre_cita: new FormControl(''),
+    celular_cita: new FormControl(''),
+    estado_cita: new FormControl('Pendiente'),
+    observaciones_cita: new FormControl(''),
   });
 
   visible1 = true;

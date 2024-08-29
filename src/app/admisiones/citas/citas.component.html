@@ -16,7 +16,7 @@
         <div class="container-fluid">
           <div class="row mt-3">
             <div class="col-md-4">
-              <h5>Modulo de citas Medicas</h5>
+              <h5>Citas Medicas</h5>
               <div class="card flex justify-content-center mt-4">
                 <form [formGroup]="calendarForm">
                   <p-calendar 
@@ -78,14 +78,21 @@
               <label>Medico</label>
               <select
                 class="form-control"
+                formControlName="medico_cita"
               >
-                <option></option>
+                <option value="">Seleccione un medico</option>
+                <option
+                  *ngFor="let doctores of getDoctor"
+                  [value]="doctores.id"
+                >
+                  {{ doctores.nombre + ' ' + doctores.apellido  }}
+                </option>
               </select>
             </div>
             <div class="col-md-3">
               <label>Fecha</label>
               <div class="input-group">
-                <input type="date" class="form-control">
+                <input type="date" class="form-control" formControlName="fecha_cita">
                 <button class="btn btn-primary" type="button">
                   <i class="fas fa-search"></i>
                 </button>
@@ -97,7 +104,7 @@
             <div class="col-md-3">
               <label>DNI Paciente</label>
               <div class="input-group">
-                <input type="number" class="form-control">
+                <input type="number" class="form-control" formControlName="dni_cita">
                 <button class="btn btn-primary" type="button">
                   <i class="fas fa-search"></i>
                 </button>
@@ -105,26 +112,30 @@
             </div>
             <div class="col-md-6">
               <label>Nombres y Apellidos Paciente</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" formControlName="nombre_cita">
             </div>
             <div class="col-md-3">
               <label>Celular</label>
-                <input type="number" class="form-control">
+                <input type="number" class="form-control" formControlName="celular_cita">
             </div>
           </div>
           <!--  -->
           <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-6">
               <label>Estado cita</label>
               <select
                 class="form-control"
+                formControlName="estado_cita"
               >
-                <option></option>
+                <option value="Pendiente">Pendiente</option>
+                <option value="Confirmado">Confirmado</option>
+                <option value="Tratado">Tratado</option>
+                <option value="Cancelado">Cancelado</option>
               </select>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-6">
               <label>Observaciones</label>
-              <input type="text" class="form-control">
+              <input type="text" class="form-control" formControlName="observaciones_cita">
             </div>
           </div>
         </form>
