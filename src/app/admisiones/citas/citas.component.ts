@@ -9,11 +9,12 @@ import listPlugin from '@fullcalendar/list';
 import allLocales from '@fullcalendar/core/locales-all';
 import timeGridPlugin from '@fullcalendar/timegrid'
 import { CalendarModule } from 'primeng/calendar';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ListasService } from '../../services/listas.service';
 import { CommonModule } from '@angular/common';
 
 import { DatePipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-citas',
@@ -32,13 +33,15 @@ import { DatePipe } from '@angular/common';
 })
 
 export class CitasComponent implements OnInit  {
+  @ViewChild('calendar') calendar: any =  FullCalendarComponent;
   date: Date[] | undefined;
-
+  minDate: Date;
   constructor(
     private listaServices: ListasService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private http: HttpClient
   ) {
-   
+    this.minDate = new Date();
   }
   
   ngOnInit(): void {
@@ -51,7 +54,7 @@ export class CitasComponent implements OnInit  {
 
   RegistroCitasForm = new FormGroup({
     medico_cita: new FormControl(''),
-    fecha_cita: new FormControl(''),
+    fecha_cita: new FormControl('', [Validators.required]),
     dni_cita: new FormControl(''),
     nombre_cita: new FormControl(''),
     celular_cita: new FormControl(''),
@@ -76,20 +79,11 @@ export class CitasComponent implements OnInit  {
     selectable: true,
     themeSystem: 'bootstrap',
     eventDisplay: 'block', 
-    events: function(fetchInfo, successCallback, failureCallback) {
-      fetch('http://localhost:8000/clinicsoft/getCitas')
-        .then(response => response.json())
-        .then(data => {
-          console.log(data);
-          successCallback(data);
-        })
-        .catch(error => {
-          failureCallback(error);
-        });
+    events: (fetchInfo, successCallback, failureCallback) => {
+      this.loadEvents(fetchInfo, successCallback, failureCallback);
     },
-    eventAdd: function(info) {
-      alert('Evento agregado: ' + info.event.title); 
-    }
+    eventClick: this.handleEventClick.bind(this),
+    
   };
 
   getDoctor: any[] = [];
@@ -97,6 +91,7 @@ export class CitasComponent implements OnInit  {
     this.listaServices
         .getDoctor()
         .subscribe((response: any ) => {
+          console.log(response);
           this.getDoctor = response;
           
         });
@@ -105,9 +100,38 @@ export class CitasComponent implements OnInit  {
   addEvent() {
     let fecha: any = this.calendarForm.get("calendar_input")?.value;
     const date = new Date(fecha);
+    let transforDate = this.datePipe.transform(date, 'yyyy-MM-dd');
 
-    let transforDate = this.datePipe.transform(date, 'dd-MM-yyyy');
+    this.RegistroCitasForm.patchValue({
+      fecha_cita: transforDate
+    });
+  }
 
-    alert(transforDate);
+  loadEvents(fetchInfo: any , successCallback: any , failureCallback: any ) {
+    this.http.get<any[]>('http://localhost:8000/clinicsoft/getCitas/' + this.doctor).subscribe(
+      data => {
+        const events = data.map(event => ({
+          title: event.title,
+          start: event.start,
+          end: event.end
+        }));
+        successCallback(events);
+      },
+      error => {
+        failureCallback(error);
+      }
+    );
+  }
+
+  doctor: any = 0; 
+  reloadEvents(id: any ) {
+    // alert(id);
+    this.doctor = id; 
+    this.calendar.getApi().refetchEvents();
+  }
+
+  handleEventClick(arg: any) {
+    // Maneja el clic en el evento
+    console.log('Event clicked:', arg.event.title);
   }
 }

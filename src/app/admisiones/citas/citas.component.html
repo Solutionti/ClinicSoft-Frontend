@@ -23,7 +23,9 @@
                     class="max-w-full mt-3 mx-3" 
                     [inline]="true"
                     [showWeek]="false"
+                    (click)="addEvent()"
                     formControlName="calendar_input"
+                    [minDate]="minDate"
                   />
                 </form>
               </div>
@@ -31,33 +33,51 @@
               <ul class="list-group mt-3">
                 <li class="list-group-item active" aria-current="true">TODO PROGRAMADO</li>
                 <li
-                  class="list-group-item"
+                  class="list-group-item list-group-item-dark"
+                >
+                  <div class="form-check ">
+                    <label class="form-check-label text-capitalize" for="flexCheckDefault">
+                     Todos los doctores
+                    </label>
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="flexCheckDefault"
+                      (change)="reloadEvents(0)"
+                      checked
+                    >
+                  </div>
+                </li>
+                <li
+                  class="list-group-item list-group-item-primary"
                   *ngFor="let doctores of getDoctor"
                 >
-                  <div class="form-check">
+                  <div class="form-check ">
                     <label class="form-check-label text-capitalize" for="flexCheckDefault">
                       {{ doctores.nombre + ' ' + doctores.apellido  }}
                     </label>
                     <input
                       class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckDefault"
+                      type="radio"
+                      name="flexCheckDefault"
+                      (change)="reloadEvents(doctores.codigo_doctor)"
                     >
                   </div>
                 </li> 
               </ul>
+              <P class="mt-4">Para agendar una cita <a class="text-danger">medica especializada</a>  selecciona una fecha y luego oprimir el boton agragar cita.</P>
               <button
                 class="btn btn-primary mt-3"
-                (click)="addEvent()"
                 data-bs-toggle="modal"
                 data-bs-target="#staticBackdrop"
+                [disabled]="RegistroCitasForm.invalid"
               >
                 Agregar cita
               </button>
+              <!--  -->
             </div>
             <div class="col-md-8">
-              <full-calendar [options]="calendarOptions"></full-calendar>
+              <full-calendar #calendar [options]="calendarOptions"></full-calendar>
             </div>
           </div>
         </div>
