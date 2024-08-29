@@ -82,8 +82,6 @@ export class CitasComponent implements OnInit  {
     events: (fetchInfo, successCallback, failureCallback) => {
       this.loadEvents(fetchInfo, successCallback, failureCallback);
     },
-    eventClick: this.handleEventClick.bind(this),
-    
   };
 
   getDoctor: any[] = [];
@@ -124,14 +122,9 @@ export class CitasComponent implements OnInit  {
   }
 
   doctor: any = 0; 
-  reloadEvents(id: any ) {
-    // alert(id);
+  cargarUrlDoctores(id: any ) {
     this.doctor = id; 
     this.calendar.getApi().refetchEvents();
   }
 
-  handleEventClick(arg: any) {
-    // Maneja el clic en el evento
-    console.log('Event clicked:', arg.event.title);
-  }
 }
