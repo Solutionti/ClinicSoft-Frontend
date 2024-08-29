@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
 
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-citas',
@@ -106,7 +107,9 @@ export class CitasComponent implements OnInit  {
   }
 
   loadEvents(fetchInfo: any , successCallback: any , failureCallback: any ) {
-    this.http.get<any[]>('http://localhost:8000/clinicsoft/getCitas/' + this.doctor).subscribe(
+    let url = `${environment.apiClinicSoft}getCitas/` + this.doctor;
+    
+    this.http.get<any[]>(url).subscribe(
       data => {
         const events = data.map(event => ({
           title: event.title,
