@@ -57,7 +57,7 @@ export class AdmisionComponent implements OnInit {
   );
   spinner = true;
   pdfFactura = true;
-
+  usuarioRol = localStorage.getItem('rol');
   admisionForm: FormGroup = new FormGroup({
     dni_admision: new FormControl(''),
     hc_admision: new FormControl({value:'', disabled: true}),
@@ -220,7 +220,7 @@ export class AdmisionComponent implements OnInit {
                 dni_paciente: this.admisionForm.get("dni_admision")?.value,
                 medico: this.admisionForm.get("doctor_admision")?.value,
                 especialidad: this.admisionForm.get("especialidad_admision")?.value,
-                atencion: 18,
+                atencion: response.admision,
                 descuento: this.admisionForm2.get("descuento_admision")?.value,
                 comision: this.admisionForm2.get("comision_admision")?.value,
                 descripcion: "",

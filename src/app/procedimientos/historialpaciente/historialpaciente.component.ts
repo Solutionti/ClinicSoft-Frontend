@@ -72,7 +72,6 @@ export class HistorialpacienteComponent implements OnInit {
 
   nombrepaciente: any = "";
   fechanacimiento: any = "";
-
   // TRIAGE
   estatura: any = "";
   peso: any = "";
@@ -86,6 +85,11 @@ export class HistorialpacienteComponent implements OnInit {
   agendafecha =  "";
   agendahora =  "";
   agendadescripcion =  "";
+  date = new Date();
+  fechaActual = String(this.date.getFullYear() + '-' +
+    String(this.date.getMonth() + 1).padStart(2, '0') + '-' +
+    String(this.date.getDate()).padStart(2, '0')
+  );
 
   antecedentesForm: FormGroup = new FormGroup ({
     antecedentes_familiares: new FormControl(''),
