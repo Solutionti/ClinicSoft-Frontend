@@ -1,0 +1,171 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  * -->
+<!-- * * * * * * * * * * * JERSON GALVEZ ENSUNCHO * * * * * * * * * * * -->
+<!-- ******* * * * * * * * PROYECTO CLINICSOFT * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<p-toast position="top-right"/>
+<div class="min-height-300 bg-default position-absolute w-100"></div>
+<aside 
+  class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4"
+  id="sidenav-main"
+  style="z-index: 1 !important;"
+>
+  <app-menu></app-menu>
+</aside>
+<main class="main-content position-relative border-radius-lg">
+  <app-cerrarsesion titulo="Ecografia Abdominal"></app-cerrarsesion>
+  <div class="container-fluid ">
+    <div class="row ">
+      <div class="card">
+        <div class="container-fluid mt-3">
+          <div class="row">
+            <div class="col-md-12">
+              <form [formGroup]="ecografiaabdominalForm">
+              <div class="row">
+                <div class="col-md-3">
+                  <label>DNI *</label>
+                  <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    formControlName="dni_ecografia_abdomninal"
+                    (keyup.enter)="buscarPacientes()"
+                  >
+                  <button class="btn btn-primary btn-xs" type="button">
+                    <i class="fas fa-fingerprint"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <label>Nombre</label>
+                <input
+                   type="text"
+                   class="form-control form-control-sm"
+                   formControlName="nombre_ecografia_abdomninal"
+                 >
+              </div>
+              <div class="col-md-3">
+                <label>Apellidos</label>
+                <input
+                   type="text"
+                   class="form-control form-control-sm"
+                   formControlName="apellido_ecografia_abdomninal"
+                 >
+              </div>
+              <div class="col-md-1">
+                <label>Edad</label>
+                <input
+                   type="text"
+                   class="form-control form-control-sm"
+                   formControlName="edad_ecografia_abdomninal"
+                 >
+              </div>
+              <div class="col-md-2">
+                <label>HC</label>
+                <input
+                   type="text"
+                   class="form-control form-control-sm"
+                   formControlName="hc_ecografia_abdomninal"
+                 >
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-8">
+                    <label for="motivo" class="form-label">Motivo del Examen:</label>
+                    <input type="text" class="form-control form-control-sm" id="motivo" formControlName="motivo">
+                </div>
+                <div class="col-md-4">
+                    <label for="fecha" class="form-label">Fecha:</label>
+                    <input type="date" class="form-control form-control-sm" id="fecha" formControlName="fecha">
+                </div>
+            </div>
+            <h6>Hallazgos:</h6>
+            <!-- Estómago y hígado en la misma línea -->
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="estomago">Estómago:</label>
+                    <input type="text" class="form-control form-control-sm" id="estomago" placeholder="Ingrese hallazgos">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="higado">Hígado:</label>
+                    <input type="text" class="form-control form-control-sm" id="higado" placeholder="Ingrese hallazgos">
+                </div>
+            </div>
+
+            <!-- Colédoco y vesícula en la misma línea -->
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="coledoco_diametro">Colédoco (diámetro):</label>
+                    <input type="text" class="form-control form-control-sm" id="coledoco_diametro" placeholder="Ingrese diámetro en mm">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="vesicula_volumen">Vesícula (medidas):</label>
+                    <input type="text" class="form-control form-control-sm" id="vesicula_volumen" placeholder="Ingrese medidas">
+                </div>
+            </div>
+
+            <!-- Páncreas y bazo en la misma línea -->
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="vesicula_paredes">Páncreas:</label>
+                    <input type="text" class="form-control form-control-sm" id="vesicula_paredes" placeholder="Ingrese tamaño y ecoestructura">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="bazo">Bazo:</label>
+                    <input type="text" class="form-control form-control-sm" id="bazo" placeholder="Ingrese tamaño y ecoestructura">
+                </div>
+            </div>
+
+            <!-- Riñones (derecho e izquierdo) en la misma línea -->
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="rinonDerecho">Riñón Derecho:</label>
+                    <input type="text" class="form-control form-control-sm" id="rinonDerecho" placeholder="Ingrese hallazgos">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="rinonIzquierdo">Riñón Izquierdo:</label>
+                    <input type="text" class="form-control form-control-sm" id="rinonIzquierdo" placeholder="Ingrese hallazgos">
+                </div>
+            </div>
+
+            <!-- Otros hallazgos, conclusiones y sugerencias en filas separadas -->
+            <div class="form-group">
+                <label for="otrosHallazgos">Otros Hallazgos:</label>
+                <textarea class="form-control form-control-sm" id="otrosHallazgos" rows="2" placeholder="Ingrese otros hallazgos"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="conclusiones">Conclusiones:</label>
+                <textarea class="form-control form-control-sm" id="conclusiones" rows="2" placeholder="Ingrese conclusiones"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="sugerencias">Sugerencias:</label>
+                <textarea class="form-control form-control-sm" id="sugerencias" rows="2" placeholder="Ingrese sugerencias"></textarea>
+            </div>
+              <div class="row mt-1">
+                <div class="col-md-3">
+                  <button class="btn btn-primary btn-xs mt-2">
+                    Guardar
+                  </button>
+                  <button
+                    class="btn btn-danger btn-xs mt-2 mx-2"
+                  > <i class="fas fa-file-pdf"></i>
+                    Imprimir
+                  </button>
+                </div>
+              </div>
+            </form>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<!-- spinner -->
+<div [hidden]="spinner" class="overlay z-index">
+  <div class="dot-wave">
+    <div class="dot-wave__dot"></div>
+    <div class="dot-wave__dot"></div>
+    <div class="dot-wave__dot"></div>
+    <div class="dot-wave__dot"></div>
+  </div>
+</div>
