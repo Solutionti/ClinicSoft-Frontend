@@ -130,7 +130,14 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./ecografias/ecografiamorfologica/ecografiamorfologica.component').then((c) => c.EcografiamorfologicaComponent)
   },
-
-
-
+  {
+    path: 'ecografiarenal',
+    loadComponent: () =>
+      import('./ecografias/ecografiarenal/ecografiarenal.component').then((c) => c.EcografiarenalComponent)
+  },
+  {
+    path: 'ecografiabdominal',
+    loadComponent: () =>
+      import('./ecografias/ecografiaabdominal/ecografiaabdominal.component').then((c) => c.EcografiaabdominalComponent)
+  },
 ];
