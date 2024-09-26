@@ -20,8 +20,8 @@
                 <button
                   class="btn btn-primary text-white btn-xs mx-1"
                   (click)="createAdmission()"
-                  [disabled]="admisionForm.invalid || admisionForm2.invalid"
-                >
+                  >
+                  <!-- [disabled]="admisionForm.invalid || admisionForm2.invalid" -->
                   <i class="fas fa-database text-white"></i> Crear
                 </button>
               </div>
@@ -81,7 +81,7 @@
                       </a>
                       <a
                         class="badge  bg-danger mx-1"
-                        (click)="CancelarAdmision(getAdmissions.paciente)"
+                        (click)="CancelarAdmision(getAdmissions.codigo_atencion)"
                       >
                         <i class="fas fa-times fa-xs text-white"></i>
                       </a>
@@ -163,7 +163,7 @@
                 </div>
               </div>
               <div class="row mt-3">
-                <div class="col-md-6">
+                <div class="col-md-5">
                   <label>Especialidad *</label>
                   <select
                     class="form-control form-control-sm text-uppercase"
@@ -187,7 +187,7 @@
                 </p>
               </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-7">
                   <label>Doctor *</label>
                   <select
                     class="form-control form-control-sm text-uppercase"
@@ -198,7 +198,7 @@
                       *ngFor="let doctor of getDoctors"
                       [value]="doctor.codigo_doctor"
                     >
-                      {{ doctor.nombre }}
+                      {{ doctor.nombre + ' ' + doctor.apellido }}
                     </option>
                 </select>
                 <div

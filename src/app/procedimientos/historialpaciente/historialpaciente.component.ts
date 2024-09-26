@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ComponentesModule } from '../../componentes/componentes.module';
 import { MenuComponent } from '../../componentes/menu/menu.component';
 import { CerrarsesionComponent } from '../../componentes/cerrarsesion/cerrarsesion.component';
@@ -13,6 +13,8 @@ import { TableModule } from 'primeng/table';
 import { Footer, MessageService } from 'primeng/api';
 import { PdfService } from '../../services/pdf.service';
 import { ToastModule } from 'primeng/toast';
+import { ChipModule } from 'primeng/chip';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-historialpaciente',
@@ -25,7 +27,8 @@ import { ToastModule } from 'primeng/toast';
     CommonModule,
     DialogModule,
     TableModule,
-    ToastModule
+    ToastModule,
+    ChipModule,
   ],
   providers: [MessageService],
   templateUrl: './historialpaciente.component.html',
@@ -59,15 +62,16 @@ export class HistorialpacienteComponent implements OnInit {
 
   ngOnInit(): void {
    this.paciente = this.route.snapshot.paramMap.get("documento");
-
+   this.getAlergias();
+   this.getAlergiasOtras();
    this.getDataHistoriaCLinica();
    this.getDiagnosticos();
+   this.getProcedimientos();
    this.getDocumentosPaciente();
   }
 
   nombrepaciente: any = "";
   fechanacimiento: any = "";
-
   // TRIAGE
   estatura: any = "";
   peso: any = "";
@@ -81,6 +85,11 @@ export class HistorialpacienteComponent implements OnInit {
   agendafecha =  "";
   agendahora =  "";
   agendadescripcion =  "";
+  date = new Date();
+  fechaActual = String(this.date.getFullYear() + '-' +
+    String(this.date.getMonth() + 1).padStart(2, '0') + '-' +
+    String(this.date.getDate()).padStart(2, '0')
+  );
 
   antecedentesForm: FormGroup = new FormGroup ({
     antecedentes_familiares: new FormControl(''),
@@ -126,7 +135,7 @@ export class HistorialpacienteComponent implements OnInit {
   });
 
   anamnesisForm: FormGroup = new FormGroup ({
-    anamnesis_directa: new FormControl(''),
+    anamnesis_directa: new FormControl('D'),
     anamnesis_empresa: new FormControl(''),
     anamnesis_compañia: new FormControl(''),
     anamnesis_iafa: new FormControl(''),
@@ -148,7 +157,8 @@ export class HistorialpacienteComponent implements OnInit {
   });
 
   historiaTipoForm: FormGroup = new FormGroup ({
-    tphistoria: new FormControl({value: '', disabled: false})
+    tphistoria: new FormControl({value: '', disabled: false}),
+    consecutivo_historia: new FormControl({value: '', disabled: false}, [Validators.required]),
   });
 
   cargueDocumentosForm: FormGroup = new FormGroup ({
@@ -170,19 +180,54 @@ export class HistorialpacienteComponent implements OnInit {
     fisico_orina: new FormControl(''),
   });
 
+  alergiasForm = new FormGroup ({
+    tpalergia: new FormControl('', [Validators.required]),
+    descripcion_alergia: new FormControl('', [Validators.required]),
+  });
+
+  medicamentosForm = new FormGroup ({
+    fecha_medicamento: new FormControl(''),
+    doctor_medicamento: new FormControl(''),
+    paciente_medicamento: new FormControl(''),
+    medicamento_medicamento: new FormControl(''),
+    cantidad_medicamento: new FormControl(''),
+    dosis_medicamento: new FormControl(''),
+    via_aplicacion_medicamento: new FormControl(''),
+    frecuencia_medicamento: new FormControl(''),
+    duracion_medicamento: new FormControl(''),
+  });
+
+  alergiaMedicamentos: any[] = [];
+  getAlergias() {
+    this.procedimientoService
+        .getAlergias(this.paciente)
+        .subscribe((response: any ) => {
+          this.alergiaMedicamentos = response;
+        })
+  }
+
+  alergiaOtras: any[] = [];
+  getAlergiasOtras() {
+    this.procedimientoService
+        .getAlergiasOtras(this.paciente)
+        .subscribe((response: any ) => {
+          this.alergiaOtras = response;
+        })
+  }
 
   createHistoriaClinica(): void {
     this.spinner = false;
 
     let pacientes: any = [
       {
+        codigo_historia: this.historiaTipoForm.get("consecutivo_historia")?.value,
         tphistoria: this.historiaTipoForm.get("tphistoria")?.value,
         anamnesis: this.anamnesisForm.get("anamnesis_directa")?.value,
         empresa: this.anamnesisForm.get("anamnesis_empresa")?.value,
         compania: this.anamnesisForm.get("anamnesis_compañia")?.value,
         iafa: this.anamnesisForm.get("anamnesis_iafa")?.value,
         nombre_acompanante: this.anamnesisForm.get("anamnesis_acompañante")?.value,
-        dni: this.anamnesisForm.get("anamnesis_dni")?.value,
+        dni: this.paciente,
         celular: this.anamnesisForm.get("anamnesis_celular")?.value,
         motivo_consulta: this.anamnesisForm.get("anamnesis_consulta")?.value,
         tratamiento_anterior: this.anamnesisForm.get("anamnesis_tratamiento")?.value,
@@ -248,7 +293,9 @@ export class HistorialpacienteComponent implements OnInit {
         proxima_cita1: "",
         firma_medico1: "",
         estado1: "Activo",
-        usuario1: localStorage.getItem("usuario")
+        usuario1: localStorage.getItem("usuario"),
+        procedimientosarray: this.procedimientoRelacionado,
+        diagnosticosarray: this.diagnosticoRelacionado
           }
         ];
 
@@ -259,9 +306,8 @@ export class HistorialpacienteComponent implements OnInit {
                 this.showSuccess(response.message);
                 this.spinner = true;
 
-                setTimeout(() => {
-                  location.reload();
-                }, 3000);
+                this.getProcedimientos2();
+                this.getDiagnosticos2();
               }
               else {
                 this.showError(response.message);
@@ -311,6 +357,7 @@ export class HistorialpacienteComponent implements OnInit {
       // CONSULTAS
   }
 
+
   habilitarMenu() {
     this.historiaTipoForm.get("tphistoria")?.disable();
     let historia = this.historiaTipoForm.get("tphistoria")?.value;
@@ -321,6 +368,14 @@ export class HistorialpacienteComponent implements OnInit {
       this.plan_trabajo = false;
       this.diagnostico = false;
       this.procedimiento  = false;
+
+      this.procedimientoService
+          .getcountCantidadHistorias(1, this.paciente)
+          .subscribe((response: any ) => {
+            this.historiaTipoForm.patchValue({
+              consecutivo_historia: response
+            });
+          })
     }
     else if(historia == "2") {
       this.antecedentes = false;
@@ -328,6 +383,14 @@ export class HistorialpacienteComponent implements OnInit {
       this.axamen_fisico = false;
       this.diagnostico = false;
       this.procedimiento  = false;
+
+      this.procedimientoService
+          .getcountCantidadHistorias(2, this.paciente)
+          .subscribe((response: any ) => {
+            this.historiaTipoForm.patchValue({
+              consecutivo_historia: response
+            });
+          })
     }
     else if(historia == "") {
       this.antecedentes = true;
@@ -338,6 +401,10 @@ export class HistorialpacienteComponent implements OnInit {
       this.plan_trabajo = true;
       this.diagnostico = true;
       this.procedimiento  = true;
+
+      this.historiaTipoForm.patchValue({
+        consecutivo_historia: ""
+      });
     }
   }
 
@@ -370,7 +437,7 @@ export class HistorialpacienteComponent implements OnInit {
     this.archivopdf.forEach((element: any) => {
       formdata.append('pdfs', this.archivopdf[0]);
     });
-      formdata.append('paciente', '1110542802');
+      formdata.append('paciente', this.paciente);
       formdata.append('tparchivo', tparchivo);
       formdata.append('titulo', titulo);
       formdata.append('usuario', usuario);
@@ -421,15 +488,196 @@ export class HistorialpacienteComponent implements OnInit {
         })
 
   }
+
+  getProcedimiento: any[] = [];
+  getProcedimientos() {
+    this.listaServices
+    .getProcedimientos()
+    .subscribe((response: any ) =>{
+      this.getProcedimiento = response;
+    })
+  }
+
   getDocumentosPacient: any[] = [];
   getDocumentosPaciente(){
-    let paciente = "1110542802";
+    let paciente = this.paciente;
     this.listaServices
         .getDocumentosPaciente(paciente)
         .subscribe((response: any ) => {
           this.getDocumentosPacient = response;
         })
 
+  }
+
+  diagnosticoRelacionado: any[] = [];
+  vincularDiagnosticosHistoria(codigo: any, descripcion: any ) {
+    this.diagnosticoRelacionado.push(
+      {
+        historia: this.historiaTipoForm.get("consecutivo_historia")?.value,
+        paciente: this.paciente,
+        codigodiagnostico: codigo,
+        nombrediagnostico: descripcion,
+        tpespecialidad: this.historiaTipoForm.get("tphistoria")?.value,
+        fecha: '',
+        usuario: localStorage.getItem('usuario')
+      }
+    );
+
+    for(let i = 0; i < this.getDiagnostico.length; i++){
+      if(this.getDiagnostico[i].clave === codigo){
+        this.getDiagnostico.splice(i, 1);
+      }
+    }
+    
+    this.showSuccess("Se ha agregado un Item ");
+  }
+
+  dbclickDiagnostico(codigo: any, descripcion: any ) {
+    for(let i = 0; i < this.diagnosticoRelacionado.length; i++){
+      if(this.diagnosticoRelacionado[i].codigodiagnostico === codigo){
+        this.diagnosticoRelacionado.splice(i, 1);
+      }
+    }
+    this.showSuccess("Se ha quitado el diagnostico de la lista");
+
+    this.getDiagnostico.unshift({
+      clave: codigo,
+      descripcion: descripcion,
+    });
+  }
+
+  procedimientoRelacionado: any[] = [];
+  vincularProcedimientosHistoria(codigo: any, descripcion: any ) {
+    this.procedimientoRelacionado.push(
+      {
+        historia: this.historiaTipoForm.get("consecutivo_historia")?.value,
+        paciente: this.paciente,
+        codprocedimiento: codigo,
+        nomprocedimiento: descripcion,
+        especialidad: this.historiaTipoForm.get("tphistoria")?.value,
+        fecha: "",
+        usuario: localStorage.getItem('usuario')
+      }
+    );
+
+    for(let i = 0; i < this.getProcedimiento.length; i++){
+      if(this.getProcedimiento[i].codigo_cpt === codigo){
+        this.getProcedimiento.splice(i, 1);
+      }
+    }
+    console.log(this.procedimientoRelacionado);
+    this.showSuccess("Se ha agregado un Item ");
+  }
+
+  dbclickProcedimiento(codigo: any, descripcion: any ) {
+    for(let i = 0; i < this.procedimientoRelacionado.length; i++){
+      if(this.procedimientoRelacionado[i].codprocedimiento === codigo){
+        this.procedimientoRelacionado.splice(i, 1);
+      }
+    }
+    this.showSuccess("Se ha quitado el procedimiento de la lista");
+
+    this.getProcedimiento.unshift({
+      codigo_cpt: codigo,
+      nombre: descripcion,
+    });
+  }
+
+  createAlergias() {
+    this.spinner = false;
+    let paciente = this.paciente,
+        tpalergia = this.alergiasForm.get("tpalergia")?.value,
+        descripcion = this.alergiasForm.get("descripcion_alergia")?.value;
+
+    this.procedimientoService
+        .createAlergias(paciente, tpalergia, descripcion)
+        .subscribe((response: any ) => {
+          if(response.status == 200) {
+            this.getAlergias();
+            this.getAlergiasOtras();
+            this.showSuccess(response.message);
+            this.spinner = true;
+          }
+          else {
+            this.showError(response.message);
+            this.spinner = true;
+          }
+        });
+  }
+
+  crearMedicamentos() {
+    this.spinner = false;
+    let datos = [{
+      codigo_historia: this.historiaTipoForm.get("consecutivo_historia")?.value,
+      paciente: this.paciente,
+      medicamento: this.medicamentosForm.get("medicamento_medicamento")?.value?.split("-")[0],
+      codigo_medicamento: this.medicamentosForm.get("medicamento_medicamento")?.value?.split("-")[1],
+      cantidad: this.medicamentosForm.get("cantidad_medicamento")?.value,
+      dosis: this.medicamentosForm.get("dosis_medicamento")?.value,
+      via_aplicacion: this.medicamentosForm.get("via_aplicacion_medicamento")?.value,
+      frecuencia: this.medicamentosForm.get("frecuencia_medicamento")?.value,
+      duracion: this.medicamentosForm.get("duracion_medicamento")?.value,
+      autorizo: localStorage.getItem('usuario'),
+      usuario: localStorage.getItem('usuario')
+    }];
+    this.procedimientoService
+        .crearMedicamentos(datos)
+        .subscribe((response: any ) => {
+          if(response.status == 200) {
+            this.showSuccess(response.message);
+            this.medicamentosForm.patchValue({
+              medicamento_medicamento: "",
+              cantidad_medicamento: "",
+              dosis_medicamento: "",
+              via_aplicacion_medicamento: "",
+              frecuencia_medicamento: "",
+              duracion_medicamento: "",
+            });
+            this.getMedicamentos();
+            this.spinner = true;
+          }
+          else {
+            this.showError(response.message);
+            this.spinner = true;
+          }
+        });
+  }
+
+  getMedicamento: any[] = [];
+  getMedicamentos() {
+
+    let historia = this.historiaTipoForm.get("consecutivo_historia")?.value,
+        paciente = this.paciente;
+    this.procedimientoService
+        .getMedicamentos(paciente, historia)
+        .subscribe((response: any ) => {
+          this.getMedicamento = response;
+        })
+  }
+
+  getprocedimiento: any[] = [];
+  getProcedimientos2() {
+
+    let historia = this.historiaTipoForm.get("consecutivo_historia")?.value,
+        paciente = this.paciente;
+
+        this.procedimientoService
+            .getProcedimientos(paciente, historia)
+            .subscribe((response: any ) => {
+              this.getprocedimiento = response;
+            });
+  }
+
+  getdiagnostico: any[] = [];
+  getDiagnosticos2() {
+    let historia = this.historiaTipoForm.get("consecutivo_historia")?.value,
+    paciente = this.paciente;
+
+    this.procedimientoService
+        .getDiagnosticos(paciente, historia)
+        .subscribe((response: any ) => {
+          this.getdiagnostico = response;
+        });
   }
 
 }

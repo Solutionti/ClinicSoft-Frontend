@@ -22,11 +22,19 @@ export class ProcedimientosService {
     return this.http.post(url,formdata);
   }
 
+  getcountCantidadHistorias(tphistoria: any, paciente: any  ) {
+    const url = `${environment.apiClinicSoft}getcountCantidadHistorias`;
+    let params = new HttpParams().set("tphistoria", tphistoria).set("paciente", paciente);
+
+    return this.http.get(url, { params });
+  }
+
   createHistoriaClinica(datos: any){
     const url = `${environment.apiClinicSoft}createHistoriaClinica`;
 
     return this.http.post(url,{
       tphistoria: datos[0].tphistoria,
+      codigo_historia: datos[0].codigo_historia,
       anamnesis: datos[0].anamnesis,
       empresa: datos[0].empresa,
       compania: datos[0].compania,
@@ -96,7 +104,10 @@ export class ProcedimientosService {
       proxima_cita1:datos[0].proxima_cita1,
       firma_medico1:datos[0].firma_medico1,
       estado1:datos[0].estado1,
-      usuario1:datos[0].usuario1
+      usuario1:datos[0].usuario1,
+
+      procedimientosarray:datos[0].procedimientosarray,
+      diagnosticosarray:datos[0].diagnosticosarray,
     });
   }
 
@@ -110,5 +121,75 @@ export class ProcedimientosService {
     const url = `${environment.apiClinicSoft}subirArchivosPdf`;
 
     return this.http.post(url, formdata);
+  }
+
+  getAlergias(paciente: string ) {
+    const url = `${environment.apiClinicSoft}getAlergias`;
+    let params = new HttpParams().set("paciente", paciente);
+
+    return this.http.get(url, { params });
+  }
+
+  getAlergiasOtras(paciente: string ) {
+    const url = `${environment.apiClinicSoft}getAlergiasOtras`;
+    let params = new HttpParams().set("paciente", paciente);
+    
+    return this.http.get(url, { params });
+  }
+
+  createAlergias(paciente: any, tpalergia: any, descripcion: any ) {
+    const url = `${environment.apiClinicSoft}createAlergias`;
+
+    return this.http.post(url, {
+      paciente: paciente,
+      tpalergia: tpalergia,
+      descripcion: descripcion,
+    }) 
+  }
+
+  crearMedicamentos(datos: any ) {
+    const url = `${environment.apiClinicSoft}crearMedicamentos`;
+
+    return this.http.post(url, {
+      codigo_historia: datos[0].codigo_historia,
+      paciente: datos[0].paciente,
+      medicamento: datos[0].medicamento,
+      codigo_medicamento: datos[0].codigo_medicamento,
+      cantidad: datos[0].cantidad,
+      dosis: datos[0].dosis,
+      via_aplicacion: datos[0].via_aplicacion,
+      frecuencia: datos[0].frecuencia,
+      duracion: datos[0].duracion,
+      autorizo: datos[0].autorizo,
+      usuario: datos[0].usuario,   
+    });
+  }
+
+  getMedicamentos(paciente: any, historia: any ) {
+
+    const url = `${environment.apiClinicSoft}getMedicamentos`;
+    let params = new HttpParams().set("historia",historia)
+                                 .set("paciente", paciente);
+
+    return this.http.get(url, { params });
+    
+  }
+
+  getProcedimientos(paciente: any, historia: any ) {
+
+    const url = `${environment.apiClinicSoft}getProcedimientos`;
+    let params = new HttpParams().set("historia",historia)
+                                 .set("paciente", paciente);
+
+    return this.http.get(url, { params });
+  }
+
+  getDiagnosticos(paciente: any, historia: any ) {
+
+    const url = `${environment.apiClinicSoft}getDiagnosticos`;
+    let params = new HttpParams().set("historia",historia)
+                                 .set("paciente", paciente);
+
+    return this.http.get(url, { params });
   }
 }

@@ -36,6 +36,7 @@ export class LoginService {
       estado: datos[0].estado,
       usuario_creacion: datos[0].usuario_creacion,
       cmp: datos[0].cmp,
+      color: datos[0].cmp,
     })
   }
 

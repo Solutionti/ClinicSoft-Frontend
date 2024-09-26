@@ -53,11 +53,11 @@ export class IniciarsesionComponent implements OnInit {
           if(response.status == 200) {
             sessionStorage.setItem('token', response.token);
             localStorage.setItem('token', JSON.stringify(response.token));
-            localStorage.setItem("nombre", JSON.stringify(response.users.nombre));
-            localStorage.setItem("apellido", JSON.stringify(response.users.apellido));
-            localStorage.setItem("usuario", JSON.stringify(response.users.usuario));
-            localStorage.setItem("rol", JSON.stringify(response.users.rol_usuario));
-            localStorage.setItem("estado", JSON.stringify(response.users.estado));
+            localStorage.setItem('nombre', response.users.nombre.toUpperCase());
+            localStorage.setItem('apellido', response.users.apellido.toUpperCase());
+            localStorage.setItem('usuario', response.users.usuario.toUpperCase());
+            localStorage.setItem('rol', response.users.rol_usuario.toUpperCase());
+            localStorage.setItem('estado', response.users.estado.toUpperCase());
             this.spinner = false;
             this.showSuccess();
             setTimeout(() => {

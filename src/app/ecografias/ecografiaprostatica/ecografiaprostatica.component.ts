@@ -10,6 +10,7 @@ import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     MenuComponent,
+    ReactiveFormsModule,
     CerrarsesionComponent
   ],
   templateUrl: './ecografiaprostatica.component.html',

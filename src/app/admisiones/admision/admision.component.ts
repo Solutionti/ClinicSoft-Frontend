@@ -57,7 +57,7 @@ export class AdmisionComponent implements OnInit {
   );
   spinner = true;
   pdfFactura = true;
-
+  usuarioRol = localStorage.getItem('rol');
   admisionForm: FormGroup = new FormGroup({
     dni_admision: new FormControl(''),
     hc_admision: new FormControl({value:'', disabled: true}),
@@ -175,17 +175,23 @@ export class AdmisionComponent implements OnInit {
 
   createAdmission() {
     this.spinner = false;
+    let espera = this.admisionForm.get("si_admision")?.value;
+    if(espera == true){
+      espera = "Si";
+    }
+    else {
+      espera = "No"
+    }
     let datos: any = [
       {
         documento: this.admisionForm.get("dni_admision")?.value,
         medico: this.admisionForm.get("doctor_admision")?.value,
         especialidad: this.admisionForm.get("especialidad_admision")?.value,
-        cola_atencion: "No",
+        cola_atencion: espera,
         costo: this.admisionForm2.get("costo_admision")?.value,
         comision: this.admisionForm2.get("comision_admision")?.value,
         turno: 0,
         usuario: localStorage.getItem('usuario'),
-        orden__: 1,
       }
     ];
 
@@ -214,7 +220,7 @@ export class AdmisionComponent implements OnInit {
                 dni_paciente: this.admisionForm.get("dni_admision")?.value,
                 medico: this.admisionForm.get("doctor_admision")?.value,
                 especialidad: this.admisionForm.get("especialidad_admision")?.value,
-                atencion: 18,
+                atencion: response.admision,
                 descuento: this.admisionForm2.get("descuento_admision")?.value,
                 comision: this.admisionForm2.get("comision_admision")?.value,
                 descripcion: "",
@@ -233,11 +239,32 @@ export class AdmisionComponent implements OnInit {
 
             this.showSuccess(response.message);
             this.getAdmission();
-            this.admisionForm.reset();
-            this.admisionForm2.reset();
+            this.admisionForm.patchValue({
+              dni_admision: "",
+              hc_admision: "",
+              si_admision: "",
+              nombre_admision: "",
+              especialidad_admision: "",
+              doctor_admision: "",
+            });
+
+            this.admisionForm2.patchValue({
+              fecha_admision: this.fechaActual,
+              factura_admision: "",
+              costo_admision: "",
+              descuento_admision: 0,
+              comision_admision: 0,
+              recibida_admision: "",
+              devolver_admision: "",
+              efectivo_admision:'Efectivo',
+              total_admision: ""
+            });
+            this.totalform.patchValue({
+              total: ""
+            });
+
             this.spinner = true;
             this.pdfFactura = false;
-
           }
           else {
             this.showError(response.message);

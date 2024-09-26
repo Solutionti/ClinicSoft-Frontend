@@ -15,11 +15,156 @@
       <div class="card">
         <div class="container-fluid">
           <div class="row mt-3">
-            <div class="col-md-10">
-              <full-calendar [options]="calendarOptions"></full-calendar>
+            <div class="col-md-4">
+              <h5>Citas Medicas</h5>
+              <div class="card flex justify-content-center mt-4">
+                <form [formGroup]="calendarForm">
+                  <p-calendar 
+                    class="max-w-full mt-3 mx-3" 
+                    [inline]="true"
+                    [showWeek]="false"
+                    (click)="addEvent()"
+                    formControlName="calendar_input"
+                    [minDate]="minDate"
+                  />
+                </form>
+              </div>
+              <!--  -->
+              <ul class="list-group mt-3">
+                <li class="list-group-item active" aria-current="true">TODO PROGRAMADO</li>
+                <li
+                  class="list-group-item list-group-item-dark"
+                >
+                  <div class="form-check ">
+                    <label class="form-check-label text-capitalize" for="flexCheckDefault">
+                     Todos los doctores
+                    </label>
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="flexCheckDefault"
+                      (change)="cargarUrlDoctores(0)"
+                      checked
+                    >
+                  </div>
+                </li>
+                <li
+                  class="list-group-item list-group-item-dark"
+                  *ngFor="let doctores of getDoctor"
+                >
+                  <div class="form-check ">
+                    <label class="form-check-label text-capitalize" for="flexCheckDefault">
+                      {{ doctores.nombre + ' ' + doctores.apellido  }} 
+                    </label>
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="flexCheckDefault"
+                      (change)="cargarUrlDoctores(doctores.codigo_doctor)"
+                    >
+                  </div>
+                </li> 
+              </ul>
+              <P class="mt-4">Para agendar una cita <a class="text-danger">medica especializada</a>  selecciona una fecha del calendario y luego oprimir el boton agregar cita.</P>
+              <button
+                class="btn btn-primary mt-3"
+                data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop"
+                [disabled]="RegistroCitasForm.invalid"
+              >
+                Agregar cita
+              </button>
+              <!--  -->
+            </div>
+            <div class="col-md-8">
+              <full-calendar #calendar [options]="calendarOptions"></full-calendar>
             </div>
           </div>
         </div>
     </div>
   </div>
-
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">REGISTRO DE CITAS</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="RegistroCitasForm">
+          <div class="row">
+            <div class="col-md-9">
+              <label>Medico</label>
+              <select
+                class="form-control"
+                formControlName="medico_cita"
+              >
+                <option value="">Seleccione un medico</option>
+                <option
+                  *ngFor="let doctores of getDoctor"
+                  [value]="doctores.id"
+                >
+                  {{ doctores.nombre + ' ' + doctores.apellido  }}
+                </option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label>Fecha</label>
+              <div class="input-group">
+                <input type="date" class="form-control" formControlName="fecha_cita">
+                <button class="btn btn-primary" type="button">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <!--  -->
+          <div class="row">
+            <div class="col-md-3">
+              <label>DNI Paciente</label>
+              <div class="input-group">
+                <input type="number" class="form-control" formControlName="dni_cita">
+                <button class="btn btn-primary" type="button">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label>Nombres y Apellidos Paciente</label>
+                <input type="text" class="form-control" formControlName="nombre_cita">
+            </div>
+            <div class="col-md-3">
+              <label>Celular</label>
+                <input type="number" class="form-control" formControlName="celular_cita">
+            </div>
+          </div>
+          <!--  -->
+          <div class="row">
+            <div class="col-md-6">
+              <label>Estado cita</label>
+              <select
+                class="form-control"
+                formControlName="estado_cita"
+              >
+                <option value="Pendiente">Pendiente</option>
+                <option value="Confirmado">Confirmado</option>
+                <option value="Tratado">Tratado</option>
+                <option value="Cancelado">Cancelado</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label>Observaciones</label>
+              <input type="text" class="form-control" formControlName="observaciones_cita">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+  

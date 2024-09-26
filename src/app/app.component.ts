@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router, RouterOutlet } from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -24,9 +25,9 @@ export class AppComponent implements OnInit {
     this.primengConfig.ripple = true;
     this.validarSesion2();
   }
-
+  
   validarSesion2() {
-    const token: any  = localStorage.getItem('token');
+    let  token: any  = localStorage.getItem('token');
     if(token == null) {
       this.router.navigate(['/']);
     }

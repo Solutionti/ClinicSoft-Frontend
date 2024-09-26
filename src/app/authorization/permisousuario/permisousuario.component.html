@@ -1,0 +1,75 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  * -->
+<!-- * * * * * * * * * * * JERSON GALVEZ ENSUNCHO * * * * * * * * * * * -->
+<!-- ******* * * * * * * * PROYECTO CLINICSOFT * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+
+
+<div class="min-height-300 bg-default position-absolute w-100"></div>
+<aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
+  <app-menu></app-menu>
+</aside>
+
+<main class="main-content position-relative border-radius-lg">
+  <app-cerrarsesion titulo="Permisos usuario"></app-cerrarsesion>
+  <div class="container-fluid py-1">
+    <div class="row">
+      <div class="card">
+        <div class="container-fluid mt-3">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="d-flex flex-row-reverse">
+              </div>
+            </div>
+          </div>
+      <div class="card">
+        <div class="container-fluid mt-3">
+          <div class="row">
+            <div class="col-md-12">
+                <p-table
+                  #usuarios
+                  [rows]="5"
+                  [paginator]="true"
+                  [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+                  [tableStyle]="{ 'min-width': '75rem' }"
+                  [rowHover]="true"
+                  dataKey="id"
+                  currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas"
+                >
+                <ng-template pTemplate="caption">
+                  <div class="flex align-items-center justify-content-between">
+                    <span class="p-input-icon-left">
+                      <i class="pi pi-search"></i>
+                      <input
+                        pInputText
+                        type="text"
+                        class="form-control"
+                        (input)="usuarios.filterGlobal($any($event.target).value, 'contains')"
+                        placeholder="Buscar..."
+                      />
+                    </span>
+                  </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th  class="text-xs text-white bg-default" style="width:5%"></th>
+                    <th  class="text-xs text-white bg-default" style="width:10%">Usuario</th>
+                    <th  class="text-xs text-white bg-default" style="width:10%">Nombre</th>
+                    <th  class="text-xs text-white bg-default" style="width:10%">Apellido</th>
+                    <th  class="text-xs text-white bg-default" style="width:10%">Email</th>
+                    <th  class="text-xs text-white bg-default" style="width:8%">Rol usuario</th>
+                    <th  class="text-xs text-white bg-default" style="width:8%">Estado</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-getAdmissions>
+                  
+                </ng-template>
+               </p-table>
+            </div>
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,337 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  * -->
+<!-- * * * * * * * * * * * JERSON GALVEZ ENSUNCHO * * * * * * * * * * * -->
+<!-- ******* * * * * * * * PROYECTO CLINICSOFT * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<!--<p-toast position="top-right"/>-->
+<div class="min-height-300 bg-default position-absolute w-100"></div>
+<aside
+  class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4"
+  id="sidenav-main"
+  style="z-index: 1 !important;"
+>
+  <app-menu></app-menu>
+</aside>
+<main class="main-content position-relative border-radius-lg">
+  <app-cerrarsesion titulo="Ecografia transvaginal"></app-cerrarsesion>
+  <form [formGroup]="pelvicaForm">
+    <div class="container-fluid ">
+      <div class="row ">
+        <div class="card">
+          <div class="container-fluid mt-3">
+            <div class="row">
+              <div class="col-md-12">
+                <form>
+                <div class="row">
+                  <div class="col-md-3">
+                    <label>DNI *</label>
+                    <div class="input-group">
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      formControlName="pelvica_dni"
+                    >
+                    <button class="btn btn-primary btn-xs" type="button">
+                      <i class="fas fa-fingerprint"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <label>Nombre</label>
+                  <input
+                     type="text"
+                     class="form-control form-control-sm"
+                     formControlName="pelvica_nombre"
+                   >
+                </div>
+                <div class="col-md-3">
+                  <label>Apellidos</label>
+                  <input
+                     type="text"
+                     class="form-control form-control-sm"
+                     formControlName="pelvica_apellido"
+                   >
+                </div>
+                <div class="col-md-1">
+                  <label>Edad</label>
+                  <input
+                     type="text"
+                     class="form-control form-control-sm"
+                     formControlName="pelvica_edad"
+                   >
+                </div>
+                <div class="col-md-2">
+                  <label>HC</label>
+                  <input
+                     type="text"
+                     class="form-control form-control-sm"
+                     formControlName="pelvica_hc"
+                   >
+                </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                     <div class="form-group">
+                        <label>Utero</label>
+                        <select
+                          class="form-control form-control-sm"
+                          formControlName="pelvica_utero"
+                        >
+                           <option value="Anteverso">Anteverso</option>
+                           <option value="Retroverso">Retroverso</option>
+                           <option value="Ausente">Ausente</option>
+                        </select>
+                     </div>
+                  </div>
+                  <div class="col-md-4 offset-md-1">
+                     <label>Superficie</label>
+                     <br>
+                     <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="inlineRadioOptions"
+                          id="inlineRadio1"
+                          value="option1"
+                          formControlName="pelvica_regular"
+                        >
+                        <label class="form-check-label" for="inlineRadio1">Regular</label>
+                     </div>
+                     <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="inlineRadioOptions"
+                          id="inlineRadio2"
+                          value="option2"
+                          formControlName="pelvica_modular"
+                        >
+                        <label class="form-check-label" for="inlineRadio2">Modular</label>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-md-4">
+                        <div class="form-group">
+                           <label>Endometrio</label>
+                           <textarea
+                              class="form-control"
+                              rows="1"
+                              formControlName="pelvica_endometrio"
+                            >Grosor mm libre
+                          </textarea>
+                           <br>
+                           <label>Tumor anexial</label>
+                           <br>
+                           <div class="form-check form-check-inline">
+                              <input
+                                class="form-check-input"
+                                type="radio"
+                                name="inlineRadioOptions"
+                                id="inlineRadio1"
+                                value="option1"
+                                formControlName="pelvica_tumor_si"
+                              >
+                              <label class="form-check-label" for="inlineRadio1">Si</label>
+                           </div>
+                           <div class="form-check form-check-inline">
+                              <input
+                                class="form-check-input"
+                                type="radio"
+                                name="inlineRadioOptions"
+                                id="inlineRadio2"
+                                value="option2"
+                                formControlName="pelvica_tumor_no"
+                              >
+                              <label class="form-check-label" for="inlineRadio2">No</label>
+                           </div>
+                           <input type="text" class="form-control-sm form-control" value="Nohay masas solidas ni quisticas">
+                        </div>
+                     </div>
+                     <div class="col-md-8 ">
+                        <div class="row">
+                           <div class="col-md-2 offset-md-1">
+                              <label>Dimensiones =></label>
+                           </div>
+                           <div class="col-md-2">
+                              <label>Longitud</label>
+                           </div>
+                           <div class="col-md-2">
+                              <label>Transverso</label>
+                           </div>
+                           <div class="col-md-2">
+                              <label>Ant. post</label>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-md-2 offset-md-1">
+                              <label>UTERO</label>
+                           </div>
+                           <div class="col-md-1">
+                              <input
+                                type="number"
+                                class="form-control form-control-sm"
+                                formControlName="pelvica_utero_longitud"
+                              >
+                           </div>
+                           <div class="col-md-1">
+                              <label class="mt-3">mm</label>
+                           </div>
+                           <div class="col-md-1">
+                              <input
+                                type="number"
+                                class="form-control form-control-sm"
+                                formControlName="pelvica_utero_transverso"
+                              >
+                           </div>
+                           <div class="col-md-1">
+                              <label class="mt-3">mm</label>
+                           </div>
+                           <div class="col-md-1">
+                              <input
+                                type="number"
+                                class="form-control form-control-sm"
+                                formControlName="pelvica_utero_post"
+                              >
+                           </div>
+                           <div class="col-md-3">
+                              <textarea
+                                class="form-control form-control-sm"
+                                rows="1"
+                                formControlName="pelvica_regulares_parenquima"
+                              >DE BORDES REGULARES Y PARENQUIMA HOMOGENEO</textarea>
+                           </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                           <div class="col-md-2 offset-md-1">
+                              <label>OVARIO DERECHO</label>
+                           </div>
+                           <div class="col-md-1">
+                              <input
+                                type="number"
+                                class="form-control form-control-sm"
+                                formControlName="pelvica_ova_der_long"
+                              >
+                           </div>
+                           <div class="col-md-1">
+                              <label class="mt-3">mm</label>
+                           </div>
+                           <div class="col-md-1">
+                              <input
+                                type="number"
+                                class="form-control form-control-sm"
+                                formControlName="pelvica_ova_der_transv"
+                              >
+                           </div>
+                           <div class="col-md-1">
+                              <label class="mt-3">mm</label>
+                           </div>
+                           <div class="col-md-4">
+                              <textarea
+                                class="form-control form-control-sm"
+                                rows="1"
+                                formControlName="pelvica_ova_der_aspecto"
+                              >DE ASPECTO NORMAL.
+                            </textarea>
+                           </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                           <div class="col-md-2 offset-md-1">
+                              <label>OVARIO IZQUIERDO</label>
+                           </div>
+                           <div class="col-md-1">
+                              <input
+                                type="number"
+                                class="form-control form-control-sm"
+                                formControlName="pelvica_ova_izq_long"
+                              >
+                           </div>
+                           <div class="col-md-1">
+                              <label class="mt-3">mm</label>
+                           </div>
+                           <div class="col-md-1">
+                              <input
+                                type="number"
+                                class="form-control form-control-sm"
+                                formControlName="pelvica_ova_izq_transv"
+                              >
+                           </div>
+                           <div class="col-md-1">
+                              <label class="mt-3">mm</label>
+                           </div>
+                           <div class="col-md-4">
+                              <textarea
+                                class="form-control form-control-sm"
+                                rows="1"
+                                formControlName="pelvica_ova_izq_aspecto"
+                              >DE ASPECTO NORMAL.</textarea>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-md-6">
+                        <label>Fondo de saco</label>
+                        <textarea
+                          class="form-control form-control-sm"
+                          rows="1"
+                          formControlName="pelvica_fondo"
+                        >Libre</textarea>
+                     </div>
+                     <div class="col-md-6">
+                        <label>Miometrio</label>
+                        <textarea class="form-control form-control-sm" rows="1">Homogenio</textarea>
+                     </div>
+                  </div>
+                  <br>
+                  <br>
+                  <div class="row">
+                     <div class="col-md-6">
+                        <label>Conclusión</label>
+                        <textarea
+                          class="form-control form-control-sm"
+                          rows="2"
+                          formControlName="pelvica_conclusion"
+                        >
+                      </textarea>
+                     </div>
+                     <div class="col-md-6">
+                        <label>Sugerencias</label>
+                        <textarea
+                          class="form-control form-control-sm"
+                          rows="2"
+                          formControlName="pelvica_sugerencias"
+                        >
+                      </textarea>
+                     </div>
+                  </div>
+               </div>
+  </form>
+              <div class="row mt-1">
+                <div class="col-md-3">
+                  <button class="btn btn-primary btn-xs mt-2">
+                    Guardar
+                  </button>
+                  <button
+                    class="btn btn-danger btn-xs mt-2 mx-2"
+                  > <i class="fas fa-file-pdf"></i>
+                    Imprimir
+                  </button>
+                </div>
+              </div>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<!-- spinner -->
+<div class="overlay z-index">
+  <div class="dot-wave">
+    <div class="dot-wave__dot"></div>
+    <div class="dot-wave__dot"></div>
+    <div class="dot-wave__dot"></div>
+    <div class="dot-wave__dot"></div>
+  </div>
+</div>
