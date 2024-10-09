@@ -27,6 +27,11 @@ export const routes: Routes = [
       import('./admisiones/admision/admision.component').then((c) => c.AdmisionComponent)
   },
   {
+    path: 'digiturno',
+    loadComponent: () =>
+      import('./admisiones/digiturno/digiturno.component').then((c) => c.DigiturnoComponent)
+  },
+  {
     path: 'laboratorio',
     loadComponent: () =>
       import('./admisiones/laboratorio/laboratorio.component').then((c) => c.LaboratorioComponent)

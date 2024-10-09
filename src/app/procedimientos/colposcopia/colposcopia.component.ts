@@ -77,6 +77,7 @@ export class ColposcopiaComponent implements OnInit {
 });
 
 getColposcopias() {
+  
   this.ProcedimientosService
       .getColposcopias()
       .subscribe((response: any ) => {
@@ -227,6 +228,7 @@ extraerBase64 = async($event: any ) => new Promise((resolve, reject) => {
   catch (e) {
   }
 });
+
 
 generarPdfColposcopia() {
   this.PdfServices

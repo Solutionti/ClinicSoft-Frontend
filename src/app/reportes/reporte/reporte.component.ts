@@ -94,7 +94,7 @@ export class ReporteComponent implements OnInit {
     this.ListaServices
         .getTransaccion()
         .subscribe((response: any ) => {
-          console.log(response);
+          
           this.transaccion = response;
         });
   }
@@ -104,7 +104,7 @@ export class ReporteComponent implements OnInit {
     this.ListaServices
         .countEfectivo()
         .subscribe((response: any ) => {
-          console.log(response);
+          
           this.efectivo = response;
         });
   }
@@ -115,7 +115,7 @@ export class ReporteComponent implements OnInit {
     this.ListaServices
     .countTargeta()
     .subscribe((response: any ) => {
-      console.log(response);
+      
       this.targeta = response;
     });
   }

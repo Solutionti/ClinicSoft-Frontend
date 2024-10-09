@@ -13,6 +13,7 @@ import { PdfService } from '../../services/pdf.service';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ButtonModule } from 'primeng/button';
 import { ContabilidadService } from '../../contabilidad/services/contabilidad.service';
+import { DigiturnoComponent } from '../digiturno/digiturno.component';
 
 @Component({
   selector: 'app-admision',
@@ -33,14 +34,14 @@ import { ContabilidadService } from '../../contabilidad/services/contabilidad.se
   providers: [ConfirmationService,MessageService]
 })
 export class AdmisionComponent implements OnInit {
-
+  @ViewChild(DigiturnoComponent) child!: DigiturnoComponent;
   constructor(
     private admisionServices: AdmisionesService,
     private listaService: ListasService,
     private contabilidadServices: ContabilidadService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-    private pdfServices: PdfService
+    private pdfServices: PdfService,
   ) { }
 
 
@@ -360,5 +361,5 @@ export class AdmisionComponent implements OnInit {
       detail: message
     });
   }
-
+  
 }
