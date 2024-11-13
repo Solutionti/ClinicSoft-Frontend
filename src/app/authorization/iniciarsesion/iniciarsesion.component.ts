@@ -91,7 +91,7 @@ export class IniciarsesionComponent implements OnInit {
     this.messageService.add({
       severity: 'success',
       summary: 'Bienvenido a ClinicSoft  !!', 
-      detail: nombre?.slice(1, -1).toLocaleUpperCase() + '  ' +  apellido?.slice(1, -1).toLocaleUpperCase() + ' ' + rol?.slice(1, -1).toLocaleUpperCase()
+      detail: nombre?.slice(0, -1).toLocaleUpperCase() + '  ' +  apellido?.slice(1, -1).toLocaleUpperCase() + ' ' + rol?.slice(1, -1).toLocaleUpperCase()
     });
   }
 

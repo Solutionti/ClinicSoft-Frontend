@@ -70,26 +70,32 @@
                       <a
                         class="badge bg-success"
                         (click)="PasateStatusAdmission(getAdmissions.paciente)"
+                        title="Pasar a atencion"
                       >
                         <i class="fas fa-check fa-xs text-white"></i>
                       </a>
                       <a
                         class="badge bg-primary mx-1"
                         (click)="pdfFacturaAdmision(getAdmissions.codigo_atencion)"
+                        title="Generar ticket"
                       >
                         <i class="fas fa-file-pdf fa-xs text-white"></i>
                       </a>
                       <a
                         class="badge  bg-danger mx-1"
                         (click)="CancelarAdmision(getAdmissions.codigo_atencion)"
+                        title="Cancelar admision"
                       >
                         <i class="fas fa-times fa-xs text-white"></i>
                       </a>
-                      <!-- <a
-                        class="badge  bg-warning mx-1"
-                      >
-                        <i class="fas fa-list fa-xs text-white"></i>
-                      </a> -->
+                      <a
+                        class="badge  bg-dark mx-1"
+                        title="Hacer llamado turnero"
+                        (click)="ActualizarTurnoPasar()"
+                        >
+                        <!-- (click)="atiendeLlamadoTurnero(getAdmissions.orden__)" -->
+                        <i class="fas fa-user-check fa-xs text-white"></i>
+                      </a>
                     </td>
                     <td>
                       <div class="d-flex px-2 py-1">
@@ -203,7 +209,7 @@
                       *ngFor="let doctor of getDoctors"
                       [value]="doctor.codigo_doctor"
                     >
-                      {{ doctor.nombre + ' ' + doctor.apellido }}
+                      {{ doctor.nombre + ' ' + doctor.apellido + ' (' + doctor.iniciales + ')'  }}
                     </option>
                 </select>
                 <div

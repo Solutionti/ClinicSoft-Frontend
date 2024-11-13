@@ -126,40 +126,28 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="text-center text-bold">
-            <td class="text-danger">MTP256</td>
-            <td>PENDIENTE</td>
-            <td>5</td>
+          <tr class="text-center text-bold" *ngFor="let turnos of tableTurnos">
+            <td class="">MTP0{{ turnos.orden__ }}</td>
+            <td class="text-uppercase">{{ turnos.estado_digiturno }}</td>
+            <td>{{ turnos.modulo }}</td>
           </tr>
-          <tr class="text-center text-bold">
-            <td>MTP256</td>
-            <td>PENDIENTE</td>
-            <td>5</td>
-          </tr>
-          <tr class="text-center text-bold">
-            <td>MTP256</td>
-            <td>PENDIENTE</td>
-            <td>5</td>
-          </tr>
-          <tr class="text-center text-bold">
-            <td>MTP256</td>
-            <td>PENDIENTE</td>
-            <td>5</td>
-          </tr>
-          <tr class="text-center text-bold">
-            <td>MTP256</td>
-            <td>PENDIENTE</td>
-            <td>5</td>
-          </tr>
-          <tr class="text-center text-bold">
-            <td>MTP256</td>
-            <td>PENDIENTE</td>
-            <td>5</td>
-          </tr>
-          
         </tbody>
       </table>
-      <img src="https://img.freepik.com/fotos-premium/fantastica-vista-primer-plano-tranquilas-olas-mar-luz-sol-naranja-amanecer-isla-tropical_663265-3842.jpg" class="img-fluid">
+      
+      <!-- Card -->
+<div class="card  card-bordered ">
+  <div class="card-body text-center">
+    <br>
+    <br>
+    <br>
+    <div class="mb-2">
+      <i class="fas fa-building fs-2 text-dark"></i>
+    </div>
+    <h1>MTP0{{ turno }}</h1>
+    <br><br>
+  </div>
+</div>
+<!-- End Card -->
     </div>
   </div>
 </div>

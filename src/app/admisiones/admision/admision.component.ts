@@ -14,6 +14,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ButtonModule } from 'primeng/button';
 import { ContabilidadService } from '../../contabilidad/services/contabilidad.service';
 import { DigiturnoComponent } from '../digiturno/digiturno.component';
+import { DigiturnoService } from '../services/digiturno.service';
 
 @Component({
   selector: 'app-admision',
@@ -35,6 +36,8 @@ import { DigiturnoComponent } from '../digiturno/digiturno.component';
 })
 export class AdmisionComponent implements OnInit {
   @ViewChild(DigiturnoComponent) child!: DigiturnoComponent;
+  
+
   constructor(
     private admisionServices: AdmisionesService,
     private listaService: ListasService,
@@ -42,13 +45,14 @@ export class AdmisionComponent implements OnInit {
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private pdfServices: PdfService,
+    private digiturnoServices: DigiturnoService
   ) { }
 
 
   ngOnInit(): void {
     this.getSpecialties();
     this.getDoctor();
-    this.getAdmission();
+    this.getAdmission(); 
   }
 
   date = new Date();
@@ -360,6 +364,24 @@ export class AdmisionComponent implements OnInit {
       summary: 'ClinicSoft Aviso',
       detail: message
     });
+  }
+
+  atiendeLlamadoTurnero(turno: any) {
+    this.confirmationService.confirm({
+      header: 'Estas seguro ?',
+      message: 'El paciente atendio al llamado del turno ' + turno,
+      accept: () => {
+        // si es correcto
+      },
+      reject: () => {
+          // si es incorrecto
+      }
+    }); 
+  }
+
+  ActualizarTurnoPasar() {
+    this.digiturnoServices.miVariable$.next(true);
+    
   }
   
 }
