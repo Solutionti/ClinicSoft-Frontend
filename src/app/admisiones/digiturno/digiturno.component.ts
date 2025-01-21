@@ -22,7 +22,6 @@ export class DigiturnoComponent implements OnInit, OnDestroy {
     this.getTurnos();
 
     this.digiturnoServices.miVariable$.subscribe(data => {
-      alert();
       console.log(`El valor de la variable cambio a: ${data}`);
     });
   }

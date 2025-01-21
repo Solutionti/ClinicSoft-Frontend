@@ -122,7 +122,7 @@ export class ReporteComponent implements OnInit {
 
   contarEneroFebrero() {
     this.ListaServices
-        .contarMesAMes("2024-01-01", "2024-01-29")
+        .contarMesAMes("2025-01-01", "2025-01-29")
         .subscribe((response: any ) => {
           this.enero = response;
         });
@@ -130,7 +130,7 @@ export class ReporteComponent implements OnInit {
 
   contarMarzoAbril() {
     this.ListaServices
-        .contarMesAMes("2024-03-01", "2024-04-31")
+        .contarMesAMes("2025-03-01", "2025-04-31")
         .subscribe((response: any ) => {
           this.marzo = response;
         });
@@ -138,7 +138,7 @@ export class ReporteComponent implements OnInit {
 
   contarMayoJunio() {
     this.ListaServices
-        .contarMesAMes("2024-05-01", "2024-06-31")
+        .contarMesAMes("2025-05-01", "2025-06-31")
         .subscribe((response: any ) => {
           this.mayo = response;
         });
@@ -146,7 +146,7 @@ export class ReporteComponent implements OnInit {
 
   contarJulioAgosto() {
     this.ListaServices
-        .contarMesAMes("2024-07-01", "2024-08-31")
+        .contarMesAMes("2025-07-01", "2025-08-31")
         .subscribe((response: any ) => {
           this.julio = response;
         });
@@ -154,14 +154,14 @@ export class ReporteComponent implements OnInit {
 
   contarSeptiembreOctubre() {
     this.ListaServices
-        .contarMesAMes("2024-09-01", "2024-10-31")
+        .contarMesAMes("2025-09-01", "2025-10-31")
         .subscribe((response: any ) => {
           this.septiembre = response;
         });
   }
   contarNoviembreDiciembre() {
     this.ListaServices
-        .contarMesAMes("2024-11-01", "2024-12-31")
+        .contarMesAMes("2025-11-01", "2025-12-31")
         .subscribe((response: any ) => {
           this.noviembre = response;
         });
